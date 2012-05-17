@@ -4,6 +4,7 @@
 \alias{assert_any_are_numeric_strings}
 \alias{assert_any_strings_are_missing_or_empty}
 \alias{assert_is_a_string}
+\alias{assert_is_character}
 \alias{assert_is_empty_string}
 \alias{assert_is_non_empty_string}
 \alias{is_a_string}
@@ -16,6 +17,8 @@
 \title{Is the input of type character?}
 \usage{
   assert_is_a_string(x)
+
+  assert_is_character(x)
 
   assert_is_empty_string(x)
 

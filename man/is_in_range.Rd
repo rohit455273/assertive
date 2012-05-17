@@ -52,15 +52,15 @@
   assert_any_are_in_open_range(x, lower = -Inf,
     upper = Inf)
 
+  assert_all_are_in_range(x, lower = -Inf, upper = Inf)
+
+  assert_any_are_in_range(x, lower = -Inf, upper = Inf)
+
   assert_all_are_in_right_open_range(x, lower = -Inf,
     upper = Inf)
 
   assert_any_are_in_right_open_range(x, lower = -Inf,
     upper = Inf)
-
-  assert_all_are_in_range(x, lower = -Inf, upper = Inf)
-
-  assert_any_are_in_range(x, lower = -Inf, upper = Inf)
 
   assert_all_are_negative(x)
 
@@ -94,10 +94,10 @@
 
   is_in_open_range(x, lower = -Inf, upper = Inf)
 
-  is_in_right_open_range(x, lower = -Inf, upper = Inf)
-
   is_in_range(x, lower = -Inf, upper = Inf,
     lower_is_strict = FALSE, upper_is_strict = FALSE)
+
+  is_in_right_open_range(x, lower = -Inf, upper = Inf)
 
   is_negative(x)
 

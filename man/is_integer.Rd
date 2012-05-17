@@ -1,10 +1,13 @@
 \name{assert_is_an_integer}
 \alias{assert_is_an_integer}
+\alias{assert_is_integer}
 \alias{is_an_integer}
 \alias{is_integer}
 \title{Is the input an integer?}
 \usage{
   assert_is_an_integer(x)
+
+  assert_is_integer(x)
 
   is_an_integer(x)
 

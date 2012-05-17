@@ -1,10 +1,13 @@
 \name{assert_is_a_number}
 \alias{assert_is_a_number}
+\alias{assert_is_numeric}
 \alias{is_a_number}
 \alias{is_numeric}
 \title{Is the input numeric?}
 \usage{
   assert_is_a_number(x)
+
+  assert_is_numeric(x)
 
   is_a_number(x)
 

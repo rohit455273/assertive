@@ -272,6 +272,24 @@ is_expression <- function(x)
   TRUE
 }
 
+#' Is the input an factor?
+#'
+#' Checks to see if the input is an factor.
+#'
+#' @param x Input to check.
+#' @return \code{is_factor} wraps \code{is.factor}, providing more 
+#' information on failure.  \code{assert_is_factor} returns nothing
+#' but throws an error if \code{is_factor} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.factor}}.
+#' @examples
+#' assert_is_factor(factor(sample(letters, 10)))
+#' @export
+is_factor <- function(x)
+{
+  if(!is.factor(x)) return(false("Input is not of type 'factor'."))
+  TRUE
+}
+
 #' @rdname is_true
 #' @export
 is_false <- function(x)

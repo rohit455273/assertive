@@ -1,0 +1,37 @@
+\name{assert_is_a_raw}
+\alias{assert_is_a_raw}
+\alias{assert_is_raw}
+\alias{is_a_raw}
+\alias{is_raw}
+\title{Is the input raw?}
+\usage{
+  assert_is_a_raw(x)
+
+  assert_is_raw(x)
+
+  is_a_raw(x)
+
+  is_raw(x)
+}
+\arguments{
+  \item{x}{Input to check.}
+}
+\value{
+  \code{is_raw} wraps \code{is.raw}, providing more
+  information on failure. \code{is_a_raw} returns
+  \code{TRUE} if the input is raw and scalar.  The
+  \code{assert_*} functions return nothing but throw an
+  error if the corresponding \code{is_*} function returns
+  \code{FALSE}.
+}
+\description{
+  Checks to see if the input is raw
+}
+\examples{
+assert_is_raw(as.raw(1:10))
+assert_is_a_raw(as.raw(255))
+}
+\seealso{
+  \code{\link[base]{is.raw}} and \code{\link{is_scalar}}.
+}
+

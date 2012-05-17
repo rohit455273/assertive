@@ -1,10 +1,13 @@
 \name{assert_is_a_bool}
 \alias{assert_is_a_bool}
+\alias{assert_is_logical}
 \alias{is_a_bool}
 \alias{is_logical}
 \title{Is the input logical?}
 \usage{
   assert_is_a_bool(x)
+
+  assert_is_logical(x)
 
   is_a_bool(x)
 

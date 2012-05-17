@@ -118,6 +118,14 @@ assert_is_expression <- function(x)
   assert_engine(x, is_expression, msg)        
 }
 
+#' @rdname is_factor
+#' @export
+assert_is_factor <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'factor'.", get_name_in_parent(x))
+  assert_engine(x, is_factor, msg)        
+}
+
 #' @rdname is_function
 #' @export
 assert_is_function <- function(x)
@@ -436,7 +444,7 @@ assert_any_are_positive <- function(x)
   assert_engine(x, is_positive, msg, what = "any")
 }
 
-#' @rdname is_primitive
+#' @rdname is_function
 #' @export
 assert_is_primitive <- function(x)
 {                                                         
