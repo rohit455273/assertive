@@ -118,6 +118,14 @@ assert_is_expression <- function(x)
   assert_engine(x, is_expression, msg)        
 }
 
+#' @rdname is_function
+#' @export
+assert_is_function <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'function'.", get_name_in_parent(x))
+  assert_engine(x, is_function, msg)        
+}
+
 #' @rdname is_true
 #' @export
 assert_is_false <- function(x)
@@ -426,6 +434,14 @@ assert_any_are_positive <- function(x)
 {                                                      
   msg <- sprintf("%s are all non-positive.", get_name_in_parent(x))
   assert_engine(x, is_positive, msg, what = "any")
+}
+
+#' @rdname is_primitive
+#' @export
+assert_is_primitive <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'primitive'.", get_name_in_parent(x))
+  assert_engine(x, is_primitive, msg)        
 }
 
 #' @rdname is_in_range

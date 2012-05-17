@@ -280,6 +280,27 @@ is_false <- function(x)
   TRUE
 }                  
 
+#' Is the input a function?
+#'
+#' Checks to see if the input is a function.
+#'
+#' @param x Input to check.
+#' @return \code{is_function} and \code{is_primitive} wrap 
+#' \code{is.function} and \code{is.primitive}, providing more 
+#' information on failure.  The \code{assert_*} functions return 
+#' nothing butthrow an error if the corresponding \code{is_*} 
+#' function returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.function}} and \code{\link{is_scalar}}.
+#' @examples
+#' assert_is_function(sqrt)
+#' assert_is_function(function(){})
+#' @export
+is_function <- function(x)
+{
+  if(!is.function(x)) return(false("Input is not of type 'function'."))
+  TRUE
+}
+
 # ' Is the input generic?
 # '
 # ' Checks to see if the input is a generic function.
@@ -542,7 +563,16 @@ is_positive <- function(x)
 {
   is_in_range(x, 0, lower_is_strict = TRUE)
 }
-                       
+
+#' @rdname is_function
+#' @export
+is_primitive <- function(x)
+{
+  if(!(ok <- is_function(x))) return(ok)
+  if(!is.primitive(x)) return(false("Input is not primitive."))
+  TRUE
+} 
+
 #' @rdname is_in_range
 #' @export
 is_proportion <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
