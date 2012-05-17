@@ -43,6 +43,26 @@ is_an_integer <- function(x)
   TRUE
 } 
 
+#' Is the input an array?
+#'
+#' Checks to see if the input is an array.
+#'
+#' @param x Input to check.
+#' @return \code{is_array} wraps \code{is.array}, providing more 
+#' information on failure.  \code{assert_is_array} returns nothing
+#' but throws an error if \code{is_array} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.array}}.
+#' @examples
+#' assert_is_logical(runif(10) > 0.5)
+#' assert_is_a_bool(TRUE)
+#' assert_is_a_bool(NA)
+#' @export
+is_array <- function(x)
+{
+  if(!is.array(x)) return(false("Input is not an array."))
+  TRUE
+}
+
 #' Is the input atomic/recursive/vector?
 #'
 #' Checks to see if the input is a type that is atomic/recursive/vector.

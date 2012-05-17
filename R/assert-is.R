@@ -38,6 +38,14 @@ assert_is_an_integer <- function(x)
   assert_engine(x, is_an_integer, msg)    
 }
 
+#' @rdname is_array
+#' @export
+assert_is_array <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'array'.", get_name_in_parent(x))
+  assert_engine(x, is_array, msg)        
+}
+
 #' @rdname is_atomic
 #' @export
 assert_is_atomic <- function(x)
