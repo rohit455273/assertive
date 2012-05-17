@@ -7,15 +7,6 @@ is_a_bool <- function(x)
   TRUE
 }
 
-#' @rdname is_integer
-#' @export
-is_an_integer <- function(x)
-{
-  if(!(ok <- is_integer(x))) return(ok)
-  if(!(ok <- is_scalar(x))) return(ok)
-  TRUE
-} 
-
 #' @rdname is_numeric
 #' @export
 is_a_number <- function(x)
@@ -33,6 +24,15 @@ is_a_string <- function(x)
   if(!(ok <- is_scalar(x))) return(ok)
   TRUE
 }
+
+#' @rdname is_integer
+#' @export
+is_an_integer <- function(x)
+{
+  if(!(ok <- is_integer(x))) return(ok)
+  if(!(ok <- is_scalar(x))) return(ok)
+  TRUE
+} 
 
 #' Is the input atomic/recursive/vector?
 #'
@@ -107,6 +107,24 @@ is_atomic <- function(x)
 is_character <- function(x)
 {
   if(!is.character(x)) return(false("Input is not of type 'character'."))
+  TRUE
+}
+
+#' Checks to see if the input is a data.frame.
+#'
+#' @param x Input to check.
+#' @return \code{is_data.frame} wraps \code{is.data.frame}, 
+#' providing more information on failure.  \code{assert_is_data.frame} 
+#' returns nothing but throws an error if \code{is_data.frame} 
+#' returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.data.frame}}.
+#' @examples
+#' assert_is_data.frame(data.frame())
+#' assert_is_data.frame(datasets::CO2)
+#' @export
+is_data.frame <- function(x)
+{
+  if(!is.data.frame(x)) return(false("Input is not a data.frame."))
   TRUE
 }
 
@@ -230,13 +248,6 @@ is_in_open_range <- function(x, lower = -Inf, upper = Inf)
   is_in_range(x, lower, upper, TRUE, TRUE)
 }
    
-#' @rdname is_in_range
-#' @export
-is_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
-{
-  is_in_range(x, lower, upper, FALSE, TRUE)
-}
-
 #' Is the input in range?
 #'
 #' Checks to see if the input is within an numeric interval.
@@ -272,6 +283,13 @@ is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE, u
   if(lower_is_strict) ok[x == lower] <- FALSE
   if(upper_is_strict) ok[x == upper] <- FALSE
   ok
+}
+
+#' @rdname is_in_range
+#' @export
+is_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
+{
+  is_in_range(x, lower, upper, FALSE, TRUE)
 }
 
 #' Is the input an integer?
@@ -332,15 +350,6 @@ is_non_empty <- function(x)
   TRUE
 }
 
-#' @rdname is_character
-#' @export
-is_non_empty_string <- function(x)
-{
-  is_a_string(x)
-  if(!nzchar(x)) return(false("Input string contains no characters."))
-  TRUE
-}
-
 #' @rdname is_empty_model
 #' @export
 is_non_empty_model <- function(x)
@@ -351,6 +360,15 @@ is_non_empty_model <- function(x)
   {
     return(false("The model is empty."))
   }
+  TRUE
+}
+
+#' @rdname is_character
+#' @export
+is_non_empty_string <- function(x)
+{
+  is_a_string(x)
+  if(!nzchar(x)) return(false("Input string contains no characters."))
   TRUE
 }
 
@@ -518,14 +536,6 @@ is_true <- function(x)
   TRUE
 }
 
-#' @rdname is_atomic
-#' @export
-is_vector <- function(x)
-{
-  if(!is.vector(x)) return(false("Input is not a vector."))
-  TRUE
-}                
-
 #' Is the string a valid variable name?
 #'
 #' Checks strings to see if they are valid variable names.
@@ -570,4 +580,11 @@ is_valid_variable_name <- function(x, allow_reserved = TRUE, allow_duplicates = 
 
   ok
 }
- 
+
+#' @rdname is_atomic
+#' @export
+is_vector <- function(x)
+{
+  if(!is.vector(x)) return(false("Input is not a vector."))
+  TRUE
+}                

@@ -6,14 +6,6 @@ assert_is_a_bool <- function(x)
   assert_engine(x, is_a_bool, msg)    
 }
 
-#' @rdname is_integer
-#' @export
-assert_is_an_integer <- function(x)
-{
-  msg <- sprintf("%s is not an integer.", get_name_in_parent(x))
-  assert_engine(x, is_an_integer, msg)    
-}
-
 #' @rdname is_numeric
 #' @export
 assert_is_a_number <- function(x)
@@ -21,7 +13,7 @@ assert_is_a_number <- function(x)
   msg <- sprintf("%s is not a number.", get_name_in_parent(x))
   assert_engine(x, is_a_number, msg)        
 }
-    
+
 #' @rdname is_character
 #' @export
 assert_is_a_string <- function(x)
@@ -30,12 +22,28 @@ assert_is_a_string <- function(x)
   assert_engine(x, is_a_string, msg)        
 }
 
+#' @rdname is_integer
+#' @export
+assert_is_an_integer <- function(x)
+{
+  msg <- sprintf("%s is not an integer.", get_name_in_parent(x))
+  assert_engine(x, is_an_integer, msg)    
+}
+
 #' @rdname is_atomic
 #' @export
 assert_is_atomic <- function(x)
 {                                                         
   msg <- sprintf("%s is not atomic.", get_name_in_parent(x))
   assert_engine(x, is_atomic, msg)        
+}
+
+#' @rdname is_data.frame
+#' @export
+assert_is_data.frame <- function(x)
+{                                                         
+  msg <- sprintf("%s is not a data.frame.", get_name_in_parent(x))
+  assert_engine(x, is_data.frame, msg)        
 }
 
 #' @rdname is_empty
@@ -144,22 +152,6 @@ assert_any_are_in_open_range <- function(x, lower = -Inf, upper = Inf)
 
 #' @rdname is_in_range
 #' @export
-assert_all_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
-{                                                     
-  msg <- sprintf("%s are not all in range.", get_name_in_parent(x))
-  assert_engine(x, is_in_right_open_range, msg, lower = lower, upper = upper)  
-}
-
-#' @rdname is_in_range
-#' @export
-assert_any_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
-{                                                     
-  msg <- sprintf("%s are all out of range.", get_name_in_parent(x))
-  assert_engine(x, is_in_right_open_range, msg, what = "any", lower = lower, upper = upper)  
-}
-
-#' @rdname is_in_range
-#' @export
 assert_all_are_in_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
   msg <- sprintf("%s are not all in range.", get_name_in_parent(x))
@@ -189,6 +181,22 @@ assert_any_are_in_range <- function(x, lower = -Inf, upper = Inf)
     lower_is_strict = lower_is_strict, 
     upper_is_strict = upper_is_strict
   )
+}
+
+#' @rdname is_in_range
+#' @export
+assert_all_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
+{                                                     
+  msg <- sprintf("%s are not all in range.", get_name_in_parent(x))
+  assert_engine(x, is_in_right_open_range, msg, lower = lower, upper = upper)  
+}
+
+#' @rdname is_in_range
+#' @export
+assert_any_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
+{                                                     
+  msg <- sprintf("%s are all out of range.", get_name_in_parent(x))
+  assert_engine(x, is_in_right_open_range, msg, what = "any", lower = lower, upper = upper)  
 }
 
 #' @rdname is_in_range
@@ -433,14 +441,6 @@ assert_is_true <- function(x)
   assert_engine(x, is_true, msg)        
 }
 
-#' @rdname is_atomic
-#' @export
-assert_is_vector <- function(x)
-{                                                    
-  msg <- sprintf("%s is not a vector.", get_name_in_parent(x))
-  assert_engine(x, is_vector, msg)        
-}
-
 #' @rdname is_valid_variable_name
 #' @export
 assert_all_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_duplicates = TRUE)
@@ -468,4 +468,12 @@ assert_any_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_
     allow_reserved = allow_reserved,
     allow_duplicates = allow_duplicates
   )
+}
+
+#' @rdname is_atomic
+#' @export
+assert_is_vector <- function(x)
+{                                                    
+  msg <- sprintf("%s is not a vector.", get_name_in_parent(x))
+  assert_engine(x, is_vector, msg)        
 }
