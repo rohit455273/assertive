@@ -126,20 +126,51 @@ assert_is_factor <- function(x)
   assert_engine(x, is_factor, msg)        
 }
 
-#' @rdname is_function
-#' @export
-assert_is_function <- function(x)
-{                                                         
-  msg <- sprintf("%s is not of type 'function'.", get_name_in_parent(x))
-  assert_engine(x, is_function, msg)        
-}
-
 #' @rdname is_true
 #' @export
 assert_is_false <- function(x)
 {                                                  
   msg <- sprintf("%s is not identical to FALSE.", get_name_in_parent(x))
   assert_engine(x, is_false, msg)        
+}
+
+#' Is the inputs (in)finite?
+#'
+#' Checks to see if the inputs are (in)finite.
+#'
+#' @param x Input to check.
+#' @return \code{assert_all_are_finite} and \code{assert_any_are_finite}
+#' return nothing but throw an error if the inputs to \code{is.finite}
+#' are not \code{TRUE}. \code{assert_all_are_infinite} and 
+#' \code{assert_any_are_infinite} work likewise for \code{is.infinite}.
+#' @note Note that there are no corresponding \code{is_finite} and 
+#' \code{is_finite} functions in the package.  Use \code{is.finite}
+#' and \code{is.infinite} instead.
+#' @seealso \code{\link[base]{is.finite}}
+#' @examples
+#' assert_all_are_finite(1:10)
+#' assert_any_are_finite(c(1, Inf))
+#' @export
+assert_all_are_finite <- function(x)
+{                                                     
+  msg <- sprintf("%s are not all finite.", get_name_in_parent(x))
+  assert_engine(x, is.finite, msg)        
+}
+
+#' @rdname assert_all_are_finite
+#' @export
+assert_any_are_infinite <- function(x)
+{                                                     
+  msg <- sprintf("%s are all not finite.", get_name_in_parent(x))
+  assert_engine(x, is.finite, msg, what = "any")        
+}
+
+#' @rdname is_function
+#' @export
+assert_is_function <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'function'.", get_name_in_parent(x))
+  assert_engine(x, is_function, msg)        
 }
 
 # ' @rdname is_generic
@@ -164,6 +195,22 @@ assert_any_are_imaginary <- function(x)
 {                                                     
   msg <- sprintf("%s are all not imaginary.", get_name_in_parent(x))
   assert_engine(x, is_imaginary, msg, what = "any")        
+}
+
+#' @rdname is_finite
+#' @export
+assert_all_are_infinite <- function(x)
+{                                                     
+  msg <- sprintf("%s are not all infinite.", get_name_in_parent(x))
+  assert_engine(x, is.infinite, msg)        
+}
+
+#' @rdname is_finite
+#' @export
+assert_any_are_infinite <- function(x)
+{                                                     
+  msg <- sprintf("%s are all not infinite.", get_name_in_parent(x))
+  assert_engine(x, is.infinite, msg, what = "any")        
 }
 
 #' @rdname is_in_range
@@ -388,7 +435,7 @@ assert_any_are_not_nan <- function(x)
 assert_is_not_null <- function(x)
 {                                                         
   msg <- sprintf("%s is NULL.", get_name_in_parent(x))
-  assert_engine(x, is_not_null, msg)        
+  assert_engine(x, is_null, msg)        
 }
 
 #' @rdname is_null
