@@ -110,6 +110,14 @@ assert_is_environment <- function(x)
   assert_engine(x, is_environment, msg)        
 }
 
+#' @rdname is_expression
+#' @export
+assert_is_expression <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'expression'.", get_name_in_parent(x))
+  assert_engine(x, is_expression, msg)        
+}
+
 #' @rdname is_true
 #' @export
 assert_is_false <- function(x)

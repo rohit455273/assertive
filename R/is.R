@@ -254,6 +254,24 @@ is_environment <- function(x)
   TRUE
 }
 
+#' Is the input an expression?
+#'
+#' Checks to see if the input is an expression.
+#'
+#' @param x Input to check.
+#' @return \code{is_expression} wraps \code{is.expression}, providing more 
+#' information on failure.  \code{assert_is_expression} returns nothing
+#' but throws an error if \code{is_expression} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.expression}}.
+#' @examples
+#' assert_is_expression(expression(1:10 + pi, sqrt(169)))
+#' @export
+is_expression <- function(x)
+{
+  if(!is.expression(x)) return(false("Input is not an expression."))
+  TRUE
+}
+
 #' @rdname is_true
 #' @export
 is_false <- function(x)
