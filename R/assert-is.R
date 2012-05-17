@@ -102,6 +102,14 @@ assert_is_empty_string <- function(x)
   assert_engine(x, is_empty_string, msg)        
 }
 
+#' @rdname is_environment
+#' @export
+assert_is_environment <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'environment'.", get_name_in_parent(x))
+  assert_engine(x, is_environment, msg)        
+}
+
 #' @rdname is_true
 #' @export
 assert_is_false <- function(x)

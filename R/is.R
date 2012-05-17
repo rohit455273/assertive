@@ -234,6 +234,26 @@ is_empty_string <- function(x)
   TRUE
 }
 
+#' Is the input an environment?
+#'
+#' Checks to see if the input is an environment.
+#'
+#' @param x Input to check.
+#' @return \code{is_environment} wraps \code{is.environment}, providing more 
+#' information on failure.  \code{assert_is_environment} returns nothing
+#' but throws an error if \code{is_environment} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.environment}}.
+#' @examples
+#' assert_is_environment(new.env())
+#' assert_is_environment(globalenv())
+#' assert_is_environment(baseenv())
+#' @export
+is_environment <- function(x)
+{
+  if(!is.environment(x)) return(false("Input is not an environment."))
+  TRUE
+}
+
 #' @rdname is_true
 #' @export
 is_false <- function(x)
