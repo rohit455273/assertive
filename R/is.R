@@ -552,6 +552,36 @@ is_not_nan <- function(x)
   is.numeric(x) & !is.nan(x)
 }
 
+#' @rdname is_null
+#' export
+is_not_null <- function(x)
+{
+  if(is.null(x)) return(false("Input is NULL."))
+  TRUE
+}
+
+#' Is the input (not) null?
+#'
+#' Checks to see if the input is (not) null.
+#'
+#' @param x Input to check.
+#' @return \code{is_null} wraps \code{is.null}, providing more 
+#' information on failure. \code{is_not_null} returns \code{TRUE} in
+#' the opposite case.  The \code{assert_*} functions return nothing but
+#' throw an error if the corresponding \code{is_*} function returns 
+#' \code{FALSE}.
+#' @seealso \code{\link[base]{is.null}}.
+#' @examples
+#' assert_is_null(NULL)
+#' assert_is_null(c())
+#' assert_is_not_null(NA)
+#' @export
+is_null <- function(x)
+{
+  if(!is.null(x)) return(false("Input is not NULL."))
+  TRUE
+}
+
 #' Is the input numeric?
 #'
 #' Checks to see if the input is numeric.

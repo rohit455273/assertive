@@ -383,6 +383,23 @@ assert_any_are_not_nan <- function(x)
   assert_engine(x, is_not_nan, msg, what = "any")
 }
 
+#' @rdname is_null
+#' @export
+assert_is_not_null <- function(x)
+{                                                         
+  msg <- sprintf("%s is NULL.", get_name_in_parent(x))
+  assert_engine(x, is_not_null, msg)        
+}
+
+#' @rdname is_null
+#' @export
+assert_is_null <- function(x)
+{                                                         
+  msg <- sprintf("%s is not NULL.", get_name_in_parent(x))
+  assert_engine(x, is_null, msg)        
+}
+
+#' @rdname is_ch
 #' @rdname is_numeric
 #' @export
 assert_is_numeric <- function(x)
@@ -494,7 +511,7 @@ assert_any_are_proportions <- function(x)
 assert_is_R <- function()
 {                                                         
   msg <- sprintf("You are not running R.", get_name_in_parent(x))
-  assert_engine(prediate = is_R, msg = msg)        
+  assert_engine(predicate = is_R, msg = msg)        
 }
 
 #' @rdname is_raw
