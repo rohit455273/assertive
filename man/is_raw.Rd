@@ -7,7 +7,7 @@
 \usage{
   assert_is_a_raw(x)
 
-  assert_is_raw(x)
+  assert_is_raw()
 
   is_a_raw(x)
 

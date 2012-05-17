@@ -489,9 +489,17 @@ assert_any_are_proportions <- function(x)
   )
 }  
 
+#' @rdname is_R
+#' @export
+assert_is_R <- function()
+{                                                         
+  msg <- sprintf("You are not running R.", get_name_in_parent(x))
+  assert_engine(prediate = is_R, msg = msg)        
+}
+
 #' @rdname is_raw
 #' @export
-assert_is_raw <- function(x)
+assert_is_raw <- function()
 {                                                         
   msg <- sprintf("%s is not of type 'raw'.", get_name_in_parent(x))
   assert_engine(x, is_raw, msg)        

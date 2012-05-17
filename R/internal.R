@@ -3,7 +3,7 @@
 #' The workhorse of the package.  If a condition isn't met, then an error
 #' is thrown.
 #'
-#' @param x Input to check.
+#' @param x Input to check.  If missing, pass no args to \code{predicate}.
 #' @param predicate Function that returns a logical value (possibly 
 #' a vector).
 #' @param msg The error message, in the event of failure.
@@ -19,7 +19,9 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
     c("stop", "warning", "message")
   ))
   what <- match.fun(match.arg(what))
-  if(!what(predicate(x, ...)))
+  #Some functions, e.g., is.R take no args
+  ok <- what(if(missing(x)) predicate() else predicate(x, ...))
+  if(!ok)
   {
     handler(msg, call. = FALSE)
   }

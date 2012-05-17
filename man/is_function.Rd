@@ -31,7 +31,6 @@ assert_is_function(sqrt)
 assert_is_function(function(){})
 }
 \seealso{
-  \code{\link[base]{is.function}} and
-  \code{\link{is_scalar}}.
+  \code{\link[base]{is.function}}.
 }
 

@@ -6,7 +6,8 @@
     ...)
 }
 \arguments{
-  \item{x}{Input to check.}
+  \item{x}{Input to check.  If missing, pass no args to
+  \code{predicate}.}
 
   \item{predicate}{Function that returns a logical value
   (possibly a vector).}

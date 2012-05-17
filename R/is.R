@@ -314,7 +314,7 @@ is_false <- function(x)
 #' information on failure.  The \code{assert_*} functions return 
 #' nothing butthrow an error if the corresponding \code{is_*} 
 #' function returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.function}} and \code{\link{is_scalar}}.
+#' @seealso \code{\link[base]{is.function}}.
 #' @examples
 #' assert_is_function(sqrt)
 #' assert_is_function(function(){})
@@ -612,6 +612,24 @@ is_proportion <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
   is_in_range(x, 0, 1, lower_is_strict, upper_is_strict)
 }
 
+#' Are you running R?
+#'
+#' Checks to see you are running R.
+#'
+#' @param x Input to check.
+#' @return \code{is_R} wraps \code{is.R}, providing more 
+#' information on failure.  \code{assert_is_R} returns nothing but
+#' throws an error if \code{is_R} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.R}}.
+#' @examples
+#' assert_is_R()
+#' @export
+is_R <- function()
+{
+  if(!is.R()) return(false("You are not running R."))
+  TRUE
+}
+
 #' Is the input raw?
 #'
 #' Checks to see if the input is raw
@@ -629,7 +647,8 @@ is_proportion <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
 #' @export
 is_raw <- function(x)
 {
-  if(!is.raw(x)) return(false("Input is nt of type 'raw'."))
+  if(!is.raw(x)) return(false("Input is not of type 'raw'."))
+  TRUE
 }
 
 #' Is the input real/imaginary?
