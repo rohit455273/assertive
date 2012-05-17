@@ -1,3 +1,25 @@
+#' Does the current call have an argument?
+#'
+#' Checks to see if the current call has an argument with 
+#' the name given in the input.
+#'
+#' @param x Input to check.
+#' @return \code{has_arg} wraps \code{hasArg}, providing more
+#' information on failure.  
+#' @note There is currently no corresponding \code{assert_has_arg}
+#' function, because evaluating in the correct call is hard.
+#' @seealso \code{\link{ncol}}.
+#' @examples
+#' assert_has_rows(data.frame(x = 1:10))
+#' assert_has_cols(matrix())
+#' @export
+has_arg <- function(x)
+{
+  ok <- eval.parent(substitute(hasArg(name), list(name = x)))
+  if(!ok) return(false("The argument doesn't exist in the current call."))
+  TRUE
+}
+
 #' @rdname has_names
 #' @export
 has_colnames <- function(x)
