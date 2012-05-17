@@ -53,9 +53,8 @@ is_an_integer <- function(x)
 #' but throws an error if \code{is_array} returns \code{FALSE}.
 #' @seealso \code{\link[base]{is.array}}.
 #' @examples
-#' assert_is_logical(runif(10) > 0.5)
-#' assert_is_a_bool(TRUE)
-#' assert_is_a_bool(NA)
+#' assert_is_array(array())
+#' assert_is_array(matrix())
 #' @export
 is_array <- function(x)
 {
@@ -105,6 +104,24 @@ is_array <- function(x)
 is_atomic <- function(x)
 {
   if(!is.atomic(x)) return(false("Input is not atomic."))
+  TRUE
+}
+
+#' Is the input a call?
+#'
+#' Checks to see if the input is a call.
+#'
+#' @param x Input to check.
+#' @return \code{is_call} wraps \code{is.call}, providing more 
+#' information on failure.  \code{assert_is_call} returns nothing
+#' but throws an error if \code{is_call} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.call}}.
+#' @examples
+#' assert_is_call(call("sin", "pi"))
+#' @export
+is_call <- function(x)
+{
+  if(!is.call(x)) return(false("Input is not a call."))
   TRUE
 }
 

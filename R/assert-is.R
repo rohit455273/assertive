@@ -54,6 +54,14 @@ assert_is_atomic <- function(x)
   assert_engine(x, is_atomic, msg)        
 }
 
+#' @rdname is_call
+#' @export
+assert_is_call <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'call'.", get_name_in_parent(x))
+  assert_engine(x, is_call, msg)        
+}
+
 #' @rdname is_character
 #' @export
 assert_is_character <- function(x)
