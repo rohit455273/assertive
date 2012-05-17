@@ -38,6 +38,14 @@ assert_is_atomic <- function(x)
   assert_engine(x, is_atomic, msg)        
 }
 
+#' @rdname is_character
+#' @export
+assert_is_character <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'character'.", get_name_in_parent(x))
+  assert_engine(x, is_character, msg)        
+}
+
 #' @rdname is_data.frame
 #' @export
 assert_is_data.frame <- function(x)
@@ -199,6 +207,22 @@ assert_any_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
   assert_engine(x, is_in_right_open_range, msg, what = "any", lower = lower, upper = upper)  
 }
 
+#' @rdname is_integer
+#' @export
+assert_is_integer <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'integer'.", get_name_in_parent(x))
+  assert_engine(x, is_integer, msg)        
+}
+
+#' @rdname is_logical
+#' @export
+assert_is_logical <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'logical'.", get_name_in_parent(x))
+  assert_engine(x, is_logical, msg)        
+}
+
 #' @rdname is_in_range
 #' @export
 assert_all_are_negative <- function(x)
@@ -293,6 +317,14 @@ assert_any_are_not_nan <- function(x)
 {                                                      
   msg <- sprintf("%s are all NaN.", get_name_in_parent(x))
   assert_engine(x, is_not_nan, msg, what = "any")
+}
+
+#' @rdname is_numeric
+#' @export
+assert_is_numeric <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'numeric'.", get_name_in_parent(x))
+  assert_engine(x, is_numeric, msg)        
 }
 
 #' @rdname is_character
