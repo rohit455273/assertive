@@ -279,6 +279,14 @@ assert_is_logical <- function(x)
   assert_engine(x, is_logical, msg)        
 }
 
+#' @rdname is_array
+#' @export
+assert_is_matrix <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'matrix'.", get_name_in_parent(x))
+  assert_engine(x, is_matrix, msg)        
+}
+
 #' @rdname is_in_range
 #' @export
 assert_all_are_negative <- function(x)

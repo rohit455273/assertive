@@ -43,18 +43,24 @@ is_an_integer <- function(x)
   TRUE
 } 
 
-#' Is the input an array?
+#' Is the input an array or matrix?
 #'
-#' Checks to see if the input is an array.
+#' Checks to see if the input is an array or matrix.
 #'
 #' @param x Input to check.
-#' @return \code{is_array} wraps \code{is.array}, providing more 
-#' information on failure.  \code{assert_is_array} returns nothing
-#' but throws an error if \code{is_array} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.array}}.
+#' @return \code{is_array} and \code{is_matrix} wrap \code{is.array}, 
+#' and \code{is.matrix} respectively, providing more information on
+#' failure.  The \code{assert_*} functions return nothing but throw
+#' an error if the corresponding \code{is_*} function returns
+#' \code{FALSE}.
 #' @examples
 #' assert_is_array(array())
 #' assert_is_array(matrix())
+#' assert_is_matrix(matrix())
+#' dontrun{
+#' #This throws an error:
+#' assert_is_matrix(array())
+#' }
 #' @export
 is_array <- function(x)
 {
@@ -463,6 +469,14 @@ is_logical <- function(x)
 is_negative <- function(x)
 {
   is_in_range(x, upper = 0, upper_is_strict = TRUE)
+}
+
+#' @rdname is_array
+#' @export
+is_matrix <- function(x)
+{
+  if(!is.matrix(x)) return(false("Input is not of type 'matrix'."))
+  TRUE
 }
 
 #' @rdname is_empty
