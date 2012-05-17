@@ -16,6 +16,15 @@ is_a_number <- function(x)
   TRUE
 } 
 
+#' @rdname is_raw
+#' @export
+is_a_raw <- function(x)
+{
+  if(!(ok <- is_raw(x))) return(ok)
+  if(!(ok <- is_scalar(x))) return(ok)
+  TRUE
+} 
+
 #' @rdname is_character
 #' @export
 is_a_string <- function(x)
@@ -464,6 +473,26 @@ is_positive <- function(x)
 is_proportion <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
 {
   is_in_range(x, 0, 1, lower_is_strict, upper_is_strict)
+}
+
+#' Is the input raw?
+#'
+#' Checks to see if the input is raw
+#'
+#' @param x Input to check.
+#' @return \code{is_raw} wraps \code{is.raw}, providing more 
+#' information on failure. \code{is_a_raw} returns \code{TRUE} if the 
+#' input is raw and scalar.  The \code{assert_*} functions return nothing but
+#' throw an error if the corresponding \code{is_*} function returns 
+#' \code{FALSE}.
+#' @seealso \code{\link[base]{is.raw}} and \code{\link{is_scalar}}.
+#' @examples
+#' assert_is_raw(as.raw(1:10))
+#' assert_is_a_raw(as.raw(255))
+#' @export
+is_raw <- function(x)
+{
+  if(!is.raw(x)) return(false("Input is nt of type 'raw'."))
 }
 
 #' Is the input real/imaginary?

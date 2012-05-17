@@ -14,6 +14,14 @@ assert_is_a_number <- function(x)
   assert_engine(x, is_a_number, msg)        
 }
 
+#' @rdname is_raw
+#' @export
+assert_is_a_raw <- function(x)
+{                                                          
+  msg <- sprintf("%s is not a raw.", get_name_in_parent(x))
+  assert_engine(x, is_a_raw, msg)        
+}
+
 #' @rdname is_character
 #' @export
 assert_is_a_string <- function(x)
@@ -416,6 +424,14 @@ assert_any_are_proportions <- function(x)
     upper_is_strict = upper_is_strict
   )
 }  
+
+#' @rdname is_raw
+#' @export
+assert_is_raw <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'raw'.", get_name_in_parent(x))
+  assert_engine(x, is_raw, msg)        
+}
 
 #' @rdname is_real
 #' @export
