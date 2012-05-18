@@ -486,7 +486,15 @@ assert_any_are_numeric_strings <- function(x)
   msg <- sprintf("%s is not a character of numbers.", get_name_in_parent(x))
   assert_engine(x, is_numeric_string, msg, what = "any")        
 }
-  
+
+#' @rdname is_factor
+#' @export
+assert_is_ordered <- function()
+{                                                         
+  msg <- sprintf("%s is not of type 'ordered'.", get_name_in_parent(x))
+  assert_engine(x, is_ordered, msg)        
+}
+
 #' @rdname is_in_range
 #' @export
 assert_all_are_percentages <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)

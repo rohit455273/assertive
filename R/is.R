@@ -623,7 +623,16 @@ is_numeric_string <- function(x)
 {
   is_not_na(as.numeric(as.character(x)))
 }
-     
+
+#' @rdname is_factor
+#' @export
+is_ordered <- function(x)
+{
+  if(!(ok <- is_factor(x))) return(ok)
+  if(!is.ordered(x)) return(false("Input is not an ordered factor."))
+  TRUE
+}
+
 #' @rdname is_in_range
 #' @export
 is_percentage <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
