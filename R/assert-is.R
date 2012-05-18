@@ -54,7 +54,7 @@ assert_is_atomic <- function(x)
   assert_engine(x, is_atomic, msg)        
 }
 
-#' @rdname is_call
+#' @rdname is_language
 #' @export
 assert_is_call <- function(x)
 {                                                         
@@ -110,7 +110,7 @@ assert_is_environment <- function(x)
   assert_engine(x, is_environment, msg)        
 }
 
-#' @rdname is_expression
+#' @rdname is_language
 #' @export
 assert_is_expression <- function(x)
 {                                                         
@@ -318,6 +318,14 @@ assert_is_integer <- function(x)
   assert_engine(x, is_integer, msg)        
 }
 
+#' @rdname is_language
+#' @export
+assert_is_language <- function(x)
+{                                                         
+  msg <- sprintf("%s is not a language object.", get_name_in_parent(x))
+  assert_engine(x, is_language, msg)        
+}
+
 #' @rdname is_logical
 #' @export
 assert_is_logical <- function(x)
@@ -332,6 +340,14 @@ assert_is_matrix <- function(x)
 {                                                         
   msg <- sprintf("%s is not of type 'matrix'.", get_name_in_parent(x))
   assert_engine(x, is_matrix, msg)        
+}
+
+#' @rdname is_language
+#' @export
+assert_is_name <- function(x)
+{                                                         
+  msg <- sprintf("%s is not of type 'name' (a.k.a. 'symbol').", get_name_in_parent(x))
+  assert_engine(x, is_name, msg)        
 }
 
 #' @rdname is_in_range
@@ -616,6 +632,9 @@ assert_any_strings_are_missing_or_empty <- function(x)
   msg <- sprintf("%s are all not missing or empty strings.", get_name_in_parent(x))
   assert_engine(x, is_string_missing_or_empty, msg, what = "any")
 }
+#' @rdname is_language
+#' @export
+assert_is_symbol <- assert_is_name
 
 #' @rdname is_true
 #' @export

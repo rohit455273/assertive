@@ -113,17 +113,7 @@ is_atomic <- function(x)
   TRUE
 }
 
-#' Is the input a call?
-#'
-#' Checks to see if the input is a call.
-#'
-#' @param x Input to check.
-#' @return \code{is_call} wraps \code{is.call}, providing more 
-#' information on failure.  \code{assert_is_call} returns nothing
-#' but throws an error if \code{is_call} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.call}}.
-#' @examples
-#' assert_is_call(call("sin", "pi"))
+#' @rdname is_language
 #' @export
 is_call <- function(x)
 {
@@ -260,17 +250,7 @@ is_environment <- function(x)
   TRUE
 }
 
-#' Is the input an expression?
-#'
-#' Checks to see if the input is an expression.
-#'
-#' @param x Input to check.
-#' @return \code{is_expression} wraps \code{is.expression}, providing more 
-#' information on failure.  \code{assert_is_expression} returns nothing
-#' but throws an error if \code{is_expression} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.expression}}.
-#' @examples
-#' assert_is_expression(expression(1:10 + pi, sqrt(169)))
+#' @rdname is_language
 #' @export
 is_expression <- function(x)
 {
@@ -464,6 +444,28 @@ is_logical <- function(x)
   TRUE
 }       
 
+#' Is the input a language object?
+#'
+#' Checks to see if the input is a language object.
+#'
+#' @param x Input to check.
+#' @return \code{is_call}, \code{is_expression}, \code{is_language}, 
+#' \code{is_name} and \code{is_symbol} wrap the corresponding \code{is.*}
+#' functions, providing more information on failure.The \code{assert_*}
+#' functions return nothing but throw an error if the corresponding
+#' \code{is_*} function returns \code{FALSE}.
+#' @note \code{is_name} and \code{is_symbol} are different names for 
+#' the same function.
+#' @seealso \code{\link[base]{is.call}}.
+#' @examples
+#' assert_is_call(call("sin", "pi"))
+#' @export
+is_language <- function(x)
+{
+  if(!is.language(x)) return(false("Input is not a language object (name, call or expression)."))
+  TRUE
+}
+
 #' @rdname is_in_range
 #' @export
 is_negative <- function(x)
@@ -476,6 +478,14 @@ is_negative <- function(x)
 is_matrix <- function(x)
 {
   if(!is.matrix(x)) return(false("Input is not of type 'matrix'."))
+  TRUE
+}
+
+#' @rdname is_language
+#' @export
+is_name <- function(x)
+{
+  if(!is.name(x)) return(false("Input is not of type 'name' (a.k.a. 'symbol')."))
   TRUE
 }
 
@@ -732,6 +742,10 @@ is_string_missing_or_empty <- function(x)
 #' @rdname is_character
 #' @export
 is_string_not_missing_nor_empty <- Negate(is_string_missing_or_empty)
+
+#' @rdname is_language
+#' @export
+is_symbol <- is_name
 
 #' Is the input TRUE?
 #' 
