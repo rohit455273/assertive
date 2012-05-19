@@ -9,12 +9,14 @@
 
   assert_is_primitive(x)
 
-  is_function(x)
+  is_function(x, .xname = get_name_in_parent(x))
 
-  is_primitive(x)
+  is_primitive(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_function} and \code{is_primitive} wrap

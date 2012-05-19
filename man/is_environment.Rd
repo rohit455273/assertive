@@ -5,10 +5,12 @@
 \usage{
   assert_is_environment(x)
 
-  is_environment(x)
+  is_environment(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_environment} wraps \code{is.environment},

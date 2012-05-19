@@ -13,14 +13,16 @@
 
   assert_is_vector(x)
 
-  is_atomic(x)
+  is_atomic(x, .xname = get_name_in_parent(x))
 
-  is_recursive(x)
+  is_recursive(x, .xname = get_name_in_parent(x))
 
-  is_vector(x)
+  is_vector(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_atomic}, \code{is_recursive} and

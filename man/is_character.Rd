@@ -32,13 +32,13 @@
 
   assert_any_strings_are_missing_or_empty(x)
 
-  is_a_string(x)
+  is_a_string(x, .xname = get_name_in_parent(x))
 
-  is_character(x)
+  is_character(x, .xname = get_name_in_parent(x))
 
-  is_empty_string(x)
+  is_empty_string(x, .xname = get_name_in_parent(x))
 
-  is_non_empty_string(x)
+  is_non_empty_string(x, .xname = get_name_in_parent(x))
 
   is_numeric_string(x)
 
@@ -48,6 +48,8 @@
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_character} wraps \code{is.character}, providing

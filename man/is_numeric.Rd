@@ -9,12 +9,14 @@
 
   assert_is_numeric(x)
 
-  is_a_number(x)
+  is_a_number(x, .xname = get_name_in_parent(x))
 
-  is_numeric(x)
+  is_numeric(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_numeric} wraps \code{is.numeric}, providing more

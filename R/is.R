@@ -1,45 +1,46 @@
 #' @rdname is_logical
 #' @export
-is_a_bool <- function(x)
+is_a_bool <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!(ok <- is_logical(x))) return(ok)
-  if(!(ok <- is_scalar(x))) return(ok)
+  if(!(ok <- is_logical(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname))) return(ok)
   TRUE
 }
 
+
 #' @rdname is_numeric
 #' @export
-is_a_number <- function(x)
+is_a_number <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!(ok <- is_numeric(x))) return(ok)
-  if(!(ok <- is_scalar(x))) return(ok)
+  if(!(ok <- is_numeric(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname))) return(ok)
   TRUE
 } 
 
 #' @rdname is_raw
 #' @export
-is_a_raw <- function(x)
+is_a_raw <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!(ok <- is_raw(x))) return(ok)
-  if(!(ok <- is_scalar(x))) return(ok)
+  if(!(ok <- is_raw(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname))) return(ok)
   TRUE
 } 
 
 #' @rdname is_character
 #' @export
-is_a_string <- function(x)
+is_a_string <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!(ok <- is_character(x))) return(ok)
-  if(!(ok <- is_scalar(x))) return(ok)
+  if(!(ok <- is_character(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname))) return(ok)
   TRUE
 }
 
 #' @rdname is_integer
 #' @export
-is_an_integer <- function(x)
+is_an_integer <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!(ok <- is_integer(x))) return(ok)
-  if(!(ok <- is_scalar(x))) return(ok)
+  if(!(ok <- is_integer(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname))) return(ok)
   TRUE
 } 
 
@@ -48,6 +49,7 @@ is_an_integer <- function(x)
 #' Checks to see if the input is an array or matrix.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_array} and \code{is_matrix} wrap \code{is.array}, 
 #' and \code{is.matrix} respectively, providing more information on
 #' failure.  The \code{assert_*} functions return nothing but throw
@@ -62,9 +64,12 @@ is_an_integer <- function(x)
 #' assert_is_matrix(array())
 #' }
 #' @export
-is_array <- function(x)
+is_array <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.array(x)) return(false("Input is not an array."))
+  if(!is.array(x)) 
+  {
+    return(false(sprintf("%s is not an array.", .xname)))
+  }
   TRUE
 }
 
@@ -73,6 +78,7 @@ is_array <- function(x)
 #' Checks to see if the input is a type that is atomic/recursive/vector.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_atomic}, \code{is_recursive} and \code{is_vector} wrap 
 #' \code{is.atomic}, \code{is.recursive} and \code{is.vector} respectively,
 #' providing more information on failure.  The \code{assert_*} functions
@@ -107,17 +113,23 @@ is_array <- function(x)
 #' )
 #' for(var in recursive_types) assert_is_vector(var)
 #' @export
-is_atomic <- function(x)
+is_atomic <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.atomic(x)) return(false("Input is not atomic."))
+  if(!is.atomic(x))
+  {
+    return(false(sprintf("%s is not atomic.", .xname)))
+  }
   TRUE
 }
 
 #' @rdname is_language
 #' @export
-is_call <- function(x)
+is_call <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.call(x)) return(false("Input is not a call."))
+  if(!is.call(x)) 
+  {
+    return(false(sprintf("%s is not a call.", .xname)))
+  }
   TRUE
 }
 
@@ -126,6 +138,7 @@ is_call <- function(x)
 #' Checks to see if the input is of type character.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_character} wraps \code{is.character}, providing more 
 #' information on failure. \code{is_a_string} returns \code{TRUE} if the 
 #' input is character and scalar. \code{is_empty_string} returns \code{TRUE}
@@ -146,15 +159,19 @@ is_call <- function(x)
 #' assert_all_strings_are_missing_or_empty(c("", NA))
 #' assert_any_strings_are_missing_or_empty(c("a", NA, "b"))
 #' @export
-is_character <- function(x)
+is_character <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.character(x)) return(false("Input is not of type 'character'."))
+  if(!is.character(x)) 
+  {
+    return(false(sprintf("%s is not of type 'character'.", .xname)))
+  }
   TRUE
 }
 
 #' Checks to see if the input is a data.frame.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_data.frame} wraps \code{is.data.frame}, 
 #' providing more information on failure.  \code{assert_is_data.frame} 
 #' returns nothing but throws an error if \code{is_data.frame} 
@@ -164,9 +181,12 @@ is_character <- function(x)
 #' assert_is_data.frame(data.frame())
 #' assert_is_data.frame(datasets::CO2)
 #' @export
-is_data.frame <- function(x)
+is_data.frame <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.data.frame(x)) return(false("Input is not a data.frame."))
+  if(!is.data.frame(x)) 
+  {
+    return(false(sprintf("%s is not of type 'data.frame'.", .xname)))
+  }
   TRUE
 }
 
@@ -175,6 +195,7 @@ is_data.frame <- function(x)
 #' Checks to see if the input has length zero/one.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_empty} returns \code{TRUE} if the input has length 
 #' zero.  \code{is_scalar} returns \code{TRUE} if the input has length 
 #' one.  The \code{assert_*} functions return nothing but throw an
@@ -189,9 +210,12 @@ is_data.frame <- function(x)
 #' assert_is_scalar("Multiple words in a single string are scalar.")
 #' assert_is_scalar(NA)
 #' @export
-is_empty <- function(x)
+is_empty <- function(x, .xname = get_name_in_parent(x))
 {
-  if(length(x) != 0L) return(false("Input has non-zero length."))
+  if(length(x) != 0L) 
+  {
+    return(false(sprintf("%s has non-zero length.", .xname)))
+  }
   TRUE
 }
 
@@ -200,6 +224,7 @@ is_empty <- function(x)
 #' Checks to see if the input is the empty model.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_[non_]empty_model} returns \code{TRUE} if the input is an  
 #' [non] empty model.  (\code{has_terms} is used to determine that a variable 
 #' is a model object.)  The model is considered empty if there are no
@@ -212,21 +237,33 @@ is_empty <- function(x)
 #' assert_is_non_empty_model(lm(uptake ~ conc, CO2))
 #' assert_is_non_empty_model(lm(uptake ~ 1, CO2))
 #' @export
-is_empty_model <- function(x)
+is_empty_model <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!has_terms(x)) return(false("Input has no terms, probably not a model."))
+  if(!has_terms(x)) 
+  {
+    return(false(sprintf("%s has no terms, probably not a model.", .xname)))
+  }
   tt <- terms(x)
-  if(length(attr(tt, "factors")) != 0L) return(false("The model has factors."))
-  if(attr(tt, "intercept") != 0L) return(false("The model has an intercept."))
+  if(length(attr(tt, "factors")) != 0L) 
+  {
+    return(false(sprintf("%s has factors.", .xname)))
+  }
+  if(attr(tt, "intercept") != 0L) 
+  {
+    return(false(sprintf("%s has an intercept.", .xname)))
+  }
   TRUE
 }
 
 #' @rdname is_character
 #' @export
-is_empty_string <- function(x)
+is_empty_string <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_a_string(x))) return(ok)
-  if(nzchar(x)) return(false("Input string contains characters."))
+  if(nzchar(x)) 
+  {
+    return(false(sprintf("%s contains characters.", .xname)))
+  }
   TRUE
 }
 
@@ -235,6 +272,7 @@ is_empty_string <- function(x)
 #' Checks to see if the input is an environment.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_environment} wraps \code{is.environment}, providing more 
 #' information on failure.  \code{assert_is_environment} returns nothing
 #' but throws an error if \code{is_environment} returns \code{FALSE}.
@@ -244,17 +282,23 @@ is_empty_string <- function(x)
 #' assert_is_environment(globalenv())
 #' assert_is_environment(baseenv())
 #' @export
-is_environment <- function(x)
+is_environment <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.environment(x)) return(false("Input is not an environment."))
+  if(!is.environment(x)) 
+  {
+    return(false(sprintf("%s is not of type 'environment'.", .xname)))
+  }
   TRUE
 }
 
 #' @rdname is_language
 #' @export
-is_expression <- function(x)
+is_expression <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.expression(x)) return(false("Input is not an expression."))
+  if(!is.expression(x)) 
+  {
+    return(false(sprintf("%s is not of type 'expression'.", .xname)))
+  }
   TRUE
 }
 
@@ -263,6 +307,7 @@ is_expression <- function(x)
 #' Checks to see if the input is an factor.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_factor} wraps \code{is.factor}, providing more 
 #' information on failure.  \code{assert_is_factor} returns nothing
 #' but throws an error if \code{is_factor} returns \code{FALSE}.
@@ -270,17 +315,23 @@ is_expression <- function(x)
 #' @examples
 #' assert_is_factor(factor(sample(letters, 10)))
 #' @export
-is_factor <- function(x)
+is_factor <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.factor(x)) return(false("Input is not of type 'factor'."))
+  if(!is.factor(x)) 
+  {
+    return(false(sprintf("%s is not of type 'factor'.", .xname)))
+  }
   TRUE
 }
 
 #' @rdname is_true
 #' @export
-is_false <- function(x)
+is_false <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!identical(FALSE, x)) return(false("The input is not identical to FALSE."))
+  if(!identical(FALSE, x)) 
+  {
+    return(false(sprintf("%s is not identical to FALSE.", .xname)))
+  }
   TRUE
 }                  
 
@@ -289,6 +340,7 @@ is_false <- function(x)
 #' Checks to see if the input is a function.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_function} and \code{is_primitive} wrap 
 #' \code{is.function} and \code{is.primitive}, providing more 
 #' information on failure.  The \code{assert_*} functions return 
@@ -299,9 +351,12 @@ is_false <- function(x)
 #' assert_is_function(sqrt)
 #' assert_is_function(function(){})
 #' @export
-is_function <- function(x)
+is_function <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.function(x)) return(false("Input is not of type 'function'."))
+  if(!is.function(x)) 
+  {
+    return(false(sprintf("%s is not of type 'function'.", .xname)))
+  }
   TRUE
 }
 
@@ -310,6 +365,7 @@ is_function <- function(x)
 # ' Checks to see if the input is a generic function.
 # '
 # ' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 # ' @return \code{TRUE} if the input is a generic function. 
 # ' \code{assert_is_generic} functions return nothing but throws an error
 # ' if \code{is_generic} returns \code{FALSE}.
@@ -406,6 +462,7 @@ is_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 #' Checks to see if the input is an integer.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_integer} wraps \code{is.integer}, providing more 
 #' information on failure. \code{is_an_integer} returns \code{TRUE} if the 
 #' input is an integer and scalar.  The \code{assert_*} functions return 
@@ -416,9 +473,12 @@ is_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 #' assert_is_integer(1L:10L)
 #' assert_is_an_integer(99L)
 #' @export
-is_integer <- function(x)
+is_integer <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.integer(x)) return(false("Input is not of type 'integer'."))
+  if(!is.integer(x)) 
+  {
+    return(false(sprintf("%s is not of type 'integer'.", .xname)))
+  }
   TRUE
 }
 
@@ -427,6 +487,7 @@ is_integer <- function(x)
 #' Checks to see if the input is logical.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_logical} wraps \code{is.logical}, providing more 
 #' information on failure. \code{is_a_bool} returns \code{TRUE} if the 
 #' input is logical and scalar.  The \code{assert_*} functions return
@@ -438,9 +499,12 @@ is_integer <- function(x)
 #' assert_is_a_bool(TRUE)
 #' assert_is_a_bool(NA)
 #' @export
-is_logical <- function(x)
+is_logical <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.logical(x)) return(false("Input is not of type 'logical'."))
+  if(!is.logical(x)) 
+  {
+    return(false(sprintf("%s is not of type 'logical'.", .xname)))
+  }
   TRUE
 }       
 
@@ -449,6 +513,7 @@ is_logical <- function(x)
 #' Checks to see if the input is a language object.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_call}, \code{is_expression}, \code{is_language}, 
 #' \code{is_name} and \code{is_symbol} wrap the corresponding \code{is.*}
 #' functions, providing more information on failure.The \code{assert_*}
@@ -460,9 +525,12 @@ is_logical <- function(x)
 #' @examples
 #' assert_is_call(call("sin", "pi"))
 #' @export
-is_language <- function(x)
+is_language <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.language(x)) return(false("Input is not a language object (name, call or expression)."))
+  if(!is.language(x)) 
+  {
+    return(false(sprintf("%s is not a language object (name, call or expression).", .xname)))
+  }
   TRUE
 }
 
@@ -475,47 +543,62 @@ is_negative <- function(x)
 
 #' @rdname is_array
 #' @export
-is_matrix <- function(x)
+is_matrix <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.matrix(x)) return(false("Input is not of type 'matrix'."))
+  if(!is.matrix(x)) 
+  {
+    return(false(sprintf("%s is not of type 'matrix'.", .xname)))
+  }
   TRUE
 }
 
 #' @rdname is_language
 #' @export
-is_name <- function(x)
+is_name <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.name(x)) return(false("Input is not of type 'name' (a.k.a. 'symbol')."))
+  if(!is.name(x)) 
+  {
+    return(false(sprintf("%s is not of type 'name'.", .xname)))
+  }
   TRUE
 }
 
 #' @rdname is_empty
 #' @export
-is_non_empty <- function(x)
+is_non_empty <- function(x, .xname = get_name_in_parent(x))
 {
-  if(length(x) == 0L) return(false("Input has zero length."))
+  if(length(x) == 0L) 
+  {
+    return(false(sprintf("%s has length zero.", .xname)))
+  }
   TRUE
 }
 
 #' @rdname is_empty_model
 #' @export
-is_non_empty_model <- function(x)
+is_non_empty_model <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!has_terms(x)) return(false("Input has no terms, probably not a model."))
-  tt <- terms(x)
-  if(length(attr(tt, "factors")) == 0L && attr(tt, "intercept") == 0L) 
+  if(!has_terms(x)) 
   {
-    return(false("The model is empty."))
+    return(false(sprintf("%s has no terms, is probably not a model.", .xname)))
+  }
+  tt <- terms(x)
+  if(length(attr(tt, "factors")) == 0L && attr(tt, "intercept") == 0L)  
+  {
+    return(false(sprintf("%s is an empty model.", .xname)))
   }
   TRUE
 }
 
 #' @rdname is_character
 #' @export
-is_non_empty_string <- function(x)
+is_non_empty_string <- function(x, .xname = get_name_in_parent(x))
 {
   is_a_string(x)
-  if(!nzchar(x)) return(false("Input string contains no characters."))
+  if(!nzchar(x))
+  {
+    return(false(sprintf("%s has no characters.", .xname)))
+  }
   TRUE
 }
 
@@ -566,9 +649,12 @@ is_not_nan <- function(x)
 
 #' @rdname is_null
 #' export
-is_not_null <- function(x)
+is_not_null <- function(x, .xname = get_name_in_parent(x))
 {
-  if(is.null(x)) return(false("Input is NULL."))
+  if(is.null(x))
+  {
+    return(false(sprintf("%s is NULL.", .xname)))
+  }
   TRUE
 }
 
@@ -577,6 +663,7 @@ is_not_null <- function(x)
 #' Checks to see if the input is (not) null.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_null} wraps \code{is.null}, providing more 
 #' information on failure. \code{is_not_null} returns \code{TRUE} in
 #' the opposite case.  The \code{assert_*} functions return nothing but
@@ -588,9 +675,12 @@ is_not_null <- function(x)
 #' assert_is_null(c())
 #' assert_is_not_null(NA
 #' @export
-is_null <- function(x)
+is_null <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.null(x)) return(false("Input is not NULL."))
+  if(!is.null(x))
+  {
+    return(false(sprintf("%s is not NULL.", .xname)))
+  }
   TRUE
 }
 
@@ -599,6 +689,7 @@ is_null <- function(x)
 #' Checks to see if the input is numeric.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_numeric} wraps \code{is.numeric}, providing more 
 #' information on failure. \code{is_a_number} returns \code{TRUE} if the 
 #' input is numeric and scalar.  The \code{assert_*} functions return nothing but
@@ -611,9 +702,12 @@ is_null <- function(x)
 #' assert_is_a_number(1L)
 #' assert_is_a_number(NA_real_)
 #' @export
-is_numeric <- function(x)
+is_numeric <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.numeric(x)) return(false("Input is not of type 'numeric'."))
+  if(!is.numeric(x))
+  {
+    return(false(sprintf("%s is not of type 'numeric'.", .xname)))
+  }
   TRUE
 }
 
@@ -626,10 +720,13 @@ is_numeric_string <- function(x)
 
 #' @rdname is_factor
 #' @export
-is_ordered <- function(x)
+is_ordered <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_factor(x))) return(ok)
-  if(!is.ordered(x)) return(false("Input is not an ordered factor."))
+  if(!is.ordered(x))
+  {
+    return(false(sprintf("%s is not an ordered factor.", .xname)))
+  }
   TRUE
 }
 
@@ -649,10 +746,13 @@ is_positive <- function(x)
 
 #' @rdname is_function
 #' @export
-is_primitive <- function(x)
+is_primitive <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_function(x))) return(ok)
-  if(!is.primitive(x)) return(false("Input is not primitive."))
+  if(!is.primitive(x))
+  {
+    return(false(sprintf("%s is not a primitive function.", .xname)))
+  }
   TRUE
 } 
 
@@ -677,7 +777,10 @@ is_proportion <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
 #' @export
 is_R <- function()
 {
-  if(!is.R()) return(false("You are not running R."))
+  if(!is.R())
+  {
+    return(false("You are not running R."))
+  } 
   TRUE
 }
 
@@ -686,6 +789,7 @@ is_R <- function()
 #' Checks to see if the input is raw
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{is_raw} wraps \code{is.raw}, providing more 
 #' information on failure. \code{is_a_raw} returns \code{TRUE} if the 
 #' input is raw and scalar.  The \code{assert_*} functions return nothing but
@@ -696,9 +800,12 @@ is_R <- function()
 #' assert_is_raw(as.raw(1:10))
 #' assert_is_a_raw(as.raw(255))
 #' @export
-is_raw <- function(x)
+is_raw <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.raw(x)) return(false("Input is not of type 'raw'."))
+  if(!is.raw(x))
+  {
+    return(false(sprintf("%s is not of type 'raw'.", .xname)))
+  }
   TRUE
 }
 
@@ -727,17 +834,23 @@ is_real <- function(x)
 
 #' @rdname is_atomic
 #' @export
-is_recursive <- function(x)
+is_recursive <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.recursive(x)) return(false("Input is not recursive."))
+  if(!is.recursive(x))
+  {
+    return(false(sprintf("%s is not recursive.", .xname)))
+  }
   TRUE
 }
 
 #' @rdname is_empty
 #' @export
-is_scalar <- function(x)
+is_scalar <- function(x, .xname = get_name_in_parent(x))
 {
-  if(length(x) != 1L) return(false("Input does not have length 1."))
+  if(length(x) != 1L)
+  {
+    return(false(sprintf("%s does not have length one.", .xname)))
+  }
   TRUE
 }                
  
@@ -761,6 +874,7 @@ is_symbol <- is_name
 #' Checks to see if the input if \code{TRUE}.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{TRUE} if the input is identical to \code{TRUE}.
 #' The \code{assert_*} functions return nothing but
 #' throw an error if the corresponding \code{is_*} function returns 
@@ -770,9 +884,12 @@ is_symbol <- is_name
 #' assert_is_true(TRUE)
 #' assert_is_false(FALSE)
 #' @export
-is_true <- function(x)
+is_true <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!base::isTRUE(x)) return(false("Input is not identical to TRUE."))
+  if(!isTRUE(x))
+  {
+    return(false(sprintf("%s is not identical to TRUE.", .xname)))
+  }
   TRUE
 }
 
@@ -823,7 +940,7 @@ is_valid_variable_name <- function(x, allow_reserved = TRUE, allow_duplicates = 
 
 #' @rdname is_atomic
 #' @export
-is_vector <- function(x)
+is_vector <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.vector(x)) return(false("Input is not a vector."))
   TRUE

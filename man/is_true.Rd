@@ -9,12 +9,14 @@
 
   assert_is_true(x)
 
-  is_false(x)
+  is_false(x, .xname = get_name_in_parent(x))
 
-  is_true(x)
+  is_true(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{TRUE} if the input is identical to \code{TRUE}. The

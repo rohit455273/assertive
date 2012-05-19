@@ -9,12 +9,14 @@
 
   assert_is_integer(x)
 
-  is_an_integer(x)
+  is_an_integer(x, .xname = get_name_in_parent(x))
 
-  is_integer(x)
+  is_integer(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_integer} wraps \code{is.integer}, providing more

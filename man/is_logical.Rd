@@ -9,12 +9,14 @@
 
   assert_is_logical(x)
 
-  is_a_bool(x)
+  is_a_bool(x, .xname = get_name_in_parent(x))
 
-  is_logical(x)
+  is_logical(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_logical} wraps \code{is.logical}, providing more

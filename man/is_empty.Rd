@@ -10,14 +10,16 @@
 
   assert_is_scalar(x)
 
-  is_empty(x)
+  is_empty(x, .xname = get_name_in_parent(x))
 
-  is_non_empty(x)
+  is_non_empty(x, .xname = get_name_in_parent(x))
 
-  is_scalar(x)
+  is_scalar(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_empty} returns \code{TRUE} if the input has

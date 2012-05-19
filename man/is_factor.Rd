@@ -1,14 +1,22 @@
 \name{assert_is_factor}
 \alias{assert_is_factor}
+\alias{assert_is_ordered}
 \alias{is_factor}
+\alias{is_ordered}
 \title{Is the input an factor?}
 \usage{
   assert_is_factor(x)
 
-  is_factor(x)
+  assert_is_ordered()
+
+  is_factor(x, .xname = get_name_in_parent(x))
+
+  is_ordered(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_factor} wraps \code{is.factor}, providing more

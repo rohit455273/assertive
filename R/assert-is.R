@@ -2,136 +2,119 @@
 #' @export
 assert_is_a_bool <- function(x)
 {      
-  msg <- sprintf("%s is not a bool.", get_name_in_parent(x))
-  assert_engine(x, is_a_bool, msg)    
+  assert_engine(x, is_a_bool, .xname = get_name_in_parent(x))    
 }
 
 #' @rdname is_numeric
 #' @export
 assert_is_a_number <- function(x)
 {                                                          
-  msg <- sprintf("%s is not a number.", get_name_in_parent(x))
-  assert_engine(x, is_a_number, msg)        
+  assert_engine(x, is_a_number, .xname = get_name_in_parent(x))   
 }
 
 #' @rdname is_raw
 #' @export
 assert_is_a_raw <- function(x)
 {                                                          
-  msg <- sprintf("%s is not a raw.", get_name_in_parent(x))
-  assert_engine(x, is_a_raw, msg)        
+  assert_engine(x, is_a_raw, .xname = get_name_in_parent(x))      
 }
 
 #' @rdname is_character
 #' @export
 assert_is_a_string <- function(x)
 {                                                         
-  msg <- sprintf("%s is not a string.", get_name_in_parent(x))
-  assert_engine(x, is_a_string, msg)        
+  assert_engine(x, is_a_string, .xname = get_name_in_parent(x))   
 }
 
 #' @rdname is_integer
 #' @export
 assert_is_an_integer <- function(x)
 {
-  msg <- sprintf("%s is not an integer.", get_name_in_parent(x))
-  assert_engine(x, is_an_integer, msg)    
+  assert_engine(x, is_an_integer, .xname = get_name_in_parent(x)) 
 }
 
 #' @rdname is_array
 #' @export
 assert_is_array <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'array'.", get_name_in_parent(x))
-  assert_engine(x, is_array, msg)        
+  assert_engine(x, is_array, .xname = get_name_in_parent(x))       
 }
 
 #' @rdname is_atomic
 #' @export
 assert_is_atomic <- function(x)
 {                                                         
-  msg <- sprintf("%s is not atomic.", get_name_in_parent(x))
-  assert_engine(x, is_atomic, msg)        
+  assert_engine(x, is_atomic, .xname = get_name_in_parent(x)) 
 }
 
 #' @rdname is_language
 #' @export
 assert_is_call <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'call'.", get_name_in_parent(x))
-  assert_engine(x, is_call, msg)        
+  assert_engine(x, is_call, .xname = get_name_in_parent(x))       
 }
 
 #' @rdname is_character
 #' @export
 assert_is_character <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'character'.", get_name_in_parent(x))
-  assert_engine(x, is_character, msg)        
+  assert_engine(x, is_character, .xname = get_name_in_parent(x))   
 }
 
 #' @rdname is_data.frame
 #' @export
 assert_is_data.frame <- function(x)
 {                                                         
-  msg <- sprintf("%s is not a data.frame.", get_name_in_parent(x))
-  assert_engine(x, is_data.frame, msg)        
+  assert_engine(x, is_data.frame, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_empty
 #' @export
 assert_is_empty <- function(x)
 {                                                  
-  msg <- sprintf("%s is not empty.", get_name_in_parent(x))
-  assert_engine(x, is_empty, msg)        
+  assert_engine(x, is_empty, .xname = get_name_in_parent(x))      
 }
 
 #' @rdname is_empty_model
 #' @export
 assert_is_empty_model <- function(x)
 {                                                     
-  msg <- sprintf("%s is not scalar.", get_name_in_parent(x))
-  assert_engine(x, is_empty_model, msg)        
+  assert_engine(x, is_empty_model, .xname = get_name_in_parent(x))     
 }
 
 #' @rdname is_character
 #' @export
 assert_is_empty_string <- function(x)
 {                                                  
-  msg <- sprintf("%s is not the empty string.", get_name_in_parent(x))
-  assert_engine(x, is_empty_string, msg)        
+  assert_engine(x, is_empty_string, .xname = get_name_in_parent(x))     
 }
 
 #' @rdname is_environment
 #' @export
 assert_is_environment <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'environment'.", get_name_in_parent(x))
-  assert_engine(x, is_environment, msg)        
+  assert_engine(x, is_environment, .xname = get_name_in_parent(x))     
 }
 
 #' @rdname is_language
 #' @export
 assert_is_expression <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'expression'.", get_name_in_parent(x))
-  assert_engine(x, is_expression, msg)        
+  assert_engine(x, is_expression, .xname = get_name_in_parent(x))     
 }
 
 #' @rdname is_factor
 #' @export
 assert_is_factor <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'factor'.", get_name_in_parent(x))
-  assert_engine(x, is_factor, msg)        
+  assert_engine(x, is_factor, .xname = get_name_in_parent(x))  
 }
 
 #' @rdname is_true
 #' @export
 assert_is_false <- function(x)
 {                                                  
-  msg <- sprintf("%s is not identical to FALSE.", get_name_in_parent(x))
-  assert_engine(x, is_false, msg)        
+  assert_engine(x, is_false, .xname = get_name_in_parent(x))      
 }
 
 #' Is the inputs (in)finite?
@@ -169,8 +152,7 @@ assert_any_are_infinite <- function(x)
 #' @export
 assert_is_function <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'function'.", get_name_in_parent(x))
-  assert_engine(x, is_function, msg)        
+  assert_engine(x, is_function, .xname = get_name_in_parent(x))     
 }
 
 # ' @rdname is_generic
@@ -197,7 +179,7 @@ assert_any_are_imaginary <- function(x)
   assert_engine(x, is_imaginary, msg, what = "any")        
 }
 
-#' @rdname is_finite
+#' @rdname assert_all_are_finite
 #' @export
 assert_all_are_infinite <- function(x)
 {                                                     
@@ -205,7 +187,7 @@ assert_all_are_infinite <- function(x)
   assert_engine(x, is.infinite, msg)        
 }
 
-#' @rdname is_finite
+#' @rdname assert_all_are_finite
 #' @export
 assert_any_are_infinite <- function(x)
 {                                                     
@@ -314,40 +296,35 @@ assert_any_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 #' @export
 assert_is_integer <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'integer'.", get_name_in_parent(x))
-  assert_engine(x, is_integer, msg)        
+  assert_engine(x, is_integer, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_language
 #' @export
 assert_is_language <- function(x)
 {                                                         
-  msg <- sprintf("%s is not a language object.", get_name_in_parent(x))
-  assert_engine(x, is_language, msg)        
+  assert_engine(x, is_language, .xname = get_name_in_parent(x))    
 }
 
 #' @rdname is_logical
 #' @export
 assert_is_logical <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'logical'.", get_name_in_parent(x))
-  assert_engine(x, is_logical, msg)        
+  assert_engine(x, is_logical, .xname = get_name_in_parent(x))       
 }
 
 #' @rdname is_array
 #' @export
 assert_is_matrix <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'matrix'.", get_name_in_parent(x))
-  assert_engine(x, is_matrix, msg)        
+  assert_engine(x, is_matrix, .xname = get_name_in_parent(x))      
 }
 
 #' @rdname is_language
 #' @export
 assert_is_name <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'name' (a.k.a. 'symbol').", get_name_in_parent(x))
-  assert_engine(x, is_name, msg)        
+  assert_engine(x, is_name, .xname = get_name_in_parent(x))     
 }
 
 #' @rdname is_in_range
@@ -370,16 +347,14 @@ assert_any_are_negative <- function(x)
 #' @export
 assert_is_non_empty_string <- function(x)
 {                                                     
-  msg <- sprintf("%s is not a non-empty string.", get_name_in_parent(x))
-  assert_engine(x, is_non_empty_string, msg)        
+  assert_engine(x, is_non_empty_string, .xname = get_name_in_parent(x))    
 }  
   
 #' @rdname is_empty_model
 #' @export
 assert_is_non_empty_model <- function(x)
 {                                                     
-  msg <- sprintf("%s is not scalar.", get_name_in_parent(x))
-  assert_engine(x, is_non_empty_model, msg)        
+  assert_engine(x, is_non_empty_model, .xname = get_name_in_parent(x))    
 }
 
 #' @rdname is_in_range
@@ -449,26 +424,23 @@ assert_any_are_not_nan <- function(x)
 #' @rdname is_null
 #' @export
 assert_is_not_null <- function(x)
-{                                                         
-  msg <- sprintf("%s is NULL.", get_name_in_parent(x))
-  assert_engine(x, is_null, msg)        
+{                                                      
+  assert_engine(x, is_null, .xname = get_name_in_parent(x))   
 }
 
 #' @rdname is_null
 #' @export
 assert_is_null <- function(x)
 {                                                         
-  msg <- sprintf("%s is not NULL.", get_name_in_parent(x))
-  assert_engine(x, is_null, msg)        
+  
+  assert_engine(x, is_null, .xname = get_name_in_parent(x))       
 }
 
-#' @rdname is_ch
 #' @rdname is_numeric
 #' @export
 assert_is_numeric <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'numeric'.", get_name_in_parent(x))
-  assert_engine(x, is_numeric, msg)        
+  assert_engine(x, is_numeric, .xname = get_name_in_parent(x)) 
 }
 
 #' @rdname is_character
@@ -491,8 +463,7 @@ assert_any_are_numeric_strings <- function(x)
 #' @export
 assert_is_ordered <- function()
 {                                                         
-  msg <- sprintf("%s is not of type 'ordered'.", get_name_in_parent(x))
-  assert_engine(x, is_ordered, msg)        
+  assert_engine(x, is_ordered, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_in_range
@@ -544,8 +515,7 @@ assert_any_are_positive <- function(x)
 #' @export
 assert_is_primitive <- function(x)
 {                                                         
-  msg <- sprintf("%s is not of type 'primitive'.", get_name_in_parent(x))
-  assert_engine(x, is_primitive, msg)        
+  assert_engine(x, is_primitive, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_in_range
@@ -581,16 +551,14 @@ assert_any_are_proportions <- function(x)
 #' @export
 assert_is_R <- function()
 {                                                         
-  msg <- sprintf("You are not running R.", get_name_in_parent(x))
-  assert_engine(predicate = is_R, msg = msg)        
+  assert_engine(predicate = is_R)        
 }
 
 #' @rdname is_raw
 #' @export
 assert_is_raw <- function()
 {                                                         
-  msg <- sprintf("%s is not of type 'raw'.", get_name_in_parent(x))
-  assert_engine(x, is_raw, msg)        
+  assert_engine(x, is_raw, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_real
@@ -613,16 +581,14 @@ assert_any_are_real <- function(x)
 #' @export
 assert_is_recursive <- function(x)
 {                                                         
-  msg <- sprintf("%s is not recursive.", get_name_in_parent(x))
-  assert_engine(x, is_recursive, msg)        
+  assert_engine(x, is_recursive, .xname = get_name_in_parent(x)) 
 }
 
 #' @rdname is_empty
 #' @export
 assert_is_scalar <- function(x)
 {                                                     
-  msg <- sprintf("%s is not scalar.", get_name_in_parent(x))
-  assert_engine(x, is_scalar, msg)        
+  assert_engine(x, is_scalar, .xname = get_name_in_parent(x))    
 }
 
 #' @rdname is_character
@@ -648,8 +614,7 @@ assert_is_symbol <- assert_is_name
 #' @export
 assert_is_true <- function(x)
 {                                                  
-  msg <- sprintf("%s is not identical to TRUE.", get_name_in_parent(x))
-  assert_engine(x, is_true, msg)        
+ assert_engine(x, is_true, .xname = get_name_in_parent(x))    
 }
 
 #' @rdname is_valid_variable_name
@@ -685,6 +650,5 @@ assert_any_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_
 #' @export
 assert_is_vector <- function(x)
 {                                                    
-  msg <- sprintf("%s is not a vector.", get_name_in_parent(x))
-  assert_engine(x, is_vector, msg)        
+  assert_engine(x, is_vector, .xname = get_name_in_parent(x))
 }

@@ -9,12 +9,14 @@
 
   assert_is_non_empty_model(x)
 
-  is_empty_model(x)
+  is_empty_model(x, .xname = get_name_in_parent(x))
 
-  is_non_empty_model(x)
+  is_non_empty_model(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_[non_]empty_model} returns \code{TRUE} if the

@@ -9,12 +9,14 @@
 
   assert_is_matrix(x)
 
-  is_array(x)
+  is_array(x, .xname = get_name_in_parent(x))
 
-  is_matrix(x)
+  is_matrix(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_array} and \code{is_matrix} wrap

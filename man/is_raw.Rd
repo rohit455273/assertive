@@ -9,12 +9,14 @@
 
   assert_is_raw()
 
-  is_a_raw(x)
+  is_a_raw(x, .xname = get_name_in_parent(x))
 
-  is_raw(x)
+  is_raw(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_raw} wraps \code{is.raw}, providing more

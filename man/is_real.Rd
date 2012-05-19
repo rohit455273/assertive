@@ -20,6 +20,8 @@
   is_real(x)
 }
 \arguments{
+  \item{.xname}{Not intended to be used directly.}
+
   \item{x}{Input to check.}
 }
 \value{

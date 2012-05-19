@@ -14,10 +14,9 @@
   \item{x}{Input to check.}
 }
 \value{
-  \code{is_not_na} is the negation of \code{is.na}. The
-  \code{assert_*} functions return nothing but throw an
-  error if the corresponding \code{is_*} function returns
-  \code{FALSE}.
+  \code{is_not_na} is the negation of \code{is.na}.
+  \code{assert_is_not_na} returns nothing but throws an
+  error if \code{is_not_na} returns \code{FALSE}.
 }
 \description{
   Checks to see if the input is not NA.

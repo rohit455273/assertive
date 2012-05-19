@@ -5,10 +5,12 @@
 \usage{
   assert_is_data.frame(x)
 
-  is_data.frame(x)
+  is_data.frame(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
   \code{is_data.frame} wraps \code{is.data.frame},

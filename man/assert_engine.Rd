@@ -2,7 +2,7 @@
 \alias{assert_engine}
 \title{Throws an error if a condition isn't met.}
 \usage{
-  assert_engine(x, predicate, msg, what = c("all", "any"),
+  assert_engine(x, predicate, msg., what = c("all", "any"),
     ...)
 }
 \arguments{
