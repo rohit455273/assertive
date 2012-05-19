@@ -12,18 +12,29 @@
 #' @param ... Passed to the \code{predicate} function.
 #' @return \code{FALSE} with the attribute \code{message}, as provided
 #' in the input.
-assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
+assert_engine <- function(x, predicate, msg., what = c("all", "any"), ...)
 {
   handler <- match.fun(match.arg(
     getOption("assertive.severity"),
     c("stop", "warning", "message")
-  ))
+    ))
   what <- match.fun(match.arg(what))
   #Some functions, e.g., is.R take no args
-  ok <- what(if(missing(x)) predicate() else predicate(x, ...))
-  if(!ok)
+  ok <- if(missing(x)) predicate() else predicate(x, ...)
+  if(!what(ok))
   {
-    handler(msg, call. = FALSE)
+    if(missing(msg.)) 
+    {
+      if(is_scalar(ok))
+      {
+        msg. <- msg(ok)
+      } else
+      {
+        stop("Bug in assertive; error message is missing")
+      }
+    }
+    #browser()
+    handler(msg., call. = FALSE)
   }
 }
 
