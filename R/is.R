@@ -715,7 +715,8 @@ is_numeric <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_numeric_string <- function(x)
 {
-  is_not_na(as.numeric(as.character(x)))
+  x <- as.numeric(coerce_to(x, "character"))
+  is_not_na(x)
 }
 
 #' @rdname is_factor
@@ -858,6 +859,7 @@ is_scalar <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_string_missing_or_empty <- function(x)
 { 
+  x <- coerce_to(x, "character")
   !nzchar(x) | is.na(x)
 }
 
@@ -918,6 +920,7 @@ is_true <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_valid_variable_name <- function(x, allow_reserved = TRUE, allow_duplicates = TRUE)
 {
+  x <- coerce_to(x, "character")
   ok <- rep.int(TRUE, length(x))
 
   #is name too long?
