@@ -53,34 +53,36 @@ has_cols <- function(x)
   TRUE
 } 
 
-#' Does the input have dimensions?
-#'
-#' Checks to see if the input has dimensions.
-#'
-#' @param x Input to check.
-#' @return \code{has_dims} returns\code{TRUE} if \code{dim} is non-null 
-#' and has length at least 1.  \code{assert_has_dims} returns nothing but 
-#' throws an error if \code{has_dims} is not \code{TRUE}.
-#' @seealso \code{\link{dim}}.
-#' @export
-has_dims <- function(x)
-{
-  dimx <- dim(x)
-  if(is.null(dimx)) return(false("Dimensions are NULL."))
-  if(is_empty(dimx)) return(false("Dimensions are empty."))
-  TRUE
-}
-              
 #' @rdname has_names
 #' @export
 has_dimnames <- function(x)
 {
   dimnamesx <- dimnames(x)
   if(is.null(dimnamesx)) return(false("Dimension names are NULL."))
-  if(!any(nzchar(dimnamesx))) return(false("Dimension names are all empty."))
+  if(!any(nzchar(unlist(dimnamesx, use.names = FALSE)))) 
+  {
+    return(false("Dimension names are all empty."))
+  }
   TRUE
 } 
 
+#' Does the input have dimensions?
+#'
+#' Checks to see if the input has dimensions.
+#'
+#' @param x Input to check.
+#' @return \code{has_dims} returns\code{TRUE} if \code{dim} is non-null.
+#' \code{assert_has_dims} returns nothing but throws an error if
+#' \code{has_dims} is not \code{TRUE}.
+#' @seealso \code{\link{dim}}.
+#' @export
+has_dims <- function(x)
+{
+  dimx <- dim(x)
+  if(is.null(dimx)) return(false("Dimensions are NULL."))
+  TRUE
+}
+    
 #' @rdname has_duplicates
 #' @export
 has_no_duplicates <- function(x)
@@ -108,12 +110,13 @@ has_duplicates <- Negate(has_no_duplicates)
 #'
 #' @param x Input to check.
 #' @return \code{has_names} returns \code{TRUE} if \code{names} is 
-#' non-null and at least one column name is not \code{""}. 
+#' non-null. 
 #' \code{has_rownames}, \code{has_colnames} and \code{has_dimnames} work
 #' in a similar fashion, checking the corresponding attributes.
 #' \code{assert_has_names} returns nothing but throws an error if 
 #' \code{has_names} is not \code{TRUE}.
-#' name is not \code{""}.
+#' @note Empty names (i.e., \code{""}) are not allowed in R, and are 
+#' not checked here.
 #' @seealso \code{\link[base]{names}}, \code{\link[base]{rownames}}, \code{\link[base]{colnames}}, \code{\link[base]{dimnames}}.
 #' @examples
 #' assert_has_names(c(a = 1, 2))
@@ -126,7 +129,6 @@ has_names <- function(x)
 {
   namesx <- names(x)
   if(is.null(namesx)) return(false("Names are NULL."))
-  if(!any(nzchar(namesx))) return(false("Names are all empty."))
   TRUE
 } 
 
@@ -164,7 +166,10 @@ has_rows <- function(x)
 #' @export
 has_terms <- function(x)
 {
-  if(is.null(x$terms) && is.null(attr(x, "terms")))
+  if(
+    is.null(attr(x, "terms")) && 
+    (is.atomic(x) || is.null(x$terms))
+  )
   {
     return(false("Input has no terms component nor attribute."))
   }
