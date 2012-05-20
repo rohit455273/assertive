@@ -144,7 +144,7 @@ is_call <- function(x, .xname = get_name_in_parent(x))
 #' input is character and scalar. \code{is_empty_string} returns \code{TRUE}
 #' if the input is \code{""}.  \code{is_numeric_string} is vectorised, 
 #' returning \code{TRUE} when the inputs are not \code{NA} after conversion
-#' to character and then numeric. \code{is_string_missing_or_empty} is
+#' to character and then numeric. \code{is_missing_or_empty_string} is
 #' also vectorised, returning \code{TRUE} when the input is \code{""} or
 #' \code{NA}.
 #' The \code{assert_*} functions return nothing but throw an error if the
@@ -857,7 +857,7 @@ is_scalar <- function(x, .xname = get_name_in_parent(x))
  
 #' @rdname is_character
 #' @export
-is_string_missing_or_empty <- function(x)
+is_missing_or_empty_string <- function(x)
 { 
   x <- coerce_to(x, "character")
   !nzchar(x) | is.na(x)
@@ -865,7 +865,7 @@ is_string_missing_or_empty <- function(x)
 
 #' @rdname is_character
 #' @export
-is_string_not_missing_nor_empty <- Negate(is_string_missing_or_empty)
+is_not_missing_nor_empty_string <- Negate(is_missing_or_empty_string)
 
 #' @rdname is_language
 #' @export

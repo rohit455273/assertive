@@ -596,7 +596,7 @@ assert_is_scalar <- function(x)
 assert_all_strings_are_missing_or_empty <- function(x)
 {                                                       
   msg <- sprintf("%s are not all missing or empty strings.", get_name_in_parent(x))
-  assert_engine(x, is_string_missing_or_empty, msg)
+  assert_engine(x, is_missing_or_empty_string, msg)
 }
 
 #' @rdname is_character
@@ -604,7 +604,7 @@ assert_all_strings_are_missing_or_empty <- function(x)
 assert_any_strings_are_missing_or_empty <- function(x)
 {                                                      
   msg <- sprintf("%s are all not missing or empty strings.", get_name_in_parent(x))
-  assert_engine(x, is_string_missing_or_empty, msg, what = "any")
+  assert_engine(x, is_missing_or_empty_string, msg, what = "any")
 }
 #' @rdname is_language
 #' @export
