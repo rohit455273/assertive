@@ -33,7 +33,6 @@ assert_engine <- function(x, predicate, msg., what = c("all", "any"), ...)
         stop("Bug in assertive; error message is missing")
       }
     }
-    #browser()
     handler(msg., call. = FALSE)
   }
 }
