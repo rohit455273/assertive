@@ -18,15 +18,7 @@ test.is_array.a_vector.returns_false <- function()
   checkTrue(!is_array(1:10))
 }
 
-#'   logical(),
-#'   integer(),
-#'   numeric(), 
-#'   complex(),
-#'   character(), 
-#'   raw(),
-#'   matrix(), 
-#'   array(),
-#'   NULL
+
 test.is_atomic.logical.returns_true <- function()
 {
   checkTrue(is_atomic(logical()))
@@ -153,7 +145,127 @@ test.is_environment.not_an_environment.returns_false <- function()
 }
 
 
+test.is_expression.an_environment.returns_true <- function()
+{
+  checkTrue(is_expression(expression(sin(pi))))
+}
 
+test.is_expression.not_an_expression.returns_false <- function()
+{
+  checkTrue(!is_expression(call("sin", "pi")))
+}
+
+
+test.is_factor.a_factor.returns_true <- function()
+{
+  checkTrue(is_factor(factor(letters)))
+}
+
+test.is_factor.not_a_factor.returns_false <- function()
+{
+  checkTrue(!is_factor(letters))
+}
+
+
+test.is_function.a_function.returns_true <- function()
+{
+  checkTrue(is_function(function(){}))
+}
+
+test.is_function.a_primitive_function.returns_true <- function()
+{
+  checkTrue(is_function(sqrt))
+}
+
+test.is_function.not_a_function.returns_false <- function()
+{
+  checkTrue(!is_function(call("sin", "pi")))
+}
+
+
+test.is_integer.an_integer_vector.returns_true <- function()
+{
+  checkTrue(is_integer(1L:10L))
+}
+
+test.is_integer.na_integer_.returns_true <- function()
+{
+  checkTrue(is_integer(NA_integer_))
+}
+
+test.is_integer.not_an_integer.returns_false <- function()
+{
+  checkTrue(!is_integer(1:10))
+}
+
+
+test.is_language.a_call.returns_true <- function()
+{
+  checkTrue(is_language(call("sin", "pi")))
+}
+
+test.is_language.an_expression.returns_true <- function()
+{
+  checkTrue(is_language(expression(sin(pi))))
+}
+
+test.is_language.a_name.returns_true <- function()
+{
+  checkTrue(is_language(as.name("foo")))
+}
+
+test.is_language.not_a_language_object.returns_false <- function()
+{
+  checkTrue(!is_language(sin))
+}
+
+
+test.is_logical.a_logical_vector.returns_true <- function()
+{
+  checkTrue(is_logical(c(TRUE, FALSE)))
+}
+
+test.is_logical.na.returns_true <- function()
+{
+  checkTrue(is_logical(NA))
+}
+
+test.is_logical.not_a_logical.returns_false <- function()
+{
+  checkTrue(!is_logical(1:10))
+}
+
+
+test.is_matrix.a_matrix.returns_true <- function()
+{
+  checkTrue(is_matrix(matrix()))
+}
+
+test.is_matrix.an_array.returns_true <- function()
+{
+  checkTrue(is_matrix(array()))
+}
+
+test.is_matrix.a_data.frame.returns_false <- function()
+{
+  checkTrue(!is_matrix(data.frame(x = 1:5)))
+}
+
+test.is_matrix.a_vector.returns_false <- function()
+{
+  checkTrue(!is_matrix(1:10))
+}
+
+
+test.is_name.a_name.returns_true <- function()
+{
+  checkTrue(is_name(as.name("foo")))
+}
+
+test.is_name.not_a_name.returns_false <- function()
+{
+  checkTrue(!is_name(call("sin", "pi")))
+}
 
 
 

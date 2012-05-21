@@ -55,6 +55,27 @@ test.is_a_complex.empty_complex.returns_false <- function()
 }
 
 
+test.is_a_non_empty_string.non_empty_string.returns_true <- function()
+{
+  checkTrue(is_a_non_empty_string("foo"))
+}
+
+test.is_a_non_empty_string.na_character_.returns_true <- function()
+{
+  checkTrue(is_a_non_empty_string(NA_character_))
+}
+
+test.is_a_non_empty_string.empty_string.returns_false <- function()
+{
+  checkTrue(!is_a_non_empty_string(""))
+}
+
+test.is_a_non_empty_string.empty_character.returns_false <- function()
+{
+  checkTrue(!is_a_non_empty_string(character()))
+}
+
+
 test.is_a_number.1.returns_true <- function()
 {
   checkTrue(is_a_number(1))

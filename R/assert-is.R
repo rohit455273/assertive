@@ -12,6 +12,13 @@ assert_is_a_number <- function(x)
   assert_engine(x, is_a_number, .xname = get_name_in_parent(x))   
 }
 
+#' @rdname is_character
+#' @export
+assert_is_a_non_empty_string <- function(x)
+{                                                     
+  assert_engine(x, is_a_non_empty_string, .xname = get_name_in_parent(x))    
+}  
+
 #' @rdname is_raw
 #' @export
 assert_is_a_raw <- function(x)
@@ -334,6 +341,22 @@ assert_is_name <- function(x)
   assert_engine(x, is_name, .xname = get_name_in_parent(x))     
 }
 
+#' @rdname is_nan
+#' @export
+assert_all_are_nan <- function(x)
+{                                                                
+  msg <- sprintf("%s are not all NaN.", get_name_in_parent(x))
+  assert_engine(x, is_nan, msg)
+}
+
+#' @rdname is_nan
+#' @export
+assert_any_are_nan <- function(x)
+{                                                                
+  msg <- sprintf("%s are all not NaN.", get_name_in_parent(x))
+  assert_engine(x, is_nan, msg, what = "any")
+}
+
 #' @rdname is_in_range
 #' @export
 assert_all_are_negative <- function(x)
@@ -350,13 +373,6 @@ assert_any_are_negative <- function(x)
   assert_engine(x, is_negative, msg, what = "any")
 }
 
-#' @rdname is_character
-#' @export
-assert_is_non_empty_string <- function(x)
-{                                                     
-  assert_engine(x, is_non_empty_string, .xname = get_name_in_parent(x))    
-}  
-  
 #' @rdname is_empty_model
 #' @export
 assert_is_non_empty_model <- function(x)

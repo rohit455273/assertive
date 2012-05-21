@@ -16,6 +16,18 @@ is_a_complex <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' @rdname is_character
+#' @export
+is_a_non_empty_string <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_a_string(x))) return(ok)
+  if(!nzchar(x))
+  {
+    return(false(sprintf("%s has no characters.", .xname)))
+  }
+  TRUE
+}
+
 #' @rdname is_numeric
 #' @export
 is_a_number <- function(x, .xname = get_name_in_parent(x))
@@ -537,7 +549,7 @@ is_integer <- function(x, .xname = get_name_in_parent(x))
 #' @param .xname Not intended to be used directly.
 #' @return \code{is_call}, \code{is_expression}, \code{is_language}, 
 #' \code{is_name} and \code{is_symbol} wrap the corresponding \code{is.*}
-#' functions, providing more information on failure.The \code{assert_*}
+#' functions, providing more information on failure.  The \code{assert_*}
 #' functions return nothing but throw an error if the corresponding
 #' \code{is_*} function returns \code{FALSE}.
 #' @note \code{is_name} and \code{is_symbol} are different names for 
@@ -605,6 +617,26 @@ is_matrix <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' Is the input (not) NaN?
+#'
+#' Checks to see if the input is a number that is(n't) NaN.
+#'
+#' @param x Input to check.
+#' @return \code{is_nan} wraps \code{is.nan}, coercing the input to
+#' numeric if necessary.  \code{is_not_nan} works similarly, but returns
+#' the negation.  The \code{assert_*} functions return nothing but
+#' throw an error if the corresponding \code{is_*} function returns
+#' \code{FALSE}.
+#' @seealso \code{\link[base]{is.nan}}
+#' @examples
+#' assert_is_not_nan(1:10)
+#' @export
+is_nan <- function(x, .xname = get_name_in_parent(x))
+{
+  x <- coerce_to(x, "numeric")
+  is.nan(x)
+}
+
 #' @rdname is_language
 #' @export
 is_name <- function(x, .xname = get_name_in_parent(x))
@@ -643,18 +675,6 @@ is_non_empty_model <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
-#' @rdname is_character
-#' @export
-is_non_empty_string <- function(x, .xname = get_name_in_parent(x))
-{
-  is_a_string(x)
-  if(!nzchar(x))
-  {
-    return(false(sprintf("%s has no characters.", .xname)))
-  }
-  TRUE
-}
-
 #' @rdname is_in_range
 #' @export
 is_non_negative <- function(x)
@@ -683,21 +703,12 @@ is_non_positive <- function(x)
 #' @export
 is_not_na <- Negate(is.na)
   
-#' Is the input not NaN?
-#'
-#' Checks to see if the input is a number that isn't NaN.
-#'
-#' @param x Input to check.
-#' @return \code{is_not_nan} returns \code{TRUE} if the input is
-#' numeric and is not nan.  \code{assert_is_not_nan} returns nothing
-#' but throws an error if \code{is_not_nan} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.nan}}
-#' @examples
-#' assert_is_not_nan(1:10)
+#' @rdname is_nan
 #' @export
 is_not_nan <- function(x)
 {
-  is.numeric(x) & !is.nan(x)
+  x <- coerce_to(x, "numeric")
+  !is.nan(x)
 }
 
 #' @rdname is_null
