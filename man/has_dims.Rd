@@ -12,9 +12,8 @@
 }
 \value{
   \code{has_dims} returns\code{TRUE} if \code{dim} is
-  non-null and has length at least 1.
-  \code{assert_has_dims} returns nothing but throws an
-  error if \code{has_dims} is not \code{TRUE}.
+  non-null. \code{assert_has_dims} returns nothing but
+  throws an error if \code{has_dims} is not \code{TRUE}.
 }
 \description{
   Checks to see if the input has dimensions.

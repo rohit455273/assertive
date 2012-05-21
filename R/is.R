@@ -7,6 +7,14 @@ is_a_bool <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' @rdname is_complex
+#' @export
+is_a_complex <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_complex(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname))) return(ok)
+  TRUE
+}
 
 #' @rdname is_numeric
 #' @export
@@ -35,6 +43,18 @@ is_a_string <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' @rdname is_character
+#' @export
+is_an_empty_string <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_a_string(x, .xname))) return(ok)
+  if(nzchar(x)) 
+  {
+    return(false(sprintf("%s contains characters.", .xname)))
+  }
+  TRUE
+}
+
 #' @rdname is_integer
 #' @export
 is_an_integer <- function(x, .xname = get_name_in_parent(x))
@@ -60,7 +80,7 @@ is_an_integer <- function(x, .xname = get_name_in_parent(x))
 #' assert_is_array(matrix())
 #' assert_is_matrix(matrix())
 #' dontrun{
-#' #This throws an error:
+#' #These examples should fail:
 #' assert_is_matrix(array())
 #' }
 #' @export
@@ -168,6 +188,39 @@ is_character <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' Is the input complex?
+#'
+#' Checks to see if the input is complex.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_complex} wraps \code{is.complex}, providing more 
+#' information on failure. \code{is_a_bool} returns \code{TRUE} if the 
+#' input is complex and scalar.  The \code{assert_*} functions return
+#' nothing but throw an error if the corresponding \code{is_*} function
+#' returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.complex}} and \code{\link{is_scalar}}.
+#' @examples
+#' assert_is_complex(c(1i, 2i))
+#' assert_is_a_complex(1i)
+#' assert_is_a_complex(1 + 0i)
+#' assert_is_a_complex(NA_complex_)
+#' \dontrun{
+#' #These examples should fail:
+#' assert_is_complex(1:10)
+#' assert_is_a_complex(c(1i, 2i))
+#' assert_is_a_complex(complex())
+#' }
+#' @export
+is_complex <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!is.complex(x)) 
+  {
+    return(false(sprintf("%s is not of type 'complex'.", .xname)))
+  }
+  TRUE
+}       
+
 #' Checks to see if the input is a data.frame.
 #'
 #' @param x Input to check.
@@ -251,18 +304,6 @@ is_empty_model <- function(x, .xname = get_name_in_parent(x))
   if(attr(tt, "intercept") != 0L) 
   {
     return(false(sprintf("%s has an intercept.", .xname)))
-  }
-  TRUE
-}
-
-#' @rdname is_character
-#' @export
-is_empty_string <- function(x, .xname = get_name_in_parent(x))
-{
-  if(!(ok <- is_a_string(x))) return(ok)
-  if(nzchar(x)) 
-  {
-    return(false(sprintf("%s contains characters.", .xname)))
   }
   TRUE
 }
@@ -472,6 +513,12 @@ is_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 #' @examples
 #' assert_is_integer(1L:10L)
 #' assert_is_an_integer(99L)
+#' \dontrun{
+#' #These examples should fail:
+#' assert_is_integer(1:10)
+#' assert_is_an_integer(1L:10L)
+#' assert_is_an_integer(integer())
+#' }
 #' @export
 is_integer <- function(x, .xname = get_name_in_parent(x))
 {
@@ -481,32 +528,6 @@ is_integer <- function(x, .xname = get_name_in_parent(x))
   }
   TRUE
 }
-
-#' Is the input logical?
-#'
-#' Checks to see if the input is logical.
-#'
-#' @param x Input to check.
-#' @param .xname Not intended to be used directly.
-#' @return \code{is_logical} wraps \code{is.logical}, providing more 
-#' information on failure. \code{is_a_bool} returns \code{TRUE} if the 
-#' input is logical and scalar.  The \code{assert_*} functions return
-#' nothing but throw an error if the corresponding \code{is_*} function
-#' returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.logical}} and \code{\link{is_scalar}}.
-#' @examples
-#' assert_is_logical(runif(10) > 0.5)
-#' assert_is_a_bool(TRUE)
-#' assert_is_a_bool(NA)
-#' @export
-is_logical <- function(x, .xname = get_name_in_parent(x))
-{
-  if(!is.logical(x)) 
-  {
-    return(false(sprintf("%s is not of type 'logical'.", .xname)))
-  }
-  TRUE
-}       
 
 #' Is the input a language object?
 #'
@@ -533,6 +554,38 @@ is_language <- function(x, .xname = get_name_in_parent(x))
   }
   TRUE
 }
+
+#' Is the input logical?
+#'
+#' Checks to see if the input is logical.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_logical} wraps \code{is.logical}, providing more 
+#' information on failure. \code{is_a_bool} returns \code{TRUE} if the 
+#' input is logical and scalar.  The \code{assert_*} functions return
+#' nothing but throw an error if the corresponding \code{is_*} function
+#' returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.logical}} and \code{\link{is_scalar}}.
+#' @examples
+#' assert_is_logical(runif(10) > 0.5)
+#' assert_is_a_bool(TRUE)
+#' assert_is_a_bool(NA)
+#' \dontrun{
+#' #These examples should fail:
+#' assert_is_logical(1)
+#' assert_is_a_bool(c(TRUE, FALSE))
+#' assert_is_a_bool(logical())
+#' }
+#' @export
+is_logical <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!is.logical(x)) 
+  {
+    return(false(sprintf("%s is not of type 'logical'.", .xname)))
+  }
+  TRUE
+}       
 
 #' @rdname is_in_range
 #' @export
@@ -701,6 +754,12 @@ is_null <- function(x, .xname = get_name_in_parent(x))
 #' assert_is_a_number(pi)
 #' assert_is_a_number(1L)
 #' assert_is_a_number(NA_real_)
+#' \dontrun{
+#' #These examples should fail:
+#' assert_is_numeric(c(TRUE, FALSE))
+#' assert_is_a_number(1:10)
+#' assert_is_a_number(numeric())
+#' }
 #' @export
 is_numeric <- function(x, .xname = get_name_in_parent(x))
 {
@@ -800,6 +859,12 @@ is_R <- function()
 #' @examples
 #' assert_is_raw(as.raw(1:10))
 #' assert_is_a_raw(as.raw(255))
+#' \dontrun{
+#' #These examples should fail:
+#' assert_is_raw(c(TRUE, FALSE))
+#' assert_is_a_raw(as.raw(1:10))
+#' assert_is_a_raw(raw())
+#' }
 #' @export
 is_raw <- function(x, .xname = get_name_in_parent(x))
 {

@@ -8,7 +8,7 @@
 #' @return The input \code{x} after attempted coersion to the target class.
 #' @note If x does not already have the target class, a warning is given
 #' before coersion.
-#' @sealso \code{\link[base]{is}} and \code{\link[base]{as}}.
+#' @seealso \code{\link[base]{is}} and \code{\link[base]{as}}.
 #' @export
 coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
 {

@@ -29,16 +29,19 @@
 }
 \value{
   \code{has_names} returns \code{TRUE} if \code{names} is
-  non-null and at least one column name is not \code{""}.
-  \code{has_rownames}, \code{has_colnames} and
+  non-null. \code{has_rownames}, \code{has_colnames} and
   \code{has_dimnames} work in a similar fashion, checking
   the corresponding attributes. \code{assert_has_names}
   returns nothing but throws an error if \code{has_names}
-  is not \code{TRUE}. name is not \code{""}.
+  is not \code{TRUE}.
 }
 \description{
   Checks to see if the input has (row/column/dimension)
   names.
+}
+\note{
+  Empty names (i.e., \code{""}) are not allowed in R, and
+  are not checked here.
 }
 \examples{
 assert_has_names(c(a = 1, 2))
