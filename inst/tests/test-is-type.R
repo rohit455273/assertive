@@ -5,12 +5,12 @@ test.is2.1_to_5_is_numeric.returns_true <- function()
 
 test.is2.1_to_5_is_list.returns_false <- function()
 {
-  checkTrue(is2(1:5, "list"))
+  checkTrue(!is2(1:5, "list"))
 }
 
 test.is2.1_to_5_is_nonsense.returns_false <- function()
 {
-  checkTrue(is2(1:5, "a b c"))
+  checkTrue(!is2(1:5, "a b c"))
 }
 
 

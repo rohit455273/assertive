@@ -1,6 +1,6 @@
 #' @rdname is2  
 #' @export
-assert_is <- function(x, class)
+assert_is <- function(x, class, .xname = get_name_in_parent(x))
 {  
   assert_engine(x, is2, class = class, .xname = .xname)
 }
@@ -137,7 +137,7 @@ assert_is_false <- function(x, allow_attributes = FALSE)
 {                                                  
   assert_engine(
     x, 
-    is_false, 
+    assertive::is_false,  #avoid conflict with testthat::is_false
     allow_attributes = allow_attributes, 
     .xname = get_name_in_parent(x)
   )      
@@ -168,7 +168,7 @@ assert_all_are_finite <- function(x)
 
 #' @rdname assert_all_are_finite
 #' @export
-assert_any_are_infinite <- function(x)
+assert_any_are_finite <- function(x)
 {                                                     
   msg <- sprintf("%s are all not finite.", get_name_in_parent(x))
   assert_engine(x, is.finite, msg, what = "any")        
@@ -271,7 +271,7 @@ assert_any_are_in_open_range <- function(x, lower = -Inf, upper = Inf)
 
 #' @rdname is_in_range
 #' @export
-assert_all_are_in_range <- function(x, lower = -Inf, upper = Inf)
+assert_all_are_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE, upper_is_strict = FALSE)
 {                                                     
   msg <- sprintf("%s are not all in range.", get_name_in_parent(x))
   assert_engine(
@@ -287,7 +287,7 @@ assert_all_are_in_range <- function(x, lower = -Inf, upper = Inf)
 
 #' @rdname is_in_range
 #' @export
-assert_any_are_in_range <- function(x, lower = -Inf, upper = Inf)
+assert_any_are_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE, upper_is_strict = FALSE)
 {                                                     
   msg <- sprintf("%s are all out of range.", get_name_in_parent(x))
   assert_engine(
@@ -397,6 +397,13 @@ assert_any_are_negative <- function(x)
 {                                                        
   msg <- sprintf("%s are all not negative.", get_name_in_parent(x))
   assert_engine(x, is_negative, msg, what = "any")
+}
+
+#' @rdname is_empty
+#' @export
+assert_is_non_empty <- function(x)
+{                                                     
+  assert_engine(x, is_non_empty, .xname = get_name_in_parent(x))    
 }
 
 #' @rdname is_empty_model
@@ -510,7 +517,7 @@ assert_any_are_numeric_strings <- function(x)
 
 #' @rdname is_factor
 #' @export
-assert_is_ordered <- function()
+assert_is_ordered <- function(x)
 {                                                         
   assert_engine(x, is_ordered, .xname = get_name_in_parent(x))
 }
@@ -531,7 +538,7 @@ assert_all_are_percentages <- function(x, lower_is_strict = FALSE, upper_is_stri
 
 #' @rdname is_in_range
 #' @export
-assert_any_are_percentages <- function(x)
+assert_any_are_percentages <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
 {                                                       
   msg <- sprintf("%s are all not percentages.", get_name_in_parent(x))
   assert_engine(
@@ -583,7 +590,7 @@ assert_all_are_proportions <- function(x, lower_is_strict = FALSE, upper_is_stri
 
 #' @rdname is_in_range
 #' @export
-assert_any_are_proportions <- function(x)
+assert_any_are_proportions <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
 {                                                       
   msg <- sprintf("%s are all not proportions.", get_name_in_parent(x))
   assert_engine(
@@ -612,7 +619,7 @@ assert_is_R <- function()
 
 #' @rdname is_raw
 #' @export
-assert_is_raw <- function()
+assert_is_raw <- function(x)
 {                                                         
   assert_engine(x, is_raw, .xname = get_name_in_parent(x))
 }
@@ -692,7 +699,7 @@ assert_is_true <- function(x, allow_attributes = FALSE)
 {                                                  
  assert_engine(
    x, 
-   is_true, 
+   assertive::is_true,  #avoid conflict with testthat::is_true
    allow_attributes = allow_attributes, 
    .xname = get_name_in_parent(x)
   )    

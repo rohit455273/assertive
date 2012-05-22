@@ -52,9 +52,11 @@
   assert_any_are_in_open_range(x, lower = -Inf,
     upper = Inf)
 
-  assert_all_are_in_range(x, lower = -Inf, upper = Inf)
+  assert_all_are_in_range(x, lower = -Inf, upper = Inf,
+    lower_is_strict = FALSE, upper_is_strict = FALSE)
 
-  assert_any_are_in_range(x, lower = -Inf, upper = Inf)
+  assert_any_are_in_range(x, lower = -Inf, upper = Inf,
+    lower_is_strict = FALSE, upper_is_strict = FALSE)
 
   assert_all_are_in_right_open_range(x, lower = -Inf,
     upper = Inf)
@@ -77,7 +79,8 @@
   assert_all_are_percentages(x, lower_is_strict = FALSE,
     upper_is_strict = FALSE)
 
-  assert_any_are_percentages(x)
+  assert_any_are_percentages(x, lower_is_strict = FALSE,
+    upper_is_strict = FALSE)
 
   assert_all_are_positive(x)
 
@@ -86,7 +89,8 @@
   assert_all_are_proportions(x, lower_is_strict = FALSE,
     upper_is_strict = FALSE)
 
-  assert_any_are_proportions(x)
+  assert_any_are_proportions(x, lower_is_strict = FALSE,
+    upper_is_strict = FALSE)
 
   is_in_closed_range(x, lower = -Inf, upper = Inf)
 

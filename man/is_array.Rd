@@ -33,7 +33,7 @@
 assert_is_array(array())
 assert_is_array(matrix())
 assert_is_matrix(matrix())
-dontrun{
+\dontrun{
 #These examples should fail:
 assert_is_matrix(array())
 }

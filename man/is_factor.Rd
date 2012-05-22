@@ -7,7 +7,7 @@
 \usage{
   assert_is_factor(x)
 
-  assert_is_ordered()
+  assert_is_ordered(x)
 
   is_factor(x, .xname = get_name_in_parent(x))
 

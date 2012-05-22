@@ -44,7 +44,7 @@
 
   is_missing_or_empty_character(x)
 
-  is_not_missing_nor_empty_character(...)
+  is_not_missing_nor_empty_character(x)
 }
 \arguments{
   \item{x}{Input to check.}

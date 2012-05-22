@@ -4,6 +4,7 @@
 #' If not, call \code{is(x, class)}.
 #' @param x Input to check.
 #' @param class Target class that \code{x} maybe belong to.
+#' @param .xname Not intended to be used directly.
 #' @return \code{TRUE} if x belongs to the class and \code{FALSE} 
 #' otherwise.  \code{assert_is} returns nothing but throws an error if
 #' \code{x} does not have class \code{class}.
@@ -125,7 +126,7 @@ is_an_integer <- function(x, .xname = get_name_in_parent(x))
 #' assert_is_array(array())
 #' assert_is_array(matrix())
 #' assert_is_matrix(matrix())
-#' dontrun{
+#' \dontrun{
 #' #These examples should fail:
 #' assert_is_matrix(array())
 #' }
@@ -746,7 +747,10 @@ is_non_positive <- function(x)
 #' @examples
 #' assert_is_not_na(1:10)
 #' @export
-is_not_na <- Negate(is.na)
+is_not_na <- function(x)
+{
+  is.na(x)
+}
   
 #' @rdname is_nan
 #' @export
@@ -951,7 +955,6 @@ is_raw <- function(x, .xname = get_name_in_parent(x))
 #' throw an error if the corresponding \code{is_*} function returns 
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{complex}}
-#' @rdname is_real
 #' @examples
 #' assert_are_all_real(1:10)
 #' assert_are_all_real(1:10 + 0i)
@@ -1052,7 +1055,11 @@ is_missing_or_empty_character <- function(x)
 
 #' @rdname is_character
 #' @export
-is_not_missing_nor_empty_character <- Negate(is_missing_or_empty_character)
+is_not_missing_nor_empty_character <- function(x)
+{ 
+  x <- coerce_to(x, "character")
+  nzchar(x) & !is.na(x)
+}
 
 #' @rdname is_language
 #' @export

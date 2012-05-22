@@ -40,10 +40,10 @@ assert_has_cols <- function(x)
 
 #' @rdname has_names
 #' @export
-assert_has_colnames <- function(x)
+assert_has_dimnames <- function(x)
 {                                       
   msg <- sprintf("%s has no dimension names.", get_name_in_parent(x))
-  assert_engine(x, has_colnames, msg)
+  assert_engine(x, has_dimnames, msg)
 }
 
 #' @rdname has_dims

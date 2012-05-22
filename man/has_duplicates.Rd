@@ -11,7 +11,7 @@
 
   has_no_duplicates(x)
 
-  has_duplicates(...)
+  has_duplicates(x)
 }
 \arguments{
   \item{x}{Input to check.}

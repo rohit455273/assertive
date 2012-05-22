@@ -13,10 +13,12 @@
 #' @name assertive
 #' @aliases assertive assertive-package
 #' @examples
+#' \dontrun{
 #' is_numeric(1:10)
 #' assert_are_all_positive(1:10)
 #' old_op <- options(assertive.severity = "warning")
 #' assert_is_scalar(runif(10))
 #' options(old_op)
+#' }
 #' @author Richard Cotton \email{richierocks@@gmail.com}
 NULL

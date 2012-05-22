@@ -1,4 +1,4 @@
-#' Does the input have the specifed attributes?
+#' Does the input have the specified attributes?
 #'
 #' Checks to see if the input has the specifed attributes.
 #'
@@ -10,7 +10,12 @@
 #' an error if \code{has_terms} is not \code{TRUE}.
 #' @seealso \code{\link[stats]{terms.default}}.
 #' @examples
-#' assert_has_attributes(struct(c(a = 1), b = 2), c("a", "b"))
+#' x <- structure(c(a = 1), b = 2)
+#' assert_has_all_attributes(x, c("names", "b"))
+#' assert_has_any_attributes(x, c("names", "c"))
+#' \dontrun{
+#' assert_has_all_attributes(x, c("names", "c"))
+#' }
 #' @export
 has_attributes <- function(x, attrs, .xname = get_name_in_parent(x))
 {
@@ -144,7 +149,10 @@ has_no_duplicates <- function(x)
 #' \code{has_no_duplicates} is the negation of \code{has_duplicates}.
 ##' @seealso \code{\link{anyDuplicated}}.
 #' @export
-has_duplicates <- Negate(has_no_duplicates)
+has_duplicates <- function(x)
+{
+  !has_no_duplicates(x)
+}
 
 #' Does the input have names?
 #'

@@ -8,7 +8,7 @@
 
   assert_any_are_not_na(x)
 
-  is_not_na(...)
+  is_not_na(x)
 }
 \arguments{
   \item{x}{Input to check.}

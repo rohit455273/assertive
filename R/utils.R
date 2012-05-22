@@ -8,7 +8,7 @@
 #' @return The input \code{x} after attempted coersion to the target class.
 #' @note If x does not already have the target class, a warning is given
 #' before coersion.
-#' @seealso \code{\link[base]{is}} and \code{\link[base]{as}}.
+#' @seealso \code{\link[methods]{is}} and \code{\link[methods]{as}}.
 #' @export
 coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
 {
@@ -38,27 +38,27 @@ get_name_in_parent <- function(x)
   ))
 }
 
-#' Get or set the message attribute.
+#' Get or set the \code{"cause"} attribute.
 #'
-#' Gets or sets the message attribute of a variable.
+#' Gets or sets the \code{"cause"} (of failure) attribute of a variable.
 #'
 #' @param x Any variable.
-#' @return The get method returns the \code{"message"} attribute.
+#' @param value The value to set the \code{"cause"} attribute to.
+#' @return The get method returns the \code{"cause"} attribute.
 #' @examples
 #' yn <- is_a_bool(123)
-#' msg(yn)
+#' cause(yn)
 #' @export
-msg <- function(x)
+cause <- function(x)
 {
-  attr(x, "message")
+  attr(x, "cause")
 }
 
-#' @param value The value to set the message attribute to.
-#' @rdname msg
+#' @rdname cause
 #' @export
-`msg<-` <- function(x, value)
+`cause<-` <- function(x, value)
 {
-  attr(x, "message") <- noquote(as.character(value))
+  attr(x, "cause") <- noquote(as.character(value))
   x
 }
 

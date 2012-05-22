@@ -7,7 +7,7 @@
 \usage{
   assert_is_a_raw(x)
 
-  assert_is_raw()
+  assert_is_raw(x)
 
   is_a_raw(x, .xname = get_name_in_parent(x))
 

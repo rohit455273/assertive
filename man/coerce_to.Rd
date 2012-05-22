@@ -24,6 +24,6 @@
   given before coersion.
 }
 \seealso{
-  \code{\link[base]{is}} and \code{\link[base]{as}}.
+  \code{\link[methods]{is}} and \code{\link[methods]{as}}.
 }
 

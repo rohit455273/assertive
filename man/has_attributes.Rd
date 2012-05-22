@@ -2,7 +2,7 @@
 \alias{assert_has_all_attributes}
 \alias{assert_has_any_attributes}
 \alias{has_attributes}
-\title{Does the input have the specifed attributes?}
+\title{Does the input have the specified attributes?}
 \usage{
   assert_has_all_attributes(x, attrs)
 
@@ -27,7 +27,12 @@
   Checks to see if the input has the specifed attributes.
 }
 \examples{
-assert_has_attributes(struct(c(a = 1), b = 2), c("a", "b"))
+x <- structure(c(a = 1), b = 2)
+assert_has_all_attributes(x, c("names", "b"))
+assert_has_any_attributes(x, c("names", "c"))
+\dontrun{
+assert_has_all_attributes(x, c("names", "c"))
+}
 }
 \seealso{
   \code{\link[stats]{terms.default}}.

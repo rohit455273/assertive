@@ -1,5 +1,6 @@
 \name{assert_is_empty}
 \alias{assert_is_empty}
+\alias{assert_is_non_empty}
 \alias{assert_is_scalar}
 \alias{is_empty}
 \alias{is_non_empty}
@@ -7,6 +8,8 @@
 \title{Is the input empty/scalar?}
 \usage{
   assert_is_empty(x)
+
+  assert_is_non_empty(x)
 
   assert_is_scalar(x)
 
