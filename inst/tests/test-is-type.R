@@ -468,6 +468,17 @@ test.is_table.not_a_table.returns_false <- function()
 }
 
 
+test.is_ts.a_time_series.returns_true <- function()
+{
+  checkTrue(is_ts(ts(1:10)))
+}
+
+test.is_ts.not_a_time_series.returns_false <- function()
+{
+  checkTrue(!is_ts(1:10))
+}
+
+
 test.is_vector.logical.returns_true <- function()
 {
   checkTrue(is_vector(logical()))

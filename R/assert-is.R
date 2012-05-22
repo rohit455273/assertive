@@ -714,6 +714,13 @@ assert_is_table <- function(x)
   assert_engine(x, is_table, .xname = get_name_in_parent(x))       
 }
 
+#' @rdname is_ts
+#' @export
+assert_is_ts <- function(x)
+{                                                         
+  assert_engine(x, is_ts, .xname = get_name_in_parent(x))       
+}
+
 #' @rdname is_true
 #' @export
 assert_is_true <- function(x, allow_attributes = FALSE)
