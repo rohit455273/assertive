@@ -366,3 +366,49 @@ test.is_recursive.something_atomic.returns_false <- function()
 {
   checkTrue(!is_recursive(1:10))
 }
+
+
+test.is_vector.logical.returns_true <- function()
+{
+  checkTrue(is_vector(logical()))
+}
+
+test.is_vector.integer.returns_true <- function()
+{
+  checkTrue(is_vector(integer()))
+}
+
+test.is_vector.numeric.returns_true <- function()
+{
+  checkTrue(is_vector(numeric()))
+}
+
+test.is_vector.complex.returns_true <- function()
+{
+  checkTrue(is_vector(complex()))
+}
+
+test.is_vector.character.returns_true <- function()
+{
+  checkTrue(is_vector(character()))
+}
+
+test.is_vector.raw.returns_true <- function()
+{
+  checkTrue(is_vector(raw()))
+}
+
+test.is_vector.list.returns_true <- function()
+{
+  checkTrue(is_vector(list()))
+}
+
+test.is_vector.expression.returns_true <- function()
+{
+  checkTrue(is_vector(expression()))
+}
+
+test.is_vector.not_a_vector.returns_false <- function()
+{
+  checkTrue(!is_vector(matrix()))
+}
