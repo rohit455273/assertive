@@ -447,7 +447,7 @@ assert_any_are_not_na <- function(x)
   assert_engine(x, is_not_na, msg, what = "any")
 }
 
-#' @rdname is_not_nan
+#' @rdname is_nan
 #' @export
 assert_all_are_not_nan <- function(x)
 {                                                      
@@ -455,7 +455,7 @@ assert_all_are_not_nan <- function(x)
   assert_engine(x, is_not_nan, msg)
 }
 
-#' @rdname is_not_nan
+#' @rdname is_nan
 #' @export
 assert_any_are_not_nan <- function(x)
 {                                                      
@@ -589,6 +589,13 @@ assert_any_are_proportions <- function(x)
   )
 }  
 
+#' @rdname is_qr
+#' @export
+assert_is_qr <- function(x)
+{                                                         
+  assert_engine(x, is_qr, .xname = get_name_in_parent(x))       
+}
+
 #' @rdname is_R
 #' @export
 assert_is_R <- function()
@@ -651,6 +658,13 @@ assert_any_strings_are_missing_or_empty <- function(x)
 #' @rdname is_language
 #' @export
 assert_is_symbol <- assert_is_name
+
+#' @rdname is_table
+#' @export
+assert_is_table <- function(x)
+{                                                         
+  assert_engine(x, is_table, .xname = get_name_in_parent(x))       
+}
 
 #' @rdname is_true
 #' @export

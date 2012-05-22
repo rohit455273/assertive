@@ -1019,7 +1019,29 @@ is_scalar <- function(x, .xname = get_name_in_parent(x))
   }
   TRUE
 }                
- 
+
+#' Is the input a table?
+#'
+#' Checks to see if the input is a table.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_table} wraps \code{is.table}, providing more 
+#' information on failure.  \code{assert_is_table} returns nothing but
+#' throws an error if \code{is_table} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.table}}.
+#' @examples
+#' assert_is_table(table(sample(letters, 100, replace = TRUE)))
+#' @export
+is_table <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!is.table(x))
+  {
+    return(false(sprintf("%s is not of type 'table'.")))
+  }
+  TRUE
+}
+
 #' @rdname is_character
 #' @export
 is_missing_or_empty_character <- function(x)
@@ -1030,7 +1052,7 @@ is_missing_or_empty_character <- function(x)
 
 #' @rdname is_character
 #' @export
-is_not_missing_nor_empty_character <- Negate(is_missing_or_empty_string)
+is_not_missing_nor_empty_character <- Negate(is_missing_or_empty_character)
 
 #' @rdname is_language
 #' @export

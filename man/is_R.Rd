@@ -7,9 +7,6 @@
 
   is_R()
 }
-\arguments{
-  \item{x}{Input to check.}
-}
 \value{
   \code{is_R} wraps \code{is.R}, providing more information
   on failure.  \code{assert_is_R} returns nothing but

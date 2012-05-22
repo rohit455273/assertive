@@ -409,6 +409,18 @@ test.is_recursive.something_atomic.returns_false <- function()
 }
 
 
+test.is_table.a_table.returns_true <- function()
+{
+  x <- table(sample(letters, 100, replace = TRUE))
+  checkTrue(is_table(x))
+}
+
+test.is_table.not_a_table.returns_true <- function()
+{
+  checkTrue(is_table(1:10))
+}
+
+
 test.is_vector.logical.returns_true <- function()
 {
   checkTrue(is_vector(logical()))

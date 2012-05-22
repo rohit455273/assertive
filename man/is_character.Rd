@@ -1,28 +1,28 @@
-\name{assert_is_a_string}
+\name{assert_is_a_non_empty_string}
 \alias{assert_all_are_numeric_strings}
 \alias{assert_all_strings_are_missing_or_empty}
 \alias{assert_any_are_numeric_strings}
 \alias{assert_any_strings_are_missing_or_empty}
+\alias{assert_is_a_non_empty_string}
 \alias{assert_is_a_string}
 \alias{assert_is_an_empty_string}
 \alias{assert_is_character}
-\alias{assert_is_non_empty_string}
+\alias{is_a_non_empty_string}
 \alias{is_a_string}
 \alias{is_an_empty_string}
 \alias{is_character}
-\alias{is_missing_or_empty_string}
-\alias{is_non_empty_string}
-\alias{is_not_missing_nor_empty_string}
+\alias{is_missing_or_empty_character}
+\alias{is_not_missing_nor_empty_character}
 \alias{is_numeric_string}
 \title{Is the input of type character?}
 \usage{
+  assert_is_a_non_empty_string(x)
+
   assert_is_a_string(x)
 
   assert_is_an_empty_string(x)
 
   assert_is_character(x)
-
-  assert_is_non_empty_string(x)
 
   assert_all_are_numeric_strings(x)
 
@@ -32,19 +32,19 @@
 
   assert_any_strings_are_missing_or_empty(x)
 
+  is_a_non_empty_string(x, .xname = get_name_in_parent(x))
+
   is_a_string(x, .xname = get_name_in_parent(x))
 
   is_an_empty_string(x, .xname = get_name_in_parent(x))
 
   is_character(x, .xname = get_name_in_parent(x))
 
-  is_non_empty_string(x, .xname = get_name_in_parent(x))
-
   is_numeric_string(x)
 
-  is_missing_or_empty_string(x)
+  is_missing_or_empty_character(x)
 
-  is_not_missing_nor_empty_string(...)
+  is_not_missing_nor_empty_character(...)
 }
 \arguments{
   \item{x}{Input to check.}

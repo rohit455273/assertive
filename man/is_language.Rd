@@ -40,7 +40,7 @@
   \code{is_call}, \code{is_expression}, \code{is_language},
   \code{is_name} and \code{is_symbol} wrap the
   corresponding \code{is.*} functions, providing more
-  information on failure.The \code{assert_*} functions
+  information on failure.  The \code{assert_*} functions
   return nothing but throw an error if the corresponding
   \code{is_*} function returns \code{FALSE}.
 }
@@ -52,9 +52,24 @@
   for the same function.
 }
 \examples{
-assert_is_call(call("sin", "pi"))
+a_call <- call("sin", "pi")
+assert_is_call(a_call)
+assert_is_language(a_call)
+an_expression <- expression(sin(pi))
+assert_is_expression(an_expression)
+assert_is_language(an_expression)
+a_name <- as.name("foo")
+assert_is_name(a_name)
+assert_is_language(a_name)
+\dontrun{
+#These tests should fail:
+assert_is_language(function(){})
+}
 }
 \seealso{
-  \code{\link[base]{is.call}}.
+  \code{\link[base]{is.call}},
+  \code{\link[base]{is.expression}}
+  \code{\link[base]{is.language}} and
+  \code{\link[base]{is.name}}.
 }
 

@@ -5,16 +5,21 @@
 \alias{is_true}
 \title{Is the input TRUE?}
 \usage{
-  assert_is_false(x)
+  assert_is_false(x, allow_attributes = FALSE)
 
-  assert_is_true(x)
+  assert_is_true(x, allow_attributes = FALSE)
 
-  is_false(x, .xname = get_name_in_parent(x))
+  is_false(x, allow_attributes = FALSE,
+    .xname = get_name_in_parent(x))
 
-  is_true(x, .xname = get_name_in_parent(x))
+  is_true(x, allow_attributes = FALSE,
+    .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{allow_attributes}{If \code{TRUE}, a scalar value of
+  \code{TRUE} with attributes is allowed.}
 
   \item{.xname}{Not intended to be used directly.}
 }
@@ -30,6 +35,13 @@
 \examples{
 assert_is_true(TRUE)
 assert_is_false(FALSE)
+assert_is_true(c(truth = TRUE), allow_attributes = TRUE)
+assert_is_false(false("This has an attribute"), allow_attributes = TRUE)
+\dontrun{
+#These tests should fail:
+assert_is_true(c(truth = TRUE))
+assert_is_false(false("This has an attribute"))
+}
 }
 \seealso{
   \code{\link[base]{isTRUE}}.

@@ -5,7 +5,7 @@
   use_first(x)
 }
 \arguments{
-  \item{x}{Input that should be scalar}
+  \item{x}{Input that should be scalar.}
 }
 \value{
   If \code{x} is scalar, it is returned unchanged,
