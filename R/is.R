@@ -555,15 +555,53 @@ is_integer <- function(x, .xname = get_name_in_parent(x))
 #' \code{is_*} function returns \code{FALSE}.
 #' @note \code{is_name} and \code{is_symbol} are different names for 
 #' the same function.
-#' @seealso \code{\link[base]{is.call}}.
+#' @seealso \code{\link[base]{is.call}}, \code{\link[base]{is.expression}}
+#' \code{\link[base]{is.language}} and \code{\link[base]{is.name}}.
 #' @examples
-#' assert_is_call(call("sin", "pi"))
+#' a_call <- call("sin", "pi")
+#' assert_is_call(a_call)
+#' assert_is_language(a_call)
+#' an_expression <- expression(sin(pi))
+#' assert_is_expression(an_expression)
+#' assert_is_language(an_expression)
+#' a_name <- as.name("foo")
+#' assert_is_name(a_name)
+#' assert_is_language(a_name)
+#' \dontrun{
+#' #These tests should fail:
+#' assert_is_language(function(){})
+#' }
 #' @export
 is_language <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.language(x)) 
   {
     return(false(sprintf("%s is not a language object (name, call or expression).", .xname)))
+  }
+  TRUE
+}
+
+#' Is the input a list?
+#'
+#' Checks to see if the input is a list.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_list} wraps \code{is.list}, providing more 
+#' information on failure.
+#' @seealso \code{\link[base]{is.list}}.
+#' @examples
+#' assert_is_list(list(1,2,3))
+#' \dontrun{
+#' #These tests should fail:
+#' assert_is_list(1:10)
+#' }
+#' @export
+is_list <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!is.list(x)) 
+  {
+    return(false(sprintf("%s is not of type 'list'.", .xname)))
   }
   TRUE
 }

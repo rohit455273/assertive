@@ -325,6 +325,13 @@ assert_is_language <- function(x)
   assert_engine(x, is_language, .xname = get_name_in_parent(x))    
 }
 
+#' @rdname is_list
+#' @export
+assert_is_list <- function(x)
+{                                                         
+  assert_engine(x, is_list, .xname = get_name_in_parent(x))       
+}
+
 #' @rdname is_logical
 #' @export
 assert_is_logical <- function(x)
