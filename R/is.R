@@ -398,11 +398,11 @@ is_false <- function(x, allow_attributes = FALSE, .xname = get_name_in_parent(x)
 #'
 #' @param x Input to check.
 #' @param .xname Not intended to be used directly.
-#' @return \code{is_function} and \code{is_primitive} wrap 
-#' \code{is.function} and \code{is.primitive}, providing more 
-#' information on failure.  The \code{assert_*} functions return 
-#' nothing butthrow an error if the corresponding \code{is_*} 
-#' function returns \code{FALSE}.
+#' @return \code{is_function}, \code{is_primitive} and \code{is_stepfun}
+#' wrap \code{is.function}, \code{is.primitive} and \code{is.stepfun} 
+#' repsectively, providing more information on failure.  The 
+#' \code{assert_*} functions return nothing but throw an error if the
+#' corresponding \code{is_*} function returns \code{FALSE}.
 #' @seealso \code{\link[base]{is.function}}.
 #' @examples
 #' assert_is_function(sqrt)
@@ -749,7 +749,7 @@ is_non_positive <- function(x)
 #' @export
 is_not_na <- function(x)
 {
-  is.na(x)
+  !is.na(x)
 }
   
 #' @rdname is_nan
@@ -918,9 +918,34 @@ is_R <- function()
   TRUE
 }
 
+#' Is the input a raster?
+#'
+#' Checks to see if the input is a raster.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_raster} wraps \code{is.raster}, providing more 
+#' information on failure. \code{is_a_raster} returns \code{TRUE} if the 
+#' input is raster and scalar.  The \code{assert_*} functions return nothing but
+#' throw an error if the corresponding \code{is_*} function returns 
+#' \code{FALSE}.
+#' @seealso \code{\link[grDevices]{is.raster}}.
+#' @examples
+#' m <- matrix(hcl(0, 80, seq(50, 80, 10)), nrow=4, ncol=5)
+#' assert_is_raster(as.raster(m))
+#' \dontrun{
+#' #These examples should fail:
+#' assert_is_raster(m)
+#' }
+#' @export
+is_raster <- function(x, .xname = get_name_in_parent(x))
+{
+  is2(x, "raster", .xname)
+}
+
 #' Is the input raw?
 #'
-#' Checks to see if the input is raw
+#' Checks to see if the input is raw.
 #'
 #' @param x Input to check.
 #' @param .xname Not intended to be used directly.
@@ -988,6 +1013,18 @@ is_scalar <- function(x, .xname = get_name_in_parent(x))
   }
   TRUE
 }                
+
+#' @rdname is_function
+#' @export
+is_stepfun <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_function(x))) return(ok)
+  if(!is.stepfun(x))
+  {
+    return(false("%s is not a step function.", .xname))
+  }
+  TRUE
+} 
 
 #' Is the input a symmetric matrix?
 #'

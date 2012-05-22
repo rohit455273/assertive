@@ -1,43 +1,3 @@
-#' Coerce variable to a different class.
-#'
-#' Coerce the input to a different class, with a warning.
-#'
-#' @param x Input to coerce.
-#' @param target_class The desired class of x.
-#' @param .xname Not intended to be used directly.
-#' @return The input \code{x} after attempted coersion to the target class.
-#' @note If x does not already have the target class, a warning is given
-#' before coersion.
-#' @seealso \code{\link[methods]{is}} and \code{\link[methods]{as}}.
-#' @export
-coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
-{
-  if(!is2(x, target_class))
-  {
-    warning(
-      "Coercing ", .xname, " to class ", sQuote(target_class), ".",
-      call. = FALSE
-    )
-    x <- as(x, target_class)
-  }
-  x
-}
-
-#' Get the name of a variable in the parent frame.
-#'
-#' Gets the name of the input in the parent frame.
-#'
-#' @param x Variable to get the name of.
-#' @return A string giving the name of the input in the parent frame.
-#' @export
-get_name_in_parent <- function(x)
-{  
-  deparse(do.call(
-    substitute, 
-    list(substitute(x), parent.frame())
-  ))
-}
-
 #' Get or set the \code{"cause"} attribute.
 #'
 #' Gets or sets the \code{"cause"} (of failure) attribute of a variable.
@@ -78,6 +38,46 @@ strip_attributes <- function(x)
 {
   attributes(x) <- NULL
   x
+}
+
+#' Coerce variable to a different class.
+#'
+#' Coerce the input to a different class, with a warning.
+#'
+#' @param x Input to coerce.
+#' @param target_class The desired class of x.
+#' @param .xname Not intended to be used directly.
+#' @return The input \code{x} after attempted coersion to the target class.
+#' @note If x does not already have the target class, a warning is given
+#' before coersion.
+#' @seealso \code{\link[methods]{is}} and \code{\link[methods]{as}}.
+#' @export
+coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
+{
+  if(!is2(x, target_class))
+  {
+    warning(
+      "Coercing ", .xname, " to class ", sQuote(target_class), ".",
+      call. = FALSE
+    )
+    x <- as(x, target_class)
+  }
+  x
+}
+
+#' Get the name of a variable in the parent frame.
+#'
+#' Gets the name of the input in the parent frame.
+#'
+#' @param x Variable to get the name of.
+#' @return A string giving the name of the input in the parent frame.
+#' @export
+get_name_in_parent <- function(x)
+{  
+  deparse(do.call(
+    substitute, 
+    list(substitute(x), parent.frame())
+  ))
 }
 
 #' Only use the first element of a vector.

@@ -390,6 +390,19 @@ test.is_raw.not_raw.returns_false <- function()
 }
 
 
+test.is_raster.a_raster.returns_true <- function()
+{
+  m <- matrix(hcl(0, 80, seq(50, 80, 10)), nrow=4, ncol=5)
+  checkTrue(is_raster(as.raster(m)))
+}
+
+test.is_raster.a_matrix.returns_false <- function()
+{
+  m <- matrix(hcl(0, 80, seq(50, 80, 10)), nrow=4, ncol=5)
+  checkTrue(!is_raster(m))
+}
+
+
 test.is_recursive.a_list.returns_true <- function()
 {
   checkTrue(is_recursive(list()))
@@ -423,6 +436,23 @@ test.is_recursive.a_call.returns_true <- function()
 test.is_recursive.something_atomic.returns_false <- function()
 {
   checkTrue(!is_recursive(1:10))
+}
+
+
+test.is_stepfun.a_step_function.returns_true <- function()
+{
+  x <- stepfun(1:3, c(1, 2, 4, 3), f = 0)
+  checkTrue(is_stepfun(x))
+}
+
+test.is_stepfun.a_regular_function.returns_false <- function()
+{
+  checkTrue(!is_stepfun(function(){}))
+}
+
+test.is_stepfun.not_a_function.returns_false <- function()
+{
+  checkTrue(!is_stepfun(call("sin", "pi")))
 }
 
 

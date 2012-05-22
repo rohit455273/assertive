@@ -617,6 +617,13 @@ assert_is_R <- function()
   assert_engine(predicate = is_R)        
 }
 
+#' @rdname is_raster
+#' @export
+assert_is_raster <- function(x)
+{                                                         
+  assert_engine(x, is_raster, .xname = get_name_in_parent(x))
+}
+
 #' @rdname is_raw
 #' @export
 assert_is_raw <- function(x)
@@ -652,6 +659,13 @@ assert_is_recursive <- function(x)
 assert_is_scalar <- function(x)
 {                                                     
   assert_engine(x, is_scalar, .xname = get_name_in_parent(x))    
+}
+
+#' @rdname is_function
+#' @export
+assert_is_stepfun <- function(x)
+{                                                         
+  assert_engine(x, is_stepfun, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_character
