@@ -1,3 +1,25 @@
+#' Does the input have any attributes?
+#'
+#' Checks to see if the input has any attributes.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{has_terms} returns \code{TRUE} if \code{attributes(x)}
+#' has length zero. \code{assert_has_terms} returns nothing but throws
+#' an error if \code{has_terms} is not \code{TRUE}.
+#' @seealso \code{\link[stats]{terms.default}}.
+#' @examples
+#' assert_has_terms(lm(uptake ~ conc, CO2))
+#' @export
+has_any_attributes <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!is_empty(attributes(x)))
+  {
+    return(false(sprintf("%s has attributes.")))
+  }
+  TRUE
+}
+
 #' Does the current call have an argument?
 #'
 #' Checks to see if the current call has an argument with 
@@ -157,6 +179,7 @@ has_rows <- function(x)
 #' Checks to see if the input has a terms component or attribute.
 #'
 #' @param x Input to check.
+#' @param .xname Not intended to be used directly.
 #' @return \code{has_terms} returns \code{TRUE} if the input has an 
 #' element or an attribute named terms. \code{assert_has_terms} returns 
 #' nothing but throws an error if \code{has_terms} is not \code{TRUE}.
@@ -164,14 +187,14 @@ has_rows <- function(x)
 #' @examples
 #' assert_has_terms(lm(uptake ~ conc, CO2))
 #' @export
-has_terms <- function(x)
+has_terms <- function(x, .xname = get_name_in_parent(x))
 {
   if(
     is.null(attr(x, "terms")) && 
     (is.atomic(x) || is.null(x$terms))
   )
   {
-    return(false("Input has no terms component nor attribute."))
+    return(false(sprintf("%s has no terms component nor attribute.")))
   }
   TRUE
 }

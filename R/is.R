@@ -902,11 +902,32 @@ is_proportion <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
   is_in_range(x, 0, 1, lower_is_strict, upper_is_strict)
 }
 
+#' Is the input a QR decomposition of a matrix?
+#'
+#' Checks to see if the input is a QR decomposition of a matrix.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_qr} wraps \code{is.qr}, providing more 
+#' information on failure.  \code{assert_is_qr} returns nothing but
+#' throws an error if \code{is_qr} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.qr}}.
+#' @examples
+#' assert_is_qr(qr(matrix(rnorm(25), nrow = 5)))
+#' @export
+is_qr <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!is.qr(x))
+  {
+    return(false(sprintf("%s is not of type 'qr'.")))
+  }
+  TRUE
+}
+
 #' Are you running R?
 #'
 #' Checks to see you are running R.
 #'
-#' @param x Input to check.
 #' @return \code{is_R} wraps \code{is.R}, providing more 
 #' information on failure.  \code{assert_is_R} returns nothing but
 #' throws an error if \code{is_R} returns \code{FALSE}.
