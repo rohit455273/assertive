@@ -679,6 +679,13 @@ is_matrix <- function(x, .xname = get_name_in_parent(x))
   is2(x, "matrix", .xname)
 }
 
+#' @rdname is_ts
+#' @export
+is_mts <- function(x, .xname = get_name_in_parent(x))
+{
+  is2(x, "mts", .xname)
+}
+
 #' Is the input (not) NaN?
 #'
 #' Checks to see if the input is a number that is(n't) NaN.
@@ -1107,12 +1114,12 @@ is_table <- function(x, .xname = get_name_in_parent(x))
 #'
 #' @param x Input to check.
 #' @param .xname Not intended to be used directly.
-#' @return \code{is_table} wraps \code{is.table}, providing more 
-#' information on failure.  \code{assert_is_table} returns nothing but
-#' throws an error if \code{is_table} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.table}}.
+#' @return \code{is_ts} wraps \code{is.ts}, providing more 
+#' information on failure.  \code{assert_is_ts} returns nothing but
+#' throws an error if \code{is_ts} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.ts}}.
 #' @examples
-#' assert_is_table(table(sample(letters, 100, replace = TRUE)))
+#' assert_is_ts(ts(1:10))
 #' @export
 is_ts <- function(x, .xname = get_name_in_parent(x))
 {

@@ -367,6 +367,13 @@ assert_is_matrix <- function(x)
   assert_engine(x, is_matrix, .xname = get_name_in_parent(x))      
 }
 
+#' @rdname is_ts
+#' @export
+assert_is_mts <- function(x)
+{                                                         
+  assert_engine(x, is_mts, .xname = get_name_in_parent(x))       
+}
+
 #' @rdname is_language
 #' @export
 assert_is_name <- function(x)
