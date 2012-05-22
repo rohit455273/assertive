@@ -10,7 +10,7 @@
   assert_any_numbers_whole_numbers(x,
     tol = .Machine$double.eps)
 
-  is_whole_number(x, tol = .Machine$double.eps)
+  is_whole_number(x, tol = 100 * .Machine$double.eps)
 }
 \arguments{
   \item{x}{Input to check.}

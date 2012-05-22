@@ -1,31 +1,8 @@
-#' Is the input from a class?
-#'
-#' Checks to see if the input is from a class.
-#'
-#' @param x Input to check.
-#' @param class Target class that \code{x} maybe belong to.
-#' @return \code{assert_is} returns nothing but throws an error if
-#' \code{x} does not have class \code{class}. 
-#' @seealso \code{\link[methods]{is}}
-#' @examples
-#' assert_is(1:10, "numeric")
-#' #These examples should fail:
-#' \dontrun{
-#' assert_is(1:10, "list")
-#' }
+#' @rdname is2  
 #' @export
 assert_is <- function(x, class)
-{
-  .xname = get_name_in_parent(x)
-  predicate <- function(x, class, .xname)
-  {
-    if(!is2(x, class))
-    {
-      return(false("%s is not of type '%s'.", .xname, class))
-    }
-    TRUE
-  }
-  assert_engine(x, predicate, class = class, .xname = .xname)
+{  
+  assert_engine(x, is2, class = class, .xname = .xname)
 }
 
 #' @rdname is_logical

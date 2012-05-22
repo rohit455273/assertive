@@ -58,7 +58,7 @@ msg <- function(x)
 #' @export
 `msg<-` <- function(x, value)
 {
-  attr(x, "message") <- as.character(value)
+  attr(x, "message") <- noquote(as.character(value))
   x
 }
 

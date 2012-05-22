@@ -2,10 +2,10 @@
 \alias{false}
 \title{FALSE, with a message.}
 \usage{
-  false(msg. = "")
+  false(...)
 }
 \arguments{
-  \item{msg}{A string to provide a message.}
+  \item{...}{Passed to sprintf to create a message.}
 }
 \value{
   \code{FALSE} with the attribute \code{message}, as

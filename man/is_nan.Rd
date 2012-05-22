@@ -15,7 +15,7 @@
 
   assert_any_are_not_nan(x)
 
-  is_nan(x, .xname = get_name_in_parent(x))
+  is_nan(x)
 
   is_not_nan(x)
 }

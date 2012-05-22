@@ -2,7 +2,7 @@
 \alias{assert_all_are_finite}
 \alias{assert_all_are_infinite}
 \alias{assert_any_are_infinite}
-\title{Is the inputs (in)finite?}
+\title{Are the inputs (in)finite?}
 \usage{
   assert_all_are_finite(x)
 

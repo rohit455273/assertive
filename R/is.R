@@ -1,3 +1,37 @@
+#' Alternative version of is.
+#' 
+#' If a function named \code{is.class} exists, call \code{is.class(x)}.
+#' If not, call \code{is(x, class)}.
+#' @param x Input to check.
+#' @param class Target class that \code{x} maybe belong to.
+#' @return \code{TRUE} if x belongs to the class and \code{FALSE} 
+#' otherwise.  \code{assert_is} returns nothing but throws an error if
+#' \code{x} does not have class \code{class}.
+#' @seealso \code{\link[methods]{is}}.
+#' @examples
+#' assert_is(1:10, "numeric")
+#' #These examples should fail:
+#' \dontrun{
+#' assert_is(1:10, "list")
+#' }
+#' @export
+is2 <- function(x, class, .xname = get_name_in_parent(x))
+{  
+  fn <- try(match.fun(paste0("is.", class)), silent = TRUE)
+  condn <- if(inherits(fn, "try-error"))
+  {
+    is(x, class)
+  } else
+  {
+    fn(x)
+  }
+  if(!condn)
+  {
+    return(false("%s is not of type '%s'.", .xname, class))
+  }
+  TRUE
+}
+
 #' @rdname is_logical
 #' @export
 is_a_bool <- function(x, .xname = get_name_in_parent(x))
@@ -98,11 +132,7 @@ is_an_integer <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_array <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.array(x)) 
-  {
-    return(false("%s is not an array.", .xname))
-  }
-  TRUE
+  is2(x, "array", .xname)
 }
 
 #' Is the input atomic/recursive/vector?
@@ -158,11 +188,7 @@ is_atomic <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_call <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.call(x)) 
-  {
-    return(false("%s is not a call.", .xname))
-  }
-  TRUE
+  is2(x, "call", .xname)
 }
 
 #' Is the input of type character?
@@ -193,11 +219,7 @@ is_call <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_character <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.character(x)) 
-  {
-    return(false("%s is not of type 'character'.", .xname))
-  }
-  TRUE
+  is2(x, "character", .xname)
 }
 
 #' Is the input complex?
@@ -226,11 +248,7 @@ is_character <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_complex <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.complex(x)) 
-  {
-    return(false("%s is not of type 'complex'.", .xname))
-  }
-  TRUE
+  is2(x, "complex", .xname)
 }       
 
 #' Checks to see if the input is a data.frame.
@@ -248,11 +266,7 @@ is_complex <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_data.frame <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.data.frame(x)) 
-  {
-    return(false("%s is not of type 'data.frame'.", .xname))
-  }
-  TRUE
+  is2(x, "data.frame", .xname)
 }
 
 #' Is the input empty/scalar?
@@ -337,22 +351,14 @@ is_empty_model <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_environment <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.environment(x)) 
-  {
-    return(false("%s is not of type 'environment'.", .xname))
-  }
-  TRUE
+  is2(x, "environment", .xname)
 }
 
 #' @rdname is_language
 #' @export
 is_expression <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.expression(x)) 
-  {
-    return(false("%s is not of type 'expression'.", .xname))
-  }
-  TRUE
+  is2(x, "expression", .xname)
 }
 
 #' Is the input an factor?
@@ -370,11 +376,7 @@ is_expression <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_factor <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.factor(x)) 
-  {
-    return(false("%s is not of type 'factor'.", .xname))
-  }
-  TRUE
+  is2(x, "factor", .xname)
 }
 
 #' @rdname is_true
@@ -407,11 +409,7 @@ is_false <- function(x, allow_attributes = FALSE, .xname = get_name_in_parent(x)
 #' @export
 is_function <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.function(x)) 
-  {
-    return(false("%s is not of type 'function'.", .xname))
-  }
-  TRUE
+  is2(x, "function", .xname)
 }
 
 # ' Is the input generic?
@@ -535,11 +533,7 @@ is_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 #' @export
 is_integer <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.integer(x)) 
-  {
-    return(false("%s is not of type 'integer'.", .xname))
-  }
-  TRUE
+  is2(x, "integer", .xname)
 }
 
 #' Is the input a language object?
@@ -627,11 +621,7 @@ is_leaf <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_list <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.list(x)) 
-  {
-    return(false("%s is not of type 'list'.", .xname))
-  }
-  TRUE
+  is2(x, "list", .xname)
 }
 
 #' Is the input logical?
@@ -659,22 +649,14 @@ is_list <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_logical <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.logical(x)) 
-  {
-    return(false("%s is not of type 'logical'.", .xname))
-  }
-  TRUE
+  is2(x, "logical", .xname)
 }       
 
 #' @rdname is_array
 #' @export
 is_matrix <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.matrix(x)) 
-  {
-    return(false("%s is not of type 'matrix'.", .xname))
-  }
-  TRUE
+  is2(x, "matrix", .xname)
 }
 
 #' Is the input (not) NaN?
@@ -701,11 +683,7 @@ is_nan <- function(x)
 #' @export
 is_name <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.name(x)) 
-  {
-    return(false("%s is not of type 'name'.", .xname))
-  }
-  TRUE
+  is2(x, "name", .xname)
 }
 
 #' @rdname is_in_range
@@ -841,11 +819,7 @@ is_null <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_numeric <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.numeric(x))
-  {
-    return(false("%s is not of type 'numeric'.", .xname))
-  }
-  TRUE
+  is2(x, "numeric", .xname)
 }
 
 #' @rdname is_character
@@ -917,11 +891,7 @@ is_proportion <- function(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
 #' @export
 is_qr <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.qr(x))
-  {
-    return(false("%s is not of type 'qr'.", .xname))
-  }
-  TRUE
+  is2(x, "qr", .xname)
 }
 
 #' Are you running R?
@@ -968,11 +938,7 @@ is_R <- function()
 #' @export
 is_raw <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.raw(x))
-  {
-    return(false("%s is not of type 'raw'.", .xname))
-  }
-  TRUE
+  is2(x, "raw", .xname)
 }
 
 #' Is the input real/imaginary?
@@ -1073,11 +1039,7 @@ is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get
 #' @export
 is_table <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.table(x))
-  {
-    return(false("%s is not of type 'table'.", .xname))
-  }
-  TRUE
+  is2(x, "table", .xname)
 }
 
 #' @rdname is_character
