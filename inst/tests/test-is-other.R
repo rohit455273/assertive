@@ -227,6 +227,31 @@ test.is_not_missing_nor_empty_character.a_scalar.returns_logical <- function()
 } 
 
 
+test.is_symmetric_matrix.a_symmetric_matrix.returns_true <- function()
+{
+  x <- diag(3)
+  checkTrue(is_symmetric_matrix(x))
+}
+
+test.is_symmetric_matrix.a_symmetric_matrix.returns_logical <- function()
+{
+  x <- diag(3); x[3, 1] <- 1e-100
+  checkTrue(is_symmetric_matrix(x))
+  checkTrue(!is_symmetric_matrix(x, tol = 0))
+}
+
+test.is_symmetric_matrix.an_assymmetric_matrix.returns_false <- function()
+{
+  x <- matrix(rnorm(9), nrow = 3)
+  checkTrue(!is_symmetric_matrix(x))
+}
+
+test.is_symmetric_matrix.not_coercible_to_matrix.throws_error <- function()
+{
+  suppressWarnings(checkException(is_symmetric_matrix(sqrt), silent = TRUE))
+}
+
+
 test.is_true.true.returns_true <- function()
 {
   checkTrue(is_true(TRUE))
@@ -252,9 +277,9 @@ test.is_true.true_with_attr.returns_allow_attributes <- function()
 
 test.is_whole_number.NA.returns_false <- function()
 {
-  x <- c(1, -1.5, 1 + .Machine$double.eps, Inf, NA)
+  x <- c(1, -1.5, 1 + .Machine$double.eps, 1 + 100 *.Machine$double.eps, Inf, NA)
   checkEquals(
-    c(TRUE, FALSE, FALSE, NA, NA),
+    c(TRUE, FALSE, TRUE, FALSE, NA, NA),
     is_whole_number(x)
   )
 }

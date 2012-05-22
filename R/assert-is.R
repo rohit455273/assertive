@@ -659,6 +659,19 @@ assert_any_strings_are_missing_or_empty <- function(x)
 #' @export
 assert_is_symbol <- assert_is_name
 
+#' @rdname is_symmetric_matrix
+#' @export
+assert_is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, ...)
+{                                                         
+  assert_engine(
+    x, 
+    is_symmetric_matrix, 
+    tol = tol, 
+    .xname = get_name_in_parent(x),
+    ...
+  )       
+}
+
 #' @rdname is_table
 #' @export
 assert_is_table <- function(x)

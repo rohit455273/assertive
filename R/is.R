@@ -666,13 +666,6 @@ is_logical <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }       
 
-#' @rdname is_in_range
-#' @export
-is_negative <- function(x)
-{
-  is_in_range(x, upper = 0, upper_is_strict = TRUE)
-}
-
 #' @rdname is_array
 #' @export
 is_matrix <- function(x, .xname = get_name_in_parent(x))
@@ -698,7 +691,7 @@ is_matrix <- function(x, .xname = get_name_in_parent(x))
 #' @examples
 #' assert_is_not_nan(1:10)
 #' @export
-is_nan <- function(x, .xname = get_name_in_parent(x))
+is_nan <- function(x)
 {
   x <- coerce_to(x, "numeric")
   is.nan(x)
@@ -713,6 +706,13 @@ is_name <- function(x, .xname = get_name_in_parent(x))
     return(false(sprintf("%s is not of type 'name'.", .xname)))
   }
   TRUE
+}
+
+#' @rdname is_in_range
+#' @export
+is_negative <- function(x)
+{
+  is_in_range(x, upper = 0, upper_is_strict = TRUE)
 }
 
 #' @rdname is_empty
@@ -1020,6 +1020,44 @@ is_scalar <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }                
 
+#' Is the input a symmetric matrix?
+#'
+#' Checks that the input is a symmetric matrix.
+#' 
+#' @param x Input to check.
+#' @param tol Differences smaller than \code{tol} are not considered.
+#' @param .xname Not intended to be used directly.
+#' @param ... Passed to \code{all.equal}.
+#' @return \code{TRUE} if the input is symmetrix (after coersion to be a matrix).
+#' @examples
+#' m <- diag(3); m[3, 1] <- 1e-100
+#' assert_is_symmetric_matrix(m)
+#' \dontrun{
+#' assert_is_symmetric_matrix(m, tol = 0)
+#'}
+#' @export
+is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get_name_in_parent(x), ...)
+{
+  x <- coerce_to(x, "matrix")
+  dimx <- dim(x)
+  if(dimx[1L] != dimx[2L])
+  {
+    return(false(sprintf("%s is not a square matrix.", .xname)))
+  }
+  symmetry_test <- if(is.complex(x)) 
+  {
+    all.equal.numeric(x, Conj(t(x)), tolerance = tol, ...)
+  } else 
+  {
+    all.equal(x, t(x), tolerance = tol, ...)
+  }
+  if(!is_true(symmetry_test))
+  {
+    return(false(sprintf("%s is not a symmetric matrix.", .xname)))
+  }
+  TRUE
+}
+
 #' Is the input a table?
 #'
 #' Checks to see if the input is a table.
@@ -1037,7 +1075,7 @@ is_table <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.table(x))
   {
-    return(false(sprintf("%s is not of type 'table'.")))
+    return(false(sprintf("%s is not of type 'table'.", .xname)))
   }
   TRUE
 }
@@ -1156,7 +1194,7 @@ is_vector <- function(x, .xname = get_name_in_parent(x))
 #' that the input \code{x} need not have type \code{integer}.  In fact
 #' it is expected that \code{x} will be \code{numeric}.
 #' @return \code{TRUE} if the input is a whole number.
-is_whole_number <- function(x, tol = .Machine$double.eps)
+is_whole_number <- function(x, tol = 100 * .Machine$double.eps)
 {
   x <- coerce_to(x, "numeric")
   abs(x - floor(x)) < tol

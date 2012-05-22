@@ -15,7 +15,7 @@ has_any_attributes <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is_empty(attributes(x)))
   {
-    return(false(sprintf("%s has attributes.")))
+    return(false(sprintf("%s has attributes.", .xname)))
   }
   TRUE
 }
@@ -194,7 +194,7 @@ has_terms <- function(x, .xname = get_name_in_parent(x))
     (is.atomic(x) || is.null(x$terms))
   )
   {
-    return(false(sprintf("%s has no terms component nor attribute.")))
+    return(false(sprintf("%s has no terms component nor attribute.", .xname)))
   }
   TRUE
 }
