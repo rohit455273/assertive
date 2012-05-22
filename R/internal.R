@@ -41,11 +41,12 @@ assert_engine <- function(x, predicate, msg., what = c("all", "any"), ...)
 #'
 #' Always returns the value \code{FALSE}, with a message attribute.
 #'
-#' @param msg A string to provide a message.
+#' @param ... Passed to sprintf to create a message.
 #' @return \code{FALSE} with the attribute \code{message}, as provided
 #' in the input.
-false <- function(msg. = "")
+false <- function(...)
 {
+  msg. <- if(length(list(...)) > 0L) sprintf(...) else ""
   x <- FALSE
   msg(x) <- msg.
   x

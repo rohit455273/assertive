@@ -23,7 +23,7 @@ is_a_non_empty_string <- function(x, .xname = get_name_in_parent(x))
   if(!(ok <- is_a_string(x))) return(ok)
   if(!nzchar(x))
   {
-    return(false(sprintf("%s has no characters.", .xname)))
+    return(false("%s has no characters.", .xname))
   }
   TRUE
 }
@@ -62,7 +62,7 @@ is_an_empty_string <- function(x, .xname = get_name_in_parent(x))
   if(!(ok <- is_a_string(x, .xname))) return(ok)
   if(nzchar(x)) 
   {
-    return(false(sprintf("%s contains characters.", .xname)))
+    return(false("%s contains characters.", .xname))
   }
   TRUE
 }
@@ -100,7 +100,7 @@ is_array <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.array(x)) 
   {
-    return(false(sprintf("%s is not an array.", .xname)))
+    return(false("%s is not an array.", .xname))
   }
   TRUE
 }
@@ -149,7 +149,7 @@ is_atomic <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.atomic(x))
   {
-    return(false(sprintf("%s is not atomic.", .xname)))
+    return(false("%s is not atomic.", .xname))
   }
   TRUE
 }
@@ -160,7 +160,7 @@ is_call <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.call(x)) 
   {
-    return(false(sprintf("%s is not a call.", .xname)))
+    return(false("%s is not a call.", .xname))
   }
   TRUE
 }
@@ -195,7 +195,7 @@ is_character <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.character(x)) 
   {
-    return(false(sprintf("%s is not of type 'character'.", .xname)))
+    return(false("%s is not of type 'character'.", .xname))
   }
   TRUE
 }
@@ -228,7 +228,7 @@ is_complex <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.complex(x)) 
   {
-    return(false(sprintf("%s is not of type 'complex'.", .xname)))
+    return(false("%s is not of type 'complex'.", .xname))
   }
   TRUE
 }       
@@ -250,7 +250,7 @@ is_data.frame <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.data.frame(x)) 
   {
-    return(false(sprintf("%s is not of type 'data.frame'.", .xname)))
+    return(false("%s is not of type 'data.frame'.", .xname))
   }
   TRUE
 }
@@ -279,7 +279,7 @@ is_empty <- function(x, .xname = get_name_in_parent(x))
 {
   if(length(x) != 0L) 
   {
-    return(false(sprintf("%s has non-zero length.", .xname)))
+    return(false("%s has non-zero length.", .xname))
   }
   TRUE
 }
@@ -306,16 +306,16 @@ is_empty_model <- function(x, .xname = get_name_in_parent(x))
 {
   if(!has_terms(x)) 
   {
-    return(false(sprintf("%s has no terms, probably not a model.", .xname)))
+    return(false("%s has no terms, probably not a model.", .xname))
   }
   tt <- terms(x)
   if(length(attr(tt, "factors")) != 0L) 
   {
-    return(false(sprintf("%s has factors.", .xname)))
+    return(false("%s has factors.", .xname))
   }
   if(attr(tt, "intercept") != 0L) 
   {
-    return(false(sprintf("%s has an intercept.", .xname)))
+    return(false("%s has an intercept.", .xname))
   }
   TRUE
 }
@@ -339,7 +339,7 @@ is_environment <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.environment(x)) 
   {
-    return(false(sprintf("%s is not of type 'environment'.", .xname)))
+    return(false("%s is not of type 'environment'.", .xname))
   }
   TRUE
 }
@@ -350,7 +350,7 @@ is_expression <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.expression(x)) 
   {
-    return(false(sprintf("%s is not of type 'expression'.", .xname)))
+    return(false("%s is not of type 'expression'.", .xname))
   }
   TRUE
 }
@@ -372,7 +372,7 @@ is_factor <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.factor(x)) 
   {
-    return(false(sprintf("%s is not of type 'factor'.", .xname)))
+    return(false("%s is not of type 'factor'.", .xname))
   }
   TRUE
 }
@@ -384,7 +384,7 @@ is_false <- function(x, allow_attributes = FALSE, .xname = get_name_in_parent(x)
   if(allow_attributes) attributes(x) <- NULL
   if(!identical(FALSE, x)) 
   {
-    return(false(sprintf("%s is not identical to FALSE.", .xname)))
+    return(false("%s is not identical to FALSE.", .xname))
   }
   TRUE
 }                  
@@ -409,7 +409,7 @@ is_function <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.function(x)) 
   {
-    return(false(sprintf("%s is not of type 'function'.", .xname)))
+    return(false("%s is not of type 'function'.", .xname))
   }
   TRUE
 }
@@ -537,7 +537,7 @@ is_integer <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.integer(x)) 
   {
-    return(false(sprintf("%s is not of type 'integer'.", .xname)))
+    return(false("%s is not of type 'integer'.", .xname))
   }
   TRUE
 }
@@ -576,7 +576,7 @@ is_language <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.language(x)) 
   {
-    return(false(sprintf("%s is not a language object (name, call or expression).", .xname)))
+    return(false("%s is not a language object (name, call or expression).", .xname))
   }
   TRUE
 }
@@ -596,7 +596,7 @@ is_leaf <- function(x, .xname = get_name_in_parent(x))
   leaf <- attr(x, "leaf")
   if(is.null(leaf)) 
   {
-    return(false(sprintf("%s has no 'leaf' attribute.", .xname)))
+    return(false("%s has no 'leaf' attribute.", .xname))
   }
   if(!(ok <- is_true(
     leaf, 
@@ -629,7 +629,7 @@ is_list <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.list(x)) 
   {
-    return(false(sprintf("%s is not of type 'list'.", .xname)))
+    return(false("%s is not of type 'list'.", .xname))
   }
   TRUE
 }
@@ -661,7 +661,7 @@ is_logical <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.logical(x)) 
   {
-    return(false(sprintf("%s is not of type 'logical'.", .xname)))
+    return(false("%s is not of type 'logical'.", .xname))
   }
   TRUE
 }       
@@ -672,7 +672,7 @@ is_matrix <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.matrix(x)) 
   {
-    return(false(sprintf("%s is not of type 'matrix'.", .xname)))
+    return(false("%s is not of type 'matrix'.", .xname))
   }
   TRUE
 }
@@ -703,7 +703,7 @@ is_name <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.name(x)) 
   {
-    return(false(sprintf("%s is not of type 'name'.", .xname)))
+    return(false("%s is not of type 'name'.", .xname))
   }
   TRUE
 }
@@ -721,7 +721,7 @@ is_non_empty <- function(x, .xname = get_name_in_parent(x))
 {
   if(length(x) == 0L) 
   {
-    return(false(sprintf("%s has length zero.", .xname)))
+    return(false("%s has length zero.", .xname))
   }
   TRUE
 }
@@ -732,12 +732,12 @@ is_non_empty_model <- function(x, .xname = get_name_in_parent(x))
 {
   if(!has_terms(x)) 
   {
-    return(false(sprintf("%s has no terms, is probably not a model.", .xname)))
+    return(false("%s has no terms, is probably not a model.", .xname))
   }
   tt <- terms(x)
   if(length(attr(tt, "factors")) == 0L && attr(tt, "intercept") == 0L)  
   {
-    return(false(sprintf("%s is an empty model.", .xname)))
+    return(false("%s is an empty model.", .xname))
   }
   TRUE
 }
@@ -784,7 +784,7 @@ is_not_null <- function(x, .xname = get_name_in_parent(x))
 {
   if(is.null(x))
   {
-    return(false(sprintf("%s is NULL.", .xname)))
+    return(false("%s is NULL.", .xname))
   }
   TRUE
 }
@@ -810,7 +810,7 @@ is_null <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.null(x))
   {
-    return(false(sprintf("%s is not NULL.", .xname)))
+    return(false("%s is not NULL.", .xname))
   }
   TRUE
 }
@@ -843,7 +843,7 @@ is_numeric <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.numeric(x))
   {
-    return(false(sprintf("%s is not of type 'numeric'.", .xname)))
+    return(false("%s is not of type 'numeric'.", .xname))
   }
   TRUE
 }
@@ -864,7 +864,7 @@ is_ordered <- function(x, .xname = get_name_in_parent(x))
   if(!(ok <- is_factor(x))) return(ok)
   if(!is.ordered(x))
   {
-    return(false(sprintf("%s is not an ordered factor.", .xname)))
+    return(false("%s is not an ordered factor.", .xname))
   }
   TRUE
 }
@@ -890,7 +890,7 @@ is_primitive <- function(x, .xname = get_name_in_parent(x))
   if(!(ok <- is_function(x))) return(ok)
   if(!is.primitive(x))
   {
-    return(false(sprintf("%s is not a primitive function.", .xname)))
+    return(false("%s is not a primitive function.", .xname))
   }
   TRUE
 } 
@@ -919,7 +919,7 @@ is_qr <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.qr(x))
   {
-    return(false(sprintf("%s is not of type 'qr'.")))
+    return(false("%s is not of type 'qr'.", .xname))
   }
   TRUE
 }
@@ -970,7 +970,7 @@ is_raw <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.raw(x))
   {
-    return(false(sprintf("%s is not of type 'raw'.", .xname)))
+    return(false("%s is not of type 'raw'.", .xname))
   }
   TRUE
 }
@@ -1004,7 +1004,7 @@ is_recursive <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.recursive(x))
   {
-    return(false(sprintf("%s is not recursive.", .xname)))
+    return(false("%s is not recursive.", .xname))
   }
   TRUE
 }
@@ -1015,7 +1015,7 @@ is_scalar <- function(x, .xname = get_name_in_parent(x))
 {
   if(length(x) != 1L)
   {
-    return(false(sprintf("%s does not have length one.", .xname)))
+    return(false("%s does not have length one.", .xname))
   }
   TRUE
 }                
@@ -1042,7 +1042,7 @@ is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get
   dimx <- dim(x)
   if(dimx[1L] != dimx[2L])
   {
-    return(false(sprintf("%s is not a square matrix.", .xname)))
+    return(false("%s is not a square matrix.", .xname))
   }
   symmetry_test <- if(is.complex(x)) 
   {
@@ -1053,7 +1053,7 @@ is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get
   }
   if(!is_true(symmetry_test))
   {
-    return(false(sprintf("%s is not a symmetric matrix.", .xname)))
+    return(false("%s is not a symmetric matrix.", .xname))
   }
   TRUE
 }
@@ -1075,7 +1075,7 @@ is_table <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.table(x))
   {
-    return(false(sprintf("%s is not of type 'table'.", .xname)))
+    return(false("%s is not of type 'table'.", .xname))
   }
   TRUE
 }
@@ -1125,7 +1125,7 @@ is_true <- function(x, allow_attributes = FALSE, .xname = get_name_in_parent(x))
   if(allow_attributes) attributes(x) <- NULL
   if(!isTRUE(x))
   {
-    return(false(sprintf("%s is not identical to TRUE.", .xname)))
+    return(false("%s is not identical to TRUE.", .xname))
   }
   TRUE
 }
@@ -1180,7 +1180,7 @@ is_valid_variable_name <- function(x, allow_reserved = TRUE, allow_duplicates = 
 #' @export
 is_vector <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!is.vector(x)) return(false("Input is not a vector."))
+  if(!is.vector(x)) return(false("%s is not a vector.", .xname))
   TRUE
 }                
 

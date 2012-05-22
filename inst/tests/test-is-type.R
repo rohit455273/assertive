@@ -409,31 +409,6 @@ test.is_recursive.something_atomic.returns_false <- function()
 }
 
 
-test.is_symmetric_matrix.a_symmetric_matrix.returns_true <- function()
-{
-  x <- diag(3)
-  checkTrue(is_symmetric_matrix(x))
-}
-
-test.is_symmetric_matrix.a_symmetric_matrix.returns_logical <- function()
-{
-  x <- diag(3); x[3, 1] <- 1e-100
-  checkTrue(is_symmetric_matrix(x))
-  checkTrue(!is_symmetric_matrix(x, tol = 0))
-}
-
-test.is_symmetric_matrix.an_assymmetric_matrix.returns_false <- function()
-{
-  x <- matrix(rnorm(9), nrow = 3)
-  checkTrue(!is_symmetric_matrix(x))
-}
-
-test.is_symmetric_matrix.not_coercible_to_matrix.throws_error <- function()
-{
-  suppressWarnings(checkException(is_symmetric_matrix(sqrt), silent = TRUE))
-}
-
-
 test.is_table.a_table.returns_true <- function()
 {
   x <- table(sample(letters, 100, replace = TRUE))
