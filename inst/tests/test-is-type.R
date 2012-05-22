@@ -56,7 +56,7 @@ test.is_atomic.array.returns_true <- function()
 
 test.is_atomic.null.returns_true <- function()
 {
-  checkTrue(is_atomic(NULL()))
+  checkTrue(is_atomic(NULL))
 }
 
 test.is_atomic.something_recursive.returns_false <- function()
@@ -72,7 +72,7 @@ test.is_call.a_call.returns_true <- function()
 
 test.is_atomic.not_a_call.returns_false <- function()
 {
-  checkTrue(!is_call(expression(sin(pi)))))
+  checkTrue(!is_call(expression(sin(pi))))
 }
 
 
@@ -83,12 +83,12 @@ test.is_character.character_vector.returns_true <- function()
 
 test.is_character.NA_character_.returns_true <- function()
 {
-  checkTrue(is_character(NA_character_)))
+  checkTrue(is_character(NA_character_))
 }
 
 test.is_character.not_a_character_vector.returns_false <- function()
 {
-  checkTrue(!is_character(1:10)))
+  checkTrue(!is_character(1:10))
 }
 
 
@@ -161,6 +161,11 @@ test.is_factor.a_factor.returns_true <- function()
   checkTrue(is_factor(factor(letters)))
 }
 
+test.is_factor.an_ordered_factor.returns_true <- function()
+{
+  checkTrue(is_factor(ordered(letters, levels = letters)))
+}
+
 test.is_factor.not_a_factor.returns_false <- function()
 {
   checkTrue(!is_factor(letters))
@@ -195,7 +200,7 @@ test.is_integer.na_integer_.returns_true <- function()
 
 test.is_integer.not_an_integer.returns_false <- function()
 {
-  checkTrue(!is_integer(1:10))
+  checkTrue(!is_integer(pi:10))
 }
 
 
@@ -241,9 +246,9 @@ test.is_matrix.a_matrix.returns_true <- function()
   checkTrue(is_matrix(matrix()))
 }
 
-test.is_matrix.an_array.returns_true <- function()
+test.is_matrix.an_array.returns_false <- function()
 {
-  checkTrue(is_matrix(array()))
+  checkTrue(!is_matrix(array()))
 }
 
 test.is_matrix.a_data.frame.returns_false <- function()
@@ -268,4 +273,96 @@ test.is_name.not_a_name.returns_false <- function()
 }
 
 
+test.is_numeric.a_numeric_vector.returns_true <- function()
+{
+  checkTrue(is_numeric(1:10))
+}
 
+test.is_numeric.an_integer_vector.returns_true <- function()
+{
+  checkTrue(is_numeric(1L:10L))
+}
+
+test.is_numeric.not_numeric.returns_false <- function()
+{
+  checkTrue(!is_numeric(c(TRUE, FALSE)))
+}
+
+
+test.is_ordered.an_ordered_factor.returns_true <- function()
+{
+  checkTrue(is_ordered(ordered(letters, levels = letters)))
+}
+
+test.is_ordered.an_unordered_factor.returns_false <- function()
+{
+  checkTrue(!is_ordered(factor(letters)))
+}
+
+test.is_ordered.not_a_factor.returns_false <- function()
+{
+  checkTrue(!is_ordered(letters))
+}
+
+
+test.is_primitive.a_primitive_function.returns_true <- function()
+{
+  checkTrue(is_primitive(sqrt))
+}
+
+test.is_primitive.a_regular_function.returns_false <- function()
+{
+  checkTrue(!is_primitive(function(){}))
+}
+
+test.is_primitive.not_a_function.returns_false <- function()
+{
+  checkTrue(!is_primitive(call("sin", "pi")))
+}
+
+
+test.is_raw.a_raw_vector.returns_true <- function()
+{
+  checkTrue(is_raw(as.raw(1:10)))
+}
+
+test.is_raw.not_raw.returns_false <- function()
+{
+  checkTrue(!is_raw(c(TRUE, FALSE)))
+}
+
+
+test.is_recursive.a_list.returns_true <- function()
+{
+  checkTrue(is_recursive(list()))
+}
+
+test.is_recursive.an_expression.returns_true <- function()
+{
+  checkTrue(is_recursive(expression()))
+}
+
+test.is_recursive.a_data.frame.returns_true <- function()
+{
+  checkTrue(is_recursive(data.frame()))
+}
+
+test.is_recursive.a_formula.returns_true <- function()
+{
+  checkTrue(is_recursive(y ~ x))
+}
+
+test.is_recursive.a_function.returns_true <- function()
+{
+  checkTrue(is_recursive(function(){}))
+}
+
+test.is_recursive.a_call.returns_true <- function()
+{
+  checkTrue(is_recursive(call("sin", "pi")))
+}
+
+test.is_recursive.something_atomic.returns_false <- function()
+{
+  checkTrue(!is_recursive(1:10))
+}

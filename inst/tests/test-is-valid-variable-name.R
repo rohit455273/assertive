@@ -17,7 +17,7 @@ test_is_valid_variable_name_2_dots_returns_true <- function()
 test_is_valid_variable_name_3_dots_returns_allow_reserved <- function()
 {
   checkTrue(is_valid_variable_name("..."))             
-  checkFalse(is_valid_variable_name("..."), allow_reserved = FALSE) 
+  checkTrue(!is_valid_variable_name("...", allow_reserved = FALSE))
 }
                        
 test_is_valid_variable_name_4_dots_returns_true <- function()
@@ -62,14 +62,14 @@ test_is_valid_variable_name_dot_dash_1_returns_true <- function()
                     
 test_is_valid_variable_name_dot_dot_1_returns_allow_reserved <- function()
 {
-  checkTrue(!is_valid_variable_name("..1")) 
-  checkFalse(!is_valid_variable_name("..1"), allow_reserved = FALSE)
+  checkTrue(is_valid_variable_name("..1")) 
+  checkTrue(!is_valid_variable_name("..1", allow_reserved = FALSE))
 }
                                           
 test_is_valid_variable_name_dot_dot_2_returns_allow_reserved <- function()
 {
-  checkTrue(!is_valid_variable_name("..2")) 
-  checkFalse(!is_valid_variable_name("..2"), allow_reserved = FALSE)
+  checkTrue(is_valid_variable_name("..2")) 
+  checkTrue(!is_valid_variable_name("..2", allow_reserved = FALSE))
 }
                     
 test_is_valid_variable_name_dot_dot_dot_1_returns_true <- function()
@@ -90,12 +90,12 @@ test_is_valid_variable_name_dot_dot_x_returns_true <- function()
 test_is_valid_variable_name_long_name_returns_false <- function()
 {
   vn <- paste(rep.int("a", 10001L), collapse = "")
-  checkTrue(is_valid_variable_name(vn))
+  checkTrue(!is_valid_variable_name(vn))
 }      
                  
-test_is_valid_variable_name_same_names_returns_not_unique <- function()
+test_is_valid_variable_name_same_names_returns_allow_duplicates <- function()
 {
   vn <- rep.int("foo", 2)
-  checkTrue(is_valid_variable_name(vn))
-  checkFalse(is_valid_variable_name(vn), unique = TRUE)
+  checkTrue(all(is_valid_variable_name(vn)))
+  checkTrue(!all(is_valid_variable_name(vn, allow_duplicates = FALSE)))
 }

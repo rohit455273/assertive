@@ -785,7 +785,8 @@ is_numeric <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_numeric_string <- function(x)
 {
-  x <- as.numeric(coerce_to(x, "character"))
+  x <- coerce_to(x, "character")
+  x <- suppressWarnings(as.numeric(x))
   is_not_na(x)
 }
 
