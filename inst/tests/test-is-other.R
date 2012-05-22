@@ -55,6 +55,13 @@ test.is_false.NA.returns_false <- function()
   checkTrue(!is_false(NA))
 } 
 
+test.is_false.true_with_attr.returns_allow_attributes <- function()
+{
+  x <- false("This has an attribute.")
+  checkTrue(!is_false(x))
+  checkTrue(is_false(x, allow_attributes = TRUE))
+} 
+
 
 test.is_imaginary.imaginary_numbers.returns_true_when_purely_imaginary <- function()
 {
@@ -184,7 +191,6 @@ test.is_real.real_numbers.returns_true_always <- function()
 } 
 
 
-
 test.is_scalar.a_scalar.returns_true <- function()
 {
   checkTrue(is_scalar(1))
@@ -199,3 +205,47 @@ test.is_scalar.empty.returns_false <- function()
 {
   checkTrue(!is_scalar(numeric()))
 } 
+
+
+test.is_missing_or_empty_character.a_scalar.returns_logical <- function()
+{
+  x <- c("foo", "", NA_character_, " ")
+  checkEquals(
+    c(FALSE, TRUE, TRUE, FALSE),
+    is_missing_or_empty_character(x)
+  )
+} 
+
+
+test.is_not_missing_nor_empty_character.a_scalar.returns_logical <- function()
+{
+  x <- c("foo", "", NA_character_, " ")
+  checkEquals(
+    c(TRUE, FALSE, FALSE, TRUE),
+    is_not_missing_nor_empty_character(x)
+  )
+} 
+
+
+test.is_true.true.returns_true <- function()
+{
+  checkTrue(is_true(TRUE))
+} 
+
+test.is_true.true_vector.returns_false <- function()
+{
+  checkTrue(!is_true(rep.int(TRUE, 2)))
+} 
+
+test.is_true.NA.returns_false <- function()
+{
+  checkTrue(!is_true(NA))
+}
+
+test.is_true.true_with_attr.returns_allow_attributes <- function()
+{
+  x <- c(truth = TRUE)
+  checkTrue(!is_true(x))
+  checkTrue(is_true(x, allow_attributes = TRUE))
+} 
+

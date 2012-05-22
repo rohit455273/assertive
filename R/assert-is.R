@@ -126,9 +126,14 @@ assert_is_factor <- function(x)
 
 #' @rdname is_true
 #' @export
-assert_is_false <- function(x)
+assert_is_false <- function(x, allow_attributes = FALSE)
 {                                                  
-  assert_engine(x, is_false, .xname = get_name_in_parent(x))      
+  assert_engine(
+    x, 
+    is_false, 
+    allow_attributes = allow_attributes, 
+    .xname = get_name_in_parent(x)
+  )      
 }
 
 #' Is the inputs (in)finite?
@@ -619,7 +624,7 @@ assert_is_scalar <- function(x)
 assert_all_strings_are_missing_or_empty <- function(x)
 {                                                       
   msg <- sprintf("%s are not all missing or empty strings.", get_name_in_parent(x))
-  assert_engine(x, is_missing_or_empty_string, msg)
+  assert_engine(x, is_missing_or_empty_character, msg)
 }
 
 #' @rdname is_character
@@ -627,7 +632,7 @@ assert_all_strings_are_missing_or_empty <- function(x)
 assert_any_strings_are_missing_or_empty <- function(x)
 {                                                      
   msg <- sprintf("%s are all not missing or empty strings.", get_name_in_parent(x))
-  assert_engine(x, is_missing_or_empty_string, msg, what = "any")
+  assert_engine(x, is_missing_or_empty_character, msg, what = "any")
 }
 #' @rdname is_language
 #' @export
@@ -635,9 +640,14 @@ assert_is_symbol <- assert_is_name
 
 #' @rdname is_true
 #' @export
-assert_is_true <- function(x)
+assert_is_true <- function(x, allow_attributes = FALSE)
 {                                                  
- assert_engine(x, is_true, .xname = get_name_in_parent(x))    
+ assert_engine(
+   x, 
+   is_true, 
+   allow_attributes = allow_attributes, 
+   .xname = get_name_in_parent(x)
+  )    
 }
 
 #' @rdname is_valid_variable_name

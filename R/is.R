@@ -379,8 +379,9 @@ is_factor <- function(x, .xname = get_name_in_parent(x))
 
 #' @rdname is_true
 #' @export
-is_false <- function(x, .xname = get_name_in_parent(x))
+is_false <- function(x, allow_attributes = FALSE, .xname = get_name_in_parent(x))
 {
+  if(allow_attributes) attributes(x) <- NULL
   if(!identical(FALSE, x)) 
   {
     return(false(sprintf("%s is not identical to FALSE.", .xname)))
@@ -934,7 +935,7 @@ is_scalar <- function(x, .xname = get_name_in_parent(x))
  
 #' @rdname is_character
 #' @export
-is_missing_or_empty_string <- function(x)
+is_missing_or_empty_character <- function(x)
 { 
   x <- coerce_to(x, "character")
   !nzchar(x) | is.na(x)
@@ -942,7 +943,7 @@ is_missing_or_empty_string <- function(x)
 
 #' @rdname is_character
 #' @export
-is_not_missing_nor_empty_string <- Negate(is_missing_or_empty_string)
+is_not_missing_nor_empty_character <- Negate(is_missing_or_empty_string)
 
 #' @rdname is_language
 #' @export
@@ -953,6 +954,8 @@ is_symbol <- is_name
 #' Checks to see if the input if \code{TRUE}.
 #'
 #' @param x Input to check.
+#' @param allow_attributes If \code{TRUE}, a scalar value of \code{TRUE}
+#' with attributes is allowed.
 #' @param .xname Not intended to be used directly.
 #' @return \code{TRUE} if the input is identical to \code{TRUE}.
 #' The \code{assert_*} functions return nothing but
@@ -962,9 +965,17 @@ is_symbol <- is_name
 #' @examples
 #' assert_is_true(TRUE)
 #' assert_is_false(FALSE)
+#' assert_is_true(c(truth = TRUE), allow_attributes = TRUE)
+#' assert_is_false(false("This has an attribute"), allow_attributes = TRUE)
+#' \dontrun{
+#' #These tests should fail:
+#' assert_is_true(c(truth = TRUE))
+#' assert_is_false(false("This has an attribute"))
+#' }
 #' @export
-is_true <- function(x, .xname = get_name_in_parent(x))
+is_true <- function(x, allow_attributes = FALSE, .xname = get_name_in_parent(x))
 {
+  if(allow_attributes) attributes(x) <- NULL
   if(!isTRUE(x))
   {
     return(false(sprintf("%s is not identical to TRUE.", .xname)))
