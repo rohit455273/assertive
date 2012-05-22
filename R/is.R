@@ -1036,3 +1036,19 @@ is_vector <- function(x, .xname = get_name_in_parent(x))
   if(!is.vector(x)) return(false("Input is not a vector."))
   TRUE
 }                
+
+#' Is the input a whole number?
+#'
+#' Checks that the (probably floating point) input is a whole number.
+#' 
+#' @param x Input to check.
+#' @param tol Differences smaller than \code{tol} are not considered.
+#' @note The term whole number is used to distinguish from integer in
+#' that the input \code{x} need not have type \code{integer}.  In fact
+#' it is expected that \code{x} will be \code{numeric}.
+#' @return \code{TRUE} if the input is a whole number.
+is_whole_number <- function(x, tol = .Machine$double.eps)
+{
+  x <- coerce_to(x, "numeric")
+  abs(x - floor(x)) < tol
+}

@@ -249,3 +249,12 @@ test.is_true.true_with_attr.returns_allow_attributes <- function()
   checkTrue(is_true(x, allow_attributes = TRUE))
 } 
 
+
+test.is_whole_number.NA.returns_false <- function()
+{
+  x <- c(1, -1.5, 1 + .Machine$double.eps, Inf, NA)
+  checkEquals(
+    c(TRUE, FALSE, FALSE, NA, NA),
+    is_whole_number(x)
+  )
+}

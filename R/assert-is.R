@@ -685,3 +685,20 @@ assert_is_vector <- function(x)
 {                                                    
   assert_engine(x, is_vector, .xname = get_name_in_parent(x))
 }
+
+
+#' @rdname is_whole_number
+#' @export
+assert_all_numbers_whole_numbers <- function(x, tol = .Machine$double.eps)
+{                                                       
+  msg <- sprintf("%s are not all whole numbers.", get_name_in_parent(x))
+  assert_engine(x, is_whole_number, msg, tol = tol)
+}
+
+#' @rdname is_whole_number
+#' @export
+assert_any_numbers_whole_numbers <- function(x, tol = .Machine$double.eps)
+{                                                      
+  msg <- sprintf("%s are all not whole numbers.", get_name_in_parent(x))
+  assert_engine(x, is_whole_number, msg, what = "any", tol = tol)
+}
