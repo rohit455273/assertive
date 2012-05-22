@@ -12,7 +12,7 @@
 #' @export
 coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
 {
-  if(!is(x, target_class))
+  if(!is2(x, target_class))
   {
     warning(
       "Coercing ", .xname, " to class ", sQuote(target_class), ".",

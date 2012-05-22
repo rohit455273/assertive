@@ -51,3 +51,23 @@ false <- function(...)
   msg(x) <- msg.
   x
 }
+
+#' Alternative version of is.
+#' 
+#' If a function named \code{is.class} exists, call \code{is.class(x)}.
+#' If not, call \code{is(x, class)}.
+#' @param x Input to check.
+#' @param class Target class that \code{x} maybe belong to.
+#' @return \code{TRUE} if x belongs to the class and \code{FALSE} 
+#' otherwise.
+is2 <- function(x, class)
+{  
+  fn <- try(match.fun(paste0("is.", class)), silent = TRUE)
+  condn <- if(inherits(fn, "try-error"))
+  {
+    is(x, class)
+  } else
+  {
+    fn(x)
+  }
+}

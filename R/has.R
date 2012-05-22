@@ -1,3 +1,23 @@
+#' Does the input have the specifed attributes?
+#'
+#' Checks to see if the input has the specifed attributes.
+#'
+#' @param x Input to check.
+#' @param attrs Desired attributes.
+#' @param .xname Not intended to be used directly.
+#' @return \code{has_attributes} returns \code{TRUE} where \code{x} has
+#' the attributes specified in \code{attrs}. \code{assert_has_terms} returns nothing but throws
+#' an error if \code{has_terms} is not \code{TRUE}.
+#' @seealso \code{\link[stats]{terms.default}}.
+#' @examples
+#' assert_has_attributes(struct(c(a = 1), b = 2), c("a", "b"))
+#' @export
+has_attributes <- function(x, attrs, .xname = get_name_in_parent(x))
+{
+  if(is_empty(attrs)) return(logical())
+  sapply(attrs, function(a) is_not_null(attr(x, a)))
+}
+
 #' Does the input have any attributes?
 #'
 #' Checks to see if the input has any attributes.

@@ -1,3 +1,13 @@
+test.has_attributes.struct_with_attrs.returns_true_if_attr_exists <- function()
+{
+  x <- structure(list(a = 1), foo = 1, bar = 2)
+  checkEquals(
+    c(TRUE, TRUE, TRUE, FALSE, FALSE)
+    has_attributes(x, c("names", "foo", "bar", "baz", NA))
+  )
+}
+
+
 test.has_colnames.with_colnames.returns_true <- function()
 {
   x <- matrix(1:12, nrow = 3, dimnames = list(letters[1:3], LETTERS[1:4]))
