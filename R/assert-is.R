@@ -325,6 +325,13 @@ assert_is_language <- function(x)
   assert_engine(x, is_language, .xname = get_name_in_parent(x))    
 }
 
+#' @rdname is_leaf
+#' @export
+assert_is_leaf <- function(x)
+{                                                         
+  assert_engine(x, is_leaf, .xname = get_name_in_parent(x))       
+}
+
 #' @rdname is_list
 #' @export
 assert_is_list <- function(x)

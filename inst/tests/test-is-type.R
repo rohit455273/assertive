@@ -225,6 +225,47 @@ test.is_language.not_a_language_object.returns_false <- function()
 }
 
 
+test.is_leaf.a_leaf.returns_true <- function()
+{
+  x <- structure(list(), leaf = TRUE)
+  checkTrue(is_leaf(x))
+}
+
+test.is_leaf.a_null_leaf.returns_false <- function()
+{
+  x <- list()
+  checkTrue(!is_leaf(x))
+}
+
+test.is_leaf.a_non_logical_leaf.returns_false <- function()
+{
+  x <- structure(list(), leaf = 1:10)
+  checkTrue(!is_leaf(x))
+}
+
+test.is_leaf.a_false_leaf.returns_false <- function()
+{
+  x <- structure(list(), leaf = FALSE)
+  checkTrue(!is_leaf(x))
+}
+
+
+test.is_list.a_list.returns_true <- function()
+{
+  checkTrue(is_list(list(1,2,3)))
+}
+
+test.is_list.an_atomic_vector.returns_false <- function()
+{
+  checkTrue(!is_list(1:10))
+}
+
+test.is_list.null.returns_false <- function()
+{
+  checkTrue(!is_list(NULL))
+}
+
+
 test.is_logical.a_logical_vector.returns_true <- function()
 {
   checkTrue(is_logical(c(TRUE, FALSE)))

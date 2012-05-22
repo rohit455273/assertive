@@ -581,6 +581,34 @@ is_language <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' Is the input a (dendrogram) leaf?
+#'
+#' Checks to see if the input is a (dendrogram) leaf.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_leaf} reimplements \code{is.leaf}, providing more 
+#' information on failure.
+#' @seealso \code{\link[stats]{dendrogram}}.
+#' @export
+is_leaf <- function(x, .xname = get_name_in_parent(x))
+{
+  leaf <- attr(x, "leaf")
+  if(is.null(leaf)) 
+  {
+    return(false(sprintf("%s has no 'leaf' attribute.", .xname)))
+  }
+  if(!(ok <- is_true(
+    leaf, 
+    TRUE,
+    paste("The leaf attribute of", .xname)
+  )))
+  {
+    return(ok)
+  }
+  TRUE
+}
+
 #' Is the input a list?
 #'
 #' Checks to see if the input is a list.
