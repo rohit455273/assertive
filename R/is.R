@@ -625,6 +625,25 @@ is_list <- function(x, .xname = get_name_in_parent(x))
   is2(x, "list", .xname)
 }
 
+#' Is the input DLL loaded?
+#'
+#' Checks to see if the input DLL (a.k.a. shared object) is loaded.
+#'
+#' @param x Input to check.
+#' @param PACKAGE Passed to \code{is.loaded}.
+#' @param type Passed to \code{is.loaded}.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_loaded} wraps \code{is.loaded}, providing more 
+#' information on failure.
+#' @seealso \code{\link[base]{is.loaded}}.
+is_loaded <- function(x, PACKAGE = "", type = "", .xname = get_name_in_parent(x))
+{
+  if(!is.loaded(x, PACKAGE = PACKAGE, type = type))
+  {
+    return(false("%s is not loaded.", .xname))
+  }
+}
+
 #' Is the input logical?
 #'
 #' Checks to see if the input is logical.
