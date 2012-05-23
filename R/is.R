@@ -1117,7 +1117,7 @@ is_table <- function(x, .xname = get_name_in_parent(x))
 #' @return \code{is_ts} wraps \code{is.ts}, providing more 
 #' information on failure.  \code{assert_is_ts} returns nothing but
 #' throws an error if \code{is_ts} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.ts}}.
+#' @seealso \code{\link[stats]{is.ts}}.
 #' @examples
 #' assert_is_ts(ts(1:10))
 #' @export
@@ -1126,6 +1126,13 @@ is_ts <- function(x, .xname = get_name_in_parent(x))
   if(!(ok <- is2(x, "ts", .xname))) return(ok)
   if(!(ok <- is_non_empty(x, .xname))) return(ok)
   TRUE
+}
+
+#' @rdname ts
+#' @export
+is_tskernel <- function(x, .xname = get_name_in_parent(x))
+{
+  is2(x, "tskernel", .xname)
 }
 
 #' @rdname is_character
@@ -1150,7 +1157,7 @@ is_symbol <- is_name
 
 #' Is the input TRUE?
 #' 
-#' Checks to see if the input if \code{TRUE}.
+#' Checks to see if the input is \code{TRUE}.
 #'
 #' @param x Input to check.
 #' @param allow_attributes If \code{TRUE}, a scalar value of \code{TRUE}
@@ -1178,6 +1185,51 @@ is_true <- function(x, allow_attributes = FALSE, .xname = get_name_in_parent(x))
   if(!isTRUE(x))
   {
     return(false("%s is not identical to TRUE.", .xname))
+  }
+  TRUE
+}
+
+#' Is the input unsorted?
+#' 
+#' Checks to see if the input is unsorted (without the cost of sorting it).
+#'
+#' @param x Input to check.
+#' @param na.rm If \code{TRUE}, remove \code{NA}s before checking.
+#' @param strictly If \code{TRUE}, equal values count as unsorted.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_unsorted} reimplements \code{is.unsorted}, providing
+#' more information on failure.  \code{assert_is_unsorted} returns nothing 
+#' but throws an error if \code{is_unsorted} returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.unsorted}}.
+#' @examples
+#' assert_is_unsorted(c(1, 3, 2))
+#' assert_is_unsorted(c(1, 1, 2), strictly = TRUE)
+#' \dontrun{
+#' #These tests should fail:
+#' assert_is_unsorted(c(1, 1, 2))
+#' assert_is_unsorted(c(2, 1, 0))
+#' }
+#' @export
+is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_not_null(x))) return(ok)
+  if(!is.atomic(x) && length(x) > 1)
+  {
+    #See notes in Value section of ?is.unsorted.
+    return(na("Sortability is not tested for recursive objects of length greater than one."))
+  }
+  nas <- is.na(x)
+  if(any(nas))
+  {
+    if(!na.rm) 
+    {
+      return(na("%s contains NA values.", .xname))
+    }
+    x <- x[!nas]
+  }
+  if(!.Internal(is.unsorted(x, strictly)))
+  {
+    return(false("%s is sorted.", .xname))
   }
   TRUE
 }

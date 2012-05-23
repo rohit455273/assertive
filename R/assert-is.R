@@ -728,6 +728,13 @@ assert_is_ts <- function(x)
   assert_engine(x, is_ts, .xname = get_name_in_parent(x))       
 }
 
+#' @rdname is_ts
+#' @export
+assert_is_tskernel <- function(x)
+{                                                         
+  assert_engine(x, is_tskernel, .xname = get_name_in_parent(x))       
+}
+
 #' @rdname is_true
 #' @export
 assert_is_true <- function(x, allow_attributes = FALSE)
@@ -738,6 +745,19 @@ assert_is_true <- function(x, allow_attributes = FALSE)
    allow_attributes = allow_attributes, 
    .xname = get_name_in_parent(x)
   )    
+}
+
+#' @rdname is_unsorted
+#' @export
+assert_is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE)
+{                                                         
+  assert_engine(
+    x, 
+    is_unsorted, 
+    .xname = get_name_in_parent(x),
+    na.rm = na.rm,
+    strictly = strictly
+  )       
 }
 
 #' @rdname is_valid_variable_name

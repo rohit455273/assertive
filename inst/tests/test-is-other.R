@@ -275,6 +275,23 @@ test.is_true.true_with_attr.returns_allow_attributes <- function()
 } 
 
 
+test.is_unsorted.an_unsorted_vector.returns_true <- function()
+{
+  checkTrue(is_unsorted(c(1, 3, 2)))
+} 
+
+test.is_unsorted.an_weakly_unsorted_vector.returns_strictly <- function()
+{
+  checkTrue(!is_unsorted(c(1, 1, 2)))
+  checkTrue(is_unsorted(c(1, 1, 2), strictly = TRUE))
+} 
+
+test.is_unsorted.a_sorted_vector.returns_false <- function()
+{
+  checkTrue(!is_unsorted(1:3))
+} 
+
+
 test.is_whole_number.NA.returns_false <- function()
 {
   x <- c(1, -1.5, 1 + .Machine$double.eps, 1 + 100 *.Machine$double.eps, Inf, NA)

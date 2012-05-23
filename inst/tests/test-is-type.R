@@ -479,6 +479,17 @@ test.is_ts.not_a_time_series.returns_false <- function()
 }
 
 
+test.is_tskernel.a_time_series_kernel.returns_true <- function()
+{
+  checkTrue(is_tskernel(kernel("daniell", 10)))
+}
+
+test.is_ts.not_a_time_series_kernel.returns_false <- function()
+{
+  checkTrue(!is_tskernel(1:10))
+}
+
+
 test.is_vector.logical.returns_true <- function()
 {
   checkTrue(is_vector(logical()))

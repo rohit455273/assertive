@@ -37,18 +37,35 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
   }
 }
 
-#' FALSE, with a message.
+#' FALSE, with a cause of failure.
 #'
-#' Always returns the value \code{FALSE}, with a message attribute.
+#' Always returns the value \code{FALSE}, with a cause attribute.
 #'
-#' @param ... Passed to sprintf to create a message.
+#' @param ... Passed to sprintf to create a cause of failure message.
 #' @return \code{FALSE} with the attribute \code{cause}, as provided
 #' in the input.
-#' @seealso \code{\link{cause}}
+#' @seealso \code{\link{cause}} and \code{\link{na}}
 false <- function(...)
 {
   msg <- if(length(list(...)) > 0L) sprintf(...) else ""
   x <- FALSE
+  cause(x) <- msg
+  x
+}
+
+
+#' NA, with a cause of failure.
+#'
+#' Always returns the value (logical) \code{NA}, with a cause attribute.
+#'
+#' @param ... Passed to sprintf to create a cause of failure message.
+#' @return \code{NA} with the attribute \code{cause}, as provided
+#' in the input.
+#' @seealso \code{\link{cause}} and \code{\link{false}}.
+na <- function(...)
+{
+  msg <- if(length(list(...)) > 0L) sprintf(...) else ""
+  x <- NA
   cause(x) <- msg
   x
 }
