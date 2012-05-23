@@ -20,7 +20,11 @@
 has_attributes <- function(x, attrs, .xname = get_name_in_parent(x))
 {
   if(is_empty(attrs)) return(logical())
-  sapply(attrs, function(a) is_not_null(attr(x, a)))
+  vapply(
+    attrs,
+    function(at) is_not_null(attr(x, at)),
+    logical(1)
+  )
 }
 
 #' Does the input have any attributes?

@@ -62,6 +62,18 @@ test.is_character.not_a_character_vector.returns_false <- function()
 }
 
 
+test.is_class.lm_numeric_raster.returns_true <- function()
+{
+  x <- c("lm", "numeric", "raster")
+  expected <- c(TRUE, TRUE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_class(x)
+  )
+}
+
+
 test.is_complex.1i.returns_true <- function()
 {
   checkTrue(is_complex(1i))
@@ -332,6 +344,19 @@ test.is_primitive.not_a_function.returns_false <- function()
 }
 
 
+test.is_raster.a_raster.returns_true <- function()
+{
+  m <- matrix(hcl(0, 80, seq(50, 80, 10)), nrow=4, ncol=5)
+  checkTrue(is_raster(as.raster(m)))
+}
+
+test.is_raster.a_matrix.returns_false <- function()
+{
+  m <- matrix(hcl(0, 80, seq(50, 80, 10)), nrow=4, ncol=5)
+  checkTrue(!is_raster(m))
+}
+
+
 test.is_raw.a_raw_vector.returns_true <- function()
 {
   checkTrue(is_raw(as.raw(1:10)))
@@ -343,16 +368,14 @@ test.is_raw.not_raw.returns_false <- function()
 }
 
 
-test.is_raster.a_raster.returns_true <- function()
+test.is_relistable.a_relistable_object.returns_true <- function()
 {
-  m <- matrix(hcl(0, 80, seq(50, 80, 10)), nrow=4, ncol=5)
-  checkTrue(is_raster(as.raster(m)))
+  checkTrue(is_relistable(as.relistable(list(1,2,3))))
 }
 
-test.is_raster.a_matrix.returns_false <- function()
+test.is_relistable.not_relistable.returns_false <- function()
 {
-  m <- matrix(hcl(0, 80, seq(50, 80, 10)), nrow=4, ncol=5)
-  checkTrue(!is_raster(m))
+  checkTrue(!is_relistable(list(1,2,3)))
 }
 
 

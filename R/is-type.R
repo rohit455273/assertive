@@ -96,6 +96,26 @@ is_character <- function(x, .xname = get_name_in_parent(x))
   is2(x, "character", .xname)
 }
 
+#' Is the input the name of a (formally defined) class?
+#'
+#' Checks to see if the input is the name of a (formally defined) class.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_class} is a vectorised wrapper for \code{isClass}.  
+#' \code{assert_is_class} returns nothing but throws an error if 
+#' \code{is_class} returns \code{FALSE}.
+#' @seealso \code{\link[methods]{isClass}}.
+#' @examples
+#' assert_all_are_classes(c("lm", "numeric"))
+#' @export
+is_class <- function(x, .xname = get_name_in_parent(x))
+{
+  if(is_empty(x)) return(logical())
+  x <- coerce_to(x, "character")
+  vapply(x, isClass, logical(1))
+}
+
 #' Is the input complex?
 #'
 #' Checks to see if the input is complex.
@@ -478,7 +498,7 @@ is_raster <- function(x, .xname = get_name_in_parent(x))
 #' @return \code{is_raw} wraps \code{is.raw}, providing more 
 #' information on failure. \code{is_a_raw} returns \code{TRUE} if the 
 #' input is raw and scalar.  The \code{assert_*} functions return nothing but
-#' throw an error if the corresponding \code{is_*} function returns 
+#' throws an error if the corresponding \code{is_*} function returns 
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{is.raw}} and \code{\link{is_scalar}}.
 #' @examples
@@ -494,6 +514,29 @@ is_raster <- function(x, .xname = get_name_in_parent(x))
 is_raw <- function(x, .xname = get_name_in_parent(x))
 {
   is2(x, "raw", .xname)
+}
+
+#' Is the input relistable?
+#'
+#' Checks to see if the input is relistable.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_relistable} wraps \code{is.relistable}, providing more 
+#' information on failure. The \code{assert_*} functions return nothing but
+#' throws an error if the corresponding \code{is_*} function returns 
+#' \code{FALSE}.
+#' @seealso \code{\link[utils]{is.relistable}} and \code{\link{is_scalar}}.
+#' @examples
+#' assert_is_relistable(as.relistable(list(1,2,3)))
+#' \dontrun{
+#' #These examples should fail:
+#' assert_is_relistable(list(1,2,3))
+#' }
+#' @export
+is_relistable <- function(x, .xname = get_name_in_parent(x))
+{
+  is2(x, "relistable", .xname)
 }
 
 #' @rdname is_function

@@ -26,6 +26,20 @@ assert_is_character <- function(x)
   assert_engine(x, is_character, .xname = get_name_in_parent(x))   
 }
 
+#' @rdname is_class
+#' @export
+assert_all_are_classes <- function(x)
+{                                                         
+  assert_engine(x, is_class, .xname = get_name_in_parent(x))   
+}
+
+#' @rdname is_class
+#' @export
+assert_any_are_classes <- function(x)
+{                                                         
+  assert_engine(x, is_class, .xname = get_name_in_parent(x), what = "any")   
+}
+
 #' @rdname is_complex
 #' @export
 assert_is_complex <- function(x)
@@ -164,6 +178,13 @@ assert_is_raster <- function(x)
 assert_is_raw <- function(x)
 {                                                         
   assert_engine(x, is_raw, .xname = get_name_in_parent(x))
+}
+
+#' @rdname is_raw
+#' @export
+assert_is_relistable <- function(x)
+{                                                         
+  assert_engine(x, is_relistable, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_function
