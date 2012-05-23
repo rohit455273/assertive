@@ -14,7 +14,6 @@ test.is2.1_to_5_is_nonsense.returns_false <- function()
 }
 
 
-
 test.is_array.an_array.returns_true <- function()
 {
   checkTrue(is_array(array()))
