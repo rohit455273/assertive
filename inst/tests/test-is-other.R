@@ -8,6 +8,19 @@ test.is_debugged.a_function.returns_true_when_debugged <- function()
   checkTrue(!is_debugged(x))  
 }
 
+test.is_existing.some_variables.returns_true_when_they_exist <- function()
+{
+  a_variable <- 1
+  x <- c("a_variable", "not_a_variable")
+  expected <- c(TRUE, FALSE)
+  names(expected) <- x
+  this_env <- sys.frame(sys.nframe())
+  print(is_existing(x, envir = this_env, inherits = FALSE))
+  checkEquals(
+    expected,
+    is_existing(x, envir = this_env, inherits = FALSE)
+  )
+}
 
 test.is_symmetric_matrix.a_symmetric_matrix.returns_true <- function()
 {

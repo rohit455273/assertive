@@ -1,3 +1,52 @@
+#' @rdname is_existing
+#' @export
+assert_all_are_existing <- function(
+  x, 
+  where = -1, 
+  envir = if (missing(frame)) as.environment(where) else sys.frame(frame), 
+  frame, 
+  mode = "any", 
+  inherits = TRUE
+)
+{    
+  msg <- sprintf("%s do not all exist.", get_name_in_parent(x))
+  assert_engine(
+    x, 
+    is_existing, 
+    msg = msg,
+    where = where,
+    envir = envir,
+    frame = frame,
+    mode = mode,
+    inherits = inherits
+  )       
+}
+
+#' @rdname is_existing
+#' @export
+assert_any_are_existing <- function(
+  x, 
+  where = -1, 
+  envir = if (missing(frame)) as.environment(where) else sys.frame(frame), 
+  frame, 
+  mode = "any", 
+  inherits = TRUE
+)
+{    
+  msg <- sprintf("%s all do not exist.", get_name_in_parent(x))
+  assert_engine(
+    x, 
+    is_existing, 
+    msg = msg,
+    what = "any",
+    where = where,
+    envir = envir,
+    frame = frame,
+    mode = mode,
+    inherits = inherits
+  )       
+}
+
 #' @rdname is_debugged
 #' @export
 assert_is_debugged <- function(x)

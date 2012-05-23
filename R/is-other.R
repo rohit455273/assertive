@@ -18,6 +18,70 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' Does the variable exist?
+#'
+#' Checks to see if the input variables exist.
+#'
+#' @param x Input to check.
+#' @param where Passed to \code{exists}.
+#' @param envir Passed to \code{exists}.
+#' @param frame Passed to \code{exists}.
+#' @param mode Passed to \code{exists}.
+#' @param inherits Passed to \code{exists}.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_existing} is a vectorised wrapper to \code{exists}, 
+#' providing more information on failure.  The \code{assert_*} functions
+#' return nothing but throw an error if \code{is_existing} returns 
+#' \code{FALSE}.
+#' @seealso \code{\link[base]{exists}}.
+#' @examples
+#' e <- new.env()
+#' e$x <- 1
+#' e$y <- 2
+#' assert_all_are_existing(c("x", "y"), envir = e)
+#' \dontrun{
+#' assert_all_are_existing(c("x", "z"), envir = e)
+#' }
+#' @export
+is_existing <- function(
+  x, 
+  where = -1, 
+  envir = if (missing(frame)) as.environment(where) else sys.frame(frame), 
+  frame, 
+  mode = "any", 
+  inherits = TRUE, 
+  .xname = get_name_in_parent(x)
+)
+{
+  x <- coerce_to(x, "character")
+  if(is_empty(x)) return(logical(0))
+  if(length(x) > 1L)
+  {
+    return(vapply(
+      x, 
+      is_existing, 
+      logical(1), 
+      where    = where,
+      envir    = envir,
+      frame    = frame,
+      mode     = mode,
+      inherits = inherits
+    ))
+  }
+  if(!exists(
+    x, 
+    where    = where,
+    envir    = envir,
+    frame    = frame,
+    mode     = mode,
+    inherits = inherits
+  ))
+  {
+    return(false("%s does not exist.", .xname))
+  }
+  TRUE
+}
+
 # ' Is the input generic?
 # '
 # ' Checks to see if the input is a generic function.
