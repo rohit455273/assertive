@@ -544,6 +544,31 @@ is_relistable <- function(x, .xname = get_name_in_parent(x))
   is2(x, "relistable", .xname)
 }
 
+#' Is the input an S4 object?
+#'
+#' Checks to see if the input is an S4 object.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_S4} wraps \code{isS4}, providing more information on 
+#' failure.  \code{assert_is_S4} returns nothing but throws an error if
+#' \code{is_S4} returns \code{FALSE}.
+#' @seealso \code{\link[base]{isS4}}.
+#' @examples
+#' assert_is_S4(getClass("MethodDefinition"))
+#' \dontrun{
+#' assert_is_S4(1:10)
+#' }
+#' @export
+is_S4 <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!isS4(x))
+  {
+    return(false("%s is not an S4 object.", .xname))
+  }
+  TRUE
+} 
+
 #' @rdname is_function
 #' @export
 is_stepfun <- function(x, .xname = get_name_in_parent(x))

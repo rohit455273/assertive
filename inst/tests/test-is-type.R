@@ -379,6 +379,18 @@ test.is_relistable.not_relistable.returns_false <- function()
 }
 
 
+test.is_S4.an_S4_instance.returns_true <- function()
+{
+  x <- getClass("MethodDefinition")
+  checkTrue(is_S4(x))
+}
+
+test.is_S4.not_an_S4_instance.returns_true <- function()
+{
+  checkTrue(!is_S4(1:10))
+}
+
+
 test.is_stepfun.a_step_function.returns_true <- function()
 {
   x <- stepfun(1:3, c(1, 2, 4, 3), f = 0)

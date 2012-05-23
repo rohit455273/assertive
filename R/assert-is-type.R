@@ -196,6 +196,13 @@ assert_is_relistable <- function(x)
   assert_engine(x, is_relistable, .xname = get_name_in_parent(x))
 }
 
+#' @rdname is_S4
+#' @export
+assert_is_S4 <- function(x)
+{                                                         
+  assert_engine(x, is_S4, .xname = get_name_in_parent(x))
+}
+
 #' @rdname is_function
 #' @export
 assert_is_stepfun <- function(x)
