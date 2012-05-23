@@ -1,3 +1,10 @@
+#' @rdname is_debugged
+#' @export
+assert_is_debugged <- function(x)
+{                                                         
+  assert_engine(x, is_debugged, .xname = get_name_in_parent(x))       
+}
+
 # ' @rdname is_generic
 # ' @export
 # assert_is_generic <- function(x)
@@ -12,7 +19,6 @@ assert_is_loaded <- function(x)
 {                                                         
   assert_engine(x, is_loaded, .xname = get_name_in_parent(x))       
 }
-
 
 #' @rdname is_R
 #' @export

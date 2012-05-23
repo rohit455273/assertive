@@ -1,8 +1,17 @@
 #' @rdname is2  
 #' @export
-assert_is <- function(x, class, .xname = get_name_in_parent(x))
+assert_is_all_of <- function(x, classes, .xname = get_name_in_parent(x))
 {  
-  assert_engine(x, is2, class = class, .xname = .xname)
+  msg <- sprintf("%s is not in all of the classes %s.", .xname, toString(sQuote(classes)))
+  assert_engine(x, is2, class = classes, msg = msg)
+}
+
+#' @rdname is2  
+#' @export
+assert_is_any_of <- function(x, classes, .xname = get_name_in_parent(x))
+{  
+  msg <- sprintf("%s is not in any of the classes %s.", .xname, toString(sQuote(classes)))
+  assert_engine(x, is2, class = classes, msg = msg, what = "any")
 }
 
 #' @rdname is_array

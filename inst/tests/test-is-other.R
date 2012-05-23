@@ -1,3 +1,14 @@
+test.is_debugged.a_function.returns_true_when_debugged <- function()
+{
+  x <- function() {}
+  checkTrue(!is_debugged(x))
+  debug(x)
+  checkTrue(is_debugged(x))
+  undebug(x)
+  checkTrue(!is_debugged(x))  
+}
+
+
 test.is_symmetric_matrix.a_symmetric_matrix.returns_true <- function()
 {
   x <- diag(3)

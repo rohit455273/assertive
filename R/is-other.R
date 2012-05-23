@@ -1,9 +1,29 @@
+#' Is the input function being debugged?
+#'
+#' Checks to see if the input DLL (a.k.a. shared object) is loaded.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_debugged} wraps \code{is.debugged}, providing more 
+#' information on failure.  \code{assert_is_debugged} returns nothing but
+#' throws an error if \code{is_loaded} returns \code{FALSE}.
+#' @seealso \code{\link[base]{isdebugged}}.
+is_debugged <- function(x, .xname = get_name_in_parent(x))
+{
+  assert_is_any_of(x, c("function", "character"), .xname)
+  if(!isdebugged(x))
+  {
+    return(false("%s is not being debugged.", .xname))
+  }
+  TRUE
+}
+
 # ' Is the input generic?
 # '
 # ' Checks to see if the input is a generic function.
 # '
 # ' @param x Input to check.
-#' @param .xname Not intended to be used directly.
+# ' @param .xname Not intended to be used directly.
 # ' @return \code{TRUE} if the input is a generic function. 
 # ' \code{assert_is_generic} functions return nothing but throws an error
 # ' if \code{is_generic} returns \code{FALSE}.
@@ -32,7 +52,8 @@
 #' @param type Passed to \code{is.loaded}.
 #' @param .xname Not intended to be used directly.
 #' @return \code{is_loaded} wraps \code{is.loaded}, providing more 
-#' information on failure.
+#' information on failure.  \code{assert_is_loaded} returns nothing but
+#' throws an error if \code{is_loaded} returns \code{FALSE}.
 #' @seealso \code{\link[base]{is.loaded}}.
 is_loaded <- function(x, PACKAGE = "", type = "", .xname = get_name_in_parent(x))
 {

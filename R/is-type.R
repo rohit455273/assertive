@@ -17,7 +17,12 @@
 #' }
 #' @export
 is2 <- function(x, class, .xname = get_name_in_parent(x))
-{  
+{    
+  if(is_empty(class)) stop("You must provide a class.")
+  if(length(class) > 1L) 
+  {
+    return(vapply(class, function(cl) is2(x, cl, ""), logical(1)))
+  }
   fn <- try(match.fun(paste0("is.", class)), silent = TRUE)
   condn <- if(inherits(fn, "try-error"))
   {
