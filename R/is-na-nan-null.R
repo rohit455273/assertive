@@ -1,3 +1,50 @@
+#' Are the inputs (in)finite?
+#'
+#' Checks to see if the inputs are (in)finite.
+#'
+#' @param x Input to check.
+#' @return \code{is_finite} wraps \code{is.finite}, showing the 
+#' names of the inputs in the answer. \code{is_infinite} works 
+#' likewise for \code{is.infinite}.  The \code{assert_*} functions 
+#' return nothing but throw an error if the corresponding 
+#' \code{is_*} function returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.finite}}
+#' @examples
+#' assert_all_are_finite(1:10)
+#' assert_any_are_finite(c(1, Inf))
+#' @export
+is_finite <- function(x)
+{
+  x <- coerce_to(x, "numeric")
+  call_and_name(is.finite, x)
+}
+
+#' @export
+is_infinite <- function(x)
+{
+  x <- coerce_to(x, "numeric")
+  call_and_name(is.infinite, x)
+}
+
+
+#' Is the input present/missing?
+#'
+#' Checks to see if the input is (not) NA.
+#'
+#' @param x Input to check.
+#' @return \code{is_na} wraps \code{is.na}, showing the names of 
+#' the inputs in the answer.  \code{is_not_na} is the negation. 
+#' The \code{assert_*} functions return nothing but throw an error
+#'if the corresponding \code{is_*} function returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.na}}
+#' @examples
+#' assert_is_not_na(1:10)
+#' @export
+is_na <- function(x)
+{
+  call_and_name(is.na, x)
+}
+
 #' Is the input (not) NaN?
 #'
 #' Checks to see if the input is a number that is(n't) NaN.
@@ -14,25 +61,15 @@
 #' @export
 is_nan <- function(x)
 {
-  x <- coerce_to(x, "numeric")
-  is.nan(x)
+  x <- coerce_to(x, "numeric")  
+  call_and_name(is.nan, x)
 }
 
-#' Is the input present?
-#'
-#' Checks to see if the input is not NA.
-#'
-#' @param x Input to check.
-#' @return \code{is_not_na} is the negation of \code{is.na}. 
-#' \code{assert_is_not_na} returns nothing but throws an error if 
-#' \code{is_not_na} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.na}}
-#' @examples
-#' assert_is_not_na(1:10)
+#' @rdname is_na
 #' @export
 is_not_na <- function(x)
 {
-  !is.na(x)
+  !call_and_name(is.na, x)
 }
 
 #' @rdname is_nan
@@ -40,7 +77,7 @@ is_not_na <- function(x)
 is_not_nan <- function(x)
 {
   x <- coerce_to(x, "numeric")
-  !is.nan(x)
+  !call_and_name(is.nan, x)
 }
 
 #' @rdname is_null

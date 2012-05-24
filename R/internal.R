@@ -37,6 +37,32 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
   }
 }
 
+#' Call a function, and give the result names.
+#'
+#' Calls a function, and names the result with the first argument.
+#'
+#' @param fn A function to call.  See note below.
+#' @param x The first input to \code{fn}.
+#' @param ... Optional additional inputs to \code{fn}.
+#' @return The result of \code{fn(x, ...)}, with names given by the
+#' argument \code{x}.
+#' @note The function, \code{fn}, should return an object with the 
+#' same length as the input \code{x}.
+#' @examples
+#' call_and_name(is.finite, c(1, Inf, Na))
+#' @seealso \code{\link{cause}} and \code{\link{na}}.
+call_and_name <- function(fn, x, ...)
+{
+  y <- fn(x, ...)
+  if(!is_true(length(y) == length(x)))
+  {
+    warning("Vector of names is different length to results.  Trying to resize.")
+    length(x) <- length(y)
+  }
+  names(y) <- x
+  y
+}
+
 #' FALSE, with a cause of failure.
 #'
 #' Always returns the value \code{FALSE}, with a cause attribute.
@@ -44,7 +70,7 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
 #' @param ... Passed to sprintf to create a cause of failure message.
 #' @return \code{FALSE} with the attribute \code{cause}, as provided
 #' in the input.
-#' @seealso \code{\link{cause}} and \code{\link{na}}
+#' @seealso \code{\link{cause}} and \code{\link{na}}.
 false <- function(...)
 {
   msg <- if(length(list(...)) > 0L) sprintf(...) else ""

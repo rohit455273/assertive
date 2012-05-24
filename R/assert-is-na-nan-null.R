@@ -1,19 +1,4 @@
-#' Are the inputs (in)finite?
-#'
-#' Checks to see if the inputs are (in)finite.
-#'
-#' @param x Input to check.
-#' @return \code{assert_all_are_finite} and \code{assert_any_are_finite}
-#' return nothing but throw an error if the inputs to \code{is.finite}
-#' are not \code{TRUE}. \code{assert_all_are_infinite} and 
-#' \code{assert_any_are_infinite} work likewise for \code{is.infinite}.
-#' @note Note that there are no corresponding \code{is_finite} and 
-#' \code{is_finite} functions in the package.  Use \code{is.finite}
-#' and \code{is.infinite} instead.
-#' @seealso \code{\link[base]{is.finite}}
-#' @examples
-#' assert_all_are_finite(1:10)
-#' assert_any_are_finite(c(1, Inf))
+#' @rdname is_finite
 #' @export
 assert_all_are_finite <- function(x)
 {                                                     
@@ -21,7 +6,7 @@ assert_all_are_finite <- function(x)
   assert_engine(x, is.finite, msg)        
 }
 
-#' @rdname assert_all_are_finite
+#' @rdname is_finite
 #' @export
 assert_any_are_finite <- function(x)
 {                                                     
@@ -29,7 +14,7 @@ assert_any_are_finite <- function(x)
   assert_engine(x, is.finite, msg, what = "any")        
 }
 
-#' @rdname assert_all_are_finite
+#' @rdname is_finite
 #' @export
 assert_all_are_infinite <- function(x)
 {                                                     
@@ -37,7 +22,7 @@ assert_all_are_infinite <- function(x)
   assert_engine(x, is.infinite, msg)        
 }
 
-#' @rdname assert_all_are_finite
+#' @rdname is_finite
 #' @export
 assert_any_are_infinite <- function(x)
 {                                                     

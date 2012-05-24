@@ -3,7 +3,7 @@
 is_missing_or_empty_character <- function(x)
 { 
   x <- coerce_to(x, "character")
-  !nzchar(x) | is.na(x)
+  !nzchar(x) | is_na(x)
 }
 
 #' @rdname is_character
@@ -11,7 +11,7 @@ is_missing_or_empty_character <- function(x)
 is_not_missing_nor_empty_character <- function(x)
 { 
   x <- coerce_to(x, "character")
-  nzchar(x) & !is.na(x)
+  nzchar(x) & !is_na(x)
 }
 
 #' @rdname is_character
@@ -66,5 +66,6 @@ is_valid_variable_name <- function(x, allow_reserved = TRUE, allow_duplicates = 
   #are names valid (and maybe unique)
   ok[x != make.names(x, unique = !allow_duplicates)] <- FALSE
   
+  names(ok) <- x
   ok
 }

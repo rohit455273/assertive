@@ -53,6 +53,7 @@ is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE, u
   ok[x > upper] <- FALSE
   if(lower_is_strict) ok[x == lower] <- FALSE
   if(upper_is_strict) ok[x == upper] <- FALSE
+  names(ok) <- x
   ok
 }
 
