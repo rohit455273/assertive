@@ -19,8 +19,10 @@ is_not_missing_nor_empty_character <- function(x)
 is_numeric_string <- function(x)
 {
   x <- coerce_to(x, "character")
-  x <- suppressWarnings(as.numeric(x))
-  is_not_na(x)
+  numx <- suppressWarnings(as.numeric(x))
+  ans <- is_not_na(numx)
+  names(ans) <- x   #need to take names from x, not numx
+  ans
 }
 
 #' Is the string a valid variable name?

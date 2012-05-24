@@ -15,7 +15,6 @@ test.is_existing.some_variables.returns_true_when_they_exist <- function()
   expected <- c(TRUE, FALSE)
   names(expected) <- x
   this_env <- sys.frame(sys.nframe())
-  print(is_existing(x, envir = this_env, inherits = FALSE))
   checkEquals(
     expected,
     is_existing(x, envir = this_env, inherits = FALSE)
