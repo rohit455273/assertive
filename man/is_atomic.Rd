@@ -63,7 +63,7 @@ vector_types <- c(
   atomic_types[1:6],
   recursive_types[1:2]
 )
-for(var in recursive_types) assert_is_vector(var)
+for(var in vector_types) assert_is_vector(var)
 }
 \seealso{
   \code{\link[base]{is.atomic}} and

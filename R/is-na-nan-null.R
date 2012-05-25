@@ -19,6 +19,7 @@ is_finite <- function(x)
   call_and_name(is.finite, x)
 }
 
+#' @rdname is_finite
 #' @export
 is_infinite <- function(x)
 {
@@ -38,7 +39,8 @@ is_infinite <- function(x)
 #'if the corresponding \code{is_*} function returns \code{FALSE}.
 #' @seealso \code{\link[base]{is.na}}
 #' @examples
-#' assert_is_not_na(1:10)
+#' assert_all_are_not_na(1:10)
+#' assert_any_are_not_na(c(NA, 1))
 #' @export
 is_na <- function(x)
 {
@@ -57,7 +59,8 @@ is_na <- function(x)
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{is.nan}}
 #' @examples
-#' assert_is_not_nan(1:10)
+#' assert_all_are_not_nan(1:10)
+#' assert_any_are_not_nan(c(NaN, 1))
 #' @export
 is_nan <- function(x)
 {
@@ -106,7 +109,7 @@ is_not_null <- function(x, .xname = get_name_in_parent(x))
 #' @examples
 #' assert_is_null(NULL)
 #' assert_is_null(c())
-#' assert_is_not_null(NA
+#' assert_is_not_null(NA)
 #' @export
 is_null <- function(x, .xname = get_name_in_parent(x))
 {

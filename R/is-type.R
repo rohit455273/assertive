@@ -4,16 +4,17 @@
 #' If not, call \code{is(x, class)}.
 #' @param x Input to check.
 #' @param class Target class that \code{x} maybe belong to.
+#' @param classes As for \code{class}.
 #' @param .xname Not intended to be used directly.
 #' @return \code{TRUE} if x belongs to the class and \code{FALSE} 
 #' otherwise.  \code{assert_is} returns nothing but throws an error if
 #' \code{x} does not have class \code{class}.
 #' @seealso \code{\link[methods]{is}}.
 #' @examples
-#' assert_is(1:10, "numeric")
+#' assert_is_all_of(1:10, c("integer", "numeric"))
 #' #These examples should fail:
 #' \dontrun{
-#' assert_is(1:10, "list")
+#' assert_is_any_of(1:10, c("list", "data.frame"))
 #' }
 #' @export
 is2 <- function(x, class, .xname = get_name_in_parent(x))
@@ -78,7 +79,7 @@ is_call <- function(x, .xname = get_name_in_parent(x))
 #' @param .xname Not intended to be used directly.
 #' @return \code{is_character} wraps \code{is.character}, providing more 
 #' information on failure. \code{is_a_string} returns \code{TRUE} if the 
-#' input is character and scalar. \code{is_empty_string} returns \code{TRUE}
+#' input is character and scalar. \code{is_an_empty_string} returns \code{TRUE}
 #' if the input is \code{""}.  \code{is_numeric_string} is vectorised, 
 #' returning \code{TRUE} when the inputs are not \code{NA} after conversion
 #' to character and then numeric. \code{is_missing_or_empty_string} is
@@ -90,7 +91,7 @@ is_call <- function(x, .xname = get_name_in_parent(x))
 #' @examples
 #' assert_is_character(letters)
 #' assert_is_a_string("foo bar baz")
-#' assert_is_empty_string("")
+#' assert_is_an_empty_string("")
 #' assert_all_are_numeric_strings(c("1", "2.3", "-4.5", "6e7", "8E-9"))
 #' assert_any_are_numeric_strings(c("1", "Not a number"))
 #' assert_all_strings_are_missing_or_empty(c("", NA))
@@ -623,7 +624,7 @@ is_ts <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
-#' @rdname ts
+#' @rdname is_ts
 #' @export
 is_tskernel <- function(x, .xname = get_name_in_parent(x))
 {

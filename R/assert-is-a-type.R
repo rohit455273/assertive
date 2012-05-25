@@ -5,6 +5,13 @@ assert_is_a_bool <- function(x)
   assert_engine(x, is_a_bool, .xname = get_name_in_parent(x))    
 }
 
+#' @rdname is_complex
+#' @export
+assert_is_a_complex <- function(x)
+{                                                          
+  assert_engine(x, is_a_complex, .xname = get_name_in_parent(x))   
+}
+
 #' @rdname is_numeric
 #' @export
 assert_is_a_number <- function(x)

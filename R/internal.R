@@ -49,7 +49,9 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
 #' @note The function, \code{fn}, should return an object with the 
 #' same length as the input \code{x}.
 #' @examples
+#' \dontrun{
 #' call_and_name(is.finite, c(1, Inf, Na))
+#' }
 #' @seealso \code{\link{cause}} and \code{\link{na}}.
 call_and_name <- function(fn, x, ...)
 {

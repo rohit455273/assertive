@@ -5,7 +5,7 @@
 #' @param x Input to check.
 #' @param rw Read-write status of connection.  Passed to \code{isOpen}.
 #' @param .xname Not intended to be used directly.
-#' @return \code{is_open_connection} wraps \code{isOpen}, provideing more
+#' @return \code{is_open_connection} wraps \code{isOpen}, providing more
 #' information on failure.  \code{assert_is_open_connection} returns nothing 
 #' but throws an error if \code{is_open_connection} returns \code{FALSE}.
 #' @seealso \code{\link[base]{isOpen}}.
@@ -21,7 +21,7 @@ is_open_connection <- function(x, rw = "", .xname = get_name_in_parent(x))
   TRUE
 }
 
-#' @is_open_connection
+#' @rdname is_open_connection
 #' @export
 is_incomplete_connection <- function(x, .xname = get_name_in_parent(x))
 {

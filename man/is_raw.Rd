@@ -1,6 +1,7 @@
 \name{assert_is_a_raw}
 \alias{assert_is_a_raw}
 \alias{assert_is_raw}
+\alias{assert_is_relistable}
 \alias{is_a_raw}
 \alias{is_raw}
 \title{Is the input raw?}
@@ -8,6 +9,8 @@
   assert_is_a_raw(x)
 
   assert_is_raw(x)
+
+  assert_is_relistable(x)
 
   is_a_raw(x, .xname = get_name_in_parent(x))
 
@@ -22,12 +25,12 @@
   \code{is_raw} wraps \code{is.raw}, providing more
   information on failure. \code{is_a_raw} returns
   \code{TRUE} if the input is raw and scalar.  The
-  \code{assert_*} functions return nothing but throw an
+  \code{assert_*} functions return nothing but throws an
   error if the corresponding \code{is_*} function returns
   \code{FALSE}.
 }
 \description{
-  Checks to see if the input is raw
+  Checks to see if the input is raw.
 }
 \examples{
 assert_is_raw(as.raw(1:10))

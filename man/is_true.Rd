@@ -30,17 +30,17 @@
   \code{FALSE}.
 }
 \description{
-  Checks to see if the input if \code{TRUE}.
+  Checks to see if the input is \code{TRUE}.
 }
 \examples{
 assert_is_true(TRUE)
 assert_is_false(FALSE)
 assert_is_true(c(truth = TRUE), allow_attributes = TRUE)
-assert_is_false(false("This has an attribute"), allow_attributes = TRUE)
+assert_is_false(assertive:::false("This has an attribute"), allow_attributes = TRUE)
 \dontrun{
 #These tests should fail:
 assert_is_true(c(truth = TRUE))
-assert_is_false(false("This has an attribute"))
+assert_is_false(assertive:::false("This has an attribute"))
 }
 }
 \seealso{

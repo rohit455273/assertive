@@ -20,8 +20,6 @@
   is_real(x)
 }
 \arguments{
-  \item{.xname}{Not intended to be used directly.}
-
   \item{x}{Input to check.}
 }
 \value{
@@ -34,11 +32,11 @@
   Checks to see if the input is real or imaginary.
 }
 \examples{
-assert_are_all_real(1:10)
-assert_are_all_real(1:10 + 0i)
-assert_any_all_real(c(1i, 0))
-assert_are_all_imaginary(1:10 * 1i)
-assert_any_all_imaginary(c(1i, 0))
+assert_all_are_real(1:10)
+assert_all_are_real(1:10 + 0i)
+assert_any_are_real(c(1i, 0))
+assert_all_are_imaginary(1:10 * 1i)
+assert_any_are_imaginary(c(1i, 0))
 }
 \seealso{
   \code{\link[base]{complex}}

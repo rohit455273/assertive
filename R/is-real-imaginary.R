@@ -16,11 +16,11 @@ is_imaginary <- function(x)
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{complex}}
 #' @examples
-#' assert_are_all_real(1:10)
-#' assert_are_all_real(1:10 + 0i)
-#' assert_any_all_real(c(1i, 0))
-#' assert_are_all_imaginary(1:10 * 1i)
-#' assert_any_all_imaginary(c(1i, 0))
+#' assert_all_are_real(1:10)
+#' assert_all_are_real(1:10 + 0i)
+#' assert_any_are_real(c(1i, 0))
+#' assert_all_are_imaginary(1:10 * 1i)
+#' assert_any_are_imaginary(c(1i, 0))
 #' @export
 is_real <- function(x)
 {

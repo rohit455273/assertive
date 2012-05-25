@@ -1,8 +1,8 @@
 Package: assertive
 Type: Package
 Title: Readable check functions to ensure code integrity.
-Version: 0.1-3
-Date: 2012-05-22
+Version: 0.1-4
+Date: 2012-05-25
 Author: Richard Cotton
 Author@R: person("Richard", "Cotton", email = "richierocks@gmail.com")
 Maintainer: Richard Cotton <richierocks@gmail.com>
@@ -13,11 +13,33 @@ License: WTFPL 2.0
 LazyLoad: yes
 LazyData: yes
 Collate:
-    'assert-has.R'
-    'assert-is.R'
-    'has.R'
-    'internal.R'
-    'is.R'
-    'zzz.R'
-    'utils.R'
     'assertive-package.R'
+    'internal.R'
+    'utils.R'
+    'zzz.R'
+    'assert-has.R'
+    'assert-is-a-type.R'
+    'assert-is-atomic-recursive-vector.R'
+    'assert-is-connection.R'
+    'assert-is-empty-scalar.R'
+    'assert-is-file.R'
+    'assert-is-in-range.R'
+    'assert-is-na-nan-null.R'
+    'assert-is-other.R'
+    'assert-is-real-imaginary.R'
+    'assert-is-string.R'
+    'assert-is-true-false.R'
+    'assert-is-type.R'
+    'has.R'
+    'is-a-type.R'
+    'is-atomic-recursive-vector.R'
+    'is-connection.R'
+    'is-empty-scalar.R'
+    'is-file.R'
+    'is-in-range.R'
+    'is-na-nan-null.R'
+    'is-other.R'
+    'is-real-imaginary.R'
+    'is-string.R'
+    'is-true-false.R'
+    'is-type.R'

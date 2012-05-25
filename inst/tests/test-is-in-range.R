@@ -1,84 +1,130 @@
-test.is_in_range.1_in_0_to_2.returns_true <- function()
+test.is_in_closed_range.0_to_4_in_1_to_3.returns_true_inside_bounds <- function()
 {
-  checkTrue(is_in_range(1, 0, 2))
-}
-
-test.is_in_range.0_in_0_to_2.returns_true <- function()
-{
-  checkTrue(is_in_range(0, 0, 2))
-}
-
-test.is_in_range.0_in_0_to_2_with_strict_lower_bound.returns_false <- function()
-{
-  checkTrue(!is_in_range(0, 0, 2, lower_is_strict = TRUE))
-}
-
-test.is_in_range.2_in_0_to_2_with_strict_upper_bound.returns_false <- function()
-{
-  checkTrue(!is_in_range(2, 0, 2, upper_is_strict = TRUE))
+  x <- 0:4
+  expected <- c(FALSE, TRUE, TRUE, TRUE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_in_closed_range(x, 1, 3)
+  )
 }
 
 
-test.is_negative.all_minus_1_to_minus_10.returns_true <- function()
+test.is_in_left_open_range.0_to_4_in_1_to_3.returns_true_inside_bounds <- function()
 {
-  checkTrue(all(is_negative(-1:-10)))
-}
-
-test.is_negative.all_1_to_10.returns_false <- function()
-{
-  checkTrue(!all(is_negative(1:10)))
-}
-
-
-test.is_non_negative.all_0_to_10.returns_true <- function()
-{
-  checkTrue(all(is_non_negative(0:10)))
-}
-
-test.is_non_negative.all_minus_1_to_minus_10.returns_false <- function()
-{
-  checkTrue(!all(is_non_negative(-1:-10)))
+  x <- 0:4
+  expected <- c(FALSE, FALSE, TRUE, TRUE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_in_left_open_range(x, 1, 3)
+  )
 }
 
 
-test.is_non_positive.all_0_to_minus_10.returns_true <- function()
+test.is_in_open_range.0_to_4_in_1_to_3.returns_true_inside_bounds <- function()
 {
-  checkTrue(all(is_non_positive(0:-10)))
-}
-
-test.is_non_positive.all_1_to_10.returns_false <- function()
-{
-  checkTrue(!all(is_non_positive(1:10)))
-}
-
-
-test.is_percentage.all_0_to_100.returns_true <- function()
-{
-  checkTrue(all(is_percentage(0:100)))
-}
-
-test.is_percentage.0_with_strict_lower_bound.returns_false <- function()
-{
-  checkTrue(!is_percentage(0, lower_is_strict = TRUE))
-}
-
-test.is_percentage.100_with_strict_upper_bound.returns_false <- function()
-{
-  checkTrue(!is_percentage(100, upper_is_strict = TRUE))
+  x <- 0:4
+  expected <- c(FALSE, FALSE, TRUE, FALSE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_in_open_range(x, 1, 3)
+  )
 }
 
 
-test.is_proportion.all_0_to_1.returns_true <- function()
+test.is_in_range.0_to_4_in_1_to_3.returns_true_inside_bounds <- function()
 {
-  checkTrue(all(is_proportion(seq.int(0, 1, 0.1))))
+  x <- 0:4
+  expected <- c(FALSE, TRUE, TRUE, TRUE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_in_range(x, 1, 3)
+  )
 }
 
-test.is_proportion.0_with_strict_lower_bound.returns_false <- function()
+
+test.is_in_right_open_range.0_to_4_in_1_to_3.returns_true_inside_bounds <- function()
 {
-  checkTrue(!is_proportion(0, lower_is_strict = TRUE))
+  x <- 0:4
+  expected <- c(FALSE, TRUE, TRUE, FALSE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_in_right_open_range(x, 1, 3)
+  )
 }
 
-test.is_proportion.1_with_strict_upper_bound.returns_false <- function()
+
+test.is_negative.minus_2_to_2.returns_true_when_negative <- function()
 {
-  checkTrue(!is_proportion(1, upper_is_strict = TRUE))
+  x <- -2:2
+  expected <- c(TRUE, TRUE, FALSE, FALSE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_negative(x)
+  )
+}
+
+
+test.is_non_negative.minus_2_to_2.returns_true_when_non_negative <- function()
+{
+  x <- -2:2
+  expected <- c(FALSE, FALSE, TRUE, TRUE, TRUE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_non_negative(x)
+  )
+}
+
+
+test.is_non_positive.minus_2_to_2.returns_true_when_non_positive <- function()
+{
+  x <- -2:2
+  expected <- c(TRUE, TRUE, TRUE, FALSE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_non_positive(x)
+  )
+}
+
+
+test.is_percentage.minus_minus_1_to_101.returns_true_when_percentage <- function()
+{
+  x <- -1:101
+  expected <- c(FALSE, rep.int(TRUE, 101), FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_percentage(x)
+  )
+}
+
+
+test.is_positive.minus_2_to_2.returns_true_when_positive <- function()
+{
+  x <- -2:2
+  expected <- c(FALSE, FALSE, FALSE, TRUE, TRUE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_positive(x)
+  )
+}
+
+
+test.is_proportion.minus_minus_point_01_to_1_point_01.returns_true_when_percentage <- function()
+{
+  x <- seq.int(-0.01, 1.01, 0.01)
+  expected <- c(FALSE, rep.int(TRUE, 101), FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_proportion(x)
+  )
 }

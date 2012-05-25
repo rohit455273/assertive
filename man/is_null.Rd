@@ -28,7 +28,7 @@
 \examples{
 assert_is_null(NULL)
 assert_is_null(c())
-assert_is_not_null(NA
+assert_is_not_null(NA)
 }
 \seealso{
   \code{\link[base]{is.null}}.

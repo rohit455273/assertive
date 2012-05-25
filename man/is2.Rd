@@ -1,9 +1,14 @@
-\name{assert_is}
-\alias{assert_is}
+\name{assert_is_all_of}
+\alias{assert_is_all_of}
+\alias{assert_is_any_of}
 \alias{is2}
 \title{Alternative version of is.}
 \usage{
-  assert_is(x, class, .xname = get_name_in_parent(x))
+  assert_is_all_of(x, classes,
+    .xname = get_name_in_parent(x))
+
+  assert_is_any_of(x, classes,
+    .xname = get_name_in_parent(x))
 
   is2(x, class, .xname = get_name_in_parent(x))
 }
@@ -24,10 +29,10 @@
   \code{is.class(x)}. If not, call \code{is(x, class)}.
 }
 \examples{
-assert_is(1:10, "numeric")
+assert_is_all_of(1:10, c("integer", "numeric"))
 #These examples should fail:
 \dontrun{
-assert_is(1:10, "list")
+assert_is_any_of(1:10, c("list", "data.frame"))
 }
 }
 \seealso{

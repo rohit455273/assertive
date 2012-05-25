@@ -1,5 +1,6 @@
 \name{assert_has_colnames}
 \alias{assert_has_colnames}
+\alias{assert_has_dimnames}
 \alias{assert_has_names}
 \alias{assert_has_rownames}
 \alias{has_colnames}
@@ -10,7 +11,7 @@
 \usage{
   assert_has_colnames(x)
 
-  assert_has_colnames(x)
+  assert_has_dimnames(x)
 
   assert_has_names(x)
 

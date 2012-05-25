@@ -1,9 +1,12 @@
-\name{assert_is_complex}
+\name{assert_is_a_complex}
+\alias{assert_is_a_complex}
 \alias{assert_is_complex}
 \alias{is_a_complex}
 \alias{is_complex}
 \title{Is the input complex?}
 \usage{
+  assert_is_a_complex(x)
+
   assert_is_complex(x)
 
   is_a_complex(x, .xname = get_name_in_parent(x))

@@ -36,7 +36,7 @@
 #'   atomic_types[1:6], 
 #'   recursive_types[1:2]
 #' )
-#' for(var in recursive_types) assert_is_vector(var)
+#' for(var in vector_types) assert_is_vector(var)
 #' @export
 is_atomic <- function(x, .xname = get_name_in_parent(x))
 {

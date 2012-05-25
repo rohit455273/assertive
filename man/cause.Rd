@@ -9,6 +9,9 @@
 }
 \arguments{
   \item{x}{Any variable.}
+
+  \item{value}{The value to set the \code{"cause"}
+  attribute to.}
 }
 \value{
   The get method returns the \code{"cause"} attribute.

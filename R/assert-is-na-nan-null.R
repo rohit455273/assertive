@@ -46,7 +46,7 @@ assert_any_are_nan <- function(x)
   assert_engine(x, is_nan, msg, what = "any")
 }
 
-#' @rdname is_not_na
+#' @rdname is_na
 #' @export
 assert_all_are_not_na <- function(x)
 {                                                      
@@ -54,7 +54,7 @@ assert_all_are_not_na <- function(x)
   assert_engine(x, is_not_na, msg)
 }
 
-#' @rdname is_not_na
+#' @rdname is_na
 #' @export
 assert_any_are_not_na <- function(x)
 {                                                      
@@ -82,7 +82,7 @@ assert_any_are_not_nan <- function(x)
 #' @export
 assert_is_not_null <- function(x)
 {                                                      
-  assert_engine(x, is_null, .xname = get_name_in_parent(x))   
+  assert_engine(x, is_not_null, .xname = get_name_in_parent(x))   
 }
 
 #' @rdname is_null

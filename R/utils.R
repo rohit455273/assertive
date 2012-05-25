@@ -31,7 +31,7 @@ cause <- function(x)
 #' @examples
 #' x <- structure(c(foo = 1, bar = 2), some_attr = 3)
 #' x2 <- strip_attributes(x)
-#' assert_is_false(has_names(x2))
+#' assert_is_false(has_names(x2), TRUE)
 #' assert_is_null(attr(x2, "some_attr"))
 #' @export
 strip_attributes <- function(x)

@@ -33,7 +33,8 @@
   Checks to see if the input is a number that is(n't) NaN.
 }
 \examples{
-assert_is_not_nan(1:10)
+assert_all_are_not_nan(1:10)
+assert_any_are_not_nan(c(NaN, 1))
 }
 \seealso{
   \code{\link[base]{is.nan}}
