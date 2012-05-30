@@ -5,7 +5,7 @@
 \alias{assert_any_are_executable_files}
 \alias{assert_any_are_readable_files}
 \alias{assert_any_are_writable_files}
-\alias{is_executable_file}
+\alias{is_ex_file}
 \alias{is_readable_file}
 \alias{is_writable_file}
 \title{Is the file accessible?}
@@ -22,7 +22,7 @@
 
   assert_any_are_writable_files(x)
 
-  is_executable_file(x)
+  is_ex_file(x)
 
   is_readable_file(x)
 
@@ -32,11 +32,10 @@
   \item{x}{Input to check.}
 }
 \value{
-  \code{is_executable_file} wraps \code{file.access},
-  showing the names of the inputs in the answer.
-  \code{assert_is_executable_file} returns nothing but
-  throws an error if \code{is_executable_file} returns
-  \code{FALSE}.
+  \code{is_ex_file} wraps \code{file.access}, showing the
+  names of the inputs in the answer.
+  \code{assert_is_ex_file} returns nothing but throws an
+  error if \code{is_ex_file} returns \code{FALSE}.
 }
 \description{
   Checks to see if the input files can be

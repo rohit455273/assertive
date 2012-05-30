@@ -2,14 +2,13 @@ Package: assertive
 Type: Package
 Title: Readable check functions to ensure code integrity.
 Version: 0.1-4
-Date: 2012-05-25
-Author: Richard Cotton
-Author@R: person("Richard", "Cotton", email = "richierocks@gmail.com")
-Maintainer: Richard Cotton <richierocks@gmail.com>
+Date: 2012-05-29
+Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
+    "richierocks@gmail.com")
 Description: assertive contains lots of is_* functions to check the
     state of your variables, and assert_* functions to throw errors
     if they aren't in the right form.
-License: WTFPL 2.0
+License: Unlimited
 LazyLoad: yes
 LazyData: yes
 Collate:

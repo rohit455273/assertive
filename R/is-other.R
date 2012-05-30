@@ -196,6 +196,12 @@ is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get
 #' @return \code{is_unsorted} reimplements \code{is.unsorted}, providing
 #' more information on failure.  \code{assert_is_unsorted} returns nothing 
 #' but throws an error if \code{is_unsorted} returns \code{FALSE}.
+#' @note The builtin function \code{is.unsorted} usually returns \code{NA}
+#' when the input is recursive and has length 2, though for some
+#' classes (particularly data.frames) it returns a \code{TRUE} or
+#' \code{FALSE} value.  The logic behind those is difficult to
+#' interpret, and gives odd results, so \code{is_unsorted} always
+#' returns \code{NA} in this case.
 #' @seealso \code{\link[base]{is.unsorted}}.
 #' @examples
 #' assert_is_unsorted(c(1, 3, 2))
@@ -223,7 +229,7 @@ is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE, .xname = get_name_in
     }
     x <- x[!nas]
   }
-  if(!.Internal(is.unsorted(x, strictly)))
+  if(!is.unsorted(x, strictly = strictly))
   {
     return(false("%s is sorted.", .xname))
   }

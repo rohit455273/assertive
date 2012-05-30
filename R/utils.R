@@ -3,7 +3,8 @@
 #' Gets or sets the \code{"cause"} (of failure) attribute of a variable.
 #'
 #' @param x Any variable.
-#' @param value The value to set the \code{"cause"} attribute to.
+#' @param value Passed to \code{sprintf} and stored in the 
+#' \code{"cause"} attribute.
 #' @return The get method returns the \code{"cause"} attribute.
 #' @examples
 #' yn <- is_a_bool(123)

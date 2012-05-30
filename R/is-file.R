@@ -25,9 +25,9 @@ is_existing_file <- function(x)
 #' Checks to see if the input files can be executed/read/written to.
 #'
 #' @param x Input to check.
-#' @return \code{is_executable_file} wraps \code{file.access}, showing
-#' the names of the inputs in the answer.   \code{assert_is_executable_file} 
-#' returns nothing but throws an error if \code{is_executable_file} returns
+#' @return \code{is_ex_file} wraps \code{file.access}, showing
+#' the names of the inputs in the answer.   \code{assert_is_ex_file} 
+#' returns nothing but throws an error if \code{is_ex_file} returns
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{file.access}}.
 #' @examples
@@ -35,13 +35,13 @@ is_existing_file <- function(x)
 #' assert_all_are_readable_files(dir())
 #' }
 #' @export
-is_executable_file <- function(x)
+is_ex_file <- function(x)
 {
   x <- coerce_to(x, "character")
   call_and_name(file.access, x, mode = 1) == 0L
 }
 
-#' @rdname is_executable_file
+#' @rdname is_ex_file
 #' @export
 is_readable_file <- function(x)
 {
@@ -49,7 +49,7 @@ is_readable_file <- function(x)
   call_and_name(file.access, x, mode = 4) == 0L
 }
 
-#' @rdname is_executable_file
+#' @rdname is_ex_file
 #' @export
 is_writable_file <- function(x)
 {

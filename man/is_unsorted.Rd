@@ -29,6 +29,15 @@
   Checks to see if the input is unsorted (without the cost
   of sorting it).
 }
+\note{
+  The builtin function \code{is.unsorted} usually returns
+  \code{NA} when the input is recursive and has length 2,
+  though for some classes (particularly data.frames) it
+  returns a \code{TRUE} or \code{FALSE} value.  The logic
+  behind those is difficult to interpret, and gives odd
+  results, so \code{is_unsorted} always returns \code{NA}
+  in this case.
+}
 \examples{
 assert_is_unsorted(c(1, 3, 2))
 assert_is_unsorted(c(1, 1, 2), strictly = TRUE)

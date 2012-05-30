@@ -20,7 +20,7 @@ assert_any_are_existing_files <- function(x)
   assert_engine(x, is_existing_file, msg = msg, what = "any")
 }
 
-#' @rdname is_executable_file
+#' @rdname is_ex_file
 #' @export
 assert_all_are_executable_files <- function(x)
 {
@@ -28,10 +28,10 @@ assert_all_are_executable_files <- function(x)
     "The files %s are not all executable.", 
     get_name_in_parent(x)
     )
-  assert_engine(x, is_executable_file, msg = msg)
+  assert_engine(x, is_ex_file, msg = msg)
 }
 
-#' @rdname is_executable_file
+#' @rdname is_ex_file
 #' @export
 assert_any_are_executable_files <- function(x)
 {
@@ -39,10 +39,10 @@ assert_any_are_executable_files <- function(x)
     "The files %s all are not executable.", 
     get_name_in_parent(x)
     )
-  assert_engine(x, is_executable_file, msg = msg, what = "any")
+  assert_engine(x, is_ex_file, msg = msg, what = "any")
 }
 
-#' @rdname is_executable_file
+#' @rdname is_ex_file
 #' @export
 assert_all_are_readable_files <- function(x)
 {
@@ -53,7 +53,7 @@ assert_all_are_readable_files <- function(x)
   assert_engine(x, is_readable_file, msg = msg)
 }
 
-#' @rdname is_executable_file
+#' @rdname is_ex_file
 #' @export
 assert_any_are_readable_files <- function(x)
 {
@@ -64,7 +64,7 @@ assert_any_are_readable_files <- function(x)
   assert_engine(x, is_readable_file, msg = msg, what = "any")
 }
 
-#' @rdname is_executable_file
+#' @rdname is_ex_file
 #' @export
 assert_all_are_writable_files <- function(x)
 {
@@ -75,7 +75,7 @@ assert_all_are_writable_files <- function(x)
   assert_engine(x, is_writable_file, msg = msg)
 }
 
-#' @rdname is_executable_file
+#' @rdname is_ex_file
 #' @export
 assert_any_are_writable_files <- function(x)
 {

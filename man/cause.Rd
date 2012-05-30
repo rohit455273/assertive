@@ -5,13 +5,13 @@
 \usage{
   cause(x)
 
-  cause(x, value) <- value
+  cause(x) <- value
 }
 \arguments{
   \item{x}{Any variable.}
 
-  \item{value}{The value to set the \code{"cause"}
-  attribute to.}
+  \item{value}{Passed to \code{sprintf} and stored in the
+  \code{"cause"} attribute.}
 }
 \value{
   The get method returns the \code{"cause"} attribute.

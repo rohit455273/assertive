@@ -17,6 +17,8 @@
 
   \item{class}{Target class that \code{x} maybe belong to.}
 
+  \item{classes}{As for \code{class}.}
+
   \item{.xname}{Not intended to be used directly.}
 }
 \value{
