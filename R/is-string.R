@@ -25,6 +25,33 @@ is_numeric_string <- function(x)
   ans
 }
 
+#' Is the input valid R code?
+#'
+#' Check to see if the input is a valid (parseable) R code.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{TRUE} if the input string is valid R code.
+#' @examples
+#' is_valid_r_code("x <- 1 + sqrt(pi)")
+#' is_valid_r_code("x <- ")
+#' is_valid_r_code("<- 1 + sqrt(pi)")
+#' @seealso \code{\link[base]{parse}}
+is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
+{
+  x <- use_first(x)
+  res <- try(parse(text = x), silent = TRUE)
+  if(inherits(res, "try-error"))
+  {
+    return(false(
+      "%s is not valid R code. In %s.", 
+      .xname, 
+      attr(res, "condition")$message
+    ))
+  }
+  TRUE
+}
+
 #' Is the string a valid variable name?
 #'
 #' Checks strings to see if they are valid variable names.

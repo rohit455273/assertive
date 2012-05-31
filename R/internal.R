@@ -37,6 +37,21 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
   }
 }
 
+#' Wrapper to vapply that returns booleans.
+#' 
+#' Wrapper to \code{\link{vapply}} for functions that return a boolean (logical scalar) value.
+#' 
+#' @param x A vector (atomic or list).
+#' @param predicate A predicate (function that returns a bool) to apply elementwise to \code{x}.
+#' @param USE.NAMES Passed to \code{vapply}.
+#' @param ... Passed to \code{vapply}.
+#' @return A logical vector.
+#' @seealso \code{\link{vapply}}.
+bapply <- function(x, predicate, ..., USE.NAMES = TRUE)
+{
+  vapply(x, predicate, logical(1L), ..., USE.NAMES = TRUE)
+}
+
 #' Call a function, and give the result names.
 #'
 #' Calls a function, and names the result with the first argument.
@@ -65,6 +80,17 @@ call_and_name <- function(fn, x, ...)
   y
 }
 
+#' Convert a character vector to a list of numeric vectors.
+#'
+#' Split strings by character, then convert to numeric.
+#' @param x Input to convert.
+#' @return A list of numeric vectors.
+#' @seealso \code{\link[base{strsplit}} and \code{\link[base]{as.numeric}}.
+character_to_list_of_numeric_vectors <- function(x)
+{
+  lapply(strsplit(x, ""), as.numeric)
+}
+
 #' FALSE, with a cause of failure.
 #'
 #' Always returns the value \code{FALSE}, with a cause attribute.
@@ -81,6 +107,19 @@ false <- function(...)
   x
 }
 
+#' Does the input match the regular expression?
+#' 
+#' Checks that the input matches the regular expression.
+#'
+#' @param x Inout to check.
+#' @param rx A regular expression.
+#' @param ... Passed to \code{\link{grepl}}.
+#' @return A logical vector that is \code{TRUE} when the input matches the regular expression.
+#' @seealso \code{\link{regex}} and \code{\link{regexpr}}.
+matches_regex <- function(x, rx, ...)
+{
+  call_and_name(function(x) grepl(rx, x, ...), x)
+}
 
 #' NA, with a cause of failure.
 #'
@@ -95,5 +134,23 @@ na <- function(...)
   msg <- if(length(list(...)) > 0L) sprintf(...) else ""
   x <- NA
   cause(x) <- msg
+  x
+}
+
+#' Removes non-numeric characters from a string.
+#' 
+#' Removes non-numeric characters from a string, leving only digits.
+#' @param x Input to strip.
+#' @param allow_X If \code{TRUE}, the letter "X" is also allowed.  (Useful for some check digits.)
+#' @return A character vector of the same length as \code{x}, consisting of strings of digits.
+strip_non_numeric <- function(x, allow_X = FALSE)
+{
+  x <- coerce_to(x, "character")
+  invalid_chars <- if(allow_X) "[^[:digit:]X]+" else "[^[:digit:]]+"
+  if(any(grepl(invalid_chars, x)))
+  {
+    warning("Removing non-digit characters from input.")
+    x <- gsub(invalid_chars, "", x)
+  }
   x
 }
