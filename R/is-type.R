@@ -318,7 +318,7 @@ is_leaf <- function(x, .xname = get_name_in_parent(x))
   {
     return(false("%s has no 'leaf' attribute.", .xname))
   }
-  if(!(ok <- is_true(
+  if(!(ok <- is_identical_to_true(
     leaf, 
     TRUE,
     paste("The leaf attribute of", .xname)

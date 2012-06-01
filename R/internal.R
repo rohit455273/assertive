@@ -71,7 +71,7 @@ bapply <- function(x, predicate, ..., USE.NAMES = TRUE)
 call_and_name <- function(fn, x, ...)
 {
   y <- fn(x, ...)
-  if(!is_true(length(y) == length(x)))
+  if(!is_identical_to_true(length(y) == length(x)))
   {
     warning("Vector of names is different length to results.  Trying to resize.")
     length(x) <- length(y)

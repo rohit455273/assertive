@@ -178,7 +178,7 @@ is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get
   {
     all.equal(x, t(x), tolerance = tol, ...)
   }
-  if(!is_true(symmetry_test))
+  if(!is_identical_to_true(symmetry_test))
   {
     return(false("%s is not a symmetric matrix.", .xname))
   }

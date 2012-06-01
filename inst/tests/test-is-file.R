@@ -11,14 +11,14 @@ test.is_existing_file.some_paths.returns_true_when_file_exists <- function()
   )  
 }
 
-test.is_executable_file.r_exes.returns_true <- function()
+test.is_ex_file.r_exes.returns_true <- function()
 {  
   x <- dir(R.home("bin"), "\\.exe$", full.names = TRUE)
   expected <- rep.int(TRUE, length(x))
   names(expected) <- x
   checkEquals(
     expected,
-    is_executable_file(x)
+    is_ex_file(x)
   )  
 }
 
@@ -42,5 +42,5 @@ test.is_writable_file.tempfile.returns_true <- function()
     expected,
     is_writable_file(x)
   )  
-  unlink(tf)
+  unlink(x)
 }
