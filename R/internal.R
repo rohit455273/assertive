@@ -137,17 +137,28 @@ na <- function(...)
   x
 }
 
-silent_as_numeric <- function(x)
+#' @rdname strip_non_numeric
+strip_non_alphanumeric <- function(x)
 {
-  suppresswarnings(as.numeric(x))
+  x <- coerce_to(x, "character")
+  invalid_chars <- "[^[:alnum:]]+" 
+  if(any(grepl(invalid_chars, x)))
+  {
+    warning("Removing non-alphanumeric characters from input.")
+    x <- gsub(invalid_chars, "", x)
+  }
+  x
 }
 
 #' Removes non-numeric characters from a string.
 #' 
-#' Removes non-numeric characters from a string, leving only digits.
+#' Removes non-numeric characters from a string, leaving only digits.
 #' @param x Input to strip.
-#' @param allow_X If \code{TRUE}, the letter "X" is also allowed.  (Useful for some check digits.)
-#' @return A character vector of the same length as \code{x}, consisting of strings of digits.
+#' @param allow_X If \code{TRUE}, the letter "X" is also allowed.  (Useful for some 
+#' check digits.)
+#' @return A character vector of the same length as \code{x}, consisting of strings 
+#' of digits in the case of \code{strip_non_numeric}, and strings of digits and numbers
+#' in the case of \code{strip_non_alphanumeric}.
 strip_non_numeric <- function(x, allow_X = FALSE)
 {
   x <- coerce_to(x, "character")
