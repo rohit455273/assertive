@@ -137,6 +137,11 @@ na <- function(...)
   x
 }
 
+silent_as_numeric <- function(x)
+{
+  suppresswarnings(as.numeric(x))
+}
+
 #' Removes non-numeric characters from a string.
 #' 
 #' Removes non-numeric characters from a string, leving only digits.

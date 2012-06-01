@@ -23,24 +23,6 @@ cause <- function(x)
   x
 }
 
-#' Strip all attributes from a variable.
-#'
-#' Strips all the attributes from a variable.
-#'
-#' @param x Input to strip.
-#' @return \code{x}, without attributes.
-#' @examples
-#' x <- structure(c(foo = 1, bar = 2), some_attr = 3)
-#' x2 <- strip_attributes(x)
-#' assert_is_false(has_names(x2), TRUE)
-#' assert_is_null(attr(x2, "some_attr"))
-#' @export
-strip_attributes <- function(x)
-{
-  attributes(x) <- NULL
-  x
-}
-
 #' Coerce variable to a different class.
 #'
 #' Coerce the input to a different class, with a warning.
@@ -79,6 +61,24 @@ get_name_in_parent <- function(x)
     substitute, 
     list(substitute(x), parent.frame())
   ))
+}
+
+#' Strip all attributes from a variable.
+#'
+#' Strips all the attributes from a variable.
+#'
+#' @param x Input to strip.
+#' @return \code{x}, without attributes.
+#' @examples
+#' x <- structure(c(foo = 1, bar = 2), some_attr = 3)
+#' x2 <- strip_attributes(x)
+#' assert_is_identical_to_false(has_names(x2), TRUE)
+#' assert_is_null(attr(x2, "some_attr"))
+#' @export
+strip_attributes <- function(x)
+{
+  attributes(x) <- NULL
+  x
 }
 
 #' Only use the first element of a vector.
