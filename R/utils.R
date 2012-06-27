@@ -106,6 +106,66 @@ strip_attributes <- function(x)
   attributes(x) <- NULL
   x
 }
+ #' Get or set the system locale
+#'
+#' Wrappers to \code{Sys.getlocale} and \code{Sys.setlocale} for getting and
+#' setting the system locale.
+#'
+#' @param simplify If \code{TRUE}, the locale settings are returned as a vector,
+#' otherwise, a list.
+#' @param ... Name-value pairs of locale categories to set.
+#' @param l A list, as an alternative method of passing local categories to set.
+#' @return A named list or vector giving the system locale names.
+#' @examples
+#' (current_locale <- sys_get_locale())
+#' sys_set_locale(LC_MONETARY = if(is_windows()) "English" else "en")
+#' sys_get_locale()
+#' sys_set_locale(l = current_locale)  #restore everything
+#' @seealso \code{\link[base]{Sys.getlocale}}.
+#' @export
+sys_get_locale <- function(simplify = FALSE)
+{
+  locale <- Sys.getlocale()
+  if(locale == "C")
+  {
+    categories <- locale_categories(FALSE)
+    values <- lapply(categories, function(x) "C")
+  } else
+  {
+    locale <- strsplit(locale, ";")[[1]]
+    locale <- strsplit(locale, "=")
+    categories <- vapply(
+      locale,
+      function(x) x[1],
+      character(1)
+    )
+    values <- lapply(
+      locale,
+      function(x) x[2]
+    )
+  }
+
+  names(values) <- categories
+  if(simplify) unlist(values) else values
+}
+
+#' @rdname sys_get_locale
+#' @export
+sys_set_locale <- function(..., l = list())
+{
+  values <- merge_dots_with_list(..., l = l)
+  categories <- names(values)
+  categories <- match.arg(
+    categories,
+    locale_categories(),
+    several.ok = TRUE
+  )
+
+  for(i in seq_along(values))
+  {
+    Sys.setlocale(categories[i], values[[i]])
+  }
+}
 
 #' Only use the first element of a vector.
 #'
