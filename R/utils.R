@@ -3,8 +3,8 @@
 #' Gets or sets the \code{"cause"} (of failure) attribute of a variable.
 #'
 #' @param x Any variable.
-#' @param value Passed to \code{sprintf} and stored in the 
-#' \code{"cause"} attribute.
+#' @param value Passed to \code{sprintf} and stored in the \code{"cause"}
+#' attribute.
 #' @return The get method returns the \code{"cause"} attribute.
 #' @examples
 #' yn <- is_a_bool(123)
@@ -61,6 +61,32 @@ get_name_in_parent <- function(x)
     substitute, 
     list(substitute(x), parent.frame())
   ))
+}
+
+#' Merge ellipsis args with a list.
+#'
+#' Merges variable length ellipsis arguments to a function with a list argument.
+#'
+#' @param ... Some inputs.
+#' @param l A list.
+#' @note If any arguments are present in both the \code{...} and \code{l} arguments,
+#' the \code{...} version takes preference, and a warning is thrown.
+#' @return A list containing the merged inputs.
+#' @examples
+#' merge_dots_with_list(foo = 1, bar = 2, baz = 3, l = list(foo = 4, baz = 5, quux = 6))
+#' @export
+merge_dots_with_list <- function(..., l = list())
+{
+  dots <- list(...)
+  l <- coerce_to(l, "list")
+  all_names <- c(names(dots), names(l))
+  all_values <- c(dots, l)
+  if(has_duplicates(all_names))
+  {
+    warning("Duplicated arguments: ", toString(all_names[duplicated(all_names)]))
+    all_values <- all_values[!duplicated(all_names)]
+  }
+  all_values
 }
 
 #' Strip all attributes from a variable.
