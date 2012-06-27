@@ -195,36 +195,42 @@ na <- function(...)
   x
 }
 
-#' @rdname strip_non_numeric
-strip_non_alphanumeric <- function(x)
+
+#' Removes invalid characters from a string.
+#'
+#' Removes invalid characters from a string, leaving only digits.
+#' @param x Input to strip.
+#' @param invalid_chars A regular expression detailing characters to remove.
+#' @param char_desc A string describing the characters to remove.
+#' @param allow_x If \code{TRUE}, the letter "X" is allowed - useful for check digits.
+#' @param allow_plus If \code{TRUE}, the symbol "+" is allowed - useful for phone numbers.
+#' @return A character vector of the same length as \code{x}, consisting of strings without
+#' the characters detailed in the \code{invalid_chars}.
+#' @examples
+#' strip_invalid_chars("  We're floating\tin    space\n\n\n", "[[:space:]]", "whitespace")
+#' strip_non_numeric(" +44 800-123-456 ", allow_plus = TRUE)
+#' #Inputs such as factors as coerced to character.
+#' strip_non_alphanumeric(factor(c(" A1\t1AA.", "*(B2^2BB)%")))
+strip_invalid_chars <- function(x, invalid_chars, char_desc = "invalid")
 {
   x <- coerce_to(x, "character")
-  invalid_chars <- "[^[:alnum:]]+" 
   if(any(grepl(invalid_chars, x)))
   {
-    warning("Removing non-alphanumeric characters from input.")
+    warning("Removing ", char_desc, " characters from input.")
     x <- gsub(invalid_chars, "", x)
   }
   x
 }
 
-#' Removes non-numeric characters from a string.
-#' 
-#' Removes non-numeric characters from a string, leaving only digits.
-#' @param x Input to strip.
-#' @param allow_X If \code{TRUE}, the letter "X" is also allowed.  (Useful for some 
-#' check digits.)
-#' @return A character vector of the same length as \code{x}, consisting of strings 
-#' of digits in the case of \code{strip_non_numeric}, and strings of digits and numbers
-#' in the case of \code{strip_non_alphanumeric}.
-strip_non_numeric <- function(x, allow_X = FALSE)
+#' @rdname strip_invalid_chars
+strip_non_alphanumeric <- function(x)
 {
-  x <- coerce_to(x, "character")
-  invalid_chars <- if(allow_X) "[^[:digit:]X]+" else "[^[:digit:]]+"
-  if(any(grepl(invalid_chars, x)))
-  {
-    warning("Removing non-digit characters from input.")
-    x <- gsub(invalid_chars, "", x)
-  }
-  x
+  strip_invalid_chars(x, "[^[:alnum:]]+", "non-alphanumeric")
+}
+
+#' @rdname strip_invalid_chars
+strip_non_numeric <- function(x, allow_x = FALSE, allow_plus = FALSE)
+{
+  invalid_chars <-paste0("[^[:digit:]", if(allow_x) "X", if(allow_plus) "\\+", "]+", collapse = "")
+  strip_invalid_chars(x, invalid_chars, "non-numeric")
 }
