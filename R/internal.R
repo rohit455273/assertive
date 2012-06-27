@@ -85,7 +85,12 @@ call_and_name <- function(fn, x, ...)
 #' Split strings by character, then convert to numeric.
 #' @param x Input to convert.
 #' @return A list of numeric vectors.
-#' @seealso \code{\link[base{strsplit}} and \code{\link[base]{as.numeric}}.
+#' @examples
+#' \dontrun{
+#' character_to_list_of_numeric_vectors(c("123", "4567a"))
+#' }
+#' @seealso \code{\link[base]{strsplit}} and \code{\link[base]{as.numeric}}.
+
 character_to_list_of_numeric_vectors <- function(x)
 {
   lapply(strsplit(x, ""), as.numeric)
