@@ -46,7 +46,7 @@ is_identical_to_true <- function(x, allow_attributes = FALSE, .xname = get_name_
 #' are \code{TRUE} and \code{FALSE} respectively.
 #' Note that in version 0.1-4 and prior, \code{is_identical_to_true/false} was named 
 #' \code{is_true/false} and the vectorised versions were not present.
-#' @return The \coee{is*} functions return \code{TRUE} if the input is \code{TRUE}/
+#' @return The \code{is*} functions return \code{TRUE} if the input is \code{TRUE}/
 #' \code{FALSE}. The \code{assert_*} functions return nothing but throw an error if the 
 #' corresponding \code{is_*} function returns \code{FALSE}.
 #' @seealso \code{\link[base]{isTRUE}}.
