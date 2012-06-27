@@ -137,6 +137,23 @@ false <- function(...)
   x
 }
 
+#' Allowed locale categories.
+#'
+#' The categories of locale that can be gotten/set.
+#'
+#' @param include_all If \code{TRUE}, the value \code{LC_ALL} is included.
+#' @return A character vector of locale categories.
+#' @seealso \code{\link{sys_get_locale}}.
+locale_categories <- function(include_all = TRUE)
+{
+  allowed_categories <- c(
+    if(include_all) "ALL",
+    "COLLATE", "CTYPE", "MONETARY", "NUMERIC", "TIME",
+    if(is_unix()) c("MESSAGES", "PAPER", "MEASUREMENT")
+  )
+  paste0("LC_", allowed_categories)
+}
+
 #' Does the input match the regular expression?
 #' 
 #' Checks that the input matches the regular expression.
