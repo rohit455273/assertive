@@ -168,6 +168,17 @@ matches_regex <- function(x, rx, ...)
   call_and_name(function(x) grepl(rx, x, ...), x)
 }
 
+#' The most common value in a vector.
+#'
+#' The modal value of a vector.
+#' @param x vector to find the modal value of.
+#' @note Probably very inefficient; not suitable for general use.
+#' @return The modal value of \code{x}.
+modal_value <- function(x)
+{
+  names(sort(table(x), descending = TRUE))[1]
+}
+
 #' NA, with a cause of failure.
 #'
 #' Always returns the value (logical) \code{NA}, with a cause attribute.
