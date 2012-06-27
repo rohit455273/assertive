@@ -96,6 +96,31 @@ character_to_list_of_numeric_vectors <- function(x)
   lapply(strsplit(x, ""), as.numeric)
 }
 
+#' Create a regex from components.
+#'
+#' Creates a regex from regex components.
+#' @param ... Character vectors of regex components.
+#' @param l A list of character vectors for alternate specification.
+#' @param sep Regex for separating components of complete regex.
+#' Defaults to "an optional space or hyphen".
+#' @return A string containing a regex.
+#' Each element in the vectors are pasted together, separated by the
+#' \code{sep} value.  Those character vectors are then preceded by "^"
+#' (regex for 'start of string'() and followed by "$" (regex for end
+#' of string).  Finally, the regexes are collapsed with "|" (regex for
+#' 'or').
+#' @examples
+#' \dontrun{
+#' cas_number_components <- c("[[:digit:]]{1,7}", "[[:digit:]]{2}", "[[:digit:]]")
+#' cas_number_rx <- create_regex(rx_components, sep = "-")
+#' }
+create_regex <- function(..., l = list(), sep = "[- ]?")
+{
+  x <- merge_dots_with_list(..., l = l)
+  rx <- vapply(x, function(x) paste0(x, collapse = sep), character(1))
+  paste0("^", rx, "$", collapse = "|")
+}
+
 #' FALSE, with a cause of failure.
 #'
 #' Always returns the value \code{FALSE}, with a cause attribute.
