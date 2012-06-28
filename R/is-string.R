@@ -341,29 +341,53 @@ is_uk_car_licence <- function(x, .xname)
   TRUE
 }
 
+#' Is the string a valid UK national insurance number?
+#'
+#' Checks that the input contains UK national insurance numbers.
+#'
+#' @param x Input to check.
+#' @param .xname Not intended to be called directly.
 is_uk_national_insurance_number <- function(x, .xname)
 {
   #http://www.regexlib.com/REDetails.aspx?regexp_id=527
-  orig_x <- x
-  x <- strip_non_alphanumeric(x)
-  rx <- "^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[[:digit:]]{6}[A-DFM]?$"
-  ok <- matches_regex(x, rx, ignore.case = TRUE)
-  names(ok) <- orig_x
-  ok
+  rx <- create_regex(
+    c(
+      "[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}", 
+      rep.int("[[:digit:]]{2}", 3), 
+      "[A-DFM]?"
+    ),
+    sep = " ?"
+  )
+  matches_regex(x, rx, ignore.case = TRUE)
 }
 
+#' Is the string a valid UK postcode?
+#' 
+#' Checks that the input contains UK postcodes.
+#' 
+#' @param x Input to check.
+#' @param .xname Not intended to be called directly.
+#' @return \code{is_uk_postcode} returns \code{TRUE} if the input string contains
+#' a valid UK postcode. The {assert_*} function retrns nothing but throw an error 
+#' when the \code{is_*} function returns \code{FALSE}.
+#' @note The checking method isn't guaranteed to work every time.  In particular,
+#' 
+#' @examples
+#' postcodes <- c("SW1A 1AA", "SK11 9DW", "M34FP", "Le45ns", "TS25 2BZ", "gir 0aa")
+#' assert_all_are_uk_postcodes(postcodes)
+#' @references Regexes taken from 
+#' \url{https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom#Validation}  
 is_uk_postcode <- function(x, .xname)
 {
-  #https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom#Validation
-  #Alternative, not used, at 
+  #Alternative regex, not used, at 
   #http://www.regexlib.com/REDetails.aspx?regexp_id=1064  
-  standard_region <- "(A[BL]|B[ABDHLNRSTX]?|C[ABFHMORTVW]|D[ADEGHLNTY]|E[HNX]?|F[KY]|G[LUY]?|H[ADGPRSUX]|I[GMPV]|JE|K[ATWY]|L[ADELNSU]?|M[EKL]?|N[EGNPRW]?|O[LX]|P[AEHLOR]|R[GHM]|S[AEGKLMNOPRSTY]?|T[ADFNQRSW]|UB|W[ADFNRSV]|YO|ZE)[1-9]?[0-9]"
-  london_region <- "((E|N|NW|SE|SW|W)1|EC[1-4]|WC[12])[A-HJKMNPR-Y]|(SW|W)([2-9]|[1-9][0-9])|EC[1-9][0-9]"
-  locality <- "[0-9][ABD-HJLNP-UW-Z]{2}"
+  standard_area <- "(A[BL]|B[ABDHLNRSTX]?|C[ABFHMORTVW]|D[ADEGHLNTY]|E[HNX]?|F[KY]|G[LUY]?|H[ADGPRSUX]|I[GMPV]|JE|K[ATWY]|L[ADELNSU]?|M[EKL]?|N[EGNPRW]?|O[LX]|P[AEHLOR]|R[GHM]|S[AEGKLMNOPRSTY]?|T[ADFNQRSW]|UB|W[ADFNRSV]|YO|ZE)[1-9]?[0-9]"
+  london_area <- "((E|N|NW|SE|SW|W)1|EC[1-4]|WC[12])[A-HJKMNPR-Y]|(SW|W)([2-9]|[1-9][0-9])|EC[1-9][0-9]"
+  district <- "[0-9][ABD-HJLNP-UW-Z]{2}"
   
   rx <- create_regex(    
-    c(standard_region, locality),
-    c(london_region, locality),
+    c(standard_area, district),
+    c(london_area, district),
     c("GIR", "0AA"),
     sep = " ?"
   )
