@@ -144,6 +144,22 @@ assert_any_strings_are_not_missing_nor_empty <- function(x)
   assert_engine(x, is_not_missing_nor_empty_character, msg, what = "any")
 }
 
+#' @rdname is_uk_car_licence
+#' @export
+assert_all_are_uk_car_licences <- function(x)
+{                                                     
+  msg <- sprintf("%s are not all UK car licence plates.", get_name_in_parent(x))
+  assert_engine(x, is_uk_car_licence, msg)        
+}
+
+#' @rdname is_uk_car_licence
+#' @export
+assert_any_are_uk_car_licences <- function(x)
+{                                                     
+  msg <- sprintf("%s are all not UK car licence plates.", get_name_in_parent(x))
+  assert_engine(x, is_uk_car_licence, msg, what = "any")        
+}
+
 #' @rdname is_uk_national_insurance_number
 #' @export
 assert_all_are_uk_national_insurance_numbers <- function(x)

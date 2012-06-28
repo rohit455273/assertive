@@ -158,7 +158,7 @@ is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_na
     simple = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$",
     rfc2822 = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
   )
-  matches_regex(x, rx, ignore.case = TRUE, perl = TRUE)
+  matches_regex(x, rx, perl = TRUE)
 }
 
 #' Does the character vector contain IP addresses?
@@ -333,12 +333,39 @@ is_numeric_string <- function(x)
   ans
 }
 
-is_uk_car_licence <- function(x, .xname)
+#' Is the string a valid UK car licence plate number?
+#'
+#' Checks that the input contains UK car licence plate numbers.
+#'
+#' @param x Input to check.
+#' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the input
+#' string contains a valid UK car licence plate number The {assert_*} function returns nothing but 
+#' throw an error when the \code{is_*} function returns \code{FALSE}.
+#' @examples
+#' licenses <- c(
+#'   "AA 11 AAA", "AA11AAA", "aa 11 aaa", 
+#'   "A1 AAA", "AAA 1A", "A999 AAA", "AAA 999A",
+#'   "1 AAA", "AAA 1", "9999 AAA", "AAA 999", 
+#'   "AA 1", "AA 9999"
+#' )
+#' assert_all_are_uk_car_licences(licences)
+#' @references Regex taken from 
+#' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
+is_uk_car_licence <- function(x)
 {
   #http://regexlib.com/REDetails.aspx?regexp_id=617
   #http://www.dreamincode.net/code/snippet3031.htm
-  message("TODO")
-  TRUE
+  rx <- create_regex(
+    `1903 to 1932`         = c("[A-Z]{1,2}", "[1-9][[:digit:]]{0,3}"),
+    `1903 to 1932 special` = c("S|G|RG|LM", "0"),
+    `1932 to 1963`         = c("[A-HJ-PR-Y]{3}", "[1-9][[:digit:]]{0,2}"),
+    `1932 to 1963 alt`     = c("[1-9][[:digit:]]{0,3}", "[A-HJ-PR-Y]{3}"),
+    `1963 to 1982`         = c("[A-Z]{3}", "[[:digit:]]{1,3}", "[A-HJ-NPR-TV-Y]"),
+    `1983 to 2001`         = c("[A-HJ-NP-TV-Y]", "[[:digit:]]{1,3}", "[A-Z]{3}"),
+    `2001 to 2051`         = c("[A-HJ-PR-Y]{2}", "[[:digit:]]{2}", "[A-HJ-PR-Z]{3}"),
+    sep = " ?"
+  )
+  matches_regex(x, rx)
 }
 
 #' Is the string a valid UK national insurance number?
@@ -346,16 +373,16 @@ is_uk_car_licence <- function(x, .xname)
 #' Checks that the input contains UK national insurance numbers.
 #'
 #' @param x Input to check.
-#' @param .xname Not intended to be called directly.
 #' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the input
-#' string contains a valid UK postcode. The {assert_*} function returns nothing but 
-#' throw an error when the \code{is_*} function returns \code{FALSE}.
+#' string contains a valid UK national insurance number.  The {assert_*} function 
+#' returns nothing but throw an error when the \code{is_*} function returns 
+#' \code{FALSE}.
 #' @examples
 #' ni_numbers <- c("AA 00 00 00 A", "AA000000A", "aa 00 00 00 a", "aa 00 00 00")
 #' assert_all_are_uk_national_insurance_numbers(ni_numbers)
 #' @references Regex taken from 
 #' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
-is_uk_national_insurance_number <- function(x, .xname)
+is_uk_national_insurance_number <- function(x)
 {
   rx <- create_regex(
     c(
@@ -365,7 +392,7 @@ is_uk_national_insurance_number <- function(x, .xname)
     ),
     sep = " ?"
   )
-  matches_regex(x, rx, ignore.case = TRUE)
+  matches_regex(x, rx)
 }
 
 #' Is the string a valid UK postcode?
@@ -373,7 +400,6 @@ is_uk_national_insurance_number <- function(x, .xname)
 #' Checks that the input contains UK postcodes.
 #' 
 #' @param x Input to check.
-#' @param .xname Not intended to be called directly.
 #' @return \code{is_uk_postcode} returns \code{TRUE} if the input string contains
 #' a valid UK postcode. The {assert_*} function returns nothing but throw an error 
 #' when the \code{is_*} function returns \code{FALSE}.
@@ -387,7 +413,7 @@ is_uk_national_insurance_number <- function(x, .xname)
 #' assert_all_are_uk_postcodes(postcodes)
 #' @references Regexes taken from 
 #' \url{https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom#Validation}.  
-is_uk_postcode <- function(x, .xname)
+is_uk_postcode <- function(x)
 {
   #Alternative regex, not used, at 
   #http://www.regexlib.com/REDetails.aspx?regexp_id=1064  
@@ -401,10 +427,10 @@ is_uk_postcode <- function(x, .xname)
     c("GIR", "0AA"),
     sep = " ?"
   )
-  matches_regex(x, rx, ignore.case = TRUE)
+  matches_regex(x, rx)
 }
 
-is_uk_telephone_number <- function(x, .xname)
+is_uk_telephone_number <- function(x)
 {
   #http://www.regexlib.com/REDetails.aspx?regexp_id=684
   rx <- "+44|0"
