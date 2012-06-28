@@ -1,4 +1,4 @@
-#' @rdname is_false
+#' @rdname is_true
 #' @export
 assert_all_are_false <- function(x)
 {                                                     
@@ -6,7 +6,7 @@ assert_all_are_false <- function(x)
   assert_engine(x, is_false, msg)        
 }
 
-#' @rdname is_false
+#' @rdname is_true
 #' @export
 assert_any_are_false <- function(x)
 {                                                     
