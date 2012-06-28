@@ -48,16 +48,18 @@ assert_any_are_date_strings <- function(x)
 
 #' @rdname is_email_address
 #' @export
-assert_all_are_email_addresses <- function(x)
-{                                                     
+assert_all_are_email_addresses <- function(x, method = c("simple", "rfc2822"))
+{                    
+  method <- match.arg(method)
   msg <- sprintf("%s are not all email addresses.", get_name_in_parent(x))
-  assert_engine(x, is_email_address, msg)        
+  assert_engine(x, is_email_address, msg, method = method)        
 }
 
 #' @rdname is_email_address
 #' @export
-assert_any_are_email_addresses <- function(x)
-{                                                     
+assert_any_are_email_addresses <- function(x, method = c("simple", "rfc2822"))
+{                                 
+  method <- match.arg(method)                    
   msg <- sprintf("%s are all not email addresses.", get_name_in_parent(x))
   assert_engine(x, is_email_address, msg, what = "any")        
 }
@@ -153,7 +155,7 @@ assert_all_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_
     msg,
     allow_reserved = allow_reserved,
     allow_duplicates = allow_duplicates
-    )
+  )
 }
 
 #' @rdname is_valid_variable_name
@@ -168,5 +170,5 @@ assert_any_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_
     what = "any",
     allow_reserved = allow_reserved,
     allow_duplicates = allow_duplicates
-    )
+  )
 }
