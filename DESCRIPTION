@@ -42,3 +42,5 @@ Collate:
     'is-string.R'
     'is-true-false.R'
     'is-type.R'
+    'assert-is-reflection.R'
+    'is-reflection.R'

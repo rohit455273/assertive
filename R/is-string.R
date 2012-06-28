@@ -68,7 +68,7 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
 #' )
 #' suppressWarnings(is_credit_card_number(x))
 #' assert_all_are_credit_card_numbers(x)
-#' @reference \url{http://www.regular-expressions.info/creditcard.html} contains the regexes
+#' @references \url{http://www.regular-expressions.info/creditcard.html} contains the regexes
 #' used by this function.
 #' @export
 is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "diners", "discover", "jcb"), .xname = get_name_in_parent(x))
@@ -86,7 +86,7 @@ is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "din
     discover = "6(?:011|5[[:digit:]]{2})[[:digit:]]{12}",
     jcb = "(?:2131|1800|35[[:digit:]]{3})[[:digit:]]{11}"    
   )
-  rx <- create_regex((rx[type], sep = " ?")
+  rx <- create_regex(rx[type], sep = " ?")
   format_ok <- matches_regex(x, rx)
   names(format_ok) <- orig_x  #Use unstripped x for names
   
@@ -143,8 +143,10 @@ is_date_character <- function(x, format, .xname = get_name_in_parent(x))
 #' the spec is very broad, it isn't as good at filtering out nonsense.
 #' @return A logical vector that is \code{TRUE} when the input contains valid email addresses.
 #' @examples
-#' assert_all_are_email_addresss("richierocks@@gmail.com")
-#' @reference \url{http://www.regular-expressions.info/email.html} contains the regexes used
+#' addresses <- c("a@@b.com", "a_at_b.com", "a@@bcom", "a@@b.comma", "a!$&@@b.com")
+#' is_email_address(addresses)
+#' is_email_address(addresses, method = "rfc2822")
+#' @references \url{http://www.regular-expressions.info/email.html} contains the regexes used
 #' by this function and a good discussion of the pros and cons of each.
 #' @export
 is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_name_in_parent(x))
