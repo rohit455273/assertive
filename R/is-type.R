@@ -22,16 +22,10 @@ is2 <- function(x, class, .xname = get_name_in_parent(x))
   if(is_empty(class)) stop("You must provide a class.")
   if(length(class) > 1L) 
   {
-    return(vapply(class, function(cl) is2(x, cl, ""), logical(1)))
+    return(bapply(class, function(cl) is2(x, cl, "")))
   }
-  fn <- try(match.fun(paste0("is.", class)), silent = TRUE)
-  condn <- if(inherits(fn, "try-error"))
-  {
-    is(x, class)
-  } else
-  {
-    fn(x)
-  }
+  ok <- is_error_free(match.fun(paste0("is.", class)))
+  condn <- if(ok) attr(ok, "result")(x) else is(x, class)
   if(!condn)
   {
     return(false("%s is not of type '%s'.", .xname, class))
