@@ -144,6 +144,22 @@ assert_any_strings_are_not_missing_nor_empty <- function(x)
   assert_engine(x, is_not_missing_nor_empty_character, msg, what = "any")
 }
 
+#' @rdname is_uk_national_insurance_number
+#' @export
+assert_all_are_uk_national_insurance_numbers <- function(x)
+{                                                     
+  msg <- sprintf("%s are not all UK national insurance numbers.", get_name_in_parent(x))
+  assert_engine(x, is_uk_national_insurance_number, msg)        
+}
+
+#' @rdname is_uk_national_insurance_number
+#' @export
+assert_any_are_uk_national_insurance_numbers <- function(x)
+{                                                     
+  msg <- sprintf("%s are all not UK national insurance numbers.", get_name_in_parent(x))
+  assert_engine(x, is_uk_national_insurance_number, msg, what = "any")        
+}
+
 #' @rdname is_valid_variable_name
 #' @export
 assert_all_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_duplicates = TRUE)

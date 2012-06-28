@@ -347,9 +347,16 @@ is_uk_car_licence <- function(x, .xname)
 #'
 #' @param x Input to check.
 #' @param .xname Not intended to be called directly.
+#' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the input
+#' string contains a valid UK postcode. The {assert_*} function returns nothing but 
+#' throw an error when the \code{is_*} function returns \code{FALSE}.
+#' @examples
+#' ni_numbers <- c("AA 00 00 00 A", "AA000000A", "aa 00 00 00 a", "aa 00 00 00")
+#' assert_all_are_uk_national_insurance_numbers(ni_numbers)
+#' @references Regex taken from 
+#' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
 is_uk_national_insurance_number <- function(x, .xname)
 {
-  #http://www.regexlib.com/REDetails.aspx?regexp_id=527
   rx <- create_regex(
     c(
       "[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}", 
@@ -368,15 +375,18 @@ is_uk_national_insurance_number <- function(x, .xname)
 #' @param x Input to check.
 #' @param .xname Not intended to be called directly.
 #' @return \code{is_uk_postcode} returns \code{TRUE} if the input string contains
-#' a valid UK postcode. The {assert_*} function retrns nothing but throw an error 
+#' a valid UK postcode. The {assert_*} function returns nothing but throw an error 
 #' when the \code{is_*} function returns \code{FALSE}.
-#' @note The checking method isn't guaranteed to work every time.  In particular,
-#' 
+#' @note The function doesn't guarantee that the postcode actually exists.  It should
+#' correctly return \code{TRUE} for genuine postcodes, and will weed out most badly
+#' formatted strings and non-existent areas, but some non-existent districts may 
+#' incorrectly return \code{TRUE}.  If you need 100% accuracy, check against an up-to-
+#' date postcode database.
 #' @examples
 #' postcodes <- c("SW1A 1AA", "SK11 9DW", "M34FP", "Le45ns", "TS25 2BZ", "gir 0aa")
 #' assert_all_are_uk_postcodes(postcodes)
 #' @references Regexes taken from 
-#' \url{https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom#Validation}  
+#' \url{https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom#Validation}.  
 is_uk_postcode <- function(x, .xname)
 {
   #Alternative regex, not used, at 
