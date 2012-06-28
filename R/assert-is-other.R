@@ -69,13 +69,6 @@ assert_is_loaded <- function(x)
   assert_engine(x, is_loaded, .xname = get_name_in_parent(x))       
 }
 
-#' @rdname is_R
-#' @export
-assert_is_R <- function()
-{                                                         
-  assert_engine(predicate = is_R)        
-}
-
 #' @rdname is_symmetric_matrix
 #' @export
 assert_is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, ...)
