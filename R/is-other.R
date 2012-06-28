@@ -18,6 +18,26 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' Does the code run without throwing an error?
+#' 
+#' Call the code inside a try block and report if an error was thrown.
+#' 
+#' @param x Code to check.
+#' @note Note that this has the side effect of running the code contained in
+#' \code{x}.
+#' @return \code{TRUE} if the code runs without throwing an error.
+is_error_free <- function(x)
+{
+  res <- try(x, silent = TRUE)
+  if(inherits(res, "try-error"))
+  {
+    return(false(attr(res, "condition")$message))
+  }
+  ok <- TRUE
+  attr(ok, "result") <- res
+  ok
+}
+
 #' Does the variable exist?
 #'
 #' Checks to see if the input variables exist.
@@ -125,26 +145,6 @@ is_loaded <- function(x, PACKAGE = "", type = "", .xname = get_name_in_parent(x)
   {
     return(false("%s is not loaded.", .xname))
   }
-}
-
-#' Are you running R?
-#'
-#' Checks to see you are running R.
-#'
-#' @return \code{is_R} wraps \code{is.R}, providing more 
-#' information on failure.  \code{assert_is_R} returns nothing but
-#' throws an error if \code{is_R} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.R}}.
-#' @examples
-#' assert_is_R()
-#' @export
-is_R <- function()
-{
-  if(!is.R())
-  {
-    return(false("You are not running R."))
-  } 
-  TRUE
 }
 
 #' Is the input a symmetric matrix?
