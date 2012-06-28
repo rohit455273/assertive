@@ -1,3 +1,14 @@
+#' @rdname is_windows
+#' @export
+is_64_bit_os <- function()
+{
+  if(.Machine$sizeof.pointer != 8)
+  {
+    return(false("The operating system is not 64 bit."))
+  }
+  TRUE
+}
+
 #' How is R running?
 #' 
 #' Tests to see if R is running in batch mode/interactively.
@@ -154,6 +165,9 @@ is_unix <- function()
 #' Unix based (pretty much anything that isn't Windows, including OS X). 
 #' \code{is_mac} and \code{is_linux} return \code{TRUE} if the OS is Linux or 
 #' Apple OS X respectively.
+#' \code{is_64_bit_os} returns \code{TRUE} when the operating system is 64-bit.
+#' The \code{assert_*} functions return nothing but throw an error if the 
+#' corresponding \code{is_*} functions return \code{FALSE}.
 #' @seealso \code{\link[base]{.Platform}}, \code{\link[base]{Sys.info}} and 
 #' \code{\link[base]{version}}.
 #' @export

@@ -1,3 +1,10 @@
+#' @rdname is_windows
+#' @export
+assert_is_batch_mode <- function()
+{
+  assert_engine(predicate = is_64_bit_os)
+}
+
 #' @rdname is_batch_mode
 #' @export
 assert_is_batch_mode <- function()
