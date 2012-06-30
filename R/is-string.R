@@ -401,7 +401,7 @@ is_uk_national_insurance_number <- function(x)
 #' 
 #' @param x Input to check.
 #' @return \code{is_uk_postcode} returns \code{TRUE} if the input string contains
-#' a valid UK postcode. The {assert_*} function returns nothing but throw an error 
+#' a valid UK postcode. The {assert_*} function returns nothing but throws an error 
 #' when the \code{is_*} function returns \code{FALSE}.
 #' @note The function doesn't guarantee that the postcode actually exists.  It should
 #' correctly return \code{TRUE} for genuine postcodes, and will weed out most badly
@@ -430,12 +430,220 @@ is_uk_postcode <- function(x)
   matches_regex(x, rx)
 }
 
+#' Is the string a valid UK telephone number?
+#' 
+#' Checks that the input contains UK telephone numbers.
+#' 
+#' @param x Input to check.
+#' @return \code{is_uk_telephone_number} returns \code{TRUE} if the input string contains
+#' a valid UK telephone number. The {assert_*} function returns nothing but throws an error 
+#' when the \code{is_*} function returns \code{FALSE}.
+#' @note The function doesn't guarantee that the phone number is in use, but checks that
+#' the format is correct, and that the area code exists.
+#' Spaces and hyphens are allowed to appear in arbitrary places.  The international UK
+#' prefix of 0044 or +44 is allowed.
+#' @examples
+#' is_uk_telephone_number(c("+44 207 219 3475", "08457 90 90 90"))
+#' @references The regex is adapted from the one at
+#' \url{http://www.aa-asterisk.org.uk/index.php/Regular_Expressions_for_Validating_and_Formatting_UK_Telephone_Numbers}
+#' with some additional consultation from
+#' \url{https://en.wikipedia.org/wiki/List_of_United_Kingdom_dialling_codes}
 is_uk_telephone_number <- function(x)
 {
-  #http://www.regexlib.com/REDetails.aspx?regexp_id=684
-  rx <- "+44|0"
-  message("TODO")
-  TRUE
+  #Spaces and round brackets appear in arbitrary places; ignore them.
+  x <- suppressWarnings(strip_invalid_chars(x, invalid_chars="[ -()]"))
+  
+  #All numbers should begin with 0 or the country code, 0044. Check and remove.
+  start <- "(0|0044|\\+44)"
+  first_rx <- create_regex(c(start, "[[:digit:]]{9,10}"), sep = "")
+  ok <- matches_regex(x, first_rx)
+  x[!ok] <- NA  #quick to reject in second pass
+  x <- sub(paste0("^", start), "", x)
+  d3 <- "[[:digit:]]{3}"
+  d6 <- "[[:digit:]]{6}"
+  d7 <- "[[:digit:]]{7}"
+  d8 <- "[[:digit:]]{8}"
+  regional <- "[2-9][[:digit:]]{4,5}"
+  d34 <- "[[:digit:]]{3,4}"
+  second_rx <- create_regex(
+    #new style city
+    c("20[01378]", d7),
+    c("23[0189]", d7),
+    c("24[017]", d7),
+    c("28[0-46-9]", d7),
+    c("29[012]", d7),
+    #city
+    c("113[0-48]", d6),
+    c("11[46][0-4]", d6),
+    c("115[012789]", d6),
+    c("117[0-39]", d6),
+    c("118[01349]", d6),
+    c("121[0-7]", d6),
+    c("131[0-8]", d6),
+    c("1[459]1[[:digit:]]", d6),
+    c("161[0-46-9]", d6),
+    #regional
+    c("120[024-9]", d6),
+    c("122[3-9]", d6),
+    c("123[3-79]", d6),
+    c("124[1-689]", d6),
+    c("12[58][02-9]", d6),
+    c("126[0-4789]", d6),
+    c("127[013-9]", d6),
+    c("129[[:digit:]]", d6),
+    c("130[[:digit:]]", d6),
+    c("13[25][02-9]", d6),
+    c("133[02-579]", d6),
+    c("13[468][0-46-9]", d6),
+    c("137[1235679]", d6),
+    c("139[24578]", d6),
+    c("140[03-9]", d6),
+    c("142[02-5789]", d6),
+    c("14[37][[:digit:]]", d6),
+    c("144[02-69]", d6),
+    c("145[0-8]", d6),
+    c("14[69][0-79]", d6),
+    c("150[1235-9]", d6),
+    c("152[024-9]", d6),
+    c("153[0145689]", d6),
+    c("154[02-9]", d6),
+    c("155[03-9]", d6),
+    c("156[[:digit:]]", d6),
+    c("157[0-35-9]", d6),
+    c("158[0-468]", d6),
+    c("159[0-5789]", d6),
+    c("160[034689]", d6),
+    c("162[0-689]", d6),
+    c("16[38][013-9]", d6),
+    c("164[1-467]", d6),
+    c("165[0-69]", d6),
+    c("166[13-9]", d6),
+    c("167[0-8]", d6),
+    c("169[0124578]", d6),
+    c("170[0246-9]", d6),
+    c("172[[:digit:]]|3[023678]", d6),
+    c("174[03-9]", d6),
+    c("175[0-46-9]", d6),
+    c("176[013-9]", d6),
+    c("177[0-35-9]", d6),
+    c("178[024-9]", d6),
+    c("179[02-9]", d6),
+    c("180[35-9]", d6),
+    c("182[1-5789]", d6),
+    c("183[02-578]", d6),
+    c("184[0-578]", d6),
+    c("185[124-9]", d6),
+    c("186[2-69]", d6),
+    c("187[[:digit:]]", d6),
+    c("188[02-9]", d6),
+    c("189[02569]", d6),
+    c("190[02-589]", d6),
+    c("192[02-689]", d6),
+    c("193[1-5789]", d6),
+    c("194[2-9]", d6),
+    c("195[0-579]", d6),
+    c("196[234789]", d6),
+    c("197[0124578]", d6),
+    c("198[[:digit:]]", d6),
+    c("199[2-57]", d6),
+    #other regional
+    c("12046[1-4]", d3),
+    c("12087[2-9]", d3),
+    c("12545[1-79]", d3),
+    c("12762[[:digit:]]", d3),
+    c("12763[1-8]", d3),
+    c("12766[1-6]", d3),
+    c("12972[0-4]", d3),
+    c("12973[2-5]", d3),
+    c("12982[2-8]", d3),
+    c("12987[0-4789]", d3),
+    c("12988[345]", d3),
+    c("13638[2-5]", d3),
+    c("13647[23]", d3),
+    c("13847[04-9]", d3),
+    c("13864[015789]", d3),
+    c("14044[1-7]", d3),
+    c("14202[23]", d3),
+    c("14208[[:digit:]]", d3),
+    c("146030", d3),
+    c("14605[2-57]", d3),
+    c("14606[1-8]", d3),
+    c("14607[2-8]", d3),
+    c("146140", d3),
+    c("148052", d3),
+    c("14887[123]", d3),
+    c("15243[2-79]", d3),
+    c("15246[[:digit:]]", d3),
+    c("15276[[:digit:]]", d3),
+    c("15626[06-9]", d3),
+    c("156686", d3),
+    c("16064[[:digit:]]", d3),
+    c("16067[4-79]", d3),
+    c("16295[567]", d3),
+    c("1635[34][[:digit:]]", d3),
+    c("164724", d3),
+    c("164761", d3),
+    c("16595[08]", d3),
+    c("16596[67]", d3),
+    c("165974", d3),
+    c("16955[0-4]", d3),
+    c("17266[13-9]", d3),
+    c("17267[0-7]", d3),
+    c("17442[[:digit:]]", d3),
+    c("17502[0-3]", d3),
+    c("1750[3-68]2", d3),
+    c("175076", d3),
+    c("1827[56][[:digit:]]", d3),
+    c("18375[2-5]", d3),
+    c("18378[239]", d3),
+    c("18843[2-58]", d3),
+    c("19006[1-8]", d3),
+    c("190085", d3),
+    c("19052[[:digit:]]", d3),
+    c("193583", d3),
+    c("19466[1-8]", d3),
+    c("19492[01]", d3),
+    c("194981", d3),
+    c("196323", d3),
+    c("19633[1-4]", d3),
+    c("199561", d3),    
+    #special regional
+    "176888[234678][[:digit:]]{2}",
+    "16977[23][[:digit:]]{3}",  
+    #mobiles
+    c("7[1-4]", d8),
+    c("75([13-9][[:digit:]]|0[0-8]|2[0-35-9])", d6),
+    c("7624", d6),
+    c(
+      "77([1-7][[:digit:]]|0[1-9]|8[02-9]|9[0-689])", 
+      d6
+    ),
+    c("78([014-9][[:digit:]]|[23][0-8])", d6),
+    c(
+      "79([04-9][[:digit:]]|1[02-9]|2[0-35-9]|3[0-689])", 
+      d6
+    ),
+    #pagers
+    c(
+      "76(0[012]|2[356]|4[0134]|5[49]|6[0-369]|77|81|9[39])", 
+      d6
+    ),
+    #free
+    c("800", "[[:digit:]]{6,7}|1111"),         
+    c("808", d7),
+    c("500", d6),
+    #premium
+    c("87[123]|9[01][[:digit:]]|98[123]", d7),
+    #shared
+    c("84[2345]|870", d7),
+    #personal
+    c("70", d8),
+    #VoIP
+    c("56", d8),
+    #UAN
+    c("55|3[0347]", d8)  
+  )
+  matches_regex(x, second_rx)
 }
 
 #' Is the input valid R code?
