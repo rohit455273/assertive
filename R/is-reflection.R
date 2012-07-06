@@ -138,7 +138,7 @@ is_period_for_decimal_point <- function()
 #' @export
 is_r <- function()
 {
-  if(!is.R())
+  if(!exists("is.R") || !is.function(is.R) || !is.R())
   {
     return(false("You are not running R."))
   } 
