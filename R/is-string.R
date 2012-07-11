@@ -121,10 +121,12 @@ is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "din
 #' @seealso \code{\link[base]{strptime}} for specifying formats, and the \code{lubridate}
 #' package for automatic guessing of date formats (and other date manipulation functions).
 #' @export
-is_date_character <- function(x, format, .xname = get_name_in_parent(x))
+is_date_string <- function(x, format = "%F %T", .xname = get_name_in_parent(x))
 {
-  x <- coerce_to(x, "character")  
-  call_and_name(function(x) !is.na(strptime(x, format)), x)  
+  x <- coerce_to(x, "character")
+  format <- use_first(format)
+  f <- function(x) !is.na(strptime(x, format))
+  call_and_name(f, x)  
 }
 
 #' Does the character vector contain email addresses?

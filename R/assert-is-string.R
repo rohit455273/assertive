@@ -30,20 +30,20 @@ assert_any_are_credit_card_numbers <- function(x)
   assert_engine(x, is_credit_card_number, msg, what = "any")        
 }
 
-#' @rdname is_date_character
+#' @rdname is_date_string
 #' @export
 assert_all_are_date_strings <- function(x)
 {                                                     
   msg <- sprintf("%s is not a character vector of dates.", get_name_in_parent(x))
-  assert_engine(x, is_date_character, msg)        
+  assert_engine(x, is_date_string, msg)        
 }
 
-#' @rdname is_date_character
+#' @rdname is_date_string
 #' @export
 assert_any_are_date_strings <- function(x)
 {                                                     
   msg <- sprintf("%s is not a character vector of dates.", get_name_in_parent(x))
-  assert_engine(x, is_date_character, msg, what = "any")        
+  assert_engine(x, is_date_string, msg, what = "any")        
 }
 
 #' @rdname is_email_address
