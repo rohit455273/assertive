@@ -90,9 +90,9 @@ call_and_name <- function(fn, x, ...)
 #' character_to_list_of_numeric_vectors(c("123", "4567a"))
 #' }
 #' @seealso \code{\link[base]{strsplit}} and \code{\link[base]{as.numeric}}.
-
 character_to_list_of_numeric_vectors <- function(x)
 {
+  x <- coerce_to(x, "character")
   lapply(strsplit(x, ""), as.numeric)
 }
 
@@ -119,6 +119,32 @@ create_regex <- function(..., l = list(), sep = "[- ]?")
   x <- merge_dots_with_list(..., l = l)
   rx <- vapply(x, function(x) paste0(x, collapse = sep), character(1))
   paste0("^", rx, "$", collapse = "|")
+}
+
+#' Create regex for repeated digits
+#' 
+#' Creates a regex string for repeated digits.
+#' 
+#' @param lo Minimum number of digits to match.
+#' @param hi Optional maximum number of digits to match.
+#' @note If \code{hi} is omitted, the returned regex will only match the exact number
+#' of digits given by \code{lo}.
+#' @return A character vector of regexes.
+#' @examples
+#' d(3)
+#' d(3, 4)
+#' d(1:5, 6)
+d <- function(lo, hi)
+{
+  lo <- as.integer(lo)
+  assert_all_are_positive(lo)
+  if(!missing(hi))
+  {
+    hi <- as.integer(hi)
+    assert_all_are_true(hi > lo)
+    lo <- paste(lo, hi, sep = ",")
+  }
+  paste0("[[:digit:]]{", lo, "}")
 }
 
 #' FALSE, with a cause of failure.
