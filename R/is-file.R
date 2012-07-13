@@ -11,6 +11,7 @@
 #' @examples
 #' assert_all_are_existing_files(c(dir(), "~", getwd()))
 #' \dontrun{
+#' #These examples should fail.
 #' assert_all_are_existing_files("not an existing file (probably)")
 #' }
 #' @export

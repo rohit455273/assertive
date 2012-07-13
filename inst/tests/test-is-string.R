@@ -123,6 +123,68 @@ test.is_ip_address.a_character_vector.returns_true_when_string_contains_an_ip_ad
 } 
 
 
+test.is_isbn_code.a_character_vector_type_10.returns_true_when_string_contains_an_isbn10_code <- function()
+{
+  x <- c(
+    hyphens             = "0-387-98503-4",
+    spaces              = "0 387 98503 4",
+    just_numbers        = "0387985034",
+    too_long            = "00-387-98503-4",
+    too_short           = "0-387-9850-4",
+    non_numeric         = "Z-387-98503-4",
+    invalid_check_digit = "0-387-98503-5"
+  )
+  expected <- c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_isbn_code(x, type = "10")
+  )
+} 
+
+test.is_isbn_code.a_character_vector_type_13.returns_true_when_string_contains_an_isbn13_code <- function()
+{
+  x <- c(
+    hyphens             = "978-0-387-98503-9",
+    spaces              = "978 0 387 98503 9",
+    just_numbers        = "9780387985039",
+    too_long            = "9978-0-387-98503-9",
+    too_short           = "978-0-387-9850-9",
+    non_numeric         = "Z78-0-387-9850-9",
+    invalid_check_digit = "978-0-387-98503-8"
+  )
+  expected <- c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_isbn_code(x, type = "13")
+  )
+} 
+
+
+test.is_missing_or_empty_character.a_character_vector.returns_true_when_string_is_missing_or_empty <- function()
+{
+  x <- c(
+    missing      = NA_character_,
+    empty        = "",
+    non_empty    = "a",
+    space        = " ",
+    not_missing1 = "NA",
+    not_missing2 = "<NA>"
+  )
+  expected <- c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE)
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_missing_or_empty_character(x)
+  )
+  checkEquals(
+    !expected,
+    is_not_missing_nor_empty_character(x)
+  )
+} 
+
+
 test.is_numeric_string.a_character_vector.returns_true_when_string_contains_a_number <- function()
 {
   x <- c("1", "-2.3e4", "Inf", "one", "NA")
@@ -135,14 +197,62 @@ test.is_numeric_string.a_character_vector.returns_true_when_string_contains_a_nu
 } 
 
 
-test.is_missing_or_empty_character.a_scalar.returns_logical <- function()
+test.is_uk_car_licence.a_character_vector.returns_true_when_string_contains_a_uk_car_licence <- function()
 {
-  x <- c("foo", "", NA_character_, " ")
-  expected <- c(FALSE, TRUE, TRUE, FALSE)
+  x <- c(
+    #1903 to 1931
+    "A 1", "AA 9999",                       #ok
+    "A 01",                                 #zero prefix on number
+    "S0", "G0", "RG0", "LM0",               #ok, special plates
+    #1931 to 1963
+    "AAA 1", "AAA 999",                     #ok
+    "III 1", "QQQ 1", "ZZZ 1",              #disallowed letters
+    "AAA 01",                               #zero prefix on number
+    #1931 to 1963 alt
+    "1 AAA", "9999 AAA",                    #ok
+    "1 III", "1 QQQ", "1 ZZZ",              #disallowed letters
+    "01 AAA",                               #zero prefix on number
+    #1963 to 1982
+    "AAA 1A", "AAA 999A",                   #ok
+    "AAA 1I", "AAA 1O", "AAA 1Q",           #disallowed letters
+    "AAA 1U", "AAA 1Z", 
+    "AAA 01A",                              #zero prefix on number
+    #1982 to 2001
+    "A1 AAA", "A999 AAA",                   #ok    
+    "I1 AAA", "O1 AAA",                     #disallowed letters
+    "U1 AAA", "Z1 AAA",
+    "A01 AAA",                              #zero prefix on number
+    #2001 to 2051
+    "AA00 AAA", "AA99 AAA",                 #ok
+    "II00 AAA", "QQ00 AAA", "ZZ00 AAA",     #disallowed letters
+    "AA00 III", "AA00 QQQ"
+  )
+  expected <- c(
+    TRUE, TRUE, 
+    FALSE,
+    TRUE, TRUE, TRUE, TRUE,
+    TRUE, TRUE,
+    FALSE, FALSE, FALSE,
+    FALSE,
+    TRUE, TRUE,
+    FALSE, FALSE, FALSE,
+    FALSE,
+    TRUE, TRUE,
+    FALSE, FALSE, FALSE,
+    FALSE, FALSE,
+    FALSE,
+    TRUE, TRUE,
+    FALSE, FALSE,
+    FALSE, FALSE,
+    FALSE,
+    TRUE, TRUE,
+    FALSE, FALSE, FALSE,
+    FALSE, FALSE
+  )
   names(expected) <- x
   checkEquals(
     expected,
-    is_missing_or_empty_character(x)
+    is_uk_car_licence(x)
   )
 } 
 
@@ -155,5 +265,5 @@ test.is_not_missing_nor_empty_character.a_scalar.returns_logical <- function()
   checkEquals(
     expected,
     is_not_missing_nor_empty_character(x)
-    )
+  )
 } 

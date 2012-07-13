@@ -22,7 +22,7 @@
 #' assert_is_incomplete_connection(tcon)
 #' close(tcon)
 #' \dontrun{
-#' #This code should throw errors.
+#' #These examples should fail.
 #' assert_is_connection("not a connection")
 #' fcon <- file()
 #' close(fcon)

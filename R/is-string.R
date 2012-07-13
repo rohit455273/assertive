@@ -20,7 +20,7 @@
 #' is_cas_number(x)
 #' assert_any_are_cas_numbers(x)
 #' \dontrun{
-#' #These examples should fail
+#' #These examples should fail.
 #' assert_all_are_cas_numbers(x)
 #' }
 #' @references Chemspider is a good service for looking up CAS numbers.
@@ -28,15 +28,15 @@
 is_cas_number <- function(x, .xname = get_name_in_parent(x))
 {
   #Check format
-  rx_components <- c("[[:digit:]]{1,7}", "[[:digit:]]{2}", "[[:digit:]]")
-  rx <- create_regex(rx_components, sep = "-")
+  rx <- c(d(1, 7), d(2), d(1))
+  rx <- create_regex(rx, sep = "-")
   
-  format_ok <- call_and_name(function(x) grepl(rx, x), x)
+  ok <- call_and_name(function(x) grepl(rx, x), x)
   
   #Check checkdigit
-  x <- suppressWarnings(strip_non_numeric(x))
-  check_digit_ok <- bapply(
-    character_to_list_of_numeric_vectors(x), 
+  x[!ok] <- suppressWarnings(strip_non_numeric(x))
+  ok[!ok] <- bapply(
+    character_to_list_of_numeric_vectors(x[!ok]), 
     function(x)
     {
       lenx <- length(x)
@@ -46,7 +46,7 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
       expected_check_digit == actual_check_digit
     }
   )
-  format_ok & check_digit_ok
+  ok
 }
 
 #' Does the character vector contain credit card numbers? 
@@ -66,13 +66,18 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
 #'   "4111 1111 1111 1111",    #spaces are allowed where they 
 #'                             #would occur on the card
 #'   "4012888888881881",       #though they can be omitted
+#'   "4111 1111 1111 11111",   #too many digits
+#'   "4012888888881882",       #bad check digit
 #'   #mastercard
 #'   "5555 5555 5555 4444",
 #'   "5105 1051 0510 5100",
+#'   "5655 5555 5555 4443",    #starts 56
+#'   "51051 051 0510 5100",    #bad spacing
 #'   #amex
 #'   "3782 822463 10005",
 #'   "3714 496353 98431",
 #'   "3787 344936 71000", 
+#'   "3782 822463 1005",       #not enough digits
 #'   #diners
 #'   "3056 930902 5904",
 #'   "3852 000002 3237",
@@ -84,10 +89,13 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
 #'   "3566 0020 2036 0505"
 #' )
 #' is_credit_card_number(x)
+#' assert_any_are_credit_card_numbers(x)
+#' \dontrun{
 #' assert_all_are_credit_card_numbers(x)
+#' }
 #' @references \url{http://www.regular-expressions.info/creditcard.html} contains the regexes
 #' used by this function.
-#' The example card numbers are from
+#' The example valid card numbers are from
 #' \url{http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm}
 #' @export
 is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "diners", "discover", "jcb"), .xname = get_name_in_parent(x))
@@ -104,14 +112,13 @@ is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "din
     jcb        = c(paste0("35", d(2)), rep.int(d(4), 3))
   )
   rx <- create_regex(l = rx[type], sep = " ?")
-  format_ok <- matches_regex(x, rx)
+  ok <- matches_regex(x, rx)
   
-  x[!format_ok] <- NA
-  x <- suppressWarnings(strip_non_numeric(x))
+  x[!ok] <- suppressWarnings(strip_non_numeric(x[!ok]))
   
   #Check check digit with Luhn algorithm
-  check_digit_ok <- bapply(
-    character_to_list_of_numeric_vectors(x),
+  ok[!ok] <- bapply(
+    character_to_list_of_numeric_vectors(x[!ok]),
     function(x)
     {
       lenx <- length(x)
@@ -122,9 +129,8 @@ is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "din
       expected_check_digit <- (9 * total) %% 10L
       expected_check_digit == actual_check_digit
     }   
-  )
-  
-  format_ok & check_digit_ok
+  )  
+  ok
 }
 
 #' Does the character vector contain dates? 
@@ -204,7 +210,7 @@ is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_na
 #' is_ip_address(x)
 #' assert_any_are_ip_addresses(x)
 #' \dontrun{
-#' #These examples should fail
+#' #These examples should fail.
 #' assert_all_are_ip_addresses(x)
 #' }
 #' @export
@@ -308,7 +314,7 @@ is_isbn13_code <- function(x, .xname = get_name_in_parent(x))
 #' is_isbn_code(x13, type = "13")
 #' assert_any_are_isbn_codes(x13, type = "13")
 #' \dontrun{
-#' #These tests should fail:
+#' #These tests should fail.
 #' assert_all_are_isbn_codes(x10, type = "10")
 #' assert_all_are_isbn_codes(x13, type = "13")
 #' }
@@ -369,26 +375,55 @@ is_numeric_string <- function(x)
 #' throw an error when the \code{is_*} function returns \code{FALSE}.
 #' @examples
 #' licences <- c(
-#'   "AA 11 AAA", "AA11AAA", "aa 11 aaa", 
-#'   "A1 AAA", "AAA 1A", "A999 AAA", "AAA 999A",
-#'   "1 AAA", "AAA 1", "9999 AAA", "AAA 999", 
-#'   "AA 1", "AA 9999"
+#'   #1903 to 1931
+#'   "A 1", "AA 9999",                   #ok
+#'   "A 01",                             #zero prefix on number
+#'   "S0", "G0", "RG0", "LM0",           #ok, special plates
+#'   #1931 to 1963
+#'   "AAA 1", "AAA 999",                 #ok
+#'   "III 1", "QQQ 1", "ZZZ 1",          #disallowed letters
+#'   "AAA 01",                           #zero prefix on number
+#'   #1931 to 1963 alt
+#'   "1 AAA", "9999 AAA",                #ok
+#'   "1 III", "1 QQQ", "1 ZZZ",          #disallowed letters
+#'   "01 AAA",                           #zero prefix on number
+#'   #1963 to 1982
+#'   "AAA 1A", "AAA 999A",               #ok
+#'   "AAA 1I", "AAA 1O", "AAA 1Q",       #disallowed letters
+#'   "AAA 1U", "AAA 1Z", 
+#'   "AAA 01A",                          #zero prefix on number
+#'   #1982 to 2001
+#'   "A1 AAA", "A999 AAA",               #ok    
+#'   "I1 AAA", "O1 AAA",                 #disallowed letters
+#'   "U1 AAA", "Z1 AAA",
+#'   "A01 AAA",                          #zero prefix on number
+#'   #2001 to 2051
+#'   "AA00 AAA", "AA99 AAA",             #ok
+#'   "II00 AAA", "QQ00 AAA", "ZZ00 AAA", #disallowed letters
+#'   "AA00 III", "AA00 QQQ"
 #' )
+#' is_uk_car_licence(licences)
+#' assert_any_are_uk_car_licences(licences)
+#' \dontrun{
+#' #These examples should fail.
 #' assert_all_are_uk_car_licences(licences)
+#' }
 #' @references Regex taken from 
 #' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
+#' @export
 is_uk_car_licence <- function(x)
 {
   #http://regexlib.com/REDetails.aspx?regexp_id=617
   #http://www.dreamincode.net/code/snippet3031.htm
+  one_to_999 <- paste0("[1-9]", d(0, 2))
   rx <- create_regex(
-    `1903 to 1932`         = c("[A-Z]{1,2}", "[1-9][[:digit:]]{0,3}"),
+    `1903 to 1932`         = c("[A-Z]{1,2}", paste0("[1-9]", d(0, 3))),
     `1903 to 1932 special` = c("S|G|RG|LM", "0"),
-    `1932 to 1963`         = c("[A-HJ-PR-Y]{3}", "[1-9][[:digit:]]{0,2}"),
-    `1932 to 1963 alt`     = c("[1-9][[:digit:]]{0,3}", "[A-HJ-PR-Y]{3}"),
-    `1963 to 1982`         = c("[A-Z]{3}", "[[:digit:]]{1,3}", "[A-HJ-NPR-TV-Y]"),
-    `1983 to 2001`         = c("[A-HJ-NP-TV-Y]", "[[:digit:]]{1,3}", "[A-Z]{3}"),
-    `2001 to 2051`         = c("[A-HJ-PR-Y]{2}", "[[:digit:]]{2}", "[A-HJ-PR-Z]{3}"),
+    `1932 to 1963`         = c("[A-HJ-PR-Y]{3}", one_to_999),
+    `1932 to 1963 alt`     = c(paste0("[1-9]", d(0, 3)), "[A-HJ-PR-Y]{3}"),
+    `1963 to 1982`         = c("[A-Z]{3}", one_to_999, "[A-HJ-NPR-TV-Y]"),
+    `1983 to 2001`         = c("[A-HJ-NP-TV-Y]", one_to_999, "[A-Z]{3}"),
+    `2001 to 2051`         = c(paste0("[A-HJ-PR-Y]{2}", d(2)), "[A-HJ-PR-Z]{3}"),
     sep = " ?"
   )
   matches_regex(x, rx)
@@ -716,7 +751,7 @@ is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
 #' @examples
 #' assert_all_are_valid_variable_names(c("x", "y_y0.y", ".", "...", "..1"))
 #' \dontrun{
-#' #These examples should fail:
+#' #These examples should fail.
 #' assert_all_are_valid_variable_names(c("...", "..1"), allow_reserved = FALSE) 
 #' assert_all_are_valid_variable_names(c("x", "x"), allow_duplicates = FALSE)
 #' }

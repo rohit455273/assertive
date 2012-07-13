@@ -139,14 +139,15 @@ create_regex <- function(..., l = list(), sep = "[- ]?")
 d <- function(lo, hi)
 {
   lo <- as.integer(lo)
-  assert_all_are_positive(lo)
+  assert_all_are_non_negative(lo)
   if(!missing(hi))
   {
     hi <- as.integer(hi)
     assert_all_are_true(hi > lo)
     lo <- paste(lo, hi, sep = ",")
   }
-  paste0("[[:digit:]]{", lo, "}")
+  rx <- paste0("[[:digit:]]{", lo, "}")
+  sub("{1}", "", rx, fixed = TRUE)
 }
 
 #' FALSE, with a cause of failure.

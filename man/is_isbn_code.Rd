@@ -57,7 +57,7 @@ assert_any_are_isbn_codes(x10, type = "10")
 is_isbn_code(x13, type = "13")
 assert_any_are_isbn_codes(x13, type = "13")
 \dontrun{
-#These tests should fail:
+#These tests should fail.
 assert_all_are_isbn_codes(x10, type = "10")
 assert_all_are_isbn_codes(x13, type = "13")
 }

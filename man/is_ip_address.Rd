@@ -41,7 +41,7 @@ x <- c(
 is_ip_address(x)
 assert_any_are_ip_addresses(x)
 \dontrun{
-#These examples should fail
+#These examples should fail.
 assert_all_are_ip_addresses(x)
 }
 }

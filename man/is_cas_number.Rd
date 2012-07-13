@@ -40,7 +40,7 @@ x <- c(
 is_cas_number(x)
 assert_any_are_cas_numbers(x)
 \dontrun{
-#These examples should fail
+#These examples should fail.
 assert_all_are_cas_numbers(x)
 }
 }

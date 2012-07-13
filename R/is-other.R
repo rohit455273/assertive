@@ -60,6 +60,7 @@ is_error_free <- function(x)
 #' e$y <- 2
 #' assert_all_are_existing(c("x", "y"), envir = e)
 #' \dontrun{
+#' #These examples should fail.
 #' assert_all_are_existing(c("x", "z"), envir = e)
 #' }
 #' @export
@@ -160,6 +161,7 @@ is_loaded <- function(x, PACKAGE = "", type = "", .xname = get_name_in_parent(x)
 #' m <- diag(3); m[3, 1] <- 1e-100
 #' assert_is_symmetric_matrix(m)
 #' \dontrun{
+#' #These examples should fail.
 #' assert_is_symmetric_matrix(m, tol = 0)
 #'}
 #' @export
@@ -207,7 +209,7 @@ is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get
 #' assert_is_unsorted(c(1, 3, 2))
 #' assert_is_unsorted(c(1, 1, 2), strictly = TRUE)
 #' \dontrun{
-#' #These tests should fail:
+#' #These tests should fail.
 #' assert_is_unsorted(c(1, 1, 2))
 #' assert_is_unsorted(c(2, 1, 0))
 #' }

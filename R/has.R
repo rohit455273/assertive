@@ -14,6 +14,7 @@
 #' assert_has_all_attributes(x, c("names", "b"))
 #' assert_has_any_attributes(x, c("names", "c"))
 #' \dontrun{
+#' #These examples should fail.
 #' assert_has_all_attributes(x, c("names", "c"))
 #' }
 #' @export

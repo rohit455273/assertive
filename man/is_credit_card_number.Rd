@@ -37,13 +37,18 @@ x <- c(
   "4111 1111 1111 1111",    #spaces are allowed where they
                             #would occur on the card
   "4012888888881881",       #though they can be omitted
+  "4111 1111 1111 11111",   #too many digits
+  "4012888888881882",       #bad check digit
   #mastercard
   "5555 5555 5555 4444",
   "5105 1051 0510 5100",
+  "5655 5555 5555 4443",    #starts 56
+  "51051 051 0510 5100",    #bad spacing
   #amex
   "3782 822463 10005",
   "3714 496353 98431",
   "3787 344936 71000",
+  "3782 822463 1005",       #not enough digits
   #diners
   "3056 930902 5904",
   "3852 000002 3237",
@@ -55,12 +60,15 @@ x <- c(
   "3566 0020 2036 0505"
 )
 is_credit_card_number(x)
+assert_any_are_credit_card_numbers(x)
+\dontrun{
 assert_all_are_credit_card_numbers(x)
+}
 }
 \references{
   \url{http://www.regular-expressions.info/creditcard.html}
   contains the regexes used by this function. The example
-  card numbers are from
+  valid card numbers are from
   \url{http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm}
 }
 
