@@ -6,16 +6,16 @@
 \alias{is_isbn13_code}
 \title{Does the character vector contain ISBN book codes?}
 \usage{
-  assert_all_are_isbn_codes(x)
+  assert_all_are_isbn_codes(x, type = c("10", "13"))
 
-  assert_any_are_isbn_codes(x)
-
-  is_isbn_code(x, type = c("isbn10", "isbn13"),
-    .xname = get_name_in_parent(x))
+  assert_any_are_isbn_codes(x, type = c("10", "13"))
 
   is_isbn10_code(x, .xname = get_name_in_parent(x))
 
   is_isbn13_code(x, .xname = get_name_in_parent(x))
+
+  is_isbn_code(x, type = c("10", "13"),
+    .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -52,14 +52,14 @@ x13 <- c(
   non_numeric         = "Z78-0-387-9850-9",
   invalid_check_digit = "978-0-387-98503-8"
 )
-is_isbn_code(x10, type = "isbn10")
-assert_any_are_isbn_codes(x10, type = "isbn10")
-is_isbn_code(x13, type = "isbn13")
-assert_any_are_isbn_codes(x13, type = "isbn13")
+is_isbn_code(x10, type = "10")
+assert_any_are_isbn_codes(x10, type = "10")
+is_isbn_code(x13, type = "13")
+assert_any_are_isbn_codes(x13, type = "13")
 \dontrun{
 #These tests should fail:
-assert_all_are_isbn_codes(x10, type = "isbn10")
-assert_all_are_isbn_codes(x13, type = "isbn13")
+assert_all_are_isbn_codes(x10, type = "10")
+assert_all_are_isbn_codes(x13, type = "13")
 }
 }
 

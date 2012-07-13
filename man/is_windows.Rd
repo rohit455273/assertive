@@ -1,5 +1,5 @@
-\name{assert_is_batch_mode}
-\alias{assert_is_batch_mode}
+\name{assert_is_64_bit_os}
+\alias{assert_is_64_bit_os}
 \alias{assert_is_linux}
 \alias{assert_is_mac}
 \alias{assert_is_unix}
@@ -11,7 +11,7 @@
 \alias{is_windows}
 \title{What OS is running?}
 \usage{
-  assert_is_batch_mode()
+  assert_is_64_bit_os()
 
   assert_is_linux()
 

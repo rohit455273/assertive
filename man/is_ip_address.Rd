@@ -35,7 +35,8 @@ x <- c(
   valid_address = "255.0.255.0",
   out_of_range  = "1.2.3.256",
   five_blocks   = "1.2.3.4.5",
-  non_numeric   = "1.2.3.Z"
+  non_numeric   = "1.2.3.Z",
+  missing_block = "1.2.3.NA"
 )
 is_ip_address(x)
 assert_any_are_ip_addresses(x)

@@ -136,7 +136,7 @@ is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "din
 #' @param .xname Not intended to be called directly.
 #' @return A logical vector that is \code{TRUE} when the input contains valid dates or times.
 #' @examples
-#' assert_all_are_date_characters("01Aug1979", format = "%d%b%Y") #My DOB!
+#' assert_all_are_date_strings("01Aug1979", format = "%d%b%Y") #My DOB!
 #' @seealso \code{\link[base]{strptime}} for specifying formats, and the \code{lubridate}
 #' package for automatic guessing of date formats (and other date manipulation functions).
 #' @export
@@ -173,7 +173,7 @@ is_date_string <- function(x, format = "%F %T", .xname = get_name_in_parent(x))
 is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_name_in_parent(x))
 {
   method <- match.arg(method)
-  x <- tolower(coerce_to(x, "character"))
+  x <- coerce_to(x, "character")
   rx <- switch(
     method,
     simple = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$",
@@ -198,7 +198,8 @@ is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_na
 #'   valid_address = "255.0.255.0", 
 #'   out_of_range  = "1.2.3.256",
 #'   five_blocks   = "1.2.3.4.5",
-#'   non_numeric   = "1.2.3.Z"
+#'   non_numeric   = "1.2.3.Z",
+#'   missing_block = "1.2.3.NA"
 #' )
 #' is_ip_address(x)
 #' assert_any_are_ip_addresses(x)
@@ -210,8 +211,7 @@ is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_na
 is_ip_address <- function(x, .xname = get_name_in_parent(x))
 {
   x <- coerce_to(x, "character")  
-  digits <- "[[:digit:]]{1,3}"
-  rx <- create_regex(rep.int(digits, 4), sep = "\\.")
+  rx <- create_regex(rep.int(d(1, 3), 4), sep = "\\.")
   format_ok <- matches_regex(x, rx)
   
   blocks <- strsplit(x, ".", fixed = TRUE)
@@ -221,57 +221,6 @@ is_ip_address <- function(x, .xname = get_name_in_parent(x))
   )
   
   (format_ok & range_ok) | (x == "localhost")
-}
-
-#' Does the character vector contain ISBN book codes?
-#' 
-#' Checks that the input contains ISBN-10 or ISBN-13 book codes.
-#' 
-#' @param x Input to check.
-#' @param type Either "isbn10", "isbn13" or both (for matching either type).
-#' @param .xname Not intended to be called directly.
-#' @return  A logical vector that is \code{TRUE} when the input contains valid ISBN book codes.
-#' @examples
-#' x10 <- c(
-#'   hyphens             = "0-387-98503-4",
-#'   spaces              = "0 387 98503 4",
-#'   just_numbers        = "0387985034",
-#'   too_long            = "00-387-98503-4",
-#'   too_short           = "0-387-9850-4",
-#'   non_numeric         = "Z-387-98503-4",
-#'   invalid_check_digit = "0-387-98503-5"
-#' )
-#' x13 <- c(
-#'   hyphens             = "978-0-387-98503-9",
-#'   spaces              = "978 0 387 98503 9",
-#'   just_numbers        = "9780387985039",
-#'   too_long            = "9978-0-387-98503-9",
-#'   too_short           = "978-0-387-9850-9",
-#'   non_numeric         = "Z78-0-387-9850-9",
-#'   invalid_check_digit = "978-0-387-98503-8"
-#' )
-#' is_isbn_code(x10, type = "isbn10")
-#' assert_any_are_isbn_codes(x10, type = "isbn10")
-#' is_isbn_code(x13, type = "isbn13")
-#' assert_any_are_isbn_codes(x13, type = "isbn13")
-#' \dontrun{
-#' #These tests should fail:
-#' assert_all_are_isbn_codes(x10, type = "isbn10")
-#' assert_all_are_isbn_codes(x13, type = "isbn13")
-#' }
-#' @export
-is_isbn_code <- function(x, type = c("isbn10", "isbn13"), .xname = get_name_in_parent(x))
-{
-  type <- match.arg(type, several.ok = TRUE)
-  ok <- lapply(
-    type, 
-    function(isbn) 
-    {
-      fn <- match.fun(paste0("is_", isbn, "_code"))
-      fn(x, .xname)
-    }
-  )
-  Reduce(`|`, ok)
 }
 
 #' @rdname is_isbn_code
@@ -327,6 +276,61 @@ is_isbn13_code <- function(x, .xname = get_name_in_parent(x))
   format_ok & n_digits_ok & check_digit_ok
 }
 
+#' Does the character vector contain ISBN book codes?
+#' 
+#' Checks that the input contains ISBN-10 or ISBN-13 book codes.
+#' 
+#' @param x Input to check.
+#' @param type Either "isbn10", "isbn13" or both (for matching either type).
+#' @param .xname Not intended to be called directly.
+#' @return  A logical vector that is \code{TRUE} when the input contains valid ISBN book codes.
+#' @examples
+#' x10 <- c(
+#'   hyphens             = "0-387-98503-4",
+#'   spaces              = "0 387 98503 4",
+#'   just_numbers        = "0387985034",
+#'   too_long            = "00-387-98503-4",
+#'   too_short           = "0-387-9850-4",
+#'   non_numeric         = "Z-387-98503-4",
+#'   invalid_check_digit = "0-387-98503-5"
+#' )
+#' x13 <- c(
+#'   hyphens             = "978-0-387-98503-9",
+#'   spaces              = "978 0 387 98503 9",
+#'   just_numbers        = "9780387985039",
+#'   too_long            = "9978-0-387-98503-9",
+#'   too_short           = "978-0-387-9850-9",
+#'   non_numeric         = "Z78-0-387-9850-9",
+#'   invalid_check_digit = "978-0-387-98503-8"
+#' )
+#' is_isbn_code(x10, type = "10")
+#' assert_any_are_isbn_codes(x10, type = "10")
+#' is_isbn_code(x13, type = "13")
+#' assert_any_are_isbn_codes(x13, type = "13")
+#' \dontrun{
+#' #These tests should fail:
+#' assert_all_are_isbn_codes(x10, type = "10")
+#' assert_all_are_isbn_codes(x13, type = "13")
+#' }
+#' @export
+is_isbn_code <- function(x, type = c("10", "13"), .xname = get_name_in_parent(x))
+{
+  type <- match.arg(type, several.ok = TRUE)
+  ok <- lapply(
+    type, 
+    function(isbn) 
+    {
+      fn <- switch(
+        isbn,
+        "10" = is_isbn10_code,
+        "13" = is_isbn13_code
+      )
+      fn(x, .xname)
+    }
+  )
+  Reduce(`|`, ok)
+}
+
 #' @rdname is_character
 #' @export
 is_missing_or_empty_character <- function(x)
@@ -359,11 +363,12 @@ is_numeric_string <- function(x)
 #' Checks that the input contains UK car licence plate numbers.
 #'
 #' @param x Input to check.
+#' @note A single space, in the appropriate place, is allowed but not compulsory.
 #' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the input
 #' string contains a valid UK car licence plate number The {assert_*} function returns nothing but 
 #' throw an error when the \code{is_*} function returns \code{FALSE}.
 #' @examples
-#' licenses <- c(
+#' licences <- c(
 #'   "AA 11 AAA", "AA11AAA", "aa 11 aaa", 
 #'   "A1 AAA", "AAA 1A", "A999 AAA", "AAA 999A",
 #'   "1 AAA", "AAA 1", "9999 AAA", "AAA 999", 
@@ -461,10 +466,10 @@ is_uk_postcode <- function(x)
 #' when the \code{is_*} function returns \code{FALSE}.
 #' @note The function doesn't guarantee that the phone number is in use, but checks that
 #' the format is correct, and that the area code exists.
-#' Spaces and hyphens are allowed to appear in arbitrary places.  The international UK
+#' Spaces, hyphens and round brackets are allowed to appear in arbitrary places.  The international UK
 #' prefix of 0044 or +44 is allowed.
 #' @examples
-#' is_uk_telephone_number(c("+44 207 219 3475", "08457 90 90 90"))
+#' assert_all_are_uk_telephone_numbers(c("+44 207 219 3475", "08457 90 90 90"))
 #' @references The regex is adapted from the one at
 #' \url{http://www.aa-asterisk.org.uk/index.php/Regular_Expressions_for_Validating_and_Formatting_UK_Telephone_Numbers}
 #' with some additional consultation from
@@ -476,16 +481,16 @@ is_uk_telephone_number <- function(x)
   
   #All numbers should begin with 0 or the country code, 0044. Check and remove.
   start <- "(0|0044|\\+44)"
-  first_rx <- create_regex(c(start, "[[:digit:]]{9,10}"), sep = "")
+  first_rx <- create_regex(c(start, d(9, 10)), sep = "")
   ok <- matches_regex(x, first_rx)
   x[!ok] <- NA  #quick to reject in second pass
   x <- sub(paste0("^", start), "", x)
-  d3 <- "[[:digit:]]{3}"
-  d6 <- "[[:digit:]]{6}"
-  d7 <- "[[:digit:]]{7}"
-  d8 <- "[[:digit:]]{8}"
-  regional <- "[2-9][[:digit:]]{4,5}"
-  d34 <- "[[:digit:]]{3,4}"
+  d3 <- d(3)
+  d6 <- d(6)
+  d7 <- d(7)
+  d8 <- d(8)
+  d34 <- d(3, 4)
+  regional <- paste0("[2-9]", d(4, 5))
   second_rx <- create_regex(
     #new style city
     c("20[01378]", d7),

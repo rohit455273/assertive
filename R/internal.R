@@ -131,9 +131,11 @@ create_regex <- function(..., l = list(), sep = "[- ]?")
 #' of digits given by \code{lo}.
 #' @return A character vector of regexes.
 #' @examples
+#' \dontrun{
 #' d(3)
 #' d(3, 4)
 #' d(1:5, 6)
+#' }
 d <- function(lo, hi)
 {
   lo <- as.integer(lo)
@@ -235,10 +237,12 @@ na <- function(...)
 #' @return A character vector of the same length as \code{x}, consisting of strings without
 #' the characters detailed in the \code{invalid_chars}.
 #' @examples
+#' \dontrun{
 #' strip_invalid_chars("  We're floating\tin    space\n\n\n", "[[:space:]]", "whitespace")
 #' strip_non_numeric(" +44 800-123-456 ", allow_plus = TRUE)
 #' #Inputs such as factors as coerced to character.
 #' strip_non_alphanumeric(factor(c(" A1\t1AA.", "*(B2^2BB)%")))
+#' }
 strip_invalid_chars <- function(x, invalid_chars, char_desc = "invalid")
 {
   x <- coerce_to(x, "character")

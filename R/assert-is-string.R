@@ -32,18 +32,18 @@ assert_any_are_credit_card_numbers <- function(x)
 
 #' @rdname is_date_string
 #' @export
-assert_all_are_date_strings <- function(x)
+assert_all_are_date_strings <- function(x, format = "%F %T")
 {                                                     
   msg <- sprintf("%s is not a character vector of dates.", get_name_in_parent(x))
-  assert_engine(x, is_date_string, msg)        
+  assert_engine(x, is_date_string, msg, format = format)        
 }
 
 #' @rdname is_date_string
 #' @export
-assert_any_are_date_strings <- function(x)
+assert_any_are_date_strings <- function(x, format = "%F %T")
 {                                                     
   msg <- sprintf("%s is not a character vector of dates.", get_name_in_parent(x))
-  assert_engine(x, is_date_string, msg, what = "any")        
+  assert_engine(x, is_date_string, msg, what = "any", format = format)        
 }
 
 #' @rdname is_email_address
@@ -82,18 +82,18 @@ assert_any_are_ip_addresses <- function(x)
 
 #' @rdname is_isbn_code
 #' @export
-assert_all_are_isbn_codes <- function(x)
+assert_all_are_isbn_codes <- function(x, type = c("10", "13"))
 {                                                     
   msg <- sprintf("%s are not all ISBN codes.", get_name_in_parent(x))
-  assert_engine(x, is_isbn_code, msg)        
+  assert_engine(x, is_isbn_code, msg, type = type)        
 }
 
 #' @rdname is_isbn_code
 #' @export
-assert_any_are_isbn_codes <- function(x)
+assert_any_are_isbn_codes <- function(x, type = c("10", "13"))
 {                                                     
   msg <- sprintf("%s are all not ISBN codes.", get_name_in_parent(x))
-  assert_engine(x, is_isbn_code, msg, what = "any")        
+  assert_engine(x, is_isbn_code, msg, what = "any", type = type)        
 }
 
 #' @rdname is_character
@@ -174,6 +174,38 @@ assert_any_are_uk_national_insurance_numbers <- function(x)
 {                                                     
   msg <- sprintf("%s are all not UK national insurance numbers.", get_name_in_parent(x))
   assert_engine(x, is_uk_national_insurance_number, msg, what = "any")        
+}
+
+#' @rdname is_uk_postcode
+#' @export
+assert_all_are_uk_postcodes <- function(x)
+{                                                     
+  msg <- sprintf("%s are not all UK postcodes.", get_name_in_parent(x))
+  assert_engine(x, is_uk_postcode, msg)        
+}
+
+#' @rdname is_uk_postcode
+#' @export
+assert_any_are_uk_postcodes <- function(x)
+{                                                     
+  msg <- sprintf("%s are all not UK postcodes.", get_name_in_parent(x))
+  assert_engine(x, is_uk_postcode, msg, what = "any")        
+}
+
+#' @rdname is_uk_telephone_number
+#' @export
+assert_all_are_uk_telephone_numbers <- function(x)
+{                                                     
+  msg <- sprintf("%s are not all UK telephone numbers.", get_name_in_parent(x))
+  assert_engine(x, is_uk_telephone_number, msg)        
+}
+
+#' @rdname is_uk_telephone_number
+#' @export
+assert_any_are_uk_telephone_numbers <- function(x)
+{                                                     
+  msg <- sprintf("%s are all not UK telephone numbers.", get_name_in_parent(x))
+  assert_engine(x, is_uk_telephone_number, msg, what = "any")        
 }
 
 #' @rdname is_valid_variable_name

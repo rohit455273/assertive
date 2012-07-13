@@ -2,12 +2,15 @@
 \alias{matches_regex}
 \title{Does the input match the regular expression?}
 \usage{
-  matches_regex(x, rx, ...)
+  matches_regex(x, rx, ignore.case = TRUE, ...)
 }
 \arguments{
   \item{x}{Inout to check.}
 
   \item{rx}{A regular expression.}
+
+  \item{ignore.case}{Should the case of alphabetic
+  chracters be ignored?}
 
   \item{...}{Passed to \code{\link{grepl}}.}
 }
@@ -17,6 +20,10 @@
 }
 \description{
   Checks that the input matches the regular expression.
+}
+\note{
+  The default for \code{ignore.case} is different to the
+  default in \code{grepl}.
 }
 \seealso{
   \code{\link{regex}} and \code{\link{regexpr}}.
