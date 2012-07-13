@@ -29,14 +29,14 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
 {
   #Check format
   rx <- c(d(1, 7), d(2), d(1))
-  rx <- create_regex(rx, sep = "-")
+  rx <- create_regex(rx, sep = "\\-")
   
-  ok <- call_and_name(function(x) grepl(rx, x), x)
+  ok <- matches_regex(x, rx)
   
   #Check checkdigit
-  x[!ok] <- suppressWarnings(strip_non_numeric(x))
-  ok[!ok] <- bapply(
-    character_to_list_of_numeric_vectors(x[!ok]), 
+  x[ok] <- suppressWarnings(strip_non_numeric(x[ok]))
+  ok[ok] <- bapply(
+    character_to_list_of_numeric_vectors(x[ok]), 
     function(x)
     {
       lenx <- length(x)
@@ -114,11 +114,11 @@ is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "din
   rx <- create_regex(l = rx[type], sep = " ?")
   ok <- matches_regex(x, rx)
   
-  x[!ok] <- suppressWarnings(strip_non_numeric(x[!ok]))
+  x[ok] <- suppressWarnings(strip_non_numeric(x[ok]))
   
   #Check check digit with Luhn algorithm
-  ok[!ok] <- bapply(
-    character_to_list_of_numeric_vectors(x[!ok]),
+  ok[ok] <- bapply(
+    character_to_list_of_numeric_vectors(x[ok]),
     function(x)
     {
       lenx <- length(x)
@@ -434,6 +434,8 @@ is_uk_car_licence <- function(x)
 #' Checks that the input contains UK national insurance numbers.
 #'
 #' @param x Input to check.
+#' @note A single space is allowed at the appropriate points (after the first two
+#' letters and after each pair of numbers) but not compulsory
 #' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the input
 #' string contains a valid UK national insurance number.  The {assert_*} function 
 #' returns nothing but throw an error when the \code{is_*} function returns 
@@ -448,7 +450,7 @@ is_uk_national_insurance_number <- function(x)
   rx <- create_regex(
     c(
       "[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}", 
-      rep.int("[[:digit:]]{2}", 3), 
+      rep.int(d(2), 3), 
       "[A-DFM]?"
     ),
     sep = " ?"

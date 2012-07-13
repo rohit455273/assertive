@@ -257,13 +257,27 @@ test.is_uk_car_licence.a_character_vector.returns_true_when_string_contains_a_uk
 } 
 
 
-test.is_not_missing_nor_empty_character.a_scalar.returns_logical <- function()
+test.is_uk_national_insurance_number.a_character_vector.returns_true_when_string_contains_a_uk_national_insurnce_number <- function()
 {
-  x <- c("foo", "", NA_character_, " ")
-  expected <- c(TRUE, FALSE, FALSE, TRUE)
+  x <- c(
+    "AA 00 00 00 A", "AA 00 00 00", "AA000000A",                #ok
+    "ZZ 99 99 99 M", "ZZ 99 99 99", "ZZ999999M",                
+    "DA 00 00 00", "FA 00 00 00", "IA 00 00 00",                #bad first letter
+    "QA 00 00 00", "UA 00 00 00", "VA 00 00 00",
+    "AD 00 00 00", "AF 00 00 00", "AI 00 00 00", "AO 00 00 00", #bad second letter
+    "AQ 00 00 00", "AU 00 00 00", "AV 00 00 00",
+    "AA 00 00 00 E", "AA 00 00 00 G", "AA 00 00 00 H",          #bad final letter
+    "AA 00 00 00 I", "AA 00 00 00 J", "AA 00 00 00 K",
+    "AA 00 00 00 L", "AA 00 00 00 N", "AA 00 00 00 O",
+    "AA 00 00 00 P", "AA 00 00 00 Q", "AA 00 00 00 R",
+    "AA 00 00 00 S", "AA 00 00 00 T", "AA 00 00 00 U",
+    "AA 00 00 00 V", "AA 00 00 00 W", "AA 00 00 00 X",
+    "AA 00 00 00 Y", "AA 00 00 00 Z"    
+  )
+  expected <- rep(c(TRUE, FALSE), times = c(6, 33))
   names(expected) <- x
   checkEquals(
     expected,
-    is_not_missing_nor_empty_character(x)
+    is_uk_national_insurance_number(x)
   )
 } 
