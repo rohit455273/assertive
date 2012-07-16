@@ -435,14 +435,32 @@ is_uk_car_licence <- function(x)
 #'
 #' @param x Input to check.
 #' @note A single space is allowed at the appropriate points (after the first two
-#' letters and after each pair of numbers) but not compulsory
+#' letters and after each pair of numbers) but not compulsory.
 #' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the input
 #' string contains a valid UK national insurance number.  The {assert_*} function 
 #' returns nothing but throw an error when the \code{is_*} function returns 
 #' \code{FALSE}.
 #' @examples
-#' ni_numbers <- c("AA 00 00 00 A", "AA000000A", "aa 00 00 00 a", "aa 00 00 00")
+#' ni_numbers <- <- c(
+#'   "AA 00 00 00 A", "AA 00 00 00", "AA000000A",                #ok
+#'   "ZZ 99 99 99 M", "ZZ 99 99 99", "ZZ999999M",                
+#'   "DA 00 00 00", "FA 00 00 00", "IA 00 00 00",                #bad first letter
+#'   "QA 00 00 00", "UA 00 00 00", "VA 00 00 00",
+#'   "AD 00 00 00", "AF 00 00 00", "AI 00 00 00", "AO 00 00 00", #bad second letter
+#'   "AQ 00 00 00", "AU 00 00 00", "AV 00 00 00",
+#'   "AA 00 00 00 E", "AA 00 00 00 G", "AA 00 00 00 H",          #bad final letter
+#'   "AA 00 00 00 I", "AA 00 00 00 J", "AA 00 00 00 K",
+#'   "AA 00 00 00 L", "AA 00 00 00 N", "AA 00 00 00 O",
+#'   "AA 00 00 00 P", "AA 00 00 00 Q", "AA 00 00 00 R",
+#'   "AA 00 00 00 S", "AA 00 00 00 T", "AA 00 00 00 U",
+#'   "AA 00 00 00 V", "AA 00 00 00 W", "AA 00 00 00 X",
+#'   "AA 00 00 00 Y", "AA 00 00 00 Z"    
+#' )
+#' assert_any_are_uk_national_insurance_numbers(ni_numbers)
+#' \dontrun{
+#' #These examples should fail.
 #' assert_all_are_uk_national_insurance_numbers(ni_numbers)
+#' }
 #' @references Regex taken from 
 #' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
 is_uk_national_insurance_number <- function(x)
@@ -520,13 +538,13 @@ is_uk_telephone_number <- function(x)
   start <- "(0|0044|\\+44)"
   first_rx <- create_regex(c(start, d(9, 10)), sep = "")
   ok <- matches_regex(x, first_rx)
-  x[!ok] <- NA  #quick to reject in second pass
-  x <- sub(paste0("^", start), "", x)
+  x[!ok] <- NA  #quick to reject in second pass  
+  x <- sub(paste0("^", start), "", x) #remove country code prefix
+  d1 <- d(1)
   d3 <- d(3)
   d6 <- d(6)
   d7 <- d(7)
   d8 <- d(8)
-  d34 <- d(3, 4)
   regional <- paste0("[2-9]", d(4, 5))
   second_rx <- create_regex(
     #new style city
@@ -543,9 +561,9 @@ is_uk_telephone_number <- function(x)
     c("118[01349]", d6),
     c("121[0-7]", d6),
     c("131[0-8]", d6),
-    c("1[459]1[[:digit:]]", d6),
+    c("1[459]1", d7),
     c("161[0-46-9]", d6),
-    #regional
+    #regional (4+6)
     c("120[024-9]", d6),
     c("122[3-9]", d6),
     c("123[3-79]", d6),
@@ -553,8 +571,8 @@ is_uk_telephone_number <- function(x)
     c("12[58][02-9]", d6),
     c("126[0-4789]", d6),
     c("127[013-9]", d6),
-    c("129[[:digit:]]", d6),
-    c("130[[:digit:]]", d6),
+    c("129", d7),
+    c("130", d7),
     c("13[25][02-9]", d6),
     c("133[02-579]", d6),
     c("13[468][0-46-9]", d6),
@@ -562,7 +580,7 @@ is_uk_telephone_number <- function(x)
     c("139[24578]", d6),
     c("140[03-9]", d6),
     c("142[02-5789]", d6),
-    c("14[37][[:digit:]]", d6),
+    c("14[37]", d7),
     c("144[02-69]", d6),
     c("145[0-8]", d6),
     c("14[69][0-79]", d6),
@@ -571,7 +589,7 @@ is_uk_telephone_number <- function(x)
     c("153[0145689]", d6),
     c("154[02-9]", d6),
     c("155[03-9]", d6),
-    c("156[[:digit:]]", d6),
+    c("156", d7),
     c("157[0-35-9]", d6),
     c("158[0-468]", d6),
     c("159[0-5789]", d6),
@@ -584,7 +602,8 @@ is_uk_telephone_number <- function(x)
     c("167[0-8]", d6),
     c("169[0124578]", d6),
     c("170[0246-9]", d6),
-    c("172[[:digit:]]|3[023678]", d6),
+    c("172", d7),
+    c("173[023678]", d6),
     c("174[03-9]", d6),
     c("175[0-46-9]", d6),
     c("176[013-9]", d6),
@@ -597,7 +616,7 @@ is_uk_telephone_number <- function(x)
     c("184[0-578]", d6),
     c("185[124-9]", d6),
     c("186[2-69]", d6),
-    c("187[[:digit:]]", d6),
+    c("187", d7),
     c("188[02-9]", d6),
     c("189[02569]", d6),
     c("190[02-589]", d6),
@@ -607,13 +626,13 @@ is_uk_telephone_number <- function(x)
     c("195[0-579]", d6),
     c("196[234789]", d6),
     c("197[0124578]", d6),
-    c("198[[:digit:]]", d6),
+    c("198", d7),
     c("199[2-57]", d6),
-    #other regional
+    #regional (6+3)
     c("12046[1-4]", d3),
     c("12087[2-9]", d3),
     c("12545[1-79]", d3),
-    c("12762[[:digit:]]", d3),
+    c("12762", d4),
     c("12763[1-8]", d3),
     c("12766[1-6]", d3),
     c("12972[0-4]", d3),
@@ -627,7 +646,7 @@ is_uk_telephone_number <- function(x)
     c("13864[015789]", d3),
     c("14044[1-7]", d3),
     c("14202[23]", d3),
-    c("14208[[:digit:]]", d3),
+    c("14208", d4),
     c("146030", d3),
     c("14605[2-57]", d3),
     c("14606[1-8]", d3),
@@ -636,14 +655,14 @@ is_uk_telephone_number <- function(x)
     c("148052", d3),
     c("14887[123]", d3),
     c("15243[2-79]", d3),
-    c("15246[[:digit:]]", d3),
-    c("15276[[:digit:]]", d3),
+    c("15246", d4),
+    c("15276", d4),
     c("15626[06-9]", d3),
     c("156686", d3),
-    c("16064[[:digit:]]", d3),
+    c("16064", d4),
     c("16067[4-79]", d3),
     c("16295[567]", d3),
-    c("1635[34][[:digit:]]", d3),
+    c("1635[34]", d4),
     c("164724", d3),
     c("164761", d3),
     c("16595[08]", d3),
@@ -652,17 +671,17 @@ is_uk_telephone_number <- function(x)
     c("16955[0-4]", d3),
     c("17266[13-9]", d3),
     c("17267[0-7]", d3),
-    c("17442[[:digit:]]", d3),
+    c("17442", d4),
     c("17502[0-3]", d3),
     c("1750[3-68]2", d3),
     c("175076", d3),
-    c("1827[56][[:digit:]]", d3),
+    c("1827[56]", d4),
     c("18375[2-5]", d3),
     c("18378[239]", d3),
     c("18843[2-58]", d3),
     c("19006[1-8]", d3),
     c("190085", d3),
-    c("19052[[:digit:]]", d3),
+    c("19052", d4),
     c("193583", d3),
     c("19466[1-8]", d3),
     c("19492[01]", d3),
@@ -671,8 +690,8 @@ is_uk_telephone_number <- function(x)
     c("19633[1-4]", d3),
     c("199561", d3),    
     #special regional
-    "176888[234678][[:digit:]]{2}",
-    "16977[23][[:digit:]]{3}",  
+    paste0("176888[234678]", d(2)),
+    paste0("16977[23]", d3),  
     #mobiles
     c("7[1-4]", d8),
     c("75([13-9][[:digit:]]|0[0-8]|2[0-35-9])", d6),
@@ -692,7 +711,7 @@ is_uk_telephone_number <- function(x)
       d6
     ),
     #free
-    c("800", "[[:digit:]]{6,7}|1111"),         
+    c("800", paste(d(6,7), "1111", sep = "|")),         
     c("808", d7),
     c("500", d6),
     #premium
@@ -704,7 +723,8 @@ is_uk_telephone_number <- function(x)
     #VoIP
     c("56", d8),
     #UAN
-    c("55|3[0347]", d8)  
+    c("55|3[0347]", d8),
+    sep = ""
   )
   matches_regex(x, second_rx)
 }
@@ -724,12 +744,13 @@ is_uk_telephone_number <- function(x)
 #' @export
 is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
 {
-  x <- use_first(coerce_to(x, "character"))
+  x <- coerce_to(x, "character")
+  x <- use_first(x)
   ok <- is_error_free(parse(text = x))
   if(!ok)
   {
     return(false(
-      "%s is not valid R code.\n%s.", 
+      "%s is not valid R code. %s.", 
       .xname, 
       cause(ok)
     ))
