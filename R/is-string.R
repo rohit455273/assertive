@@ -188,13 +188,40 @@ is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_na
   matches_regex(x, rx, perl = TRUE)
 }
 
+#' Does the character vector contain hex colours?
+#'
+#' Checks that the input contains hexadecimal colours.
+#' 
+#' @param x Input to check.
+#' @note A string is considered to represent a hexadecimal colour when contains a 
+#' hash followed by six hex values.  That is, digits or the letters from a to f 
+#' (case insensitive).
+#' @return A logical vector that is \code{TRUE} when the input contains hex colours.
+#' @examples
+#' x <- c(
+#'   "#0123456", "#789abc", "#defDEF", #ok
+#'   "012345",                         #no hash
+#'   "#g12345",                        #bad letter
+#'   "#01 23 45",                      #contains spaces
+#' )
+#' is_hex_colour(x)
+#' assert_any_are_hex_colours(x)
+#' \dontrun{
+#' #These examples should fail.
+#' assert_all_are_hex_colours(x)
+#' }
+is_hex_colour <- function(x)
+{
+  rx <- create_regex("#[0-9a-f]{6}")
+  matches_regex(x, rx)
+}
+
 #' Does the character vector contain IP addresses?
 #' 
 #' Checks that the input contains IP addresses.  (It does not check the the address exists, 
 #' merely that the string is in a suitable format.)
 #' 
 #' @param x Input to check.
-#' @param .xname Not intended to be called directly.
 #' @note Valid IP addresses are considered to be four integers in the range 0 to 255, separated
 #' by dots, or the string "localhost".
 #' @return A logical vector that is \code{TRUE} when the input contains valid IP addresses.
@@ -214,7 +241,7 @@ is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_na
 #' assert_all_are_ip_addresses(x)
 #' }
 #' @export
-is_ip_address <- function(x, .xname = get_name_in_parent(x))
+is_ip_address <- function(x)
 {
   x <- coerce_to(x, "character")  
   rx <- create_regex(rep.int(d(1, 3), 4), sep = "\\.")
