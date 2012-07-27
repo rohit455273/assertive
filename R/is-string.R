@@ -563,15 +563,20 @@ is_uk_telephone_number <- function(x)
   
   #All numbers should begin with 0 or the country code, 0044. Check and remove.
   start <- "(0|0044|\\+44)"
-  first_rx <- create_regex(c(start, d(9, 10)), sep = "")
-  ok <- matches_regex(x, first_rx)
-  x[!ok] <- NA  #quick to reject in second pass  
-  x <- sub(paste0("^", start), "", x) #remove country code prefix
   d1 <- d(1)
   d3 <- d(3)
+  d4 <- d(4)
   d6 <- d(6)
   d7 <- d(7)
   d8 <- d(8)
+  
+  first_rx <- create_regex(
+    c(start, d(7), d(2, 3, TRUE)), #country prefix + 7, 9 or 10 digits
+    sep = ""
+  )
+  ok <- matches_regex(x, first_rx) 
+  x[ok] <- sub(paste0("^", start), "", x[ok]) #remove country code prefix
+
   regional <- paste0("[2-9]", d(4, 5))
   second_rx <- create_regex(
     #new style city
@@ -580,7 +585,7 @@ is_uk_telephone_number <- function(x)
     c("24[017]", d7),
     c("28[0-46-9]", d7),
     c("29[012]", d7),
-    #city
+    #old style city
     c("113[0-48]", d6),
     c("11[46][0-4]", d6),
     c("115[012789]", d6),
@@ -717,43 +722,57 @@ is_uk_telephone_number <- function(x)
     c("19633[1-4]", d3),
     c("199561", d3),    
     #special regional
-    paste0("176888[234678]", d(2)),
-    paste0("16977[23]", d3),  
+    c("176888[234678]", d(2)),
+    c("16977[23]", d3),  
     #mobiles
     c("7[1-4]", d8),
-    c("75([13-9][[:digit:]]|0[0-8]|2[0-35-9])", d6),
+    c("750[0-8]", d6),
+    c("75[13-9]", d7),
+    c("752[0-35-9]", d6),
     c("7624", d6),
-    c(
-      "77([1-7][[:digit:]]|0[1-9]|8[02-9]|9[0-689])", 
-      d6
-    ),
-    c("78([014-9][[:digit:]]|[23][0-8])", d6),
-    c(
-      "79([04-9][[:digit:]]|1[02-9]|2[0-35-9]|3[0-689])", 
-      d6
-    ),
+    c("770[1-9]", d6),
+    c("77[1-7]", d7),
+    c("778[02-9]", d6),
+    c("779[0-689]", d6),
+    c("78[014-9]", d7),
+    c("78[23][0-8]", d6),
+    c("79[04-9]", d7),
+    c("791[02-9]", d6),
+    c("792[0-35-9]", d6),
+    c("793[0-689]", d6),
     #pagers
-    c(
-      "76(0[012]|2[356]|4[0134]|5[49]|6[0-369]|77|81|9[39])", 
-      d6
-    ),
+    c("760[012]", d6),
+    c("762[356]", d6),
+    c("764[0134]", d6),
+    c("765[49]", d6),
+    c("766[0-369]", d6),
+    c("7677", d6),
+    c("7681", d6),
+    c("769[39]", d6),
     #free
-    c("800", paste(d(6,7), "1111", sep = "|")),         
+    "8001111",
+    c("800", d(6,7)),         
     c("808", d7),
     c("500", d6),
     #premium
-    c("87[123]|9[01][[:digit:]]|98[123]", d7),
+    c("87[123]", d7),
+    c("9[01]", d8),
+    c("98[123]", d7),
     #shared
-    c("84[2345]|870", d7),
+    c("845464", d1),
+    c("84[2-5]", d7),
+    c("870", d7),
     #personal
     c("70", d8),
     #VoIP
     c("56", d8),
     #UAN
-    c("55|3[0347]", d8),
+    c("55", d8),
+    c("3[0347]", d8),
     sep = ""
   )
-  matches_regex(x, second_rx)
+  ok[ok] <- matches_regex(x[ok], second_rx)
+  ok
 }
 
 #' Is the input valid R code?

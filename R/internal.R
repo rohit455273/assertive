@@ -136,7 +136,7 @@ create_regex <- function(..., l = list(), sep = "[- ]?")
 #' d(3, 4)
 #' d(1:5, 6)
 #' }
-d <- function(lo, hi)
+d <- function(lo, hi, optional = FALSE)
 {
   lo <- as.integer(lo)
   assert_all_are_non_negative(lo)
@@ -147,7 +147,12 @@ d <- function(lo, hi)
     lo <- paste(lo, hi, sep = ",")
   }
   rx <- paste0("[[:digit:]]{", lo, "}")
-  sub("{1}", "", rx, fixed = TRUE)
+  rx <- sub("{1}", "", rx, fixed = TRUE)
+  if(optional)
+  {
+    rx <- paste0("(", rx, ")?")
+  }
+  rx
 }
 
 #' FALSE, with a cause of failure.
