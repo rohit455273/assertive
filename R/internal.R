@@ -127,6 +127,7 @@ create_regex <- function(..., l = list(), sep = "[- ]?")
 #' 
 #' @param lo Minimum number of digits to match.
 #' @param hi Optional maximum number of digits to match.
+#' @param optional If \code{TRUE}, the digits are optional.
 #' @note If \code{hi} is omitted, the returned regex will only match the exact number
 #' of digits given by \code{lo}.
 #' @return A character vector of regexes.

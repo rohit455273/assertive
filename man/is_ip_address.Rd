@@ -8,12 +8,10 @@
 
   assert_any_are_ip_addresses(x)
 
-  is_ip_address(x, .xname = get_name_in_parent(x))
+  is_ip_address(x)
 }
 \arguments{
   \item{x}{Input to check.}
-
-  \item{.xname}{Not intended to be called directly.}
 }
 \value{
   A logical vector that is \code{TRUE} when the input

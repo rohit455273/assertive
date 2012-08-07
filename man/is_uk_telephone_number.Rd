@@ -30,7 +30,9 @@
   international UK prefix of 0044 or +44 is allowed.
 }
 \examples{
-assert_all_are_uk_telephone_numbers(c("+44 207 219 3475", "08457 90 90 90"))
+phone_nos <- c("+44 207 219 3475", "08457 90 90 90")
+is_uk_telephone_number(phone_nos)
+assert_all_are_uk_telephone_numbers(phone_nos)
 }
 \references{
   The regex is adapted from the one at

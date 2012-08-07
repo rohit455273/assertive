@@ -33,6 +33,7 @@
 }
 \examples{
 postcodes <- c("SW1A 1AA", "SK11 9DW", "M34FP", "Le45ns", "TS25 2BZ", "gir 0aa")
+is_uk_postcode(postcodes)
 assert_all_are_uk_postcodes(postcodes)
 }
 \references{

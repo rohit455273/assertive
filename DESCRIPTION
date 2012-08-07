@@ -2,12 +2,14 @@ Package: assertive
 Type: Package
 Title: Readable check functions to ensure code integrity.
 Version: 0.1-5
-Date: 2012-07-12
+Date: 2012-07-27
 Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
     "richierocks@gmail.com")
 Description: assertive contains lots of is_* functions to check the
     state of your variables, and assert_* functions to throw errors
     if they aren't in the right form.
+Depends:
+    R (>= 2.15.0)
 License: Unlimited
 LazyLoad: yes
 LazyData: yes
@@ -26,6 +28,7 @@ Collate:
     'assert-is-na-nan-null.R'
     'assert-is-other.R'
     'assert-is-real-imaginary.R'
+    'assert-is-reflection.R'
     'assert-is-string.R'
     'assert-is-true-false.R'
     'assert-is-type.R'
@@ -42,5 +45,6 @@ Collate:
     'is-string.R'
     'is-true-false.R'
     'is-type.R'
-    'assert-is-reflection.R'
     'is-reflection.R'
+    'assert-is-string-uk.R'
+    'is-string-uk.R'
