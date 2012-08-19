@@ -2,7 +2,7 @@ Package: assertive
 Type: Package
 Title: Readable check functions to ensure code integrity.
 Version: 0.1-5
-Date: 2012-07-27
+Date: 2012-08-07
 Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
     "richierocks@gmail.com")
 Description: assertive contains lots of is_* functions to check the
