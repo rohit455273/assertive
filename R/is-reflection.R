@@ -77,7 +77,7 @@ is_interactive <- function()
 #' @export
 is_linux <- function()
 {
-  if(Sys.info()$sysname != "Linux")
+  if(Sys.info()["sysname"] != "Linux")
   {
     return(false("The operating system is not Linux."))
   }
@@ -88,7 +88,7 @@ is_linux <- function()
 #' @export
 is_mac <- function()
 {
-  if(Sys.info()$sysname != "Darwin")
+  if(Sys.info()["sysname"] != "Darwin")
   {
     return(false("The operating system is not OS X (or another Darwin-based OS)."))
   }
