@@ -138,7 +138,8 @@ sys_get_locale <- function(simplify = FALSE)
     values <- lapply(categories, function(x) "C")
   } else
   {
-    locale <- strsplit(locale, ";")[[1]]
+    splitter <- if(is_windows() || is_linux()) ";" else "/"
+    locale <- strsplit(locale, splitter)[[1]]
     locale <- strsplit(locale, "=")
     categories <- vapply(
       locale,
