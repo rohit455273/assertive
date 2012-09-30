@@ -25,9 +25,15 @@
 }
 \examples{
 (current_locale <- sys_get_locale())
-sys_set_locale(LC_MONETARY = if(is_windows()) "English" else "en")
+\dontrun{
+english <- if(is_windows()) "English"
+  else if(is_mac()) "en_GB"
+  else if(is_linux()) "en_GB.utf8"
+  else "en"
+sys_set_locale(LC_MONETARY = english)
 sys_get_locale()
 sys_set_locale(l = current_locale)  #restore everything
+}
 }
 \seealso{
   \code{\link[base]{Sys.getlocale}}.

@@ -47,14 +47,6 @@ is_batch_mode <- function()
 #' @export
 is_comma_for_decimal_point <- function()
 {
-  locale <- sys_get_locale(simplify = TRUE)
-  locale <- locale[names(locale) != "LC_NUMERIC"]
-  print(locale)
-  most_common_locale <- modal_value(locale)
-  print(most_common_locale)
-  assert_is_a_non_empty_string(most_common_locale)
-  suppressWarnings(Sys.setlocale("LC_NUMERIC", most_common_locale))
-  on.exit(suppressWarnings(Sys.setlocale("LC_NUMERIC", "C")))
   if(Sys.localeconv()["decimal_point"] == ".")
   {
     return(false("The locale convention is to use a '.' for a decimal point."))
@@ -107,7 +99,7 @@ is_mac <- function()
 #' @export
 is_on_os_path <- function(x)
 {
-  paths <- strsplit(Sys.getenv("path"), ";")[[1]]
+  paths <- normalizePath(strsplit(Sys.getenv("path"), ";")[[1]], mustWork = FALSE)
   x <- normalizePath(coerce_to(x, "character"), mustWork = FALSE)
   call_and_name(function(x) x %in% paths, x)  
 }
