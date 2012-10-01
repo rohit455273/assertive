@@ -26,27 +26,7 @@ is_batch_mode <- function()
   TRUE
 }
 
-#' What does the current locale specify for the decimal point?
-#' 
-#' Does the current locale specify a comma or a period for the decimal point?
-#' 
-#' @return \code{is_comma_for_decimal_point} returns \code{TRUE} when the current 
-#' locale uses a comma for a decimal place, as determined by \code{Sys.localeconv}.  
-#' Similarly, \code{is_period_for_decimal_point} returns \code{TRUE} when the current 
-#' locale uses a period (a.k.a. full stop) for a decimal place.  If R has been 
-#' compiled without support for locales, then the value will always be \code{NA}.
-#' @examples
-#' #A useful guess for reading in files:
-#' read_csv <- if(is_comma_for_decimal_point()) read.csv else read.csv2 
-#' #Force locale and test
-#' current_locale <- sys_get_locale()
-#' a_period_locale <- if(is_windows()) "English_United Kingdom.1252" else if(is_mac()) "en_GB" else if(is_linux()) "en_GB.utf8" else "en"
-#' sys_set_locale(LC_ALL = a_period_locale)
-#' assert_is_period_for_decimal_point()
-#' a_comma_locale <- if(is_windows()) "French_France.1252" else if(is_mac()) "fr_FR" else if(is_linux()) "fr_FR.utf8" else "fr"
-#' sys_set_locale(LC_ALL = a_comma_locale)
-#' assert_is_comma_for_decimal_point()
-#' suppressWarnings(sys_set_locale(l = current_locale))
+#' @rdname is_xxx_for_decimal_point
 #' @export
 is_comma_for_decimal_point <- function()
 {
@@ -103,7 +83,7 @@ is_on_os_path <- function(x)
   call_and_name(function(x) x %in% paths, x)  
 }
 
-#' @rdname is_comma_for_decimal_point
+#' @rdname is_xxx_for_decimal_point
 #' @export
 is_period_for_decimal_point <- function()
 {
@@ -172,6 +152,29 @@ is_windows <- function()
   TRUE
 }
 
+#' What does the current locale specify for the decimal point?
+#' 
+#' Does the current locale specify a comma or a period for the decimal point?
+#' 
+#' @return \code{is_comma_for_decimal_point} returns \code{TRUE} when the current 
+#' locale uses a comma for a decimal place, as determined by \code{Sys.localeconv}.  
+#' Similarly, \code{is_period_for_decimal_point} returns \code{TRUE} when the current 
+#' locale uses a period (a.k.a. full stop) for a decimal place.  If R has been 
+#' compiled without support for locales, then the value will always be \code{NA}.
+#' @examples
+#' #A useful guess for reading in files:
+#' read_csv <- if(is_comma_for_decimal_point()) read.csv else read.csv2 
+#' #Force locale and test (may require admin rights)
+#' \dontrun{
+#' current_locale <- sys_get_locale()
+#' a_period_locale <- if(is_windows()) "English_United Kingdom.1252" else if(is_mac()) "en_GB" else if(is_linux()) "en_GB.utf8" else "en"
+#' sys_set_locale(LC_ALL = a_period_locale)
+#' assert_is_period_for_decimal_point()
+#' a_comma_locale <- if(is_windows()) "French_France.1252" else if(is_mac()) "fr_FR" else if(is_linux()) "fr_FR.utf8" else "fr"
+#' sys_set_locale(LC_ALL = a_comma_locale)
+#' assert_is_comma_for_decimal_point()
+#' suppressWarnings(sys_set_locale(l = current_locale))
+#' }
 is_xxx_for_decimal_point <- function(dp)
 {
   locale_conventions <- Sys.localeconv()
@@ -179,11 +182,11 @@ is_xxx_for_decimal_point <- function(dp)
   {
     return(na("R has been compiled without support for locales."))
   }
-  if(locale_conventions["decimal_point"] != dp)
+  if(locale_conventions["mon_decimal_point"] != dp)
   {
     return(false(
       "The locale convention is to use a '%s' for a decimal point.", 
-      locale_conventions["decimal_point"]
+      locale_conventions["mon_decimal_point"]
     ))
   }
   TRUE

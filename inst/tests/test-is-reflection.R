@@ -12,7 +12,7 @@ test.is_batch_mode.any_mode.returns_true_if_called_from_batch_mode <- function()
 
 test.is_comma_for_decimal_point.any_locale.returns_true_if_locale_uses_comma <- function()
 {
-  expected <- Sys.localeconv()["decimal_point"] == ","
+  expected <- Sys.localeconv()["mon_decimal_point"] == ","
   checkEquals(expected, is_comma_for_decimal_point(), check.attributes = FALSE)
 }
 
@@ -48,7 +48,7 @@ test.is_on_os_path.made_up_paths.returns_false_for_all <- function()
 
 test.is_period_for_decimal_point.any_locale.returns_true_if_locale_uses_period <- function()
 {
-  expected <- Sys.localeconv()["decimal_point"] == "."
+  expected <- Sys.localeconv()["mon_decimal_point"] == "."
   checkEquals(expected, is_period_for_decimal_point(), check.attributes = FALSE)
 }
 
