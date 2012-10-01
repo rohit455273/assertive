@@ -47,6 +47,12 @@
   Is the operating system in this machine Windows/Unix/Mac
   based.
 }
+\examples{
+is_windows()
+is_unix()
+is_mac()
+is_linux()
+}
 \seealso{
   \code{\link[base]{.Platform}},
   \code{\link[base]{Sys.info}} and

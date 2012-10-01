@@ -48,3 +48,4 @@ Collate:
     'is-reflection.R'
     'assert-is-string-uk.R'
     'is-string-uk.R'
+    'is-string-us.R'

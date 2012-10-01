@@ -12,7 +12,7 @@ assert_is_batch_mode <- function()
   assert_engine(predicate = is_batch_mode)
 }
 
-#' @rdname is_comma_for_decimal_point
+#' @rdname is_xxx_for_decimal_point
 #' @export
 assert_is_comma_for_decimal_point <- function()
 {
@@ -56,7 +56,7 @@ assert_any_are_on_os_path <- function(x)
   assert_engine(x, is_on_os_path, msg, what = "any")        
 }
 
-#' @rdname is_comma_for_decimal_point
+#' @rdname is_xxx_for_decimal_point
 #' @export
 assert_is_period_for_decimal_point <- function()
 {
