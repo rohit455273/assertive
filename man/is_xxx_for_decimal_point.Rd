@@ -16,6 +16,9 @@
 
   is_xxx_for_decimal_point(dp)
 }
+\arguments{
+  \item{dp}{Character to be used as a decimal point.}
+}
 \value{
   \code{is_comma_for_decimal_point} returns \code{TRUE}
   when the current locale uses a comma for a decimal place,

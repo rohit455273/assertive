@@ -1,8 +1,8 @@
 Package: assertive
 Type: Package
 Title: Readable check functions to ensure code integrity.
-Version: 0.1-5
-Date: 2012-09-14
+Version: 0.1-6
+Date: 2012-10-01
 Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
     "richierocks@gmail.com")
 Description: assertive contains lots of is_* functions to check the
@@ -30,6 +30,8 @@ Collate:
     'assert-is-real-imaginary.R'
     'assert-is-reflection.R'
     'assert-is-string.R'
+    'assert-is-string-uk.R'
+    'assert-is-string-us.R'
     'assert-is-true-false.R'
     'assert-is-type.R'
     'has.R'
@@ -42,10 +44,9 @@ Collate:
     'is-na-nan-null.R'
     'is-other.R'
     'is-real-imaginary.R'
-    'is-string.R'
-    'is-true-false.R'
-    'is-type.R'
     'is-reflection.R'
-    'assert-is-string-uk.R'
+    'is-string.R'
     'is-string-uk.R'
     'is-string-us.R'
+    'is-true-false.R'
+    'is-type.R'

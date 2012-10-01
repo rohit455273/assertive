@@ -156,6 +156,7 @@ is_windows <- function()
 #' 
 #' Does the current locale specify a comma or a period for the decimal point?
 #' 
+#' @param dp Character to be used as a decimal point.
 #' @return \code{is_comma_for_decimal_point} returns \code{TRUE} when the current 
 #' locale uses a comma for a decimal place, as determined by \code{Sys.localeconv}.  
 #' Similarly, \code{is_period_for_decimal_point} returns \code{TRUE} when the current 

@@ -1,8 +1,14 @@
 \name{is_us_zip_code}
+\alias{assert_all_are_us_zip_codes}
+\alias{assert_any_are_us_zip_codes}
 \alias{is_us_zip_code}
 \title{Is the string a valid US zip code?}
 \usage{
   is_us_zip_code(x)
+
+  assert_all_are_us_zip_codes(x)
+
+  assert_any_are_us_zip_codes(x)
 }
 \arguments{
   \item{x}{Input to check.}
@@ -36,7 +42,11 @@ zip_codes <- c(
   "09901"        #fails, invalid area prefix
  )
 is_us_zip_code(zip_codes)
+assert_any_are_us_zip_codes(zip_codes)
+\dontrun{
+#The following code should throw an error.
 assert_all_are_us_zip_codes(zip_codes)
+}
 }
 \references{
   Regexes inferred from

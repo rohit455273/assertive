@@ -22,7 +22,11 @@
 #'   "09901"        #fails, invalid area prefix
 #'  )
 #' is_us_zip_code(zip_codes)
+#' assert_any_are_us_zip_codes(zip_codes)
+#' \dontrun{
+#' #The following code should throw an error.
 #' assert_all_are_us_zip_codes(zip_codes)
+#' }
 #' @references Regexes inferred from 
 #' \url{https://en.wikipedia.org/wiki/ZIP_code} and 
 #' \url{https://en.wikipedia.org/wiki/List_of_ZIP_code_prefixes}.
