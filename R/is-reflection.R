@@ -160,6 +160,11 @@ is_unix <- function()
 #' \code{is_64_bit_os} returns \code{TRUE} when the operating system is 64-bit.
 #' The \code{assert_*} functions return nothing but throw an error if the 
 #' corresponding \code{is_*} functions return \code{FALSE}.
+#' @examples
+#' is_windows()
+#' is_unix()
+#' is_mac()
+#' is_linux()
 #' @seealso \code{\link[base]{.Platform}}, \code{\link[base]{Sys.info}} and 
 #' \code{\link[base]{version}}.
 #' @export
