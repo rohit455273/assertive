@@ -31,7 +31,10 @@ is_batch_mode <- function()
 #' Does the current locale specify a comma or a period for the decimal point?
 #' 
 #' @return \code{is_comma_for_decimal_point} returns \code{TRUE} when the current 
-#' locale uses a comma for a decimal place. 
+#' locale uses a comma for a decimal place, as determined by \code{Sys.localeconv}.  
+#' Similarly, \code{is_period_for_decimal_point} returns \code{TRUE} when the current 
+#' locale uses a period (a.k.a. full stop) for a decimal place.  If R has been 
+#' compiled without support for locales, then the value will always be \code{NA}.
 #' @examples
 #' #A useful guess for reading in files:
 #' read_csv <- if(is_comma_for_decimal_point()) read.csv else read.csv2 
@@ -47,11 +50,7 @@ is_batch_mode <- function()
 #' @export
 is_comma_for_decimal_point <- function()
 {
-  if(Sys.localeconv()["decimal_point"] == ".")
-  {
-    return(false("The locale convention is to use a '.' for a decimal point."))
-  }
-  TRUE
+  is_xxx_for_decimal_point(",")
 }
 
 #' @rdname is_batch_mode
@@ -108,11 +107,7 @@ is_on_os_path <- function(x)
 #' @export
 is_period_for_decimal_point <- function()
 {
-  if(is_comma_for_decimal_point())
-  {
-    return(false("The locale convention is to use a ',' for a decimal point."))
-  }
-  TRUE
+  is_xxx_for_decimal_point(".")
 }
 
 #' Are you running R?
@@ -173,6 +168,23 @@ is_windows <- function()
   if(.Platform$OS.type != "windows")
   {
     return(false("The operating system is not Windows."))
+  }
+  TRUE
+}
+
+is_xxx_for_decimal_point <- function(dp)
+{
+  locale_conventions <- Sys.localeconv()
+  if(is.null(locale_conventions))
+  {
+    return(na("R has been compiled without support for locales."))
+  }
+  if(locale_conventions["decimal_point"] != dp)
+  {
+    return(false(
+      "The locale convention is to use a '%s' for a decimal point.", 
+      locale_conventions["decimal_point"]
+    ))
   }
   TRUE
 }
