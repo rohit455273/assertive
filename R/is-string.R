@@ -217,10 +217,46 @@ is_hex_colour <- function(x)
   rx <- create_regex("#[0-9a-f]{6}")
   matches_regex(x, rx)
 }
+       #' Is the string an honorific?
+#' 
+#' Checks that the input contains honorifics (a.k.a. titles 
+#' or salutations).
+#' @param x Input to check.
+#' @return \code{is_honorific} returns \code{TRUE} if the input string contains
+#' a valid UK postcode. The {assert_*} function returns nothing but throws an error 
+#' when the \code{is_*} function returns \code{FALSE}. 
+#' @note Single full stops (periods) following a word boundary 
+#' and preceding a space or the end of the string are stripped.  
+#' Case is ignored.  There is no formal list of official salutations,
+#' so this should only be used as a guide, rather than giving a 
+#' definitive result.  Especially note that cultural conventions
+#' differ across the world and this function has a UK bias.
+#' @examples
+#' x <- c("Mr", "MR", "mr.", "Mister", "masTer", "Mr!", "M.r", ".Mr")
+#' is_honorific(x)
+#' @export
+is_honorific <- function(x)
+{
+  #Strip single dots after words
+  x <- gsub("(?<=\\b)\\.(?=\\s|$)", "", x, perl = TRUE)  
+  rx <- create_regex(
+    #standard
+    "m([ia]ste)?r", "mrs", "miss", "d(octo)?r", 
+    #academic
+    "((assoc)?iate)prof(essor)?", "dean", 
+    #religious
+    "rev(erend)?", "ft", "father", "bro(ther)?", "s(iste)?r", "(arch)?bishop", 
+    #politics and nobility
+    "r(igh)?t hon(ourable)", "sir", "lord", "lady", "dame", "prince(ss)?", "king", "queen"#,
+    #military 
+    #TODO "", "", "", "", "", "", ""
+  )
+  matches_regex(x, rx)
+}
 
 #' Does the character vector contain IP addresses?
 #' 
-#' Checks that the input contains IP addresses.  (It does not check the the address exists, 
+#' Checks that the input contains IP addresses.  (It does not check that the address exists, 
 #' merely that the string is in a suitable format.)
 #' 
 #' @param x Input to check.

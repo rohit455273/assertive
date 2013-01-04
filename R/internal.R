@@ -193,7 +193,7 @@ locale_categories <- function(include_all = TRUE)
 #' 
 #' Checks that the input matches the regular expression.
 #'
-#' @param x Inout to check.
+#' @param x Input to check.
 #' @param rx A regular expression.
 #' @param ignore.case Should the case of alphabetic chracters be ignored?
 #' @param ... Passed to \code{\link{grepl}}.
