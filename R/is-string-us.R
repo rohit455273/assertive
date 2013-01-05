@@ -24,10 +24,12 @@
 #'   "2345678901",    #no country code
 #'   "10345678901",   #NPA can't begin 0 
 #'   "11345678901",   #...or 1
-#'   "12245678901",   #2nd, 3rd digits of NPA can't match
+#'   "12335678901",   #2nd, 3rd digits of NPA can't match
 #'   "12340678901",   #NXX can't begin 0        
 #'   "12341678901",   #...or 1
-#'   "12345118901"    #@nd, 3rd digits of NXX can't be 11
+#'   "12345118901",   #2nd, 3rd digits of NXX can't be 11
+#'   "1234567",       #NPA must be included               
+#'   "12345678",      #ditto
 #' )
 #' is_us_telephone_number(phone_numbers)
 #' @export
@@ -59,7 +61,7 @@ is_us_telephone_number <- function(x)
   second_rx <- create_regex(
     c(npa1, npa23, nxx1, nxx23, xxxx), sep = ""
   )
-  print(second_rx)
+
   ok[ok] <- matches_regex(x[ok], second_rx)
   ok  
 }
