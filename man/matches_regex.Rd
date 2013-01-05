@@ -5,7 +5,7 @@
   matches_regex(x, rx, ignore.case = TRUE, ...)
 }
 \arguments{
-  \item{x}{Inout to check.}
+  \item{x}{Input to check.}
 
   \item{rx}{A regular expression.}
 

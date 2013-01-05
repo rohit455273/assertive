@@ -19,7 +19,7 @@
 }
 \description{
   Checks that the input contains IP addresses.  (It does
-  not check the the address exists, merely that the string
+  not check that the address exists, merely that the string
   is in a suitable format.)
 }
 \note{

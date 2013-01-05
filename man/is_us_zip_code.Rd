@@ -1,14 +1,14 @@
-\name{is_us_zip_code}
+\name{assert_all_are_us_zip_codes}
 \alias{assert_all_are_us_zip_codes}
 \alias{assert_any_are_us_zip_codes}
 \alias{is_us_zip_code}
 \title{Is the string a valid US zip code?}
 \usage{
-  is_us_zip_code(x)
-
   assert_all_are_us_zip_codes(x)
 
   assert_any_are_us_zip_codes(x)
+
+  is_us_zip_code(x)
 }
 \arguments{
   \item{x}{Input to check.}
