@@ -1,9 +1,9 @@
 \name{assert_all_are_isbn_codes}
 \alias{assert_all_are_isbn_codes}
 \alias{assert_any_are_isbn_codes}
-\alias{is_isbn_code}
 \alias{is_isbn10_code}
 \alias{is_isbn13_code}
+\alias{is_isbn_code}
 \title{Does the character vector contain ISBN book codes?}
 \usage{
   assert_all_are_isbn_codes(x, type = c("10", "13"))

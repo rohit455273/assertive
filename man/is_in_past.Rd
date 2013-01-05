@@ -15,7 +15,7 @@
 
   assert_any_are_in_past(x)
 
-  is_in_future(x, .xname = get_name_in_parent(x))
+  is_in_future(x)
 
   is_in_past(x)
 }

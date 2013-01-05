@@ -1,6 +1,6 @@
 #' @rdname is_in_past   
 #' @export
-is_in_future <- function(x, .xname = get_name_in_parent(x))
+is_in_future <- function(x)
 {
   x <- coerce_to(x, "POSIXct")
   ok <- rep.int(TRUE, length(x))

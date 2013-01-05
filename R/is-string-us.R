@@ -29,7 +29,7 @@
 #'   "12341678901",   #...or 1
 #'   "12345118901",   #2nd, 3rd digits of NXX can't be 11
 #'   "1234567",       #NPA must be included               
-#'   "12345678",      #ditto
+#'   "12345678"      #ditto
 #' )
 #' is_us_telephone_number(phone_numbers)
 #' @export
