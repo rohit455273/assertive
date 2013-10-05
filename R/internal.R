@@ -195,14 +195,25 @@ locale_categories <- function(include_all = TRUE)
 #'
 #' @param x Input to check.
 #' @param rx A regular expression.
-#' @param ignore.case Should the case of alphabetic chracters be ignored?
+#' @param ignore.case Should the case of alphabetic characters be ignored?
 #' @param ... Passed to \code{\link{grepl}}.
 #' @note The default for \code{ignore.case} is different to the default in \code{grepl}.
 #' @return A logical vector that is \code{TRUE} when the input matches the regular expression.
 #' @seealso \code{\link{regex}} and \code{\link{regexpr}}.
 matches_regex <- function(x, rx, ignore.case = TRUE, ...)
 {
-  call_and_name(function(x) grepl(rx, x, ignore.case = ignore.case, ...), x)
+  call_and_name(
+    function(x) 
+    {
+      #call to ifelse needed because grepl always returns TRUE or FALSE
+      ifelse(   
+        is.na(x),
+        NA,
+        grepl(rx, x, ignore.case = ignore.case, ...)
+      )
+    }, 
+    x
+  )
 }
 
 #' The most common value in a vector.
