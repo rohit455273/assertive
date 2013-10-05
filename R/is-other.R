@@ -78,10 +78,9 @@ is_existing <- function(
   if(is_empty(x)) return(logical(0))
   if(length(x) > 1L)
   {
-    return(vapply(
+    return(bapply(
       x, 
-      is_existing, 
-      logical(1), 
+      is_existing 
       where    = where,
       envir    = envir,
       frame    = frame,

@@ -20,10 +20,9 @@
 has_attributes <- function(x, attrs, .xname = get_name_in_parent(x))
 {
   if(is_empty(attrs)) return(logical())
-  vapply(
+  bapply(
     attrs,
-    function(at) is_not_null(attr(x, at)),
-    logical(1)
+    function(at) is_not_null(attr(x, at))
   )
 }
 
