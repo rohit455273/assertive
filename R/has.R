@@ -8,7 +8,6 @@
 #' @return \code{has_attributes} returns \code{TRUE} where \code{x} has
 #' the attributes specified in \code{attrs}. \code{assert_has_terms} returns nothing but throws
 #' an error if \code{has_terms} is not \code{TRUE}.
-#' @seealso \code{\link[stats]{terms.default}}.
 #' @examples
 #' x <- structure(c(a = 1), b = 2)
 #' assert_has_all_attributes(x, c("names", "b"))
@@ -37,7 +36,6 @@ has_attributes <- function(x, attrs, .xname = get_name_in_parent(x))
 #' @return \code{has_terms} returns \code{TRUE} if \code{attributes(x)}
 #' has length zero. \code{assert_has_terms} returns nothing but throws
 #' an error if \code{has_terms} is not \code{TRUE}.
-#' @seealso \code{\link[stats]{terms.default}}.
 #' @examples
 #' assert_has_terms(lm(uptake ~ conc, CO2))
 #' @export
@@ -237,7 +235,7 @@ has_rows <- function(x)
 #' @return \code{has_terms} returns \code{TRUE} if the input has an 
 #' element or an attribute named terms. \code{assert_has_terms} returns 
 #' nothing but throws an error if \code{has_terms} is not \code{TRUE}.
-#' @seealso \code{\link[stats]{terms.default}}.
+#' @seealso \code{\link{terms}}.
 #' @examples
 #' assert_has_terms(lm(uptake ~ conc, CO2))
 #' @export
