@@ -8,6 +8,7 @@
 #' information on failure.  \code{assert_is_debugged} returns nothing but
 #' throws an error if \code{is_loaded} returns \code{FALSE}.
 #' @seealso \code{\link[base]{isdebugged}}.
+#' @export
 is_debugged <- function(x, .xname = get_name_in_parent(x))
 {
   assert_is_any_of(x, c("function", "character"), .xname)
@@ -26,6 +27,7 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
 #' @note Note that this has the side effect of running the code contained in
 #' \code{x}.
 #' @return \code{TRUE} if the code runs without throwing an error.
+#' @export
 is_error_free <- function(x)
 {
   res <- try(x, silent = TRUE)

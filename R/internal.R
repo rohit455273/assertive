@@ -93,7 +93,8 @@ call_and_name <- function(fn, x, ...)
 character_to_list_of_numeric_vectors <- function(x)
 {
   x <- coerce_to(x, "character")
-  lapply(strsplit(x, ""), as.numeric)
+  names(x) <- x
+  lapply(strsplit(x, ""), as.integer)
 }
 
 #' Create a regex from components.
