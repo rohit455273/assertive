@@ -82,7 +82,7 @@ is_existing <- function(
   {
     return(bapply(
       x, 
-      is_existing 
+      is_existing,
       where    = where,
       envir    = envir,
       frame    = frame,
@@ -249,6 +249,7 @@ is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE, .xname = get_name_in
 #' that the input \code{x} need not have type \code{integer}.  In fact
 #' it is expected that \code{x} will be \code{numeric}.
 #' @return \code{TRUE} if the input is a whole number.
+#' @export
 is_whole_number <- function(x, tol = 100 * .Machine$double.eps)
 {
   x <- coerce_to(x, "numeric")

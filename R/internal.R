@@ -80,17 +80,17 @@ call_and_name <- function(fn, x, ...)
   y
 }
 
-#' Convert a character vector to a list of numeric vectors.
+#' Convert a character vector to a list of integer vectors.
 #'
 #' Split strings by character, then convert to numeric.
 #' @param x Input to convert.
 #' @return A list of numeric vectors.
 #' @examples
 #' \dontrun{
-#' character_to_list_of_numeric_vectors(c("123", "4567a"))
+#' character_to_list_of_integer_vectors(c("123", "4567a"))
 #' }
-#' @seealso \code{\link[base]{strsplit}} and \code{\link[base]{as.numeric}}.
-character_to_list_of_numeric_vectors <- function(x)
+#' @seealso \code{\link[base]{strsplit}} and \code{\link[base]{as.integer}}.
+character_to_list_of_integer_vectors <- function(x)
 {
   x <- coerce_to(x, "character")
   names(x) <- x
@@ -206,6 +206,11 @@ matches_regex <- function(x, rx, ignore.case = TRUE, ...)
   call_and_name(
     function(x) 
     {
+      if(!nzchar(rx[1]))
+      {
+        warning("Regular expression is the empty string, and matches everything.")
+        return(rep.int(TRUE, length(x))
+      }
       #call to ifelse needed because grepl always returns TRUE or FALSE
       ifelse(   
         is.na(x),
