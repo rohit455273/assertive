@@ -179,12 +179,12 @@ false <- function(...)
 #' @param include_all If \code{TRUE}, the value \code{LC_ALL} is included.
 #' @return A character vector of locale categories.
 #' @seealso \code{\link{sys_get_locale}}.
-locale_categories <- function(include_all = TRUE)
+locale_categories <- function(include_all = TRUE, include_unix = is_unix())
 {
   allowed_categories <- c(
     if(include_all) "ALL",
     "COLLATE", "CTYPE", "MONETARY", "NUMERIC", "TIME",
-    if(is_unix()) c("MESSAGES", "PAPER", "MEASUREMENT")
+    if(include_unix) c("MESSAGES", "PAPER", "MEASUREMENT")
   )
   paste0("LC_", allowed_categories)
 }
