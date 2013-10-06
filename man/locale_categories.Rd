@@ -2,7 +2,8 @@
 \alias{locale_categories}
 \title{Allowed locale categories.}
 \usage{
-  locale_categories(include_all = TRUE)
+  locale_categories(include_all = TRUE,
+    include_unix = is_unix())
 }
 \arguments{
   \item{include_all}{If \code{TRUE}, the value

@@ -5,7 +5,7 @@
 \usage{
   cause(x)
 
-  cause(x) <- value
+  cause(x, value) <- value
 }
 \arguments{
   \item{x}{Any variable.}
