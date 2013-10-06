@@ -18,7 +18,7 @@ test.character_to_list_of_integer_vectors.strings.returns_list_of_integer_vector
 }
 
 
-test.matches_regex.strings.returns_true_when string_matches_regex <- function()
+test.matches_regex.strings.returns_true_when_string_matches_regex <- function()
 {
   rx <- "foo"
   x <- c("foo", "fooo", "fo", "", "FOO", NA)  

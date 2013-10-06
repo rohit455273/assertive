@@ -590,7 +590,7 @@ test.is_uk_telephone_number.a_character_vector.returns_true_when_string_contains
     "03112345678", "03212345678",    #bad UAN
     "03812345678", "03912345678"
   )
-  expected <- rep(c(TRUE, FALSE), times = c(884, 70))
+  expected <- rep(c(TRUE, FALSE), times = c(885, 70))
   names(expected) <- x
   checkEquals(
     expected,

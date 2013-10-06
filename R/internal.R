@@ -209,7 +209,7 @@ matches_regex <- function(x, rx, ignore.case = TRUE, ...)
       if(!nzchar(rx[1]))
       {
         warning("Regular expression is the empty string, and matches everything.")
-        return(rep.int(TRUE, length(x))
+        return(rep.int(TRUE, length(x)))
       }
       #call to ifelse needed because grepl always returns TRUE or FALSE
       ifelse(   
