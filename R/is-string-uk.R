@@ -174,6 +174,7 @@ is_uk_telephone_number <- function(x)
 {
   #Spaces and round brackets appear in arbitrary places; ignore them.
   x <- suppressWarnings(strip_invalid_chars(x, invalid_chars="[ -()]"))
+  xna <- is.na(x)
   
   #All numbers should begin with 0 or the country code, 0044. Check and remove.
   start <- "(0|0044|\\+44)"
@@ -189,7 +190,7 @@ is_uk_telephone_number <- function(x)
     sep = ""
   )
   ok <- matches_regex(x, first_rx) 
-  x[ok] <- sub(paste0("^", start), "", x[ok]) #remove country code prefix
+  x[!xna & ok] <- sub(paste0("^", start), "", x[!xna & ok]) #remove country code prefix
   
   regional <- paste0("[2-9]", d(4, 5))
   second_rx <- create_regex(
@@ -385,7 +386,7 @@ is_uk_telephone_number <- function(x)
     c("3[0347]", d8),
     sep = ""
   )
-  ok[ok] <- matches_regex(x[ok], second_rx)
-  ok[x == "999"] <- TRUE  #Emergency number
+  ok[!xna & ok] <- matches_regex(x[!xna & ok], second_rx)
+  ok[!xna & x == "999"] <- TRUE  #Emergency number
   ok
 }
