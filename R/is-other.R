@@ -249,9 +249,13 @@ is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE, .xname = get_name_in
 #' that the input \code{x} need not have type \code{integer}.  In fact
 #' it is expected that \code{x} will be \code{numeric}.
 #' @return \code{TRUE} if the input is a whole number.
+#' @examples
+#' x <- 1 + c(0, .Machine$double.eps, -.Machine$double.neg.eps)
+#' is_whole_number(x)
+#' is_whole_number(x, 0)
 #' @export
 is_whole_number <- function(x, tol = 100 * .Machine$double.eps)
 {
   x <- coerce_to(x, "numeric")
-  abs(x - floor(x)) < tol
+  call_and_name(function(x) abs(x - round(x)) <= tol, x)
 }
