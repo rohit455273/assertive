@@ -25,27 +25,73 @@ cause <- function(x)
 
 #' Coerce variable to a different class.
 #'
-#' Coerce the input to a different class, with a warning.
+#' Coerce the input to a different class, with a warning.  More reliable then 
+#' \code{\link[methods]{as}}, and supports coercion to multiple classes.
 #'
 #' @param x Input to coerce.
-#' @param target_class The desired class of x.
+#' @param target_class The desired class of x.  Multiple values allowed (see note).
 #' @param .xname Not intended to be used directly.
-#' @return The input \code{x} after attempted coersion to the target class.
+#' @return The input \code{x} after attempted coercion to the target class.
 #' @note If x does not already have the target class, a warning is given
-#' before coersion.
+#' before coercion.  
+#' The function will try and convert the \code{x} to each of the classes given
+#' in \code{target_class}, in order, until it succeeds or runs out of classes
+#' to try.  It will first try and convert \code{x} using a dedicated 
+#' \code{as.target_class} function if that exists.  If it does not exist, or throws 
+#' an error then \code{coerce_to} will try to use \code{as(x, target_class)}.
 #' @seealso \code{\link[methods]{is}} and \code{\link[methods]{as}}.
+#' @examples
+#' # Numbers can be coerced to characters but not to calls.
+#' \dontrun{
+#' coerce_to(1:5, c("call", "character"))
+#' }
+#' 
 #' @export
 coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
 {
-  if(!is2(x, target_class))
+  if(is_empty(target_class)) 
   {
+    stop("You must provide a class.")
+  }
+  for(this_class in target_class)
+  {
+    if(!is2(x, this_class))
+    {
+      warning(
+        "Coercing ", .xname, " to class ", sQuote(this_class), ".",
+        call. = FALSE
+      )
+    }
+    as.class_function_exists <- is_error_free(
+      match.fun(paste0("as.", this_class))
+    )
+    if(as.class_function_exists) 
+    {
+      can_be_coerced <- is_error_free(attr(as.class_function_exists, "result")(x)) 
+      if(can_be_coerced)
+      {
+        return(attr(can_be_coerced, "result"))
+      }
+    } 
+    can_be_coerced <- is_error_free(as(x, this_class))
+    if(can_be_coerced)
+    {
+      return(attr(can_be_coerced, "result"))
+    }
     warning(
-      "Coercing ", .xname, " to class ", sQuote(target_class), ".",
+      .xname, 
+      " cannot be coerced to type ", 
+      sQuote(this_class), 
+      ".", 
       call. = FALSE
     )
-    x <- as(x, target_class)
   }
-  x
+  stop(
+    .xname, 
+    " cannot be coerced to type ",
+    ".",
+    toString(sQuote(target_class))
+  )
 }
 
 #' Get the name of a variable in the parent frame.
