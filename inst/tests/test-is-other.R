@@ -63,11 +63,44 @@ test.is_unsorted.a_sorted_vector.returns_false <- function()
 } 
 
 
-test.is_whole_number.NA.returns_false <- function()
+test.is_whole_number.a_numeric_vector.returns_true_for_whole_numbers <- function()
 {
-  x <- c(1, -1.5, 1 + .Machine$double.eps, 1 + 100 *.Machine$double.eps, Inf, NA)
+  x <- c(
+    0, 1, -0.5, 
+    100 * .Machine$double.eps, 101 * .Machine$double.eps, 
+    100 * -.Machine$double.eps, -101 * .Machine$double.eps, #Not double.neg.eps
+    Inf, -Inf, NaN, NA
+  )
+  expected <- c(
+    TRUE, TRUE, FALSE, 
+    TRUE, FALSE, 
+    TRUE, FALSE, 
+    NA, NA, NA, NA
+  )
+  names(expected) <- x
   checkEquals(
-    c(TRUE, FALSE, TRUE, FALSE, NA, NA),
+    expected,
     is_whole_number(x)
+  )
+}
+
+test.is_whole_number.no_tolerance.returns_true_for_exactly_whole_numbers <- function()
+{
+  x <- c(
+    0, 1, -0.5, 
+    100 * .Machine$double.eps, 101 * .Machine$double.eps, 
+    100 * -.Machine$double.eps, -101 * .Machine$double.eps, #Not double.neg.eps
+    Inf, -Inf, NaN, NA
+  )
+  expected <- c(
+    TRUE, TRUE, FALSE, 
+    FALSE, FALSE, 
+    FALSE, FALSE, 
+    NA, NA, NA, NA
+  )
+  names(expected) <- x
+  checkEquals(
+    expected,
+    is_whole_number(x, 0)
   )
 }
