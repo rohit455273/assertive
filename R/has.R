@@ -54,12 +54,12 @@ has_any_attributes <- function(x, .xname = get_name_in_parent(x))
 #'
 #' @param x Argument to check. 
 #' @param fn Function to find the argument in.
-#' @return \code{has_arg} reimplements \code{\link{[base]hasArg}}, 
-#' letting you choose the function to serach in, and providing more
+#' @return \code{has_arg} reimplements \code{\link[methods]{hasArg}}, 
+#' letting you choose the function to search in, and providing more
 #' information on failure.  
 #' @note There is currently no corresponding \code{assert_has_arg}
 #' function, because evaluating in the correct call is hard.
-#' @seealso \code{\link{[base]hasArg}}.
+#' @seealso \code{\link[methods]{hasArg}}.
 #' @examples
 #' has_arg(x, mean.default)
 #' has_arg(y, mean.default)   
@@ -69,11 +69,11 @@ has_any_attributes <- function(x, .xname = get_name_in_parent(x))
 #' @export
 has_arg <- function(x, fn = sys.function(sys.parent()))
 {
-  arg_name <- deparse(substitute(x))
-  formal_args_of_fn <- names(formals(fn))
+  arg_name <- get_name_in_parent(x)
+  formal_args_of_fn <- formalArgs(fn)
   if(!arg_name %in% formal_args_of_fn)
   {                             
-    fn_name <- deparse(substitute(fn))
+    fn_name <- get_name_in_parent(fn)
     fail <- assertive:::false("%s is not an argument of %s", sQuote(arg_name), sQuote(fn_name))
     if("..." %in% formal_args_of_fn)
     {
