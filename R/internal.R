@@ -115,10 +115,17 @@ character_to_list_of_integer_vectors <- function(x)
 #' cas_number_components <- c("[[:digit:]]{1,7}", "[[:digit:]]{2}", "[[:digit:]]")
 #' cas_number_rx <- create_regex(rx_components, sep = "-")
 #' }
-create_regex <- function(..., l = list(), sep = "[- ]?")
+create_regex <- function (..., l = list(), sep = "[- ]?")
 {
-  x <- merge_dots_with_list(..., l = l)
-  rx <- vapply(x, function(x) paste0(x, collapse = sep), character(1))
+  x <- assertive:::merge_dots_with_list(..., l = l)
+  rx <- vapply(
+    x,
+    function(x)
+    {
+      paste0("(", paste0(x, collapse = sep), ")")
+    },
+    character(1)
+  )
   paste0("^", rx, "$", collapse = "|")
 }
 
