@@ -2,7 +2,10 @@ test.coerce_to.numeric_vector_to_data_frame.returns_data_frame <- function()
 {
   x <- 1:5
   expected <- data.frame(x = x)
-  checkEquals(expected, coerce_to(x, "data.frame"))
+  checkEquals(expected, suppressWarnings(coerce_to(x, "data.frame")))
+  old_ops <- options(warn = 2)
+  on.exit(options(old_ops))
+  checkException(coerce_to(x, "data.frame"), silent = TRUE)   
 }
 
 test.use_first.a_vector_double_indexing.returns_first_element <- function()
@@ -12,7 +15,7 @@ test.use_first.a_vector_double_indexing.returns_first_element <- function()
   checkIdentical(suppressWarnings(use_first(x)), expected)
   old_ops <- options(warn = 2)
   on.exit(options(old_ops))
-  checkException(use_first(x))
+  checkException(use_first(x), silent = TRUE)
 }
 
 test.use_first.a_vector_single_indexing.returns_first_element <- function()
