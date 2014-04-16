@@ -3,18 +3,21 @@ test.character_to_list_of_integer_vectors.strings.returns_list_of_integer_vector
   x <- c("12345", "1b3d5", "abcde", NA, "", " ", " 2 4 ") 
   expected <- list(
     1:5,
-    c(1, NA, 3, NA, 5),
-    rep.int(NA_integer_, 5),
+    c(1L, NA, 3L, NA, 5L),
+    rep.int(NA_integer_, 5L),
     NA_integer_,
-    numeric(),
+    integer(),
     NA_integer_,
-    c(NA, 2, NA, 4, NA)
+    c(NA, 2L, NA, 4L, NA)
   )
   names(expected) <- x
-  checkEquals(
+  checkIdentical(
     expected,
-    character_to_list_of_integer_vectors(x)
+    suppressWarnings(character_to_list_of_integer_vectors(x))
   )
+  old_ops <- options(warn = 2)
+  on.exit(options(old_ops))
+  checkException(character_to_list_of_integer_vectors(x), silent = TRUE)
 }
 
 
