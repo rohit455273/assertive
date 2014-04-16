@@ -226,19 +226,22 @@ sys_set_locale <- function(..., l = list())
 #' with a warning.
 #'
 #' @param x Input that should be scalar.
+#' @param indexer Either double indexing, \code{"[["} (the default) or
+#' single indexing \code{"["}.
 #' @return If \code{x} is scalar, it is returned unchanged, otherwise
 #' only the first element is returned, with a warning.
 #' @export
-use_first <- function(x)
+use_first <- function(x, indexer = c("[[", "["))
 {
   assert_is_non_empty(x)
+  indexer <- match.fun(match.arg(indexer))
   if(!is_scalar(x))
   {
     warning(
       "Only the first value of ", sQuote(deparse(substitute(x))), " will be used.",
       call. = FALSE
       )
-    x <- x[[1]]
+    x <- indexer(x, 1L)
   }
   x
 }
