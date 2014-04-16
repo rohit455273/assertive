@@ -234,14 +234,14 @@ sys_set_locale <- function(..., l = list())
 use_first <- function(x, indexer = c("[[", "["))
 {
   assert_is_non_empty(x)
-  indexer <- match.fun(match.arg(indexer))
-  if(!is_scalar(x))
+  if(is_scalar(x))
   {
-    warning(
-      "Only the first value of ", sQuote(deparse(substitute(x))), " will be used.",
-      call. = FALSE
-      )
-    x <- indexer(x, 1L)
+    return(x)
   }
-  x
+  indexer <- match.fun(match.arg(indexer))
+  warning(
+    "Only the first value of ", sQuote(get_name_in_parent(x)), " will be used.",
+    call. = FALSE
+  )
+  indexer(x, 1L)
 }
