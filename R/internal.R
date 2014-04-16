@@ -82,7 +82,7 @@ call_and_name <- function(fn, x, ...)
 
 #' Convert a character vector to a list of integer vectors.
 #'
-#' Split strings by character, then convert to numeric.
+#' Split strings by character, then convert to numbers
 #' @param x Input to convert.
 #' @return A list of numeric vectors.
 #' @examples
@@ -122,7 +122,7 @@ create_regex <- function (..., l = list(), sep = "[- ]?")
     x,
     function(x)
     {
-      paste0("(", paste0(x, collapse = sep), ")")
+      parenthesise(paste0(parenthesise(x), collapse = sep))
     },
     character(1)
   )
@@ -185,6 +185,7 @@ false <- function(...)
 #' The categories of locale that can be gotten/set.
 #'
 #' @param include_all If \code{TRUE}, the value \code{LC_ALL} is included.
+#' @param include_unix If \code{TRUE}, the extra unix-only values are included.
 #' @return A character vector of locale categories.
 #' @seealso \code{\link{sys_get_locale}}.
 locale_categories <- function(include_all = TRUE, include_unix = is_unix())
