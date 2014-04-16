@@ -56,6 +56,18 @@ problems <- function(x)
       names(x)
     )
   )
+  if(is.null(y))
+  {
+    return(
+      data.frame(
+        suite   = character(),
+        file    = character(),
+        test    = character(),
+        kind    = character(),
+        message = character()
+      )
+    )
+  }
   rownames(y) <- NULL
   y
 }
