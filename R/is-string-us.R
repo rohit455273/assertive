@@ -124,6 +124,7 @@ is_us_zip_code <- function(x)
     ),
     ")" 
   )  
-  rx <- create_regex(c(prefix, d(2), "(-", d(4), ")?"), sep = "")  
+  plus_four <- paste0("(-", d(4), ")?")
+  rx <- create_regex(c(prefix, d(2), plus_four), sep = "")  
   matches_regex(x, rx)
 }
