@@ -231,7 +231,6 @@ sys_set_locale <- function(..., l = list())
 #' @export
 use_first <- function(x)
 {
-  assert_is_vector(x)
   assert_is_non_empty(x)
   if(!is_scalar(x))
   {
