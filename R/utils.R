@@ -135,6 +135,63 @@ merge_dots_with_list <- function(..., l = list())
   all_values
 }
 
+#' Wrap a string in brackets
+#'
+#' Parenthesise a character vector by wrapping elements in brackets, 
+#' dashes or commas.
+#' @param x Character vector to wrap in parathenses.
+#' @param type String naming the type of parenthesis.
+#' @return A character vector of the input wrapped in parentheses.
+#' @note English grammar terminology is awfully confusing.  The verb 'to 
+#' parenthesise' means to wrap a phrase in brackets or dashes or commas,
+#' thus denoting it as supplementary material that could be left out.
+#' A 'parenthesis' as a noun is a synonym for a round bracket.
+#' @seealso \code{\link[base]{sQuote}}
+#' @examples
+#' paste("There were three", parenthesise(3), "mice in the experiment.")
+#' paste(
+#'   "I love parmos", 
+#'   parenthesise("Teesside's finest culinary invention", "en_dashes"), 
+#'   "but they are sure to give me heart disease."
+#' )
+#' parenthesise(letters[1:5], "curly")
+#' paste0(
+#'   "The R language", 
+#'   parenthesise("an offshoot of S and Scheme", "commas"), 
+#'   "is quite good for data analysis."
+#' )
+#' @export
+parenthesise <- function(x, type = c("round_brackets", "square_brackets", "curly_brackets", "angle_brackets", "chevrons", "hyphens", "en_dashes", "em_dashes", "commas")) 
+{
+  type <- match.arg(type)
+  x <- assertive::coerce_to(x, "character")
+  before <- switch(
+    type,
+    round_brackets  = "(",
+    square_brackets = "[",
+    curly_brackets  = "{",
+    angle_brackets  = "<",
+    chevrons        = "\u3008",
+    hyphens         = "- ",
+    en_dashes       = "\u2013 ",
+    em_dashes       = "\u2014",
+    commas          = ", "
+  )
+  after <- switch(
+    type,
+    round_brackets  = ")",
+    square_brackets = "]",
+    curly_brackets  = "}",
+    angle_brackets  = ">",
+    chevrons        = "\u3009",
+    hyphens         = " -",
+    en_dashes       = " \u2013",
+    em_dashes       = "\u2014",
+    commas          = ", "
+  )
+  paste0(before, x, after)
+}
+
 #' Strip all attributes from a variable.
 #'
 #' Strips all the attributes from a variable.
