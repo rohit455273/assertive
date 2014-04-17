@@ -2,21 +2,21 @@
 \alias{false}
 \title{FALSE, with a cause of failure.}
 \usage{
-  false(...)
+false(...)
 }
 \arguments{
   \item{...}{Passed to sprintf to create a cause of failure
   message.}
 }
 \value{
-  \code{FALSE} with the attribute \code{cause}, as provided
-  in the input.
+\code{FALSE} with the attribute \code{cause}, as provided
+in the input.
 }
 \description{
-  Always returns the value \code{FALSE}, with a cause
-  attribute.
+Always returns the value \code{FALSE}, with a cause
+attribute.
 }
 \seealso{
-  \code{\link{cause}} and \code{\link{na}}.
+\code{\link{cause}} and \code{\link{na}}.
 }
 

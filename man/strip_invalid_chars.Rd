@@ -4,12 +4,11 @@
 \alias{strip_non_numeric}
 \title{Removes invalid characters from a string.}
 \usage{
-  strip_invalid_chars(x, invalid_chars,
-    char_desc = "invalid")
+strip_invalid_chars(x, invalid_chars, char_desc = "invalid")
 
-  strip_non_alphanumeric(x)
+strip_non_alphanumeric(x)
 
-  strip_non_numeric(x, allow_x = FALSE, allow_plus = FALSE)
+strip_non_numeric(x, allow_x = FALSE, allow_plus = FALSE)
 }
 \arguments{
   \item{x}{Input to strip.}
@@ -27,13 +26,13 @@
   allowed - useful for phone numbers.}
 }
 \value{
-  A character vector of the same length as \code{x},
-  consisting of strings without the characters detailed in
-  the \code{invalid_chars}.
+A character vector of the same length as \code{x},
+consisting of strings without the characters detailed in
+the \code{invalid_chars}.
 }
 \description{
-  Removes invalid characters from a string, leaving only
-  digits.
+Removes invalid characters from a string, leaving only
+digits.
 }
 \examples{
 \dontrun{

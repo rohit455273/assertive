@@ -4,30 +4,30 @@
 \alias{is_uk_national_insurance_number}
 \title{Is the string a valid UK national insurance number?}
 \usage{
-  assert_all_are_uk_national_insurance_numbers(x)
+assert_all_are_uk_national_insurance_numbers(x)
 
-  assert_any_are_uk_national_insurance_numbers(x)
+assert_any_are_uk_national_insurance_numbers(x)
 
-  is_uk_national_insurance_number(x)
+is_uk_national_insurance_number(x)
 }
 \arguments{
   \item{x}{Input to check.}
 }
 \value{
-  \code{is_uk_national_insurance_number} returns
-  \code{TRUE} if the input string contains a valid UK
-  national insurance number.  The {assert_*} function
-  returns nothing but throw an error when the \code{is_*}
-  function returns \code{FALSE}.
+\code{is_uk_national_insurance_number} returns \code{TRUE}
+if the input string contains a valid UK national insurance
+number.  The {assert_*} function returns nothing but throw
+an error when the \code{is_*} function returns
+\code{FALSE}.
 }
 \description{
-  Checks that the input contains UK national insurance
-  numbers.
+Checks that the input contains UK national insurance
+numbers.
 }
 \note{
-  A single space is allowed at the appropriate points
-  (after the first two letters and after each pair of
-  numbers) but not compulsory.
+A single space is allowed at the appropriate points (after
+the first two letters and after each pair of numbers) but
+not compulsory.
 }
 \examples{
 ni_numbers <- c(
@@ -53,7 +53,7 @@ assert_all_are_uk_national_insurance_numbers(ni_numbers)
 }
 }
 \references{
-  Regex taken from
-  \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
+Regex taken from
+\url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
 }
 

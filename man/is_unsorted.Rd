@@ -3,10 +3,10 @@
 \alias{is_unsorted}
 \title{Is the input unsorted?}
 \usage{
-  assert_is_unsorted(x, na.rm = FALSE, strictly = FALSE)
+assert_is_unsorted(x, na.rm = FALSE, strictly = FALSE)
 
-  is_unsorted(x, na.rm = FALSE, strictly = FALSE,
-    .xname = get_name_in_parent(x))
+is_unsorted(x, na.rm = FALSE, strictly = FALSE,
+  .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -20,23 +20,23 @@
   \item{.xname}{Not intended to be used directly.}
 }
 \value{
-  \code{is_unsorted} reimplements \code{is.unsorted},
-  providing more information on failure.
-  \code{assert_is_unsorted} returns nothing but throws an
-  error if \code{is_unsorted} returns \code{FALSE}.
+\code{is_unsorted} reimplements \code{is.unsorted},
+providing more information on failure.
+\code{assert_is_unsorted} returns nothing but throws an
+error if \code{is_unsorted} returns \code{FALSE}.
 }
 \description{
-  Checks to see if the input is unsorted (without the cost
-  of sorting it).
+Checks to see if the input is unsorted (without the cost of
+sorting it).
 }
 \note{
-  The builtin function \code{is.unsorted} usually returns
-  \code{NA} when the input is recursive and has length 2,
-  though for some classes (particularly data.frames) it
-  returns a \code{TRUE} or \code{FALSE} value.  The logic
-  behind those is difficult to interpret, and gives odd
-  results, so \code{is_unsorted} always returns \code{NA}
-  in this case.
+The builtin function \code{is.unsorted} usually returns
+\code{NA} when the input is recursive and has length 2,
+though for some classes (particularly data.frames) it
+returns a \code{TRUE} or \code{FALSE} value.  The logic
+behind those is difficult to interpret, and gives odd
+results, so \code{is_unsorted} always returns \code{NA} in
+this case.
 }
 \examples{
 assert_is_unsorted(c(1, 3, 2))
@@ -48,6 +48,6 @@ assert_is_unsorted(c(2, 1, 0))
 }
 }
 \seealso{
-  \code{\link[base]{is.unsorted}}.
+\code{\link[base]{is.unsorted}}.
 }
 

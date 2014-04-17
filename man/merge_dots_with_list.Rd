@@ -2,7 +2,7 @@
 \alias{merge_dots_with_list}
 \title{Merge ellipsis args with a list.}
 \usage{
-  merge_dots_with_list(..., l = list())
+merge_dots_with_list(..., l = list())
 }
 \arguments{
   \item{...}{Some inputs.}
@@ -10,16 +10,16 @@
   \item{l}{A list.}
 }
 \value{
-  A list containing the merged inputs.
+A list containing the merged inputs.
 }
 \description{
-  Merges variable length ellipsis arguments to a function
-  with a list argument.
+Merges variable length ellipsis arguments to a function
+with a list argument.
 }
 \note{
-  If any arguments are present in both the \code{...} and
-  \code{l} arguments, the \code{...} version takes
-  preference, and a warning is thrown.
+If any arguments are present in both the \code{...} and
+\code{l} arguments, the \code{...} version takes
+preference, and a warning is thrown.
 }
 \examples{
 merge_dots_with_list(foo = 1, bar = 2, baz = 3, l = list(foo = 4, baz = 5, quux = 6))

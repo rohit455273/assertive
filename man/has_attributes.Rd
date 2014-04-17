@@ -4,11 +4,11 @@
 \alias{has_attributes}
 \title{Does the input have the specified attributes?}
 \usage{
-  assert_has_all_attributes(x, attrs)
+assert_has_all_attributes(x, attrs)
 
-  assert_has_any_attributes(x, attrs)
+assert_has_any_attributes(x, attrs)
 
-  has_attributes(x, attrs, .xname = get_name_in_parent(x))
+has_attributes(x, attrs, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -18,13 +18,13 @@
   \item{.xname}{Not intended to be used directly.}
 }
 \value{
-  \code{has_attributes} returns \code{TRUE} where \code{x}
-  has the attributes specified in \code{attrs}.
-  \code{assert_has_terms} returns nothing but throws an
-  error if \code{has_terms} is not \code{TRUE}.
+\code{has_attributes} returns \code{TRUE} where \code{x}
+has the attributes specified in \code{attrs}.
+\code{assert_has_terms} returns nothing but throws an error
+if \code{has_terms} is not \code{TRUE}.
 }
 \description{
-  Checks to see if the input has the specifed attributes.
+Checks to see if the input has the specifed attributes.
 }
 \examples{
 x <- structure(c(a = 1), b = 2)

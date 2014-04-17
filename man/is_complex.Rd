@@ -5,13 +5,13 @@
 \alias{is_complex}
 \title{Is the input complex?}
 \usage{
-  assert_is_a_complex(x)
+assert_is_a_complex(x)
 
-  assert_is_complex(x)
+assert_is_complex(x)
 
-  is_a_complex(x, .xname = get_name_in_parent(x))
+is_a_complex(x, .xname = get_name_in_parent(x))
 
-  is_complex(x, .xname = get_name_in_parent(x))
+is_complex(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -19,15 +19,15 @@
   \item{.xname}{Not intended to be used directly.}
 }
 \value{
-  \code{is_complex} wraps \code{is.complex}, providing more
-  information on failure. \code{is_a_bool} returns
-  \code{TRUE} if the input is complex and scalar.  The
-  \code{assert_*} functions return nothing but throw an
-  error if the corresponding \code{is_*} function returns
-  \code{FALSE}.
+\code{is_complex} wraps \code{is.complex}, providing more
+information on failure. \code{is_a_bool} returns
+\code{TRUE} if the input is complex and scalar.  The
+\code{assert_*} functions return nothing but throw an error
+if the corresponding \code{is_*} function returns
+\code{FALSE}.
 }
 \description{
-  Checks to see if the input is complex.
+Checks to see if the input is complex.
 }
 \examples{
 assert_is_complex(c(1i, 2i))
@@ -42,7 +42,6 @@ assert_is_a_complex(complex())
 }
 }
 \seealso{
-  \code{\link[base]{is.complex}} and
-  \code{\link{is_scalar}}.
+\code{\link[base]{is.complex}} and \code{\link{is_scalar}}.
 }
 

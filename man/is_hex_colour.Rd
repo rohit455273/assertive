@@ -4,26 +4,26 @@
 \alias{is_hex_colour}
 \title{Does the character vector contain hex colours?}
 \usage{
-  assert_all_are_hex_colours(x)
+assert_all_are_hex_colours(x)
 
-  assert_any_are_hex_colours(x)
+assert_any_are_hex_colours(x)
 
-  is_hex_colour(x)
+is_hex_colour(x)
 }
 \arguments{
   \item{x}{Input to check.}
 }
 \value{
-  A logical vector that is \code{TRUE} when the input
-  contains hex colours.
+A logical vector that is \code{TRUE} when the input
+contains hex colours.
 }
 \description{
-  Checks that the input contains hexadecimal colours.
+Checks that the input contains hexadecimal colours.
 }
 \note{
-  A string is considered to represent a hexadecimal colour
-  when contains a hash followed by six hex values.  That
-  is, digits or the letters from a to f (case insensitive).
+A string is considered to represent a hexadecimal colour
+when contains a hash followed by six hex values.  That is,
+digits or the letters from a to f (case insensitive).
 }
 \examples{
 x <- c(

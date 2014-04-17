@@ -4,11 +4,11 @@
 \alias{is_null}
 \title{Is the input (not) null?}
 \usage{
-  assert_is_not_null(x)
+assert_is_not_null(x)
 
-  assert_is_null(x)
+assert_is_null(x)
 
-  is_null(x, .xname = get_name_in_parent(x))
+is_null(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -16,14 +16,14 @@
   \item{.xname}{Not intended to be used directly.}
 }
 \value{
-  \code{is_null} wraps \code{is.null}, providing more
-  information on failure. \code{is_not_null} returns
-  \code{TRUE} in the opposite case.  The \code{assert_*}
-  functions return nothing but throw an error if the
-  corresponding \code{is_*} function returns \code{FALSE}.
+\code{is_null} wraps \code{is.null}, providing more
+information on failure. \code{is_not_null} returns
+\code{TRUE} in the opposite case.  The \code{assert_*}
+functions return nothing but throw an error if the
+corresponding \code{is_*} function returns \code{FALSE}.
 }
 \description{
-  Checks to see if the input is (not) null.
+Checks to see if the input is (not) null.
 }
 \examples{
 assert_is_null(NULL)
@@ -31,6 +31,6 @@ assert_is_null(c())
 assert_is_not_null(NA)
 }
 \seealso{
-  \code{\link[base]{is.null}}.
+\code{\link[base]{is.null}}.
 }
 

@@ -2,7 +2,7 @@
 \alias{bapply}
 \title{Wrapper to vapply that returns booleans.}
 \usage{
-  bapply(x, predicate, ..., USE.NAMES = TRUE)
+bapply(x, predicate, ..., USE.NAMES = TRUE)
 }
 \arguments{
   \item{x}{A vector (atomic or list).}
@@ -15,13 +15,13 @@
   \item{...}{Passed to \code{vapply}.}
 }
 \value{
-  A logical vector.
+A logical vector.
 }
 \description{
-  Wrapper to \code{\link{vapply}} for functions that return
-  a boolean (logical scalar) value.
+Wrapper to \code{\link{vapply}} for functions that return a
+boolean (logical scalar) value.
 }
 \seealso{
-  \code{\link{vapply}}.
+\code{\link{vapply}}.
 }
 

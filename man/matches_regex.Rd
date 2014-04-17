@@ -2,7 +2,7 @@
 \alias{matches_regex}
 \title{Does the input match the regular expression?}
 \usage{
-  matches_regex(x, rx, ignore.case = TRUE, ...)
+matches_regex(x, rx, ignore.case = TRUE, ...)
 }
 \arguments{
   \item{x}{Input to check.}
@@ -15,17 +15,17 @@
   \item{...}{Passed to \code{\link{grepl}}.}
 }
 \value{
-  A logical vector that is \code{TRUE} when the input
-  matches the regular expression.
+A logical vector that is \code{TRUE} when the input matches
+the regular expression.
 }
 \description{
-  Checks that the input matches the regular expression.
+Checks that the input matches the regular expression.
 }
 \note{
-  The default for \code{ignore.case} is different to the
-  default in \code{grepl}.
+The default for \code{ignore.case} is different to the
+default in \code{grepl}.
 }
 \seealso{
-  \code{\link{regex}} and \code{\link{regexpr}}.
+\code{\link{regex}} and \code{\link{regexpr}}.
 }
 

@@ -1,21 +1,20 @@
 \name{assert_all_are_isbn_codes}
 \alias{assert_all_are_isbn_codes}
 \alias{assert_any_are_isbn_codes}
-\alias{is_isbn_code}
 \alias{is_isbn10_code}
 \alias{is_isbn13_code}
+\alias{is_isbn_code}
 \title{Does the character vector contain ISBN book codes?}
 \usage{
-  assert_all_are_isbn_codes(x, type = c("10", "13"))
+assert_all_are_isbn_codes(x, type = c("10", "13"))
 
-  assert_any_are_isbn_codes(x, type = c("10", "13"))
+assert_any_are_isbn_codes(x, type = c("10", "13"))
 
-  is_isbn10_code(x, .xname = get_name_in_parent(x))
+is_isbn10_code(x, .xname = get_name_in_parent(x))
 
-  is_isbn13_code(x, .xname = get_name_in_parent(x))
+is_isbn13_code(x, .xname = get_name_in_parent(x))
 
-  is_isbn_code(x, type = c("10", "13"),
-    .xname = get_name_in_parent(x))
+is_isbn_code(x, type = c("10", "13"), .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -26,12 +25,12 @@
   \item{.xname}{Not intended to be called directly.}
 }
 \value{
-  A logical vector that is \code{TRUE} when the input
-  contains valid ISBN book codes.
+A logical vector that is \code{TRUE} when the input
+contains valid ISBN book codes.
 }
 \description{
-  Checks that the input contains ISBN-10 or ISBN-13 book
-  codes.
+Checks that the input contains ISBN-10 or ISBN-13 book
+codes.
 }
 \examples{
 x10 <- c(

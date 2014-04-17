@@ -2,20 +2,22 @@
 \alias{locale_categories}
 \title{Allowed locale categories.}
 \usage{
-  locale_categories(include_all = TRUE,
-    include_unix = is_unix())
+locale_categories(include_all = TRUE, include_unix = is_unix())
 }
 \arguments{
   \item{include_all}{If \code{TRUE}, the value
   \code{LC_ALL} is included.}
+
+  \item{include_unix}{If \code{TRUE}, the extra unix-only
+  values are included.}
 }
 \value{
-  A character vector of locale categories.
+A character vector of locale categories.
 }
 \description{
-  The categories of locale that can be gotten/set.
+The categories of locale that can be gotten/set.
 }
 \seealso{
-  \code{\link{sys_get_locale}}.
+\code{\link{sys_get_locale}}.
 }
 

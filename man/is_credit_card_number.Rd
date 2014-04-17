@@ -4,13 +4,12 @@
 \alias{is_credit_card_number}
 \title{Does the character vector contain credit card numbers?}
 \usage{
-  assert_all_are_credit_card_numbers(x)
+assert_all_are_credit_card_numbers(x)
 
-  assert_any_are_credit_card_numbers(x)
+assert_any_are_credit_card_numbers(x)
 
-  is_credit_card_number(x,
-    type = c("visa", "mastercard", "amex", "diners", "discover", "jcb"),
-    .xname = get_name_in_parent(x))
+is_credit_card_number(x, type = c("visa", "mastercard", "amex", "diners",
+  "discover", "jcb"), .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -21,15 +20,15 @@
   \item{.xname}{Not intended to be called directly.}
 }
 \value{
-  A logical vector that is \code{TRUE} when the input
-  contains valid credit card numbers.
+A logical vector that is \code{TRUE} when the input
+contains valid credit card numbers.
 }
 \description{
-  Checks that the input contains credit card numbers.
+Checks that the input contains credit card numbers.
 }
 \note{
-  Legacy card numbers, for example 13 digit Visa numbers
-  and 15 digits JCB numbers are not supported.
+Legacy card numbers, for example 13 digit Visa numbers and
+15 digits JCB numbers are not supported.
 }
 \examples{
 x <- c(
@@ -66,9 +65,9 @@ assert_all_are_credit_card_numbers(x)
 }
 }
 \references{
-  \url{http://www.regular-expressions.info/creditcard.html}
-  contains the regexes used by this function. The example
-  valid card numbers are from
-  \url{http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm}
+\url{http://www.regular-expressions.info/creditcard.html}
+contains the regexes used by this function. The example
+valid card numbers are from
+\url{http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm}
 }
 

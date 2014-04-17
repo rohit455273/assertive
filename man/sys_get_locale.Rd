@@ -3,9 +3,9 @@
 \alias{sys_set_locale}
 \title{Get or set the system locale}
 \usage{
-  sys_get_locale(simplify = FALSE)
+sys_get_locale(simplify = FALSE)
 
-  sys_set_locale(..., l = list())
+sys_set_locale(..., l = list())
 }
 \arguments{
   \item{simplify}{If \code{TRUE}, the locale settings are
@@ -17,11 +17,11 @@
   local categories to set.}
 }
 \value{
-  A named list or vector giving the system locale names.
+A named list or vector giving the system locale names.
 }
 \description{
-  Wrappers to \code{Sys.getlocale} and \code{Sys.setlocale}
-  for getting and setting the system locale.
+Wrappers to \code{Sys.getlocale} and \code{Sys.setlocale}
+for getting and setting the system locale.
 }
 \examples{
 (current_locale <- sys_get_locale())
@@ -36,6 +36,6 @@ sys_set_locale(l = current_locale)  #restore everything
 }
 }
 \seealso{
-  \code{\link[base]{Sys.getlocale}}.
+\code{\link[base]{Sys.getlocale}}.
 }
 

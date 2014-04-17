@@ -3,9 +3,9 @@
 \alias{cause<-}
 \title{Get or set the \code{"cause"} attribute.}
 \usage{
-  cause(x)
+cause(x)
 
-  cause(x, value) <- value
+cause(x) <- value
 }
 \arguments{
   \item{x}{Any variable.}
@@ -14,11 +14,11 @@
   \code{"cause"} attribute.}
 }
 \value{
-  The get method returns the \code{"cause"} attribute.
+The get method returns the \code{"cause"} attribute.
 }
 \description{
-  Gets or sets the \code{"cause"} (of failure) attribute of
-  a variable.
+Gets or sets the \code{"cause"} (of failure) attribute of a
+variable.
 }
 \examples{
 yn <- is_a_bool(123)

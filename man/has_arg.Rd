@@ -2,7 +2,7 @@
 \alias{has_arg}
 \title{Does the current call have an argument?}
 \usage{
-  has_arg(x, fn = sys.function(sys.parent()))
+has_arg(x, fn = sys.function(sys.parent()))
 }
 \arguments{
   \item{x}{Argument to check.}
@@ -10,17 +10,17 @@
   \item{fn}{Function to find the argument in.}
 }
 \value{
-  \code{has_arg} reimplements \code{\link{[base]hasArg}},
-  letting you choose the function to serach in, and
-  providing more information on failure.
+\code{has_arg} reimplements \code{\link[methods]{hasArg}},
+letting you choose the function to search in, and providing
+more information on failure.
 }
 \description{
-  Checks to see if the current call has an argument with
-  the name given in the input.
+Checks to see if the current call has an argument with the
+name given in the input.
 }
 \note{
-  There is currently no corresponding \code{assert_has_arg}
-  function, because evaluating in the correct call is hard.
+There is currently no corresponding \code{assert_has_arg}
+function, because evaluating in the correct call is hard.
 }
 \examples{
 has_arg(x, mean.default)
@@ -30,6 +30,6 @@ f(z = 123)
 f(123)
 }
 \seealso{
-  \code{\link{[base]hasArg}}.
+\code{\link[methods]{hasArg}}.
 }
 

@@ -2,7 +2,7 @@
 \alias{create_regex}
 \title{Create a regex from components.}
 \usage{
-  create_regex(..., l = list(), sep = "[- ]?")
+create_regex(..., l = list(), sep = "[- ]?")
 }
 \arguments{
   \item{...}{Character vectors of regex components.}
@@ -14,15 +14,15 @@
   regex. Defaults to "an optional space or hyphen".}
 }
 \value{
-  A string containing a regex. Each element in the vectors
-  are pasted together, separated by the \code{sep} value.
-  Those character vectors are then preceded by "^" (regex
-  for 'start of string'() and followed by "$" (regex for
-  end of string).  Finally, the regexes are collapsed with
-  "|" (regex for 'or').
+A string containing a regex. Each element in the vectors
+are pasted together, separated by the \code{sep} value.
+Those character vectors are then preceded by "^" (regex for
+'start of string'() and followed by "$" (regex for end of
+string).  Finally, the regexes are collapsed with "|"
+(regex for 'or').
 }
 \description{
-  Creates a regex from regex components.
+Creates a regex from regex components.
 }
 \examples{
 \dontrun{

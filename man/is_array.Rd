@@ -5,13 +5,13 @@
 \alias{is_matrix}
 \title{Is the input an array or matrix?}
 \usage{
-  assert_is_array(x)
+assert_is_array(x)
 
-  assert_is_matrix(x)
+assert_is_matrix(x)
 
-  is_array(x, .xname = get_name_in_parent(x))
+is_array(x, .xname = get_name_in_parent(x))
 
-  is_matrix(x, .xname = get_name_in_parent(x))
+is_matrix(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -19,15 +19,14 @@
   \item{.xname}{Not intended to be used directly.}
 }
 \value{
-  \code{is_array} and \code{is_matrix} wrap
-  \code{is.array}, and \code{is.matrix} respectively,
-  providing more information on failure.  The
-  \code{assert_*} functions return nothing but throw an
-  error if the corresponding \code{is_*} function returns
-  \code{FALSE}.
+\code{is_array} and \code{is_matrix} wrap \code{is.array},
+and \code{is.matrix} respectively, providing more
+information on failure.  The \code{assert_*} functions
+return nothing but throw an error if the corresponding
+\code{is_*} function returns \code{FALSE}.
 }
 \description{
-  Checks to see if the input is an array or matrix.
+Checks to see if the input is an array or matrix.
 }
 \examples{
 assert_is_array(array())

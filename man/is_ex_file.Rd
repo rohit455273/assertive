@@ -10,36 +10,36 @@
 \alias{is_writable_file}
 \title{Is the file accessible?}
 \usage{
-  assert_all_are_executable_files(x)
+assert_all_are_executable_files(x)
 
-  assert_any_are_executable_files(x)
+assert_any_are_executable_files(x)
 
-  assert_all_are_readable_files(x)
+assert_all_are_readable_files(x)
 
-  assert_any_are_readable_files(x)
+assert_any_are_readable_files(x)
 
-  assert_all_are_writable_files(x)
+assert_all_are_writable_files(x)
 
-  assert_any_are_writable_files(x)
+assert_any_are_writable_files(x)
 
-  is_ex_file(x)
+is_ex_file(x)
 
-  is_readable_file(x)
+is_readable_file(x)
 
-  is_writable_file(x)
+is_writable_file(x)
 }
 \arguments{
   \item{x}{Input to check.}
 }
 \value{
-  \code{is_ex_file} wraps \code{file.access}, showing the
-  names of the inputs in the answer.
-  \code{assert_is_ex_file} returns nothing but throws an
-  error if \code{is_ex_file} returns \code{FALSE}.
+\code{is_ex_file} wraps \code{file.access}, showing the
+names of the inputs in the answer.
+\code{assert_is_ex_file} returns nothing but throws an
+error if \code{is_ex_file} returns \code{FALSE}.
 }
 \description{
-  Checks to see if the input files can be
-  executed/read/written to.
+Checks to see if the input files can be
+executed/read/written to.
 }
 \examples{
 \dontrun{
@@ -47,6 +47,6 @@ assert_all_are_readable_files(dir())
 }
 }
 \seealso{
-  \code{\link[base]{file.access}}.
+\code{\link[base]{file.access}}.
 }
 

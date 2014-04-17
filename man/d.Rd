@@ -2,7 +2,7 @@
 \alias{d}
 \title{Create regex for repeated digits}
 \usage{
-  d(lo, hi, optional = FALSE)
+d(lo, hi, optional = FALSE)
 }
 \arguments{
   \item{lo}{Minimum number of digits to match.}
@@ -12,14 +12,14 @@
   \item{optional}{If \code{TRUE}, the digits are optional.}
 }
 \value{
-  A character vector of regexes.
+A character vector of regexes.
 }
 \description{
-  Creates a regex string for repeated digits.
+Creates a regex string for repeated digits.
 }
 \note{
-  If \code{hi} is omitted, the returned regex will only
-  match the exact number of digits given by \code{lo}.
+If \code{hi} is omitted, the returned regex will only match
+the exact number of digits given by \code{lo}.
 }
 \examples{
 \dontrun{

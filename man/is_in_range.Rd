@@ -34,88 +34,78 @@
 \alias{is_proportion}
 \title{Is the input in range?}
 \usage{
-  assert_all_are_in_closed_range(x, lower = -Inf,
-    upper = Inf)
+assert_all_are_in_closed_range(x, lower = -Inf, upper = Inf)
 
-  assert_any_are_in_closed_range(x, lower = -Inf,
-    upper = Inf)
+assert_any_are_in_closed_range(x, lower = -Inf, upper = Inf)
 
-  assert_all_are_in_left_open_range(x, lower = -Inf,
-    upper = Inf)
+assert_all_are_in_left_open_range(x, lower = -Inf, upper = Inf)
 
-  assert_any_are_in_left_open_range(x, lower = -Inf,
-    upper = Inf)
+assert_any_are_in_left_open_range(x, lower = -Inf, upper = Inf)
 
-  assert_all_are_in_open_range(x, lower = -Inf,
-    upper = Inf)
+assert_all_are_in_open_range(x, lower = -Inf, upper = Inf)
 
-  assert_any_are_in_open_range(x, lower = -Inf,
-    upper = Inf)
+assert_any_are_in_open_range(x, lower = -Inf, upper = Inf)
 
-  assert_all_are_in_range(x, lower = -Inf, upper = Inf,
-    lower_is_strict = FALSE, upper_is_strict = FALSE)
+assert_all_are_in_range(x, lower = -Inf, upper = Inf,
+  lower_is_strict = FALSE, upper_is_strict = FALSE)
 
-  assert_any_are_in_range(x, lower = -Inf, upper = Inf,
-    lower_is_strict = FALSE, upper_is_strict = FALSE)
+assert_any_are_in_range(x, lower = -Inf, upper = Inf,
+  lower_is_strict = FALSE, upper_is_strict = FALSE)
 
-  assert_all_are_in_right_open_range(x, lower = -Inf,
-    upper = Inf)
+assert_all_are_in_right_open_range(x, lower = -Inf, upper = Inf)
 
-  assert_any_are_in_right_open_range(x, lower = -Inf,
-    upper = Inf)
+assert_any_are_in_right_open_range(x, lower = -Inf, upper = Inf)
 
-  assert_all_are_negative(x)
+assert_all_are_negative(x)
 
-  assert_any_are_negative(x)
+assert_any_are_negative(x)
 
-  assert_all_are_non_negative(x)
+assert_all_are_non_negative(x)
 
-  assert_any_are_non_negative(x)
+assert_any_are_non_negative(x)
 
-  assert_all_are_non_positive(x)
+assert_all_are_non_positive(x)
 
-  assert_any_are_non_positive(x)
+assert_any_are_non_positive(x)
 
-  assert_all_are_percentages(x, lower_is_strict = FALSE,
-    upper_is_strict = FALSE)
+assert_all_are_percentages(x, lower_is_strict = FALSE,
+  upper_is_strict = FALSE)
 
-  assert_any_are_percentages(x, lower_is_strict = FALSE,
-    upper_is_strict = FALSE)
+assert_any_are_percentages(x, lower_is_strict = FALSE,
+  upper_is_strict = FALSE)
 
-  assert_all_are_positive(x)
+assert_all_are_positive(x)
 
-  assert_any_are_positive(x)
+assert_any_are_positive(x)
 
-  assert_all_are_proportions(x, lower_is_strict = FALSE,
-    upper_is_strict = FALSE)
+assert_all_are_proportions(x, lower_is_strict = FALSE,
+  upper_is_strict = FALSE)
 
-  assert_any_are_proportions(x, lower_is_strict = FALSE,
-    upper_is_strict = FALSE)
+assert_any_are_proportions(x, lower_is_strict = FALSE,
+  upper_is_strict = FALSE)
 
-  is_in_closed_range(x, lower = -Inf, upper = Inf)
+is_in_closed_range(x, lower = -Inf, upper = Inf)
 
-  is_in_left_open_range(x, lower = -Inf, upper = Inf)
+is_in_left_open_range(x, lower = -Inf, upper = Inf)
 
-  is_in_open_range(x, lower = -Inf, upper = Inf)
+is_in_open_range(x, lower = -Inf, upper = Inf)
 
-  is_in_range(x, lower = -Inf, upper = Inf,
-    lower_is_strict = FALSE, upper_is_strict = FALSE)
+is_in_range(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE,
+  upper_is_strict = FALSE)
 
-  is_in_right_open_range(x, lower = -Inf, upper = Inf)
+is_in_right_open_range(x, lower = -Inf, upper = Inf)
 
-  is_negative(x)
+is_negative(x)
 
-  is_non_negative(x)
+is_non_negative(x)
 
-  is_non_positive(x)
+is_non_positive(x)
 
-  is_percentage(x, lower_is_strict = FALSE,
-    upper_is_strict = FALSE)
+is_percentage(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
 
-  is_positive(x)
+is_positive(x)
 
-  is_proportion(x, lower_is_strict = FALSE,
-    upper_is_strict = FALSE)
+is_proportion(x, lower_is_strict = FALSE, upper_is_strict = FALSE)
 }
 \arguments{
   \item{x}{Input to check.}
@@ -131,21 +121,20 @@
   open (strict) otherwise it is closed.}
 }
 \value{
-  The \code{is_*} function return \code{TRUE} if the input
-  is within an interval.  The \code{assert_*} functions
-  return nothing but throw an error if the corresponding
-  \code{is_*} function returns \code{FALSE}.
+The \code{is_*} function return \code{TRUE} if the input is
+within an interval.  The \code{assert_*} functions return
+nothing but throw an error if the corresponding \code{is_*}
+function returns \code{FALSE}.
 }
 \description{
-  Checks to see if the input is within an numeric interval.
+Checks to see if the input is within an numeric interval.
 }
 \note{
-  \code{is_in_range} provides the most flexibility in
-  determining if values are within a numeric interval.  The
-  other functions restrict the input arguments for
-  convience in common cases.  For example,
-  \code{is_percentage} forces the interval to be from 0 to
-  100.
+\code{is_in_range} provides the most flexibility in
+determining if values are within a numeric interval.  The
+other functions restrict the input arguments for convience
+in common cases.  For example, \code{is_percentage} forces
+the interval to be from 0 to 100.
 }
 \examples{
 assert_all_are_positive(1:10)

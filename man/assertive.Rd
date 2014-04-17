@@ -4,18 +4,17 @@
 \alias{assertive-package}
 \title{Readable check functions to ensure code integrity.}
 \description{
-  \code{assertive} contains lots of \code{is_*} functions
-  to check the state of your variables, and \code{assert_*}
-  functions to throw errors if they aren't in the right
-  form.
+\code{assertive} contains lots of \code{is_*} functions to
+check the state of your variables, and \code{assert_*}
+functions to throw errors if they aren't in the right form.
 }
 \details{
-  When the package loads, it creates a global option
-  \code{"assertive.severity"} that determines what happens
-  when an \code{assert_*} function's input fails the
-  condition.  By default, an error is thrown but it is
-  possible to generate warnings or messages instead (see
-  the examples).
+When the package loads, it creates a global option
+\code{"assertive.severity"} that determines what happens
+when an \code{assert_*} function's input fails the
+condition.  By default, an error is thrown but it is
+possible to generate warnings or messages instead (see the
+examples).
 }
 \examples{
 \dontrun{
@@ -27,6 +26,6 @@ options(old_op)
 }
 }
 \author{
-  Richard Cotton \email{richierocks@gmail.com}
+Richard Cotton \email{richierocks@gmail.com}
 }
 

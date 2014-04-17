@@ -4,11 +4,11 @@
 \alias{is_cas_number}
 \title{Does the character vector contain CAS registry numbers?}
 \usage{
-  assert_all_are_cas_numbers(x)
+assert_all_are_cas_numbers(x)
 
-  assert_any_are_cas_numbers(x)
+assert_any_are_cas_numbers(x)
 
-  is_cas_number(x, .xname = get_name_in_parent(x))
+is_cas_number(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
@@ -16,17 +16,17 @@
   \item{.xname}{Not intended to be called directly.}
 }
 \value{
-  A logical vector that is \code{TRUE} when the input
-  contains valid CAS registry numbers.
+A logical vector that is \code{TRUE} when the input
+contains valid CAS registry numbers.
 }
 \description{
-  Checks that the input contains Chemical Abstract Service
-  registry numbers.
+Checks that the input contains Chemical Abstract Service
+registry numbers.
 }
 \note{
-  CAS numbers take the form of 1 to 7 digits followed by a
-  hyphen, followed by 2 digits, another hyphen and a final
-  check digit.
+CAS numbers take the form of 1 to 7 digits followed by a
+hyphen, followed by 2 digits, another hyphen and a final
+check digit.
 }
 \examples{
 x <- c(
@@ -45,6 +45,6 @@ assert_all_are_cas_numbers(x)
 }
 }
 \references{
-  Chemspider is a good service for looking up CAS numbers.
+Chemspider is a good service for looking up CAS numbers.
 }
 

@@ -4,28 +4,28 @@
 \alias{is_ip_address}
 \title{Does the character vector contain IP addresses?}
 \usage{
-  assert_all_are_ip_addresses(x)
+assert_all_are_ip_addresses(x)
 
-  assert_any_are_ip_addresses(x)
+assert_any_are_ip_addresses(x)
 
-  is_ip_address(x)
+is_ip_address(x)
 }
 \arguments{
   \item{x}{Input to check.}
 }
 \value{
-  A logical vector that is \code{TRUE} when the input
-  contains valid IP addresses.
+A logical vector that is \code{TRUE} when the input
+contains valid IP addresses.
 }
 \description{
-  Checks that the input contains IP addresses.  (It does
-  not check that the address exists, merely that the string
-  is in a suitable format.)
+Checks that the input contains IP addresses.  (It does not
+check that the address exists, merely that the string is in
+a suitable format.)
 }
 \note{
-  Valid IP addresses are considered to be four integers in
-  the range 0 to 255, separated by dots, or the string
-  "localhost".
+Valid IP addresses are considered to be four integers in
+the range 0 to 255, separated by dots, or the string
+"localhost".
 }
 \examples{
 x <- c(

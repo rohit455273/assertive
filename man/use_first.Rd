@@ -2,18 +2,20 @@
 \alias{use_first}
 \title{Only use the first element of a vector.}
 \usage{
-  use_first(x)
+use_first(x, indexer = c("[[", "["))
 }
 \arguments{
   \item{x}{Input that should be scalar.}
+
+  \item{indexer}{Either double indexing, \code{"[["} (the
+  default) or single indexing \code{"["}.}
 }
 \value{
-  If \code{x} is scalar, it is returned unchanged,
-  otherwise only the first element is returned, with a
-  warning.
+If \code{x} is scalar, it is returned unchanged, otherwise
+only the first element is returned, with a warning.
 }
 \description{
-  If the input is not scalar, then only the first element
-  is returned, with a warning.
+If the input is not scalar, then only the first element is
+returned, with a warning.
 }
 

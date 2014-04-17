@@ -6,32 +6,31 @@
 \alias{is_xxx_for_decimal_point}
 \title{What does the current locale specify for the decimal point?}
 \usage{
-  assert_is_comma_for_decimal_point()
+assert_is_comma_for_decimal_point()
 
-  assert_is_period_for_decimal_point()
+assert_is_period_for_decimal_point()
 
-  is_comma_for_decimal_point()
+is_comma_for_decimal_point()
 
-  is_period_for_decimal_point()
+is_period_for_decimal_point()
 
-  is_xxx_for_decimal_point(dp)
+is_xxx_for_decimal_point(dp)
 }
 \arguments{
   \item{dp}{Character to be used as a decimal point.}
 }
 \value{
-  \code{is_comma_for_decimal_point} returns \code{TRUE}
-  when the current locale uses a comma for a decimal place,
-  as determined by \code{Sys.localeconv}. Similarly,
-  \code{is_period_for_decimal_point} returns \code{TRUE}
-  when the current locale uses a period (a.k.a. full stop)
-  for a decimal place.  If R has been compiled without
-  support for locales, then the value will always be
-  \code{NA}.
+\code{is_comma_for_decimal_point} returns \code{TRUE} when
+the current locale uses a comma for a decimal place, as
+determined by \code{Sys.localeconv}. Similarly,
+\code{is_period_for_decimal_point} returns \code{TRUE} when
+the current locale uses a period (a.k.a. full stop) for a
+decimal place.  If R has been compiled without support for
+locales, then the value will always be \code{NA}.
 }
 \description{
-  Does the current locale specify a comma or a period for
-  the decimal point?
+Does the current locale specify a comma or a period for the
+decimal point?
 }
 \examples{
 #A useful guess for reading in files:
