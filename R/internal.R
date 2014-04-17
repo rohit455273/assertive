@@ -117,7 +117,7 @@ character_to_list_of_integer_vectors <- function(x)
 #' }
 create_regex <- function (..., l = list(), sep = "[- ]?")
 {
-  x <- assertive:::merge_dots_with_list(..., l = l)
+  x <- merge_dots_with_list(..., l = l)
   rx <- vapply(
     x,
     function(x)

@@ -74,7 +74,7 @@ has_arg <- function(x, fn = sys.function(sys.parent()))
   if(!arg_name %in% formal_args_of_fn)
   {                             
     fn_name <- get_name_in_parent(fn)
-    fail <- assertive:::false("%s is not an argument of %s", sQuote(arg_name), sQuote(fn_name))
+    fail <- false("%s is not an argument of %s", sQuote(arg_name), sQuote(fn_name))
     if("..." %in% formal_args_of_fn)
     {
       dots_call <- eval(quote(substitute(list(...))), sys.parent())
