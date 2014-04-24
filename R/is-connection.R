@@ -89,6 +89,17 @@ is_file_connection <- function(x, .xname = get_name_in_parent(x))
 
 #' @rdname is_connection
 #' @export
+is_gzfile_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "gzfile", .xname)
+}
+
+#' @rdname is_connection
+#' @export
 is_incomplete_connection <- function(x, .xname = get_name_in_parent(x))
 {  
   if(!(ok <- is_open_connection(x))) return(ok)
@@ -129,6 +140,7 @@ is_pipe_connection <- function(x, .xname = get_name_in_parent(x))
   {
     return(false("%s is not a pipe", .xname))
   }
+  TRUE
 }
 #' @rdname is_connection
 #' @export
