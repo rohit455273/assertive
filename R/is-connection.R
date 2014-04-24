@@ -1,3 +1,14 @@
+#' @rdname is_connection
+#' @export
+is_bzfile_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "bzfile", .xname)
+}
+
 #' Is the input a connection?
 #'
 #' Checks to see if the input is a (open/incomplete) connection.
@@ -36,15 +47,24 @@ is_connection <- function(x, .xname = get_name_in_parent(x))
 
 #' @rdname is_connection
 #' @export
-is_open_connection <- function(x, rw = "", .xname = get_name_in_parent(x))
+is_fifo_connection <- function(x, .xname = get_name_in_parent(x))
 {
-  rw <- use_first(rw)
-  if(!(ok <- is_connection(x))) return(ok)
-  if(!is_error_free(isOpen(x, rw)))
+  if(!(ok <- is_connection(x))) 
   {
-    return(false("The connection %s is not open.", .xname))
+    return(ok)
   }
-  TRUE
+  is2(x, "fifo", .xname)
+}
+
+#' @rdname is_connection
+#' @export
+is_file_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "file", .xname)
 }
 
 #' @rdname is_connection
@@ -57,4 +77,170 @@ is_incomplete_connection <- function(x, .xname = get_name_in_parent(x))
     return(false("The connection %s is complete.", .xname))
   }
   TRUE
+}
+
+#' @rdname is_connection
+#' @export
+is_open_connection <- function(x, rw = "", .xname = get_name_in_parent(x))
+{
+  rw <- use_first(rw)
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  if(!is_error_free(isOpen(x, rw)))
+  {
+    return(false("The connection %s is not open.", .xname))
+  }
+  TRUE
+}
+
+#' @rdname is_connection
+#' @export
+is_pipe_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  # Can't use is2(x, "pipe", .xname).  The class is OS dependent.
+  summary_of_x <- summary(x)
+  if(summary_of_x$class != "pipe")
+  {
+    return(false("%s is not a pipe", .xname))
+  }
+}
+#' @rdname is_connection
+#' @export
+is_readable_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  summary_of_x <- summary(x)
+  if(summary_of_x$`can read` != "yes")
+  {
+    return(false("The connection %s is not readable.", .xname))
+  }
+  TRUE
+}
+
+#' @rdname is_connection
+#' @export
+is_socket_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "sockconn", .xname)
+}
+
+#' @rdname is_connection
+#' @export
+is_stderr <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_terminal_connection(x))) 
+  {
+    return(ok)
+  }
+  summary_of_x <- summary(x)
+  if(summary_of_x$description != "stderr")
+  {
+    return(false("The connection %s is not stderr.", .xname))
+  }
+  TRUE
+}
+
+#' @rdname is_connection
+#' @export
+is_stdin <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_terminal_connection(x))) 
+  {
+    return(ok)
+  }
+  summary_of_x <- summary(x)
+  if(summary_of_x$description != "stdin")
+  {
+    return(false("The connection %s is not stdin.", .xname))
+  }
+  TRUE
+}
+
+#' @rdname is_connection
+#' @export
+is_stdout <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_terminal_connection(x))) 
+  {
+    return(ok)
+  }
+  summary_of_x <- summary(x)
+  if(summary_of_x$description != "stdout")
+  {
+    return(false("The connection %s is not stdout.", .xname))
+  }
+  TRUE
+}
+
+#' @rdname is_connection
+#' @export
+is_terminal_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "terminal", .xname)
+}
+
+#' @rdname is_connection
+#' @export
+is_unz_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "unz", .xname)
+}
+
+#' @rdname is_connection
+#' @export
+is_url_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "url", .xname)
+}
+
+#' @rdname is_connection
+#' @export
+is_writable_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  summary_of_x <- summary(x)
+  if(summary_of_x$`can write` != "yes")
+  {
+    return(false("The connection %s is not writable.", .xname))
+  }
+  TRUE
+}
+
+#' @rdname is_connection
+#' @export
+is_xzfile_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "xzfile", .xname)
 }
