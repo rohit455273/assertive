@@ -11,23 +11,41 @@ is_bzfile_connection <- function(x, .xname = get_name_in_parent(x))
 
 #' Is the input a connection?
 #'
-#' Checks to see if the input is a (open/incomplete) connection.
-#'
+#' Various checks to see if the input is a (particular type of/open/incomplete) 
+#' connection.
 #' @param x Input to check.
 #' @param rw Read-write status of connection.  Passed to \code{isOpen}.
 #' @param .xname Not intended to be used directly.
 #' @return \code{is_connection} checks for objects of class "connection".
-#' \code{is_open_connection} and \code{is_incomplete_connection} wrap \code{isOpen} and 
-#' \code{isIncomplete} respectively, providing more information on failure.
-#' The \code{assert_*} functions return nothing but throw an error if the corresponding
-#' \code{is_*} function returns \code{FALSE}.
+#' \code{is_open_connection} and \code{is_incomplete_connection} wrap 
+#' \code{isOpen} and \code{isIncomplete} respectively, providing more 
+#' information on failure.
+#' \code{is_readable_connection} and \code{is_writable_connection} tell you
+#' whether the connection is readable from or writable to.
+#' \code{is_bzfile_connection}, \code{is_fifo_connection}, 
+#' \code{is_file_connection}, \code{is_pipe_connection}, 
+#' \code{is_socket_connection}, \code{is_stderr}, \code{is_stdin}, 
+#' \code{is_stdout}, \code{is_text_connection}, \code{is_unz_connection},
+#' \code{is_url_connection} and \code{is_xzfile_connection} give more
+#' specific tests on the type of connection.
+#' The \code{assert_*} functions return nothing but throw an error if the 
+#' corresponding \code{is_*} function returns \code{FALSE}.
 #' @note \code{is_incomplete_connection} will return false for closed connections, 
 #' regardless of whether or not the connection ends with a newline character.
 #' (\code{isIncomplete} throws an error for closed connections.)
 #' @seealso \code{\link[base]{isOpen}}.
 #' @examples
 #' assert_is_connection(stdin())
+#' assert_is_readable_connection(stdin())
+#' assert_is_stdin(stdin())
+#' assert_is_connection(stdout())
+#' assert_is_writable_connection(stdout())
+#' assert_is_stdout(stdout())
+#' assert_is_connection(stderr())
+#' assert_is_writable_connection(stderr())
+#' assert_is_stderr(stderr())
 #' tcon <- textConnection("txt", "w", local = TRUE)
+#' assert_is_text_connection(tcon)
 #' assert_is_open_connection(tcon)
 #' cat("this has no final newline character", file = tcon)
 #' assert_is_incomplete_connection(tcon)
@@ -35,6 +53,8 @@ is_bzfile_connection <- function(x, .xname = get_name_in_parent(x))
 #' \dontrun{
 #' #These examples should fail.
 #' assert_is_connection("not a connection")
+#' assert_is_readable_connection(stdout())
+#' assert_is_writable_connection(stdin())
 #' fcon <- file()
 #' close(fcon)
 #' assert_is_open_connection(fcon)
@@ -194,6 +214,17 @@ is_terminal_connection <- function(x, .xname = get_name_in_parent(x))
     return(ok)
   }
   is2(x, "terminal", .xname)
+}
+
+#' @rdname is_connection
+#' @export
+is_text_connection <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_connection(x))) 
+  {
+    return(ok)
+  }
+  is2(x, "textConnection", .xname)
 }
 
 #' @rdname is_connection
