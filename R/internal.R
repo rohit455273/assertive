@@ -180,6 +180,26 @@ false <- function(...)
   x
 }
 
+#' Convert file connections to strings
+#' 
+#' \code{as.character} method for file connections.
+#' @param x A file connection.
+#' @return A string containing the target location of the file connection.
+#' @seealso \code{\link[base]{file}}, \code{\link[base]{summary.connection}},
+#' \code{\link[base]{as.character}}
+#' @examples
+#' rprofile <- file.path(R.home("etc"), "Rprofile.site")
+#' fcon <- file(rprofile)
+#' assert_all_are_true(identical(as.character(fcon), rprofile))
+#' close(fcon)
+as.character.file <- function(x)
+{
+  # Assertion is to double check that no other package has overwritten the 
+  # file class.
+  assert_is_file_connection(x)
+  summary(x)$description
+}
+
 #' Allowed locale categories.
 #'
 #' The categories of locale that can be gotten/set.
