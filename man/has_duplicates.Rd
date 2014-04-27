@@ -9,12 +9,14 @@ assert_has_duplicates(x)
 
 assert_has_no_duplicates(x)
 
-has_duplicates(x)
+has_duplicates(x, .xname = get_name_in_parent(x))
 
-has_no_duplicates(x)
+has_no_duplicates(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
 \code{has_duplicates} returns \code{TRUE}

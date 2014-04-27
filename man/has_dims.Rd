@@ -5,10 +5,12 @@
 \usage{
 assert_has_dims(x)
 
-has_dims(x)
+has_dims(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
 \code{has_dims} returns\code{TRUE} if \code{dim} is

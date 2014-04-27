@@ -9,12 +9,14 @@ assert_has_cols(x)
 
 assert_has_rows(x)
 
-has_cols(x)
+has_cols(x, .xname = get_name_in_parent(x))
 
-has_rows(x)
+has_rows(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
 \code{has_rows} and \code{has_cols} return \code{TRUE} if

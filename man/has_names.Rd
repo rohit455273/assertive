@@ -17,16 +17,18 @@ assert_has_names(x)
 
 assert_has_rownames(x)
 
-has_colnames(x)
+has_colnames(x, .xname = get_name_in_parent(x))
 
-has_dimnames(x)
+has_dimnames(x, .xname = get_name_in_parent(x))
 
-has_names(x)
+has_names(x, .xname = get_name_in_parent(x))
 
-has_rownames(x)
+has_rownames(x, .xname = get_name_in_parent(x))
 }
 \arguments{
   \item{x}{Input to check.}
+
+  \item{.xname}{Not intended to be used directly.}
 }
 \value{
 \code{has_names} returns \code{TRUE} if \code{names} is
