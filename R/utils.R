@@ -11,6 +11,7 @@
 #' fcon <- file(rprofile)
 #' assert_all_are_true(identical(as.character(fcon), rprofile))
 #' close(fcon)
+#' @method as.character file
 #' @export
 as.character.file <- function(x, ...)
 {
