@@ -13,7 +13,8 @@ is_64_bit_os <- function()
 #' 
 #' Tests to see if R is running in batch mode/interactively.
 #' 
-#' @return \code{is_batch_mode} returns \code{TRUE} if R is running in batch mode.
+#' @return \code{is_batch_mode} returns \code{TRUE} if R is running in batch 
+#' mode.
 #' \code{is_interactive} returns \code{TRUE} if R is running interactively.
 #' @seealso \code{\link[base]{EnvVar}} and \code{\link[base]{interactive}}.
 #' @export
@@ -61,7 +62,9 @@ is_mac <- function()
 {
   if(Sys.info()["sysname"] != "Darwin")
   {
-    return(false("The operating system is not OS X (or another Darwin-based OS)."))
+    return(false(
+      "The operating system is not OS X (or another Darwin-based OS)."
+    ))
   }
   TRUE
 }
@@ -74,12 +77,18 @@ is_mac <- function()
 #' @note The OS search path is determined with \code{Sys.getenv("path")}.
 #' @return \code{TRUE} if the sepcified paths are on the OS search path.
 #' @examples
-#' is_on_os_path(c(R.home("bin"), "a nonexistent path")) #probably c(TRUE, FALSE)
+#' is_on_os_path(
+#'   c(R.home("bin"), 
+#'   "a nonexistent path"
+#' )) #probably c(TRUE, FALSE)
 #' @export
 is_on_os_path <- function(x)
 {
-  paths <- normalizePath(strsplit(Sys.getenv("path"), ";")[[1]], mustWork = FALSE)
-  x <- normalizePath(coerce_to(x, "character"), mustWork = FALSE)
+  paths <- normalizePath(
+    strsplit(Sys.getenv("path"), ";")[[1]], 
+    mustWork = FALSE
+  )
+  x <- normalizePath(path.expand(coerce_to(x, "character")), mustWork = FALSE)
   call_and_name(function(x) x %in% paths, x)  
 }
 
@@ -127,9 +136,10 @@ is_unix <- function()
 #' 
 #' Is the operating system in this machine Windows/Unix/Mac based.
 #' 
-#' @return \code{is_windows} returns \code{TRUE} if the OS on the current platform
-#' is Microsoft windows-based.  \code{is_unix} returns \code{TRUE} if the OS is
-#' Unix based (pretty much anything that isn't Windows, including OS X). 
+#' @return \code{is_windows} returns \code{TRUE} if the OS on the current 
+#' platform is Microsoft windows-based.  \code{is_unix} returns \code{TRUE} if 
+#' the OS is Unix based (pretty much anything that isn't Windows, including OS 
+#' X). 
 #' \code{is_mac} and \code{is_linux} return \code{TRUE} if the OS is Linux or 
 #' Apple OS X respectively.
 #' \code{is_64_bit_os} returns \code{TRUE} when the operating system is 64-bit.
@@ -157,11 +167,12 @@ is_windows <- function()
 #' Does the current locale specify a comma or a period for the decimal point?
 #' 
 #' @param dp Character to be used as a decimal point.
-#' @return \code{is_comma_for_decimal_point} returns \code{TRUE} when the current 
-#' locale uses a comma for a decimal place, as determined by \code{Sys.localeconv}.  
-#' Similarly, \code{is_period_for_decimal_point} returns \code{TRUE} when the current 
-#' locale uses a period (a.k.a. full stop) for a decimal place.  If R has been 
-#' compiled without support for locales, then the value will always be \code{NA}.
+#' @return \code{is_comma_for_decimal_point} returns \code{TRUE} when the 
+#' current locale uses a comma for a decimal place, as determined by 
+#' \code{Sys.localeconv}.  Similarly, \code{is_period_for_decimal_point} returns 
+#' \code{TRUE} when the current locale uses a period (a.k.a. full stop) for a 
+#' decimal place.  If R has been compiled without support for locales, then the 
+#' value will always be \code{NA}.
 #' @examples
 #' #A useful guess for reading in files:
 #' read_csv <- if(is_comma_for_decimal_point()) read.csv else read.csv2 

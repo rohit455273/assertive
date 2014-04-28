@@ -46,7 +46,11 @@ has_arg <- function(x, fn = sys.function(sys.parent()))
   if(!arg_name %in% formal_args_of_fn)
   {                             
     fn_name <- get_name_in_parent(fn)
-    fail <- false("%s is not an argument of %s", sQuote(arg_name), sQuote(fn_name))
+    fail <- false(
+      "%s is not an argument of %s", 
+      sQuote(arg_name), 
+      sQuote(fn_name)
+    )
     if("..." %in% formal_args_of_fn)
     {
       dots_call <- eval(quote(substitute(list(...))), sys.parent())
@@ -70,8 +74,8 @@ has_arg <- function(x, fn = sys.function(sys.parent()))
 #' @param attrs Desired attributes.
 #' @param .xname Not intended to be used directly.
 #' @return \code{has_attributes} returns \code{TRUE} where \code{x} has
-#' the attributes specified in \code{attrs}. \code{assert_has_terms} returns nothing but throws
-#' an error if \code{has_terms} is not \code{TRUE}.
+#' the attributes specified in \code{attrs}. \code{assert_has_terms} returns 
+#' nothing but throws an error if \code{has_terms} is not \code{TRUE}.
 #' @examples
 #' x <- structure(c(a = 1), b = 2)
 #' assert_has_all_attributes(x, c("names", "b"))
@@ -95,8 +99,14 @@ has_attributes <- function(x, attrs, .xname = get_name_in_parent(x))
 has_colnames <- function(x, .xname = get_name_in_parent(x))
 {
   colnamesx <- colnames(x)
-  if(is.null(colnamesx)) return(false("The column names of %s are NULL.", .xname))
-  if(!any(nzchar(colnamesx))) return(false("The column names of %s are all empty.", .xname))
+  if(is.null(colnamesx)) 
+  {
+    return(false("The column names of %s are NULL.", .xname))
+  }
+  if(!any(nzchar(colnamesx))) 
+  {
+    return(false("The column names of %s are all empty.", .xname))
+  }
   TRUE
 } 
 
@@ -119,8 +129,14 @@ has_colnames <- function(x, .xname = get_name_in_parent(x))
 has_cols <- function(x, .xname = get_name_in_parent(x))
 {
   ncolx <- ncol(x)
-  if(is.null(ncolx)) return(false("The number of columns in %s is NULL.", .xname))  
-  if(ncolx == 0L) return(false("The number of columns in %s is zero.", .xname))
+  if(is.null(ncolx)) 
+  {
+    return(false("The number of columns in %s is NULL.", .xname))  
+  }
+  if(ncolx == 0L) 
+  {
+    return(false("The number of columns in %s is zero.", .xname))
+  }
   TRUE
 } 
 
@@ -129,7 +145,10 @@ has_cols <- function(x, .xname = get_name_in_parent(x))
 has_dimnames <- function(x, .xname = get_name_in_parent(x))
 {
   dimnamesx <- dimnames(x)
-  if(is.null(dimnamesx)) return(false("The dimension names of %s are NULL.", .xname))
+  if(is.null(dimnamesx)) 
+  {
+    return(false("The dimension names of %s are NULL.", .xname))
+  }
   if(!any(nzchar(unlist(dimnamesx, use.names = FALSE)))) 
   {
     return(false("The dimension names of %s are all empty.", .xname))
@@ -151,7 +170,10 @@ has_dimnames <- function(x, .xname = get_name_in_parent(x))
 has_dims <- function(x, .xname = get_name_in_parent(x))
 {
   dimx <- dim(x)
-  if(is.null(dimx)) return(false("The dimensions of %s are NULL.", .xname))
+  if(is.null(dimx)) 
+  {
+    return(false("The dimensions of %s are NULL.", .xname))
+  }
   TRUE
 }
 
@@ -169,7 +191,10 @@ has_dims <- function(x, .xname = get_name_in_parent(x))
 #' @export
 has_duplicates <- function(x, .xname = get_name_in_parent(x))
 {
-  if(!anyDuplicated(x)) return(false("%s has no duplicates.", .xname))
+  if(!anyDuplicated(x)) 
+  {
+    return(false("%s has no duplicates.", .xname))
+  }
   TRUE
 }
 
@@ -199,7 +224,10 @@ has_duplicates <- function(x, .xname = get_name_in_parent(x))
 has_names <- function(x, .xname = get_name_in_parent(x))
 {
   namesx <- names(x)
-  if(is.null(namesx)) return(false("The names of %s are NULL.", .xname))
+  if(is.null(namesx)) 
+  {
+    return(false("The names of %s are NULL.", .xname))
+  }
   TRUE
 } 
 
@@ -207,7 +235,10 @@ has_names <- function(x, .xname = get_name_in_parent(x))
 #' @export
 has_no_duplicates <- function(x, .xname = get_name_in_parent(x))
 {
-  if(anyDuplicated(x)) return(false("%s has duplicates.", .xname))
+  if(anyDuplicated(x)) 
+  {
+    return(false("%s has duplicates.", .xname))
+  }
   TRUE
 }
 
@@ -216,8 +247,14 @@ has_no_duplicates <- function(x, .xname = get_name_in_parent(x))
 has_rownames <- function(x, .xname = get_name_in_parent(x))
 {
   rownamesx <- rownames(x)
-  if(is.null(rownamesx)) return(false("The row names of %s are NULL.", .xname))
-  if(!any(nzchar(rownamesx))) return(false("The row names of %s are all empty.", .xname))
+  if(is.null(rownamesx)) 
+  {
+    return(false("The row names of %s are NULL.", .xname))
+  }
+  if(!any(nzchar(rownamesx))) 
+  {
+    return(false("The row names of %s are all empty.", .xname))
+  }
   TRUE
 } 
 
@@ -226,8 +263,14 @@ has_rownames <- function(x, .xname = get_name_in_parent(x))
 has_rows <- function(x, .xname = get_name_in_parent(x))
 {
   nrowx <- nrow(x)
-  if(is.null(nrowx)) return(false("The number of rows in %s is NULL.", .xname))  
-  if(nrowx == 0L) return(false("The number of rows in %s is zero.", .xname))
+  if(is.null(nrowx)) 
+  {
+    return(false("The number of rows in %s is NULL.", .xname))  
+  }
+  if(nrowx == 0L) 
+  {
+    return(false("The number of rows in %s is zero.", .xname))
+  }
   TRUE
 } 
 

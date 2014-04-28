@@ -4,10 +4,11 @@
 #' state of your variables, and \code{assert_*} functions to throw errors
 #' if they aren't in the right form.
 #'
-#' When the package loads, it creates a global option \code{"assertive.severity"}
-#' that determines what happens when an \code{assert_*} function's 
-#' input fails the condition.  By default, an error is thrown but it is 
-#' possible to generate warnings or messages instead (see the examples).
+#' When the package loads, it creates a global option 
+#' \code{"assertive.severity"} that determines what happens when an 
+#' \code{assert_*} function's input fails the condition.  By default, an error 
+#' is thrown but it is possible to generate warnings or messages instead (see 
+#' the examples).
 #'
 #' @docType package
 #' @name assertive

@@ -290,7 +290,12 @@ is_language <- function(x, .xname = get_name_in_parent(x))
 {
   if(!is.language(x)) 
   {
-    return(false("%s is not a language object (name, call or expression).", .xname))
+    return(
+      false(
+        "%s is not a language object (name, call or expression).", 
+        .xname
+      )
+    )
   }
   TRUE
 }
@@ -401,8 +406,8 @@ is_name <- function(x, .xname = get_name_in_parent(x))
 #' @param .xname Not intended to be used directly.
 #' @return \code{is_numeric} wraps \code{is.numeric}, providing more 
 #' information on failure. \code{is_a_number} returns \code{TRUE} if the 
-#' input is numeric and scalar.  The \code{assert_*} functions return nothing but
-#' throw an error if the corresponding \code{is_*} function returns 
+#' input is numeric and scalar.  The \code{assert_*} functions return nothing
+#' but throw an error if the corresponding \code{is_*} function returns 
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{is.numeric}} and \code{\link{is_scalar}}.
 #' @examples

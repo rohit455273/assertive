@@ -50,7 +50,8 @@ cause <- function(x)
 #' \code{\link[methods]{as}}, and supports coercion to multiple classes.
 #'
 #' @param x Input to coerce.
-#' @param target_class The desired class of x.  Multiple values allowed (see note).
+#' @param target_class The desired class of x.  Multiple values allowed (see 
+#' note).
 #' @param .xname Not intended to be used directly.
 #' @return The input \code{x} after attempted coercion to the target class.
 #' @note If x does not already have the target class, a warning is given
@@ -58,8 +59,9 @@ cause <- function(x)
 #' The function will try and convert the \code{x} to each of the classes given
 #' in \code{target_class}, in order, until it succeeds or runs out of classes
 #' to try.  It will first try and convert \code{x} using a dedicated 
-#' \code{as.target_class} function if that exists.  If it does not exist, or throws 
-#' an error then \code{coerce_to} will try to use \code{as(x, target_class)}.
+#' \code{as.target_class} function if that exists.  If it does not exist, or 
+#' throws an error then \code{coerce_to} will try to use 
+#' \code{as(x, target_class)}.
 #' @seealso \code{\link[methods]{is}} and \code{\link[methods]{as}}.
 #' @examples
 #' # Numbers can be coerced to characters but not to calls.
@@ -88,7 +90,9 @@ coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
     )
     if(as.class_function_exists) 
     {
-      can_be_coerced <- is_error_free(attr(as.class_function_exists, "result")(x)) 
+      can_be_coerced <- is_error_free(
+        attr(as.class_function_exists, "result")(x)
+      ) 
       if(can_be_coerced)
       {
         return(attr(can_be_coerced, "result"))
@@ -136,11 +140,16 @@ get_name_in_parent <- function(x)
 #'
 #' @param ... Some inputs.
 #' @param l A list.
-#' @note If any arguments are present in both the \code{...} and \code{l} arguments,
-#' the \code{...} version takes preference, and a warning is thrown.
+#' @note If any arguments are present in both the \code{...} and \code{l} 
+#' arguments, the \code{...} version takes preference, and a warning is thrown.
 #' @return A list containing the merged inputs.
 #' @examples
-#' merge_dots_with_list(foo = 1, bar = 2, baz = 3, l = list(foo = 4, baz = 5, quux = 6))
+#' merge_dots_with_list(
+#'   foo = 1, 
+#'   bar = 2, 
+#'   baz = 3, 
+#'   l = list(foo = 4, baz = 5, quux = 6)
+#' )
 #' @export
 merge_dots_with_list <- function(..., l = list())
 {
@@ -150,7 +159,10 @@ merge_dots_with_list <- function(..., l = list())
   all_values <- c(dots, l)
   if(has_duplicates(all_names))
   {
-    warning("Duplicated arguments: ", toString(all_names[duplicated(all_names)]))
+    warning(
+      "Duplicated arguments: ", 
+      toString(all_names[duplicated(all_names)])
+    )
     all_values <- all_values[!duplicated(all_names)]
   }
   all_values
@@ -182,7 +194,8 @@ merge_dots_with_list <- function(..., l = list())
 #'   "is quite good for data analysis."
 #' )
 #' @export
-parenthesise <- function(x, type = c("round_brackets", "square_brackets", "curly_brackets", "angle_brackets", "chevrons", "hyphens", "en_dashes", "em_dashes", "commas")) 
+parenthesise <- function(x, 
+  type = c("round_brackets", "square_brackets", "curly_brackets", "angle_brackets", "chevrons", "hyphens", "en_dashes", "em_dashes", "commas")) 
 {
   type <- match.arg(type)
   x <- assertive::coerce_to(x, "character")

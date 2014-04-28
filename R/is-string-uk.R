@@ -3,10 +3,12 @@
 #' Checks that the input contains UK car licence plate numbers.
 #'
 #' @param x Input to check.
-#' @note A single space, in the appropriate place, is allowed but not compulsory.
-#' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the input
-#' string contains a valid UK car licence plate number The {assert_*} function returns nothing but 
-#' throw an error when the \code{is_*} function returns \code{FALSE}.
+#' @note A single space, in the appropriate place, is allowed but not 
+#' compulsory.
+#' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the 
+#' input string contains a valid UK car licence plate number The {assert_*} 
+#' function returns nothing but throw an error when the \code{is_*} function 
+#' returns \code{FALSE}.
 #' @examples
 #' licences <- c(
 #'   #1903 to 1931
@@ -68,12 +70,12 @@ is_uk_car_licence <- function(x)
 #' Checks that the input contains UK national insurance numbers.
 #'
 #' @param x Input to check.
-#' @note A single space is allowed at the appropriate points (after the first two
-#' letters and after each pair of numbers) but not compulsory.
-#' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the input
-#' string contains a valid UK national insurance number.  The {assert_*} function 
-#' returns nothing but throw an error when the \code{is_*} function returns 
-#' \code{FALSE}.
+#' @note A single space is allowed at the appropriate points (after the first 
+#' two letters and after each pair of numbers) but not compulsory.
+#' @return \code{is_uk_national_insurance_number} returns \code{TRUE} if the 
+#' input string contains a valid UK national insurance number.  The {assert_*} 
+#' function returns nothing but throw an error when the \code{is_*} function 
+#' returns \code{FALSE}.
 #' @examples
 #' ni_numbers <- c(
 #'   "AA 00 00 00 A", "AA 00 00 00", "AA000000A",                #ok
@@ -117,16 +119,18 @@ is_uk_national_insurance_number <- function(x)
 #' Checks that the input contains UK postcodes.
 #' 
 #' @param x Input to check.
-#' @return \code{is_uk_postcode} returns \code{TRUE} if the input string contains
-#' a valid UK postcode. The {assert_*} function returns nothing but throws an error 
-#' when the \code{is_*} function returns \code{FALSE}.
-#' @note The function doesn't guarantee that the postcode actually exists.  It should
-#' correctly return \code{TRUE} for genuine postcodes, and will weed out most badly
-#' formatted strings and non-existent areas, but some non-existent districts may 
-#' incorrectly return \code{TRUE}.  If you need 100% accuracy, check against an up-to-
-#' date postcode database.
+#' @return \code{is_uk_postcode} returns \code{TRUE} if the input string 
+#' contains a valid UK postcode. The {assert_*} function returns nothing but 
+#' throws an error when the \code{is_*} function returns \code{FALSE}.
+#' @note The function doesn't guarantee that the postcode actually exists.  It 
+#' should correctly return \code{TRUE} for genuine postcodes, and will weed out 
+#' most badly formatted strings and non-existent areas, but some non-existent 
+#' districts may incorrectly return \code{TRUE}.  If you need 100% accuracy, 
+#' check against an up-to-date postcode database.
 #' @examples
-#' postcodes <- c("SW1A 1AA", "SK11 9DW", "M34FP", "Le45ns", "TS25 2BZ", "gir 0aa")
+#' postcodes <- c(
+#'   "SW1A 1AA", "SK11 9DW", "M34FP", "Le45ns", "TS25 2BZ", "gir 0aa"
+#' )
 #' is_uk_postcode(postcodes)
 #' assert_all_are_uk_postcodes(postcodes)
 #' @references Regexes taken from 
@@ -154,13 +158,13 @@ is_uk_postcode <- function(x)
 #' Checks that the input contains UK telephone numbers.
 #' 
 #' @param x Input to check.
-#' @return \code{is_uk_telephone_number} returns \code{TRUE} if the input string contains
-#' a valid UK telephone number. The {assert_*} function returns nothing but throws an error 
-#' when the \code{is_*} function returns \code{FALSE}.
-#' @note The function doesn't guarantee that the phone number is in use, but checks that
-#' the format is correct, and that the area code exists.
-#' Spaces, hyphens and round brackets are allowed to appear in arbitrary places.  The international UK
-#' prefix of 0044 or +44 is allowed.
+#' @return \code{is_uk_telephone_number} returns \code{TRUE} if the input string 
+#' contains a valid UK telephone number. The {assert_*} function returns nothing 
+#' but throws an error when the \code{is_*} function returns \code{FALSE}.
+#' @note The function doesn't guarantee that the phone number is in use, but 
+#' checks that the format is correct, and that the area code exists.
+#' Spaces, hyphens and round brackets are allowed to appear in arbitrary places.  
+#' The international UK prefix of 0044 or +44 is allowed.
 #' @examples
 #' phone_nos <- c("+44 207 219 3475", "08457 90 90 90")
 #' is_uk_telephone_number(phone_nos)
@@ -190,7 +194,8 @@ is_uk_telephone_number <- function(x)
     sep = ""
   )
   ok <- matches_regex(x, first_rx) 
-  x[!xna & ok] <- sub(paste0("^", start), "", x[!xna & ok]) #remove country code prefix
+  #remove country code prefix
+  x[!xna & ok] <- sub(paste0("^", start), "", x[!xna & ok]) 
   
   regional <- paste0("[2-9]", d(4, 5))
   second_rx <- create_regex(

@@ -141,7 +141,8 @@ is_existing <- function(
 #' information on failure.  \code{assert_is_loaded} returns nothing but
 #' throws an error if \code{is_loaded} returns \code{FALSE}.
 #' @seealso \code{\link[base]{is.loaded}}.
-is_loaded <- function(x, PACKAGE = "", type = "", .xname = get_name_in_parent(x))
+is_loaded <- function(x, PACKAGE = "", type = "", 
+  .xname = get_name_in_parent(x))
 {
   if(!is.loaded(x, PACKAGE = PACKAGE, type = type))
   {
@@ -157,7 +158,8 @@ is_loaded <- function(x, PACKAGE = "", type = "", .xname = get_name_in_parent(x)
 #' @param tol Differences smaller than \code{tol} are not considered.
 #' @param .xname Not intended to be used directly.
 #' @param ... Passed to \code{all.equal}.
-#' @return \code{TRUE} if the input is symmetrix (after coersion to be a matrix).
+#' @return \code{TRUE} if the input is symmetrix (after coersion to be a 
+#' matrix).
 #' @examples
 #' m <- diag(3); m[3, 1] <- 1e-100
 #' assert_is_symmetric_matrix(m)
@@ -166,7 +168,8 @@ is_loaded <- function(x, PACKAGE = "", type = "", .xname = get_name_in_parent(x)
 #' assert_is_symmetric_matrix(m, tol = 0)
 #'}
 #' @export
-is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get_name_in_parent(x), ...)
+is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, 
+  .xname = get_name_in_parent(x), ...)
 {
   x <- coerce_to(x, "matrix")
   dimx <- dim(x)
@@ -215,13 +218,16 @@ is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, .xname = get
 #' assert_is_unsorted(c(2, 1, 0))
 #' }
 #' @export
-is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE, .xname = get_name_in_parent(x))
+is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE, 
+  .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_not_null(x))) return(ok)
   if(!is.atomic(x) && length(x) > 1)
   {
     #See notes in Value section of ?is.unsorted.
-    return(na("Sortability is not tested for recursive objects of length greater than one."))
+    return(na(
+      "Sortability is not tested for recursive objects of length greater than one."
+    ))
   }
   nas <- is.na(x)
   if(any(nas))

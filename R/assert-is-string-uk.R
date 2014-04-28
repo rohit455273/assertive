@@ -18,7 +18,10 @@ assert_any_are_uk_car_licences <- function(x)
 #' @export
 assert_all_are_uk_national_insurance_numbers <- function(x)
 {                                                     
-  msg <- sprintf("%s are not all UK national insurance numbers.", get_name_in_parent(x))
+  msg <- sprintf(
+    "%s are not all UK national insurance numbers.", 
+    get_name_in_parent(x)
+  )
   assert_engine(x, is_uk_national_insurance_number, msg)        
 }
 
@@ -26,7 +29,10 @@ assert_all_are_uk_national_insurance_numbers <- function(x)
 #' @export
 assert_any_are_uk_national_insurance_numbers <- function(x)
 {                                                     
-  msg <- sprintf("%s are all not UK national insurance numbers.", get_name_in_parent(x))
+  msg <- sprintf(
+    "%s are all not UK national insurance numbers.", 
+    get_name_in_parent(x)
+  )
   assert_engine(x, is_uk_national_insurance_number, msg, what = "any")        
 }
 

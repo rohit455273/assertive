@@ -46,7 +46,8 @@ is_in_open_range <- function(x, lower = -Inf, upper = Inf)
 #' assert_all_are_proportions(c(0, 0.5, 1))
 #' assert_all_are_in_left_open_range(1 + .Machine$double.eps, lower = 1)
 #' @export
-is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE, upper_is_strict = FALSE)
+is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE, 
+  upper_is_strict = FALSE)
 {
   ok <- rep.int(TRUE, length(x))
   ok[is.na(x)] <- NA

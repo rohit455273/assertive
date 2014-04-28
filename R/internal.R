@@ -39,10 +39,12 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
 
 #' Wrapper to vapply that returns booleans.
 #' 
-#' Wrapper to \code{\link{vapply}} for functions that return a boolean (logical scalar) value.
+#' Wrapper to \code{\link{vapply}} for functions that return a boolean (logical 
+#' scalar) value.
 #' 
 #' @param x A vector (atomic or list).
-#' @param predicate A predicate (function that returns a bool) to apply elementwise to \code{x}.
+#' @param predicate A predicate (function that returns a bool) to apply 
+#' elementwise to \code{x}.
 #' @param USE.NAMES Passed to \code{vapply}.
 #' @param ... Passed to \code{vapply}.
 #' @return A logical vector.
@@ -73,7 +75,9 @@ call_and_name <- function(fn, x, ...)
   y <- fn(x, ...)
   if(!is_identical_to_true(length(y) == length(x)))
   {
-    warning("Vector of names is different length to results.  Trying to resize.")
+    warning(
+      "Vector of names is different length to results.  Trying to resize."
+    )
     length(x) <- length(y)
   }
   names(y) <- x
@@ -112,7 +116,9 @@ character_to_list_of_integer_vectors <- function(x)
 #' 'or').
 #' @examples
 #' \dontrun{
-#' cas_number_components <- c("[[:digit:]]{1,7}", "[[:digit:]]{2}", "[[:digit:]]")
+#' cas_number_components <- c(
+#'   "[[:digit:]]{1,7}", "[[:digit:]]{2}", "[[:digit:]]"
+#' )
 #' cas_number_rx <- create_regex(rx_components, sep = "-")
 #' }
 create_regex <- function (..., l = list(), sep = "[- ]?")
@@ -136,8 +142,8 @@ create_regex <- function (..., l = list(), sep = "[- ]?")
 #' @param lo Minimum number of digits to match.
 #' @param hi Optional maximum number of digits to match.
 #' @param optional If \code{TRUE}, the digits are optional.
-#' @note If \code{hi} is omitted, the returned regex will only match the exact number
-#' of digits given by \code{lo}.
+#' @note If \code{hi} is omitted, the returned regex will only match the exact 
+#' number of digits given by \code{lo}.
 #' @return A character vector of regexes.
 #' @examples
 #' \dontrun{
@@ -206,8 +212,10 @@ locale_categories <- function(include_all = TRUE, include_unix = is_unix())
 #' @param rx A regular expression.
 #' @param ignore.case Should the case of alphabetic characters be ignored?
 #' @param ... Passed to \code{\link{grepl}}.
-#' @note The default for \code{ignore.case} is different to the default in \code{grepl}.
-#' @return A logical vector that is \code{TRUE} when the input matches the regular expression.
+#' @note The default for \code{ignore.case} is different to the default in 
+#' \code{grepl}.
+#' @return A logical vector that is \code{TRUE} when the input matches the 
+#' regular expression.
 #' @seealso \code{\link{regex}} and \code{\link{regexpr}}.
 matches_regex <- function(x, rx, ignore.case = TRUE, ...)
 {
@@ -216,7 +224,9 @@ matches_regex <- function(x, rx, ignore.case = TRUE, ...)
     {
       if(!nzchar(rx[1]))
       {
-        warning("Regular expression is the empty string, and matches everything.")
+        warning(
+          "Regular expression is the empty string, and matches everything."
+        )
         return(rep.int(TRUE, length(x)))
       }
       #call to ifelse needed because grepl always returns TRUE or FALSE
@@ -264,13 +274,17 @@ na <- function(...)
 #' @param x Input to strip.
 #' @param invalid_chars A regular expression detailing characters to remove.
 #' @param char_desc A string describing the characters to remove.
-#' @param allow_x If \code{TRUE}, the letter "X" is allowed - useful for check digits.
-#' @param allow_plus If \code{TRUE}, the symbol "+" is allowed - useful for phone numbers.
-#' @return A character vector of the same length as \code{x}, consisting of strings without
-#' the characters detailed in the \code{invalid_chars}.
+#' @param allow_x If \code{TRUE}, the letter "X" is allowed - useful for check 
+#' digits.
+#' @param allow_plus If \code{TRUE}, the symbol "+" is allowed - useful for 
+#' phone numbers.
+#' @return A character vector of the same length as \code{x}, consisting of 
+#' strings without the characters detailed in the \code{invalid_chars}.
 #' @examples
 #' \dontrun{
-#' strip_invalid_chars("  We're floating\tin    space\n\n\n", "[[:space:]]", "whitespace")
+#' strip_invalid_chars(
+#'   "  We're floating\tin    space\n\n\n", "[[:space:]]", "whitespace"
+#' )
 #' strip_non_numeric(" +44 800-123-456 ", allow_plus = TRUE)
 #' #Inputs such as factors as coerced to character.
 #' strip_non_alphanumeric(factor(c(" A1\t1AA.", "*(B2^2BB)%")))
@@ -295,6 +309,12 @@ strip_non_alphanumeric <- function(x)
 #' @rdname strip_invalid_chars
 strip_non_numeric <- function(x, allow_x = FALSE, allow_plus = FALSE)
 {
-  invalid_chars <-paste0("[^[:digit:]", if(allow_x) "X", if(allow_plus) "\\+", "]+", collapse = "")
+  invalid_chars <- paste0(
+    "[^[:digit:]", 
+    if(allow_x) "X", 
+    if(allow_plus) "\\+", 
+    "]+", 
+    collapse = ""
+  )
   strip_invalid_chars(x, invalid_chars, "non-numeric")
 }

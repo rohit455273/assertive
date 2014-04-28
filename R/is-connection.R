@@ -30,8 +30,9 @@ is_bzfile_connection <- function(x, .xname = get_name_in_parent(x))
 #' specific tests on the type of connection.
 #' The \code{assert_*} functions return nothing but throw an error if the 
 #' corresponding \code{is_*} function returns \code{FALSE}.
-#' @note \code{is_incomplete_connection} will return false for closed connections, 
-#' regardless of whether or not the connection ends with a newline character.
+#' @note \code{is_incomplete_connection} will return false for closed 
+#' connections, regardless of whether or not the connection ends with a newline 
+#' character.
 #' (\code{isIncomplete} throws an error for closed connections.)
 #' @seealso \code{\link[base]{isOpen}}.
 #' @examples

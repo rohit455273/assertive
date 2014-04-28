@@ -3,9 +3,9 @@
 #' Checks that the input contains US/Canadian (NANPA) telephone numbers.
 #' 
 #' @param x Input to check.
-#' @return \code{is_us_telephone_number} returns \code{TRUE} if the input string contains
-#' a valid US telephone number. The {assert_*} functions return nothing but throw an error 
-#' when the \code{is_*} function returns \code{FALSE}. 
+#' @return \code{is_us_telephone_number} returns \code{TRUE} if the input string
+#' contains a valid US telephone number. The {assert_*} functions return nothing 
+#' but throw an error when the \code{is_*} function returns \code{FALSE}. 
 #' @note A valid US phone number consists of an optional country 
 #' code (either +1, 001 or just 1), followed by a 3 digit NPA area
 #' code, where the first digit is between 2 and 9, and the second 
@@ -52,7 +52,13 @@ is_us_telephone_number <- function(x)
     
   npa1 <- "[2-9]"
   npa23 <- enbracket(     
-    paste(c("0[1-9]", "1[02-9]", "2[013-9]", "3[0-24-9]", "4[0-35-9]", "5[0-46-9]", "6[0-57-9]", "7[0-689]", "8[0-79]"), collapse = "|")    
+    paste(
+      c(
+        "0[1-9]", "1[02-9]", "2[013-9]", "3[0-24-9]", "4[0-35-9]", 
+        "5[0-46-9]", "6[0-57-9]", "7[0-689]", "8[0-79]"
+      ), 
+      collapse = "|"
+    )    
   )
   nxx1 <- "[2-9]"
   nxx23 <- enbracket(paste(c("1[02-9]", "[02-9][0-9]"), collapse = "|"))
@@ -71,16 +77,16 @@ is_us_telephone_number <- function(x)
 #' Checks that the input contains US zip codes.
 #' 
 #' @param x Input to check.
-#' @return \code{is_us_zip_code} returns \code{TRUE} if the input string contains
-#' a valid US zip code. The {assert_*} functions return nothing but throw an error 
-#' when the \code{is_*} function returns \code{FALSE}.
-#' @note A valid zip code is considered to be 5 digits, or 5 digits then a hyphen 
-#' then 4 digits.  Unused area prefixes return FALSE, but the function doesn't 
-#' guarantee that the zip code actually exists.  It should correctly return 
-#' \code{TRUE} for genuine zip codes, and will weed out most badly formatted strings 
-#' non-existent areas, but some non-existent codes may incorrectly return 
-#' \code{TRUE}.  If you need 100% accuracy, check against an up-to-date zip code 
-#' base.
+#' @return \code{is_us_zip_code} returns \code{TRUE} if the input string 
+#' contains a valid US zip code. The {assert_*} functions return nothing but 
+#' throw an error when the \code{is_*} function returns \code{FALSE}.
+#' @note A valid zip code is considered to be 5 digits, or 5 digits then a 
+#' hyphen then 4 digits.  Unused area prefixes return FALSE, but the function 
+#' doesn't guarantee that the zip code actually exists.  It should correctly 
+#' return \code{TRUE} for genuine zip codes, and will weed out most badly 
+#' formatted strings non-existent areas, but some non-existent codes may 
+#' incorrectly return \code{TRUE}.  If you need 100% accuracy, check against an 
+#' up-to-date zip code base.
 #' @examples
 #' zip_codes <- c(
 #'   "90210", 

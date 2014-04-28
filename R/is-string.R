@@ -23,7 +23,8 @@
 #' #These examples should fail.
 #' assert_all_are_cas_numbers(x)
 #' }
-#' @references Chemspider is a good service for looking up CAS numbers.
+#' @references Chemspider (\url{https://www.chemspider.com}) is a good service 
+#' for looking up CAS numbers.
 #' @export
 is_cas_number <- function(x, .xname = get_name_in_parent(x))
 {
@@ -56,10 +57,10 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
 #' @param x Input to check.
 #' @param type Type of credit card.  Multiple types can be selected.
 #' @param .xname Not intended to be called directly.
-#' @note Legacy card numbers, for example 13 digit Visa numbers and 15 digits JCB 
-#' numbers are not supported.
-#' @return A logical vector that is \code{TRUE} when the input contains valid credit 
-#' card numbers.
+#' @note Legacy card numbers, for example 13 digit Visa numbers and 15 digits 
+#' JCB numbers are not supported.
+#' @return A logical vector that is \code{TRUE} when the input contains valid 
+#' credit card numbers.
 #' @examples
 #' x <- c(
 #'   #visa
@@ -93,12 +94,14 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
 #' \dontrun{
 #' assert_all_are_credit_card_numbers(x)
 #' }
-#' @references \url{http://www.regular-expressions.info/creditcard.html} contains the regexes
-#' used by this function.
+#' @references \url{http://www.regular-expressions.info/creditcard.html} 
+#' contains the regexes used by this function.
 #' The example valid card numbers are from
 #' \url{http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm}
 #' @export
-is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "diners", "discover", "jcb"), .xname = get_name_in_parent(x))
+is_credit_card_number <- function(x, 
+  type = c("visa", "mastercard", "amex", "diners", "discover", "jcb"), 
+  .xname = get_name_in_parent(x))
 {
   #Check format
   type <- match.arg(type, several.ok = TRUE)
@@ -138,13 +141,16 @@ is_credit_card_number <- function(x, type = c("visa", "mastercard", "amex", "din
 #' Checks that the input contains dates or times.
 #' 
 #' @param x Input to check.
-#' @param format Expected format of the dates.  See \code{\link[base]{strptime}}.
+#' @param format Expected format of the dates.  See 
+#' \code{\link[base]{strptime}}.
 #' @param .xname Not intended to be called directly.
-#' @return A logical vector that is \code{TRUE} when the input contains valid dates or times.
+#' @return A logical vector that is \code{TRUE} when the input contains valid 
+#' dates or times.
 #' @examples
 #' assert_all_are_date_strings("01Aug1979", format = "%d%b%Y") #My DOB!
-#' @seealso \code{\link[base]{strptime}} for specifying formats, and the \code{lubridate}
-#' package for automatic guessing of date formats (and other date manipulation functions).
+#' @seealso \code{\link[base]{strptime}} for specifying formats, and the 
+#' \code{lubridate} package for automatic guessing of date formats (and other 
+#' date manipulation functions).
 #' @export
 is_date_string <- function(x, format = "%F %T", .xname = get_name_in_parent(x))
 {
@@ -156,27 +162,34 @@ is_date_string <- function(x, format = "%F %T", .xname = get_name_in_parent(x))
 
 #' Does the character vector contain email addresses?
 #' 
-#' Checks that the input contains email addresses.  (It does not check the the address exists, 
-#' merely that the string is in a suitable format.)
+#' Checks that the input contains email addresses.  (It does not check the the 
+#' address exists, merely that the string is in a suitable format.)
 #' 
 #' @param x Input to check.
 #' @param method Name of method to check for validity.  See notes below.
 #' @param .xname Not intended to be called directly.
-#' @note Each method specifies a regular expression (see \code{\link[base]{regex}}) to match 
-#' against. The \code{simple} method matches most email addresses in use, and is quite good at
-#' filtering out typos and nonsense.  It won't match \emph{every} email address however.  For 
-#' example, emails from a top level domain longer than 4 characters won't pass.  The \code{rfc822}
-#' method implements the offical standard for emails.  Thus all genuine emails will pass, but since
-#' the spec is very broad, it isn't as good at filtering out nonsense.
-#' @return A logical vector that is \code{TRUE} when the input contains valid email addresses.
+#' @note Each method specifies a regular expression (see 
+#' \code{\link[base]{regex}}) to match against. The \code{simple} method matches 
+#' most email addresses in use, and is quite good at filtering out typos and 
+#' nonsense.  It won't match \emph{every} email address however.  For example, 
+#' emails from a top level domain longer than 4 characters won't pass.  The 
+#' \code{rfc822} method implements the offical standard for emails.  Thus all 
+#' genuine emails will pass, but since the spec is very broad, it isn't as good 
+#' at filtering out nonsense.
+#' @return A logical vector that is \code{TRUE} when the input contains valid 
+#' email addresses.
 #' @examples
-#' addresses <- c("a@@b.com", "a_at_b.com", "a@@bcom", "a@@b.comma", "a!$&@@b.com")
+#' addresses <- c(
+#'   "a@@b.com", "a_at_b.com", "a@@bcom", "a@@b.comma", "a!$&@@b.com"
+#' )
 #' is_email_address(addresses)
 #' is_email_address(addresses, method = "rfc2822")
-#' @references \url{http://www.regular-expressions.info/email.html} contains the regexes used
-#' by this function and a good discussion of the pros and cons of each.
+#' @references \url{http://www.regular-expressions.info/email.html} contains the 
+#' regexes used by this function and a good discussion of the pros and cons of 
+#' each.
 #' @export
-is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_name_in_parent(x))
+is_email_address <- function(x, method = c("simple", "rfc2822"), 
+  .xname = get_name_in_parent(x))
 {
   method <- match.arg(method)
   x <- coerce_to(x, "character")
@@ -193,10 +206,11 @@ is_email_address <- function(x, method = c("simple", "rfc2822"), .xname = get_na
 #' Checks that the input contains hexadecimal colours.
 #' 
 #' @param x Input to check.
-#' @note A string is considered to represent a hexadecimal colour when contains a 
-#' hash followed by six hex values.  That is, digits or the letters from a to f 
-#' (case insensitive).
-#' @return A logical vector that is \code{TRUE} when the input contains hex colours.
+#' @note A string is considered to represent a hexadecimal colour when contains 
+#' a hash followed by six hex values.  That is, digits or the letters from a to 
+#' f (case insensitive).
+#' @return A logical vector that is \code{TRUE} when the input contains hex 
+#' colours.
 #' @examples
 #' x <- c(
 #'   "#0123456", "#789abc", "#defDEF", #ok
@@ -217,14 +231,15 @@ is_hex_colour <- function(x)
   rx <- create_regex("#[0-9a-f]{6}")
   matches_regex(x, rx)
 }
-       #' Is the string an honorific?
+
+#' Is the string an honorific?
 #' 
 #' Checks that the input contains honorifics (a.k.a. titles 
 #' or salutations).
 #' @param x Input to check.
 #' @return \code{is_honorific} returns \code{TRUE} if the input string contains
-#' a valid UK postcode. The {assert_*} function returns nothing but throws an error 
-#' when the \code{is_*} function returns \code{FALSE}. 
+#' a valid UK postcode. The {assert_*} function returns nothing but throws an 
+#' error when the \code{is_*} function returns \code{FALSE}. 
 #' @note Single full stops (periods) following a word boundary 
 #' and preceding a space or the end of the string are stripped.  
 #' Case is ignored.  There is no formal list of official salutations,
@@ -256,13 +271,14 @@ is_honorific <- function(x)
 
 #' Does the character vector contain IP addresses?
 #' 
-#' Checks that the input contains IP addresses.  (It does not check that the address exists, 
-#' merely that the string is in a suitable format.)
+#' Checks that the input contains IP addresses.  (It does not check that the 
+#' address exists, merely that the string is in a suitable format.)
 #' 
 #' @param x Input to check.
-#' @note Valid IP addresses are considered to be four integers in the range 0 to 255, separated
-#' by dots, or the string "localhost".
-#' @return A logical vector that is \code{TRUE} when the input contains valid IP addresses.
+#' @note Valid IP addresses are considered to be four integers in the range 0 to 
+#' 255, separated by dots, or the string "localhost".
+#' @return A logical vector that is \code{TRUE} when the input contains valid IP 
+#' addresses.
 #' @examples
 #' x <- c(
 #'   localhost     = "localhost", 
@@ -352,7 +368,8 @@ is_isbn13_code <- function(x, .xname = get_name_in_parent(x))
 #' @param x Input to check.
 #' @param type Either "isbn10", "isbn13" or both (for matching either type).
 #' @param .xname Not intended to be called directly.
-#' @return  A logical vector that is \code{TRUE} when the input contains valid ISBN book codes.
+#' @return  A logical vector that is \code{TRUE} when the input contains valid 
+#' ISBN book codes.
 #' @examples
 #' x10 <- c(
 #'   hyphens             = "0-387-98503-4",
@@ -382,7 +399,8 @@ is_isbn13_code <- function(x, .xname = get_name_in_parent(x))
 #' assert_all_are_isbn_codes(x13, type = "13")
 #' }
 #' @export
-is_isbn_code <- function(x, type = c("10", "13"), .xname = get_name_in_parent(x))
+is_isbn_code <- function(x, type = c("10", "13"), 
+  .xname = get_name_in_parent(x))
 {
   type <- match.arg(type, several.ok = TRUE)
   ok <- lapply(
@@ -479,7 +497,8 @@ is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
 #' @references
 #' \url{http://4dpiecharts.com/2011/07/04/testing-for-valid-variable-names/}
 #' @export
-is_valid_variable_name <- function(x, allow_reserved = TRUE, allow_duplicates = TRUE)
+is_valid_variable_name <- function(x, allow_reserved = TRUE, 
+  allow_duplicates = TRUE)
 {
   x <- coerce_to(x, "character")
   ok <- rep.int(TRUE, length(x))

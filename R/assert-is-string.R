@@ -34,7 +34,10 @@ assert_any_are_credit_card_numbers <- function(x)
 #' @export
 assert_all_are_date_strings <- function(x, format = "%F %T")
 {                                                     
-  msg <- sprintf("%s is not a character vector of dates.", get_name_in_parent(x))
+  msg <- sprintf(
+    "%s is not a character vector of dates.", 
+    get_name_in_parent(x)
+  )
   assert_engine(x, is_date_string, msg, format = format)        
 }
 
@@ -42,7 +45,10 @@ assert_all_are_date_strings <- function(x, format = "%F %T")
 #' @export
 assert_any_are_date_strings <- function(x, format = "%F %T")
 {                                                     
-  msg <- sprintf("%s is not a character vector of dates.", get_name_in_parent(x))
+  msg <- sprintf(
+    "%s is not a character vector of dates.", 
+    get_name_in_parent(x)
+  )
   assert_engine(x, is_date_string, msg, what = "any", format = format)        
 }
 
@@ -116,7 +122,10 @@ assert_any_are_isbn_codes <- function(x, type = c("10", "13"))
 #' @export
 assert_all_are_numeric_strings <- function(x)
 {                                                     
-  msg <- sprintf("%s is not a character vector of numbers.", get_name_in_parent(x))
+  msg <- sprintf(
+    "%s is not a character vector of numbers.", 
+    get_name_in_parent(x)
+  )
   assert_engine(x, is_numeric_string, msg)        
 }
 
@@ -124,7 +133,10 @@ assert_all_are_numeric_strings <- function(x)
 #' @export
 assert_any_are_numeric_strings <- function(x)
 {                                                     
-  msg <- sprintf("%s is not a character vector of numbers.", get_name_in_parent(x))
+  msg <- sprintf(
+    "%s is not a character vector of numbers.", 
+    get_name_in_parent(x)
+  )
   assert_engine(x, is_numeric_string, msg, what = "any")        
 }
 
@@ -132,7 +144,10 @@ assert_any_are_numeric_strings <- function(x)
 #' @export
 assert_all_strings_are_missing_or_empty <- function(x)
 {                                                       
-  msg <- sprintf("%s are not all missing or empty strings.", get_name_in_parent(x))
+  msg <- sprintf(
+    "%s are not all missing or empty strings.", 
+    get_name_in_parent(x)
+  )
   assert_engine(x, is_missing_or_empty_character, msg)
 }
 
@@ -140,7 +155,10 @@ assert_all_strings_are_missing_or_empty <- function(x)
 #' @export
 assert_any_strings_are_missing_or_empty <- function(x)
 {                                                      
-  msg <- sprintf("%s are all not missing or empty strings.", get_name_in_parent(x))
+  msg <- sprintf(
+    "%s are all not missing or empty strings.", 
+    get_name_in_parent(x)
+  )
   assert_engine(x, is_missing_or_empty_character, msg, what = "any")
 }
 
@@ -163,7 +181,8 @@ assert_any_strings_are_not_missing_nor_empty <- function(x)
 
 #' @rdname is_valid_variable_name
 #' @export
-assert_all_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_duplicates = TRUE)
+assert_all_are_valid_variable_names <- function(x, allow_reserved = TRUE, 
+  allow_duplicates = TRUE)
 {                                                       
   msg <- sprintf("%s are not all valid variable names.", get_name_in_parent(x))
   assert_engine(
@@ -177,7 +196,8 @@ assert_all_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_
 
 #' @rdname is_valid_variable_name
 #' @export
-assert_any_are_valid_variable_names <- function(x, allow_reserved = TRUE, allow_duplicates = TRUE)
+assert_any_are_valid_variable_names <- function(x, allow_reserved = TRUE, 
+  allow_duplicates = TRUE)
 {                                                      
   msg <- sprintf("%s are all not valid variable names.", get_name_in_parent(x))
   assert_engine(

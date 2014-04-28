@@ -20,7 +20,6 @@ assert_all_are_identical <- function(...)
       call. = FALSE
     )
   }
-  #assert_engine(x = NULL, predicate = are_identical, msg = "!!!", what = "any", ...)  
 }
 
 #' @rdname are_identical
@@ -44,6 +43,5 @@ assert_any_are_identical <- function(...)
       call. = FALSE
     )
   }
-  #assert_engine(x = NULL, predicate = are_identical, msg = "!!!", what = "any", ...)  
 }
 
