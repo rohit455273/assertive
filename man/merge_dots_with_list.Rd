@@ -22,6 +22,11 @@ If any arguments are present in both the \code{...} and
 preference, and a warning is thrown.
 }
 \examples{
-merge_dots_with_list(foo = 1, bar = 2, baz = 3, l = list(foo = 4, baz = 5, quux = 6))
+merge_dots_with_list(
+  foo = 1,
+  bar = 2,
+  baz = 3,
+  l = list(foo = 4, baz = 5, quux = 6)
+)
 }
 

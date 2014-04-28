@@ -22,7 +22,7 @@ is_xxx_for_decimal_point(dp)
 \value{
 \code{is_comma_for_decimal_point} returns \code{TRUE} when
 the current locale uses a comma for a decimal place, as
-determined by \code{Sys.localeconv}. Similarly,
+determined by \code{Sys.localeconv}.  Similarly,
 \code{is_period_for_decimal_point} returns \code{TRUE} when
 the current locale uses a period (a.k.a. full stop) for a
 decimal place.  If R has been compiled without support for

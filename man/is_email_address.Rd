@@ -41,7 +41,9 @@ will pass, but since the spec is very broad, it isn't as
 good at filtering out nonsense.
 }
 \examples{
-addresses <- c("a@b.com", "a_at_b.com", "a@bcom", "a@b.comma", "a!$&@b.com")
+addresses <- c(
+  "a@b.com", "a_at_b.com", "a@bcom", "a@b.comma", "a!$&@b.com"
+)
 is_email_address(addresses)
 is_email_address(addresses, method = "rfc2822")
 }

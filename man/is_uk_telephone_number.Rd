@@ -26,8 +26,8 @@ Checks that the input contains UK telephone numbers.
 The function doesn't guarantee that the phone number is in
 use, but checks that the format is correct, and that the
 area code exists. Spaces, hyphens and round brackets are
-allowed to appear in arbitrary places.  The international
-UK prefix of 0044 or +44 is allowed.
+allowed to appear in arbitrary places. The international UK
+prefix of 0044 or +44 is allowed.
 }
 \examples{
 phone_nos <- c("+44 207 219 3475", "08457 90 90 90")

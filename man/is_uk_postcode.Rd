@@ -28,10 +28,12 @@ exists.  It should correctly return \code{TRUE} for genuine
 postcodes, and will weed out most badly formatted strings
 and non-existent areas, but some non-existent districts may
 incorrectly return \code{TRUE}.  If you need 100% accuracy,
-check against an up-to- date postcode database.
+check against an up-to-date postcode database.
 }
 \examples{
-postcodes <- c("SW1A 1AA", "SK11 9DW", "M34FP", "Le45ns", "TS25 2BZ", "gir 0aa")
+postcodes <- c(
+  "SW1A 1AA", "SK11 9DW", "M34FP", "Le45ns", "TS25 2BZ", "gir 0aa"
+)
 is_uk_postcode(postcodes)
 assert_all_are_uk_postcodes(postcodes)
 }

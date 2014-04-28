@@ -25,6 +25,9 @@ The OS search path is determined with
 \code{Sys.getenv("path")}.
 }
 \examples{
-is_on_os_path(c(R.home("bin"), "a nonexistent path")) #probably c(TRUE, FALSE)
+is_on_os_path(
+  c(R.home("bin"),
+  "a nonexistent path"
+)) #probably c(TRUE, FALSE)
 }
 

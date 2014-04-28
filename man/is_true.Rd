@@ -43,7 +43,7 @@ is_true(x)
 }
 \value{
 The \code{is*} functions return \code{TRUE} if the input is
-\code{TRUE}/ \code{FALSE}. The \code{assert_*} functions
+\code{TRUE}/\code{FALSE}. The \code{assert_*} functions
 return nothing but throw an error if the corresponding
 \code{is_*} function returns \code{FALSE}.
 }

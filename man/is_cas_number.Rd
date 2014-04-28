@@ -45,6 +45,7 @@ assert_all_are_cas_numbers(x)
 }
 }
 \references{
-Chemspider is a good service for looking up CAS numbers.
+Chemspider (\url{https://www.chemspider.com}) is a good
+service for looking up CAS numbers.
 }
 
