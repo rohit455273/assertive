@@ -26,7 +26,9 @@ Creates a regex from regex components.
 }
 \examples{
 \dontrun{
-cas_number_components <- c("[[:digit:]]{1,7}", "[[:digit:]]{2}", "[[:digit:]]")
+cas_number_components <- c(
+  "[[:digit:]]{1,7}", "[[:digit:]]{2}", "[[:digit:]]"
+)
 cas_number_rx <- create_regex(rx_components, sep = "-")
 }
 }
