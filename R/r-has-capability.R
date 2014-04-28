@@ -6,7 +6,7 @@
 #' The \code{assert_*} functions return nothing but throw an error if the 
 #' corresponding \code{is_*} function returns \code{FALSE}.
 #' @seealso \code{\link[base]{capabilities}}
-#' @alias r_has_capability
+#' @aliases r_has_capability
 #' @examples
 #' \dontrun{
 #' if(r_has_png_capability())
