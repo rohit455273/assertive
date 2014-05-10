@@ -24,5 +24,4 @@ test_that("test.is_null.nan.returns_false", {
 
 test_that("test.is_null.null.returns_true", {
   expect_true(assertive::is_null(NULL))
-})
- 
+}) 

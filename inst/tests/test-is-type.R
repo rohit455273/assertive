@@ -46,11 +46,11 @@ test_that("test.is_complex.1.returns_false", {
 })
 
 test_that("test.is_complex.1_plus_0i.returns_true", {
-  expect_true(is_complex(1 + (0 + (0+0i))))
+  expect_true(is_complex(1 + (0 + (0 + (0 + (0+0i))))))
 })
 
 test_that("test.is_complex.1i.returns_true", {
-  expect_true(is_complex(0 + (0+1i)))
+  expect_true(is_complex(0 + (0 + (0 + (0+1i)))))
 })
 
 test_that("test.is_complex.na_complex_.returns_true", {
@@ -102,8 +102,7 @@ test_that("test.is_factor.not_a_factor.returns_false", {
 })
 
 test_that("test.is_function.a_function.returns_true", {
-  expect_true(is_function(function()
-  {
+  expect_true(is_function(function() {
   }))
 })
 
@@ -240,8 +239,7 @@ test_that("test.is_primitive.a_primitive_function.returns_true", {
 })
 
 test_that("test.is_primitive.a_regular_function.returns_false", {
-  expect_false(is_primitive(function()
-  {
+  expect_false(is_primitive(function() {
   }))
 })
 
@@ -285,8 +283,7 @@ test_that("test.is_S4.not_an_S4_instance.returns_true", {
 })
 
 test_that("test.is_stepfun.a_regular_function.returns_false", {
-  expect_false(is_stepfun(function()
-  {
+  expect_false(is_stepfun(function() {
   }))
 })
 
@@ -334,5 +331,4 @@ test_that("test.is2.1_to_5_is_nonsense.returns_false", {
 
 test_that("test.is2.1_to_5_is_numeric.returns_true", {
   expect_true(is2(1:5, "numeric"))
-})
- 
+}) 

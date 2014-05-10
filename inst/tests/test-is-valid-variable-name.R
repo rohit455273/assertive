@@ -70,13 +70,13 @@ test_that("test.is_valid_variable_name.long_name.returns_false", {
   expect_false(is_valid_variable_name(vn))
 })
 
-test_that("test.is_valid_variable_name.same_names.returns_allow_duplicates", {
-  vn <- rep.int("foo", 2)
-  expect_true(all(is_valid_variable_name(vn)))
-  expect_false(all(is_valid_variable_name(vn, allow_duplicates = FALSE)))
-})
+test_that("test.is_valid_variable_name.same_names.returns_allow_duplicates", 
+  {
+    vn <- rep.int("foo", 2)
+    expect_true(all(is_valid_variable_name(vn)))
+    expect_false(all(is_valid_variable_name(vn, allow_duplicates = FALSE)))
+  })
 
 test_that("test.is_valid_variable_name.x.returns_true", {
   expect_true(is_valid_variable_name("x"))
-})
- 
+}) 

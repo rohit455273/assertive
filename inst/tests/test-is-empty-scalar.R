@@ -72,5 +72,4 @@ test_that("test.is_scalar.a_vector.returns_false", {
 
 test_that("test.is_scalar.empty.returns_false", {
   expect_false(is_scalar(numeric()))
-})
- 
+}) 
