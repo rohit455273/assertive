@@ -15,14 +15,16 @@ test_that("test.has_colnames.with_colnames.returns_true", {
 
 test_that("test.has_colnames.without_colnames.returns_false", {
   x <- matrix(1:12, nrow = 3)
-  expect_false(has_colnames(x))
+  actual <- has_colnames(x)
+  expect_false(actual)
+  expect_equal(cause(actual), noquote("The column names of x are NULL."))
 })
 
 test_that("test.has_colnames.with_empty_colnames.returns_false", {
   x <- matrix(1:12, nrow = 3, dimnames = list(character(3), character(4)))
   actual <- has_colnames(x)
   expect_false(actual)
-  expect_equal(cause(actual), noquote("The column names of x are NULL."))
+  expect_equal(cause(actual), noquote("The column names of x are all empty."))
 })
 
 
@@ -36,11 +38,11 @@ test_that("test.has_cols.without_columns.returns_true", {
   expect_false(has_cols(x))
 })
 
-test_that("test.has_rows.zero_cols.returns_false", {
+test_that("test.has_cols.zero_cols.returns_false", {
   x <- matrix(numeric(), ncol = 0)
   actual <- has_cols(x)
   expect_false(actual)
-  expect_equal(cause(actual), noquote("The number of cols in x is zero."))
+  expect_equal(cause(actual), noquote("The number of columns in x is zero."))
 })
 
 
@@ -137,14 +139,14 @@ test_that("test.has_rownames.without_rownames.returns_false", {
   x <- matrix(1:12, nrow = 3)
   actual <- has_rownames(x)
   expect_false(actual)
-  expect_equal(cause(actual), noquote("Row names are all empty."))
+  expect_equal(cause(actual), noquote("The row names of x are NULL."))
 })
 
 test_that("test.has_rownames.with_empty_rownames.returns_false", {
   x <- matrix(1:12, nrow = 3, dimnames = list(character(3), character(4)))
   actual <- has_rownames(x)
   expect_false(actual)
-  expect_equal(cause(actual), noquote("Row names are all empty."))
+  expect_equal(cause(actual), noquote("The row names of x are all empty."))
 })
 
 

@@ -29,16 +29,16 @@ test_that("test.is_file_connection.some_connections.returns_true_for_file_connec
   fcon <- file("foo")
   on.exit(close(fcon))
   expect_true(is_file_connection(fcon))
-  gutzcon <- gzfile("foo")
-  on.exit(close(gzcon), add = TRUE)
-  expect_false(is_file_connection(gzcon))
+  gcon <- gzfile("foo")
+  on.exit(close(gcon), add = TRUE)
+  expect_false(is_file_connection(gcon))
 })
 
 test_that("test.is_gzfile_connection.some_connections.returns_true_for_gzfile_connections",
 {
-  gzcon <- gzfile("foo")
-  on.exit(close(gzcon))
-  expect_true(is_gzfile_connection(gzcon))
+  gcon <- gzfile("foo")
+  on.exit(close(gcon))
+  expect_true(is_gzfile_connection(gcon))
   fcon <- file("foo")
   on.exit(close(fcon), add = TRUE)
   expect_false(is_gzfile_connection(fcon))
@@ -216,9 +216,9 @@ test_that("test.is_writable_connection.some_connections.returns_true_for_writabl
 
 test_that("test.is_xzfile_connection.some_connections.returns_true_for_xzfile_connections",
 {
-  xzcon <- xzfile("foo")
-  on.exit(close(xzcon))
-  expect_true(is_xzfile_connection(xzcon))
+  xcon <- xzfile("foo")
+  on.exit(close(xcon))
+  expect_true(is_xzfile_connection(xcon))
   fcon <- file("foo")
   on.exit(close(fcon), add = TRUE)
   expect_false(is_xzfile_connection(fcon))

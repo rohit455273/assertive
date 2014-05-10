@@ -26,7 +26,7 @@ test_that("test.is_comma_for_decimal_point.any_locale.returns_true_if_locale_use
 test_that("test.is_interactive.any_mode.returns_true_if_r_runs_interactively", 
   {
     expected <- interactive()
-    expect_equal(is_interactive(), expected)
+    expect_equal(strip_attributes(is_interactive()), expected)
   })
 
 test_that("test.is_linux.any_mode.returns_true_if_os_is_linux", {

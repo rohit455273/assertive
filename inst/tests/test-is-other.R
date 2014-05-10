@@ -36,7 +36,7 @@ test_that("test.is_symmetric_matrix.an_assymmetric_matrix.returns_false", {
 
 test_that("test.is_symmetric_matrix.not_coercible_to_matrix.throws_error", 
   {
-    suppressWarnings(checkException(is_symmetric_matrix(sqrt), silent = TRUE))
+    suppressWarnings(expect_error(is_symmetric_matrix(sqrt)))
   })
 
 test_that("test.is_unsorted.a_sorted_vector.returns_false", {
