@@ -54,7 +54,7 @@ is_existing_file <- function(x)
 is_ex_file <- function(x)
 {
   x <- coerce_to(x, "character")
-  call_and_name(function(x) is_true(file.info(x)[["isdir"]]), x)
+  call_and_name(function(x) file.access(x, mode = 1) == 0L, x)
 }
 
 #' Is the directory a known R library?
