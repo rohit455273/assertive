@@ -1,6 +1,5 @@
 test_that("test.is_debugged.a_function.returns_true_when_debugged", {
-  x <- function()
-  {
+  x <- function() {
   }
   expect_false(is_debugged(x))
   debug(x)
@@ -35,9 +34,10 @@ test_that("test.is_symmetric_matrix.an_assymmetric_matrix.returns_false", {
   expect_false(is_symmetric_matrix(x))
 })
 
-test_that("test.is_symmetric_matrix.not_coercible_to_matrix.throws_error", {
-  suppressWarnings(checkException(is_symmetric_matrix(sqrt), silent = TRUE))
-})
+test_that("test.is_symmetric_matrix.not_coercible_to_matrix.throws_error", 
+  {
+    suppressWarnings(expect_error(is_symmetric_matrix(sqrt)))
+  })
 
 test_that("test.is_unsorted.a_sorted_vector.returns_false", {
   expect_false(is_unsorted(1:3))
@@ -52,19 +52,24 @@ test_that("test.is_unsorted.an_weakly_unsorted_vector.returns_strictly", {
   expect_true(is_unsorted(c(1, 1, 2), strictly = TRUE))
 })
 
-test_that("test.is_whole_number.a_numeric_vector.returns_true_for_whole_numbers", {
-  x <- c(0, 1, -0.5, 100 * .Machine$double.eps, 101 * .Machine$double.eps, 100 * -.Machine$double.eps, -101 * 
-    .Machine$double.eps, Inf, -Inf, NaN, NA)
-  expected <- c(TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, NA, NA, NA, NA)
-  names(expected) <- x
-  expect_equal(is_whole_number(x), expected)
-})
+test_that("test.is_whole_number.a_numeric_vector.returns_true_for_whole_numbers", 
+  {
+    x <- c(0, 1, -0.5, 100 * .Machine$double.eps, 101 * .Machine$double.eps, 
+      100 * -.Machine$double.eps, -101 * .Machine$double.eps, Inf, -Inf, 
+      NaN, NA)
+    expected <- c(TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, NA, NA, 
+      NA, NA)
+    names(expected) <- x
+    expect_equal(is_whole_number(x), expected)
+  })
 
-test_that("test.is_whole_number.no_tolerance.returns_true_for_exactly_whole_numbers", {
-  x <- c(0, 1, -0.5, 100 * .Machine$double.eps, 101 * .Machine$double.eps, 100 * -.Machine$double.eps, -101 * 
-    .Machine$double.eps, Inf, -Inf, NaN, NA)
-  expected <- c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, NA, NA, NA, NA)
-  names(expected) <- x
-  expect_equal(is_whole_number(x, 0), expected)
-})
- 
+test_that("test.is_whole_number.no_tolerance.returns_true_for_exactly_whole_numbers", 
+  {
+    x <- c(0, 1, -0.5, 100 * .Machine$double.eps, 101 * .Machine$double.eps, 
+      100 * -.Machine$double.eps, -101 * .Machine$double.eps, Inf, -Inf, 
+      NaN, NA)
+    expected <- c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, NA, NA, 
+      NA, NA)
+    names(expected) <- x
+    expect_equal(is_whole_number(x, 0), expected)
+  }) 

@@ -10,5 +10,4 @@ test_that("test.is_in_past.then_now_soon.returns_true_in_past", {
   expected <- c(TRUE, FALSE)
   names(expected) <- x
   expect_equal(is_in_past(x), expected)
-})
- 
+}) 

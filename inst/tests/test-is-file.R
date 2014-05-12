@@ -12,14 +12,15 @@ test_that("test.is_ex_file.r_exes.returns_true", {
   expect_equal(is_ex_file(x), expected)
 })
 
-test_that("test.is_existing_file.some_paths.returns_true_when_file_exists", {
-  tf <- tempfile()
-  file.create(tf)
-  x <- c("~", getwd(), tf, "~not an existing file~")
-  expected <- c(TRUE, TRUE, TRUE, FALSE)
-  names(expected) <- x
-  expect_equal(is_existing_file(x), expected)
-})
+test_that("test.is_existing_file.some_paths.returns_true_when_file_exists", 
+  {
+    tf <- tempfile()
+    file.create(tf)
+    x <- c("~", getwd(), tf, "~not an existing file~")
+    expected <- c(TRUE, TRUE, TRUE, FALSE)
+    names(expected) <- x
+    expect_equal(is_existing_file(x), expected)
+  })
 
 test_that("test.is_library.some_paths.returns_true_when_path_is_library", {
   x <- c(.libPaths(), "a made up directory")
@@ -41,5 +42,4 @@ test_that("test.is_writable_file.tempfile.returns_true", {
   names(expected) <- x
   expect_equal(is_writable_file(x), expected)
   unlink(x)
-})
- 
+}) 

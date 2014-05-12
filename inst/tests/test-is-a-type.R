@@ -23,15 +23,15 @@ test_that("test.is_a_complex.1.returns_false", {
 })
 
 test_that("test.is_a_complex.1_plus_0i.returns_true", {
-  expect_true(is_a_complex(1 + (0 + (0+0i))))
+  expect_true(is_a_complex(1 + (0 + (0 + (0 + (0+0i))))))
 })
 
 test_that("test.is_a_complex.1i.returns_true", {
-  expect_true(is_a_complex(0 + (0+1i)))
+  expect_true(is_a_complex(0 + (0 + (0 + (0+1i)))))
 })
 
 test_that("test.is_a_complex.a_vector.returns_false", {
-  expect_false(is_a_complex(c(0 + (0+1i), 0 + (0+2i))))
+  expect_false(is_a_complex(c(0 + (0 + (0 + (0+1i))), 0 + (0 + (0 + (0+2i))))))
 })
 
 test_that("test.is_a_complex.empty_complex.returns_false", {
@@ -152,5 +152,4 @@ test_that("test.is_an_integer.minus_1L.returns_true", {
 
 test_that("test.is_an_integer.na.returns_true", {
   expect_true(is_an_integer(NA_integer_))
-})
- 
+}) 

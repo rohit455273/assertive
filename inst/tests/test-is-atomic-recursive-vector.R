@@ -47,8 +47,7 @@ test_that("test.is_recursive.a_formula.returns_true", {
 })
 
 test_that("test.is_recursive.a_function.returns_true", {
-  expect_true(is_recursive(function()
-  {
+  expect_true(is_recursive(function() {
   }))
 })
 
@@ -98,5 +97,4 @@ test_that("test.is_vector.numeric.returns_true", {
 
 test_that("test.is_vector.raw.returns_true", {
   expect_true(is_vector(raw()))
-})
- 
+}) 
