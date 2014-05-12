@@ -1,6 +1,6 @@
 test_that("test.is_dir.some_paths.returns_true_when_path_is_dir", {
   x <- c(R.home(), dir(R.home("bin"), full.names = TRUE))
-  expected <- c(TRUE, logical(length(x) - 1))
+  expected <- file.info(x)[["isdir"]]
   names(expected) <- x
   expect_equal(is_dir(x), expected)
 })
