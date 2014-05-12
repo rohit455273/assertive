@@ -38,7 +38,7 @@ test_that(
     )
     actual <- has_colnames(x)
     expect_false(actual)
-    expect_equal(cause(actual), noquote("The column names of x are NULL."))
+    expect_equal(cause(actual), noquote("The column names of x are all empty."))
   }
 )
 
@@ -67,7 +67,7 @@ test_that(
     expect_false(actual)
     expect_equal(
       cause(actual), 
-      noquote("The number of cols in x is zero.")
+      noquote("The number of columns in x is zero.")
     )
   }
 )
@@ -216,7 +216,7 @@ test_that(
     x <- matrix(1:12, nrow = 3)
     actual <- has_rownames(x)
     expect_false(actual)
-    expect_equal(cause(actual), noquote("Row names are all empty."))
+    expect_equal(cause(actual), noquote("The row names of x are NULL."))
   }
 )
 
@@ -230,7 +230,7 @@ test_that(
     )
     actual <- has_rownames(x)
     expect_false(actual)
-    expect_equal(cause(actual), noquote("Row names are all empty."))
+    expect_equal(cause(actual), noquote("The row names of x are all empty."))
   }
 )
 
