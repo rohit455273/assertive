@@ -85,8 +85,8 @@ is_library <- function(x)
 #' @export
 is_readable_file <- function(x)
 {
-  x <- coerce_to(x, "character")
-  call_and_name(file.access, x, mode = 4) == 0L
+  x <- coerce_to(x, "character")  
+  call_and_name(function(x) file.access(x, mode = 4) == 0L, x)
 }
 
 #' @rdname is_ex_file
@@ -94,5 +94,5 @@ is_readable_file <- function(x)
 is_writable_file <- function(x)
 {
   x <- coerce_to(x, "character")
-  call_and_name(file.access, x, mode = 2) == 0L
+  call_and_name(function(x) file.access(x, mode = 2) == 0L, x)
 }
