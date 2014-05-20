@@ -19,6 +19,30 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
   TRUE
 }
 
+#' Is the input divisible by a number?
+#' 
+#' Checks to see if the input is divisible by some number.
+#' @param x A numeric vector to divide.
+#' @param n A numeric vector to divide by.
+#' @param tol Differences from zero smaller than \code{tol} are not considered.
+#' @return \code{TRUE} if the input \code{x} is divisible by \code{n}, within 
+#' the specified tolerance.
+#' @note \code{is_even} and \code{is_odd} are shortcuts for divisbility by two.
+#' @seealso \code{is_whole_number}
+#' @examples
+#' is_divisible_by(1:10, 3)
+#' is_divisible_by(-5:5, -2)
+#' is_divisible_by(1.5:10.5, c(1.5, 3.5))
+#' assert_any_are_even(1:10)
+#' \dontrun{
+#' assert_all_are_even(1:10)
+#' }
+#' @export
+is_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
+{
+  assertive:::call_and_name(function(x) abs(x %% n) <= tol, x) 
+}
+
 #' Does the code run without throwing an error?
 #' 
 #' Call the code inside a try block and report if an error was thrown.
@@ -38,6 +62,13 @@ is_error_free <- function(x)
   ok <- TRUE
   attr(ok, "result") <- res
   ok
+}
+
+#' @rdname is_divisible_by
+#' @export
+is_even <- function(x, tol = 100 * .Machine$double.eps)
+{
+  is_divisible_by(x, 2L, tol = tol)  
 }
 
 #' Does the variable exist?
@@ -150,6 +181,13 @@ is_loaded <- function(x, PACKAGE = "", type = "",
   }
 }
 
+#' @rdname is_divisible_by
+#' @export
+is_odd <- function(x, tol = 100 * .Machine$double.eps)
+{
+  is_divisible_by(x - 1, 2L, tol = tol)  
+}
+
 #' Is the input a symmetric matrix?
 #'
 #' Checks that the input is a symmetric matrix.
@@ -255,6 +293,7 @@ is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE,
 #' that the input \code{x} need not have type \code{integer}.  In fact
 #' it is expected that \code{x} will be \code{numeric}.
 #' @return \code{TRUE} if the input is a whole number.
+#' @seealso \code{is_divisible_by}
 #' @examples
 #' x <- 1 + c(0, .Machine$double.eps, -.Machine$double.neg.eps)
 #' is_whole_number(x)
