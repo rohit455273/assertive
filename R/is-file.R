@@ -67,7 +67,6 @@ is_ex_file <- function(x)
 #' @return \code{is_library} returns \code{TRUE} if and only if the input
 #' paths are known R package libraries.  That is, they must be paths
 #' returned by \code{.libPaths}.
-#' 
 #' @export
 is_library <- function(x)
 {
@@ -75,7 +74,8 @@ is_library <- function(x)
   call_and_name(
     function(x) 
     {
-      normalizePath(x, winslash = "/", mustWork = FALSE) %in% .libPaths()
+      std_x <- normalizePath(path.expand(x), winslash = "/", mustWork = FALSE)
+      std_x %in% .libPaths()
     }, 
     x
   )
