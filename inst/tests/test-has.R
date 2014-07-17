@@ -24,7 +24,9 @@ test_that(
   "test.has_colnames.without_colnames.returns_false",
   {
     x <- matrix(1:12, nrow = 3)
-    expect_false(has_colnames(x))
+    actual <- has_colnames(x)
+    expect_false(actual)
+    expect_equal(cause(actual), noquote("The column names of x are NULL."))
   }
 )
 
@@ -55,7 +57,12 @@ test_that(
   "test.has_cols.without_columns.returns_true",
   {
     x <- 1:10
-    expect_false(has_cols(x))
+    actual <- has_cols(x)
+    expect_false(actual)
+    expect_equal(
+      cause(actual), 
+      noquote("The number of columns in x is NULL.")
+    )
   }
 )
 

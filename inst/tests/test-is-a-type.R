@@ -1,9 +1,21 @@
 test_that("test.is_a_bool.a_vector.returns_false", {
-  expect_false(is_a_bool(c(TRUE, FALSE)))
+  x <- c(TRUE, FALSE)
+  actual <- is_a_bool(x)
+  expect_false(actual)
+  expect_equal(
+    cause(actual), 
+    noquote("x does not have length one.")
+  )
 })
 
 test_that("test.is_a_bool.empty_logical.returns_false", {
-  expect_false(is_a_bool(logical()))
+  x <- logical()
+  actual <- is_a_bool(x)
+  expect_false(actual)
+  expect_equal(
+    cause(actual), 
+    noquote("x does not have length one.")
+  )
 })
 
 test_that("test.is_a_bool.false.returns_true", {
@@ -19,7 +31,13 @@ test_that("test.is_a_bool.true.returns_true", {
 })
 
 test_that("test.is_a_complex.1.returns_false", {
-  expect_false(is_a_complex(1L))
+  x <- 1L
+  actual <- is_a_complex(x)
+  expect_false(actual)
+  expect_equal(
+    cause(actual), 
+    noquote("x is not of type 'complex'.")
+  )
 })
 
 test_that("test.is_a_complex.1_plus_0i.returns_true", {
@@ -31,7 +49,14 @@ test_that("test.is_a_complex.1i.returns_true", {
 })
 
 test_that("test.is_a_complex.a_vector.returns_false", {
-  expect_false(is_a_complex(c(0 + (0 + (0 + (0+1i))), 0 + (0 + (0 + (0+2i))))))
+  x <- c(0 + (0 + (0 + (0+1i))), 0 + (0 + (0 + (0+2i))))
+  actual <- is_a_complex(x)
+  expect_false(actual)
+  expect_equal(
+    cause(actual), 
+    noquote("x does not have length one.")
+  )
+  expect_false(is_a_complex())
 })
 
 test_that("test.is_a_complex.empty_complex.returns_false", {
