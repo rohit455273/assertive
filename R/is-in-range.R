@@ -49,6 +49,7 @@ is_in_open_range <- function(x, lower = -Inf, upper = Inf)
 is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE, 
   upper_is_strict = FALSE)
 {
+  assert_is_numeric(x)
   ok <- rep.int(TRUE, length(x))
   ok[is.na(x)] <- NA
   ok[x < lower] <- FALSE                     
