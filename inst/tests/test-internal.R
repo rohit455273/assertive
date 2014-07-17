@@ -6,9 +6,7 @@ test_that("test.character_to_list_of_integer_vectors.strings.returns_list_of_int
   names(expected) <- x
   expect_identical(suppressWarnings(character_to_list_of_integer_vectors(x)), 
     expected)
-  old_ops <- options(warn = 2)
-  on.exit(options(old_ops))
-  expect_error(character_to_list_of_integer_vectors(x))
+  expect_warning(character_to_list_of_integer_vectors(x))
 })
 
 test_that("test.matches_regex.strings.returns_true_when_string_matches_regex", 
