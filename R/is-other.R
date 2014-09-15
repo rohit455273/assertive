@@ -40,7 +40,7 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
 {
-  assertive:::call_and_name(function(x) abs(x %% n) <= tol, x) 
+  call_and_name(function(x) abs(x %% n) <= tol, x) 
 }
 
 #' Does the code run without throwing an error?
