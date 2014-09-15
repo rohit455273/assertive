@@ -1,4 +1,3 @@
-
 #' @rdname is_logical
 #' @export
 is_a_bool <- function(x, .xname = get_name_in_parent(x))
@@ -76,3 +75,35 @@ is_an_integer <- function(x, .xname = get_name_in_parent(x))
   if(!(ok <- is_scalar(x, .xname))) return(ok)
   TRUE
 } 
+
+#' Does the object inherit from some class?
+#' 
+#' Checks to see if an object is inherited from any of the specifed classes.
+#' @param x Any R variable.
+#' @param classes A character vector of classes.
+#' @param .xname Not intended to be used directly.
+#' @return \code{TRUE} if \code{x} inherits from at least one of the classes,
+#' as determined by \code{\link[base]{inherits}}.
+#' @seealso \code{\link[base]{inherits}}, \code{\link{is2}}
+#' @examples
+#' x <- structure(1:5, class = c("foo", "bar"))
+#' assert_is_inherited_from(x, c("foo", "baz"))
+#' \dontrun{
+#' assert_is_inherited_from(x, c("Foo", "baz"))
+#' }
+#' @export
+is_inherited_from <- function(x, classes, .xname = get_name_in_parent(x))
+{
+  ok <- bapply(classes, function(class) inherits(x, class))
+  if(!any(ok)) 
+  {
+    return(
+      false(
+        "%s does not inherit from any of the classes %s.", 
+        .xname, 
+        toString(classes)
+      )
+    )
+  }
+  TRUE
+}
