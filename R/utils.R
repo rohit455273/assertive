@@ -42,6 +42,16 @@ cause <- function(x)
 #' @export
 `cause<-` <- function(x, value)
 {
+  if(!is_scalar(value) && length(value) != length(x))
+  {
+    stop(
+      "The length of value should be 1 or the length of x (", 
+      length(x),
+      ") but is ", 
+      length(value),
+      "."
+    )
+  }
   attr(x, "cause") <- noquote(as.character(value))
   x
 }
