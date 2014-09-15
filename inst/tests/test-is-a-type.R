@@ -178,3 +178,22 @@ test_that("test.is_an_integer.minus_1L.returns_true", {
 test_that("test.is_an_integer.na.returns_true", {
   expect_true(is_an_integer(NA_integer_))
 }) 
+
+test_that("test.is_inherited_from.x_inherited_from_lowest_class.returns_true",  {
+  x <- structure(1:5, class = c("foo", "bar"))
+  expect_true(is_inherited_from(x, "foo"))   
+})
+
+test_that("test.is_inherited_from.x_inherited_from_highest_class.returns_true",  {
+  x <- structure(1:5, class = c("foo", "bar"))
+  expect_true(is_inherited_from(x, "bar"))   
+})
+
+test_that("test.is_inherited_from.x_only_inherited_from_some_classes.returns_true",  {
+  x <- structure(1:5, class = c("foo", "bar"))
+  expect_true(is_inherited_from(x, c("foo", "baz")))   
+})
+
+test_that("test.is_inherited_from.x_not_inherited",  {
+  x <- structure(1:5, class = c("foo", "bar"))
+  expect_false(is_inherited_from(x, "baz"))   
