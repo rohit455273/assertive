@@ -27,7 +27,7 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
 #' @param tol Differences from zero smaller than \code{tol} are not considered.
 #' @return \code{TRUE} if the input \code{x} is divisible by \code{n}, within 
 #' the specified tolerance.
-#' @note \code{is_even} and \code{is_odd} are shortcuts for divisbility by two.
+#' @note \code{is_even} and \code{is_odd} are shortcuts for divisibility by two.
 #' @seealso \code{is_whole_number}
 #' @examples
 #' is_divisible_by(1:10, 3)
