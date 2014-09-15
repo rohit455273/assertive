@@ -3,7 +3,7 @@
 assert_all_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
 {  
   msg <- sprintf("%s are not all divisible by %s.", get_name_in_parent(x), toString(n, width = 20))
-  assertive:::assert_engine(x, is_divisible_by, msg, n = n, tol = tol)  
+  assert_engine(x, is_divisible_by, msg, n = n, tol = tol)  
 }
 
 #' @rdname is_divisible_by
@@ -11,25 +11,25 @@ assert_all_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
 assert_any_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
 {  
   msg <- sprintf("%s are all not divisible by %s.", get_name_in_parent(x), toString(n, width = 20))
-  assertive:::assert_engine(
+  assert_engine(
     x, is_divisible_by, msg, what = "any", n = n, tol = tol
   )  
 }
 
 #' @rdname is_divisible_by
 #' @export
-assert_all_are_even <- function(x, n, tol = 100 * .Machine$double.eps)
+assert_all_are_even <- function(x, tol = 100 * .Machine$double.eps)
 {  
-  msg <- sprintf("%s are not all even.", get_name_in_parent(x), toString(n, width = 20))
-  assertive:::assert_engine(x, is_even, msg, tol = tol)  
+  msg <- sprintf("%s are not all even.", get_name_in_parent(x))
+  assert_engine(x, is_even, msg, tol = tol)  
 }
 
 #' @rdname is_divisible_by
 #' @export
-assert_any_are_even <- function(x, n, tol = 100 * .Machine$double.eps)
+assert_any_are_even <- function(x, tol = 100 * .Machine$double.eps)
 {  
-  msg <- sprintf("%s are all not even.", get_name_in_parent(x), toString(n, width = 20))
-  assertive:::assert_engine(x, is_even, msg, what = "any", tol = tol)  
+  msg <- sprintf("%s are all not even.", get_name_in_parent(x))
+  assert_engine(x, is_even, msg, what = "any", tol = tol)  
 }
 
 #' @rdname is_existing
@@ -81,6 +81,22 @@ assert_any_are_existing <- function(
   )       
 }
 
+#' @rdname is_divisible_by
+#' @export
+assert_all_are_odd <- function(x, tol = 100 * .Machine$double.eps)
+{  
+  msg <- sprintf("%s are not all odd.", get_name_in_parent(x))
+  assert_engine(x, is_odd, msg, tol = tol)  
+}
+
+#' @rdname is_divisible_by
+#' @export
+assert_any_are_odd <- function(x, tol = 100 * .Machine$double.eps)
+{  
+  msg <- sprintf("%s are all not odd.", get_name_in_parent(x))
+  assert_engine(x, is_odd, msg, what = "any", tol = tol)  
+}
+
 #' @rdname is_debugged
 #' @export
 assert_is_debugged <- function(x)
@@ -108,7 +124,7 @@ assert_is_loaded <- function(x)
 assert_all_are_odd <- function(x, n, tol = 100 * .Machine$double.eps)
 {  
   msg <- sprintf("%s are not all odd.", get_name_in_parent(x), toString(n, width = 20))
-  assertive:::assert_engine(x, is_odd, msg, tol = tol)  
+  assert_engine(x, is_odd, msg, tol = tol)  
 }
 
 #' @rdname is_divisible_by
@@ -116,7 +132,7 @@ assert_all_are_odd <- function(x, n, tol = 100 * .Machine$double.eps)
 assert_any_are_odd <- function(x, n, tol = 100 * .Machine$double.eps)
 {  
   msg <- sprintf("%s are all not odd.", get_name_in_parent(x), toString(n, width = 20))
-  assertive:::assert_engine(
+  assert_engine(
     x, is_odd, msg, what = "any", tol = tol
   )  
 }
