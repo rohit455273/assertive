@@ -201,6 +201,14 @@ is_email_address <- function(x, method = c("simple", "rfc2822"),
   matches_regex(x, rx, perl = TRUE)
 }
 
+#' @rdname is_character
+#' @export
+is_empty_character <- function(x)
+{ 
+  x <- coerce_to(x, "character")
+  !nzchar(x)
+}
+
 #' Does the character vector contain hex colours?
 #'
 #' Checks that the input contains hexadecimal colours.
