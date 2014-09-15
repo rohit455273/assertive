@@ -56,11 +56,10 @@ test_that("test.is_a_complex.a_vector.returns_false", {
     cause(actual), 
     noquote("x does not have length one.")
   )
-  expect_false(is_a_complex())
 })
 
 test_that("test.is_a_complex.empty_complex.returns_false", {
-  expect_false(is_a_number(complex()))
+  expect_false(is_a_complex(complex()))
 })
 
 test_that("test.is_a_complex.na_complex_.returns_true", {
@@ -197,3 +196,4 @@ test_that("test.is_inherited_from.x_only_inherited_from_some_classes.returns_tru
 test_that("test.is_inherited_from.x_not_inherited",  {
   x <- structure(1:5, class = c("foo", "bar"))
   expect_false(is_inherited_from(x, "baz"))   
+})
