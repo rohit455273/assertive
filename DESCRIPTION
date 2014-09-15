@@ -1,8 +1,8 @@
 Package: assertive
 Type: Package
 Title: Readable check functions to ensure code integrity.
-Version: 0.2-0
-Date: 2014-05-10
+Version: 0.2-1
+Date: 2014-09-15
 Author: Richard Cotton
 Maintainer: Richard Cotton <richierocks@gmail.com>
 Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
