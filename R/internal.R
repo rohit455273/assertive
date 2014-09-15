@@ -33,21 +33,24 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
         stop("Bug in assertive; error message is missing")
       }
     }
-    # Append first few failure values and positions to the error message.
-    fail_index <- which(!ok)
-    fail_values <- names(ok[fail_index])
-    if(is.character(x) || is.factor(x))
+    if(!is_scalar(ok))
     {
-      fail_values <- dQuote(fail_values)
+      # Append first few failure values and positions to the error message.
+      fail_index <- which(!ok)
+      fail_values <- names(ok[fail_index])
+      if(is.character(x) || is.factor(x))
+      {
+        fail_values <- dQuote(fail_values)
+      }
+      failures <- paste0(fail_values, " [", fail_index, "]")
+      # 37 is nchar("\nFailure value [pos'n]: ") plus space for RStudio's
+      # "Show traceback" message.
+      msg <- paste0(
+        msg, 
+        "\nFailure value [pos'n]: ", 
+        toString(failures, width = getOption("width") - 37)
+      )
     }
-    failures <- paste0(fail_values, " [", fail_index, "]")
-    # 37 is nchar("\nFailure value [pos'n]: ") plus space for RStudio's
-    # "Show traceback" message.
-    msg <- paste0(
-      msg, 
-      "\nFailure value [pos'n]: ", 
-      toString(failures, width = getOption("width") - 37)
-    )
     # Throw error/warning/message
     handler(msg, call. = FALSE)
   }
