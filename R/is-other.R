@@ -135,31 +135,6 @@ is_existing <- function(
   TRUE
 }
 
-# ' Is the input generic?
-# '
-# ' Checks to see if the input is a generic function.
-# '
-# ' @param x Input to check.
-# ' @param .xname Not intended to be used directly.
-# ' @return \code{TRUE} if the input is a generic function. 
-# ' \code{assert_is_generic} functions return nothing but throws an error
-# ' if \code{is_generic} returns \code{FALSE}.
-# ' @seealso \code{\link[methods]{GenericFunctions}}.
-# ' @examples
-# ' 
-# ' @export
-# is_generic <- function(x)
-# {       
-#   x <- use_first(x)  
-#   if(!is.function(x)) return(false("Input is not a function"))  
-#   fn_name <- get_name_in_parent(x)
-#   if(fn_name %in% utils:::getKnownS3generics()) return(TRUE)      
-#   where <- find(fn_name, mode = "function")
-#   gen <- utils:::findGeneric(fn_name, envir = as.environment(where))
-#   if(!nzchar(gen)) return(false("Input is not generic."))
-#   TRUE
-# }     
-
 #' Is the input DLL loaded?
 #'
 #' Checks to see if the input DLL (a.k.a. shared object) is loaded.
