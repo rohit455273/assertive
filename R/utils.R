@@ -259,6 +259,19 @@ parenthesise <- function(x,
   paste0(before, x, after)
 }
 
+#' Set a cause and return the input
+#' 
+#' Sets the cause attribute of an object and returns that object.
+#' @param x A variable.
+#' @param value A charact vector to set the cause to.
+#' @return \code{x}, with a new cause attribute.
+#' @seealso \code{\link{cause}} , \code{\link[stats]{setNames}}
+set_cause <- function(x, value)
+{
+  cause(x) <- value
+  x
+}
+
 #' Strip all attributes from a variable.
 #'
 #' Strips all the attributes from a variable.
