@@ -176,6 +176,11 @@ merge.list <- function(x, y)
   all_values
 }
 
+merge.NULL <- function(x, y)
+{
+  return(y)
+}
+
 #' Merge ellipsis args with a list.
 #'
 #' Merges variable length ellipsis arguments to a function with a list argument.
@@ -264,13 +269,16 @@ parenthesise <- function(x,
 #' Sets the cause attribute of an object and returns that object.
 #' @param x A variable.
 #' @param value A character vector to set the cause to, where \code{x} is
-#' \code{FALSE}.
+#' not \code{TRUE}.
+#' @details If \code{x} is \code{TRUE} everywhere, this returns the input 
+#' without setting a cause.  Otherwise, the cause is an empty string where 
+#' \code{x} is \code{TRUE}, and \code{value} elsewhere.
 #' @return \code{x}, with a new cause attribute.
 #' @seealso \code{\link{cause}} , \code{\link[stats]{setNames}}
 set_cause <- function(x, value)
 {
-  if(all(x)) return(x)
-  cause(x) <- ifelse(x, "", value)
+  if(all(!is.na(x) & x)) return(x)
+  cause(x) <- ifelse(!is.na(x) & x, "", value)
   x
 }
 
