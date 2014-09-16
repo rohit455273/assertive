@@ -125,13 +125,14 @@ is_credit_card_number <- function(x,
     jcb        = c(paste0("35", d(2)), rep.int(d(4), 3))
   )
   rx <- create_regex(l = rx[type], sep = " ?")
-  ok <- matches_regex(x, rx)
+  ok <- matches <- matches_regex(x, rx)
+  not_missing_and_ok <- !is.na(ok) & ok
   
-  x[ok] <- suppressWarnings(strip_non_numeric(x[ok]))
+  x[not_missing_and_ok] <- suppressWarnings(strip_non_numeric(x[not_missing_and_ok]))
   
   #Check check digit with Luhn algorithm
-  ok[ok] <- bapply(
-    character_to_list_of_integer_vectors(x[ok]),
+  ok[not_missing_and_ok] <- bapply(
+    character_to_list_of_integer_vectors(x[not_missing_and_ok]),
     function(x)
     {
       lenx <- length(x)
@@ -143,7 +144,14 @@ is_credit_card_number <- function(x,
       expected_check_digit == actual_check_digit
     }   
   )  
-  ok
+  set_cause(
+    ok, 
+    ifelse(
+      is.na(ok),
+      "missing",
+      ifelse(matches, "bad checkdigit", "bad format")
+    )
+  )
 }
 
 #' Does the character vector contain dates? 
