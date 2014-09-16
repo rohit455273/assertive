@@ -165,6 +165,8 @@ is_credit_card_number <- function(x,
 #' @return A logical vector that is \code{TRUE} when the input contains valid 
 #' dates or times.
 #' @examples
+#' x <- c("9999-12-31 23:59:59", "wednesday", NA)
+#' is_date_string(x)
 #' assert_all_are_date_strings("01Aug1979", format = "%d%b%Y") #My DOB!
 #' @seealso \code{\link[base]{strptime}} for specifying formats, and the 
 #' \code{lubridate} package for automatic guessing of date formats (and other 
@@ -174,8 +176,14 @@ is_date_string <- function(x, format = "%F %T", .xname = get_name_in_parent(x))
 {
   x <- coerce_to(x, "character")
   format <- use_first(format)
-  f <- function(x) !is.na(strptime(x, format))
-  call_and_name(f, x)  
+  call_and_name(
+    function(x) 
+    {
+      ok <- !is.na(strptime(x, format))
+      set_cause(ok, ifelse(is.na(x), "missing", "bad format"))
+    }, 
+    x
+  )  
 }
 
 #' Does the character vector contain email addresses?
