@@ -249,9 +249,12 @@ matches_regex <- function(x, rx, ignore.case = TRUE, ...)
         )
         return(rep.int(TRUE, length(x)))
       }
-      #call to ifelse needed because grepl always returns TRUE or FALSE
+      # call to ifelse needed because grepl always returns TRUE or FALSE
+      # need to unname, because ifeles preserves x's names, when we want to
+      # name result with values of x, and mrege.list throws a warning about
+      # duplicate names attr.
       ifelse(   
-        is.na(x),
+        is.na(unname(x)),
         NA,
         grepl(rx, x, ignore.case = ignore.case, ...)
       )
