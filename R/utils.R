@@ -161,6 +161,7 @@ get_name_in_parent <- function(x)
 #' @export
 merge.list <- function(x, y)
 {
+  if(is.null(y)) return(x)
   y <- coerce_to(y, "list")
   all_names <- c(names(x), names(y))
   all_values <- c(x, y)
