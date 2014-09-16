@@ -10,7 +10,21 @@
 is_dir <- function(x)
 {  
   x <- coerce_to(x, "character")
-  call_and_name(function(x) is_true(file.info(x)[["isdir"]]), x)
+  call_and_name(
+    function(x) 
+    {
+      ok <- file.info(x)[["isdir"]]
+      causes <- ifelse(
+        is.na(ok),
+        "nonexistent",
+        ifelse(ok, "", "file")
+      )
+      ok <- is_true(ok) 
+      cause(ok) <- causes
+      unname(ok)
+    }, 
+    x
+  )
 }
 
 #' Does the file exist?
