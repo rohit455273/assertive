@@ -78,18 +78,24 @@ is_mac <- function()
 #' @return \code{TRUE} if the sepcified paths are on the OS search path.
 #' @examples
 #' is_on_os_path(
-#'   c(R.home("bin"), 
-#'   "a nonexistent path"
-#' )) #probably c(TRUE, FALSE)
+#'   c(R.home("bin"), R.home("etc"), "a nonexistent path")
+#' ) # probably c(TRUE, FALSE, FALSE)
 #' @export
 is_on_os_path <- function(x)
 {
-  paths <- normalizePath(
-    strsplit(Sys.getenv("path"), ";")[[1]], 
-    mustWork = FALSE
-  )
-  x <- normalizePath(path.expand(coerce_to(x, "character")), mustWork = FALSE)
-  call_and_name(function(x) x %in% paths, x)  
+  call_and_name(
+    function(x) 
+    {
+      x <- normalizePath(path.expand(coerce_to(x, "character")), mustWork = FALSE)
+      paths <- normalizePath(
+        strsplit(Sys.getenv("path"), ";")[[1]], 
+        mustWork = FALSE
+      )
+      ok <- x %in% paths
+      set_cause(ok, ifelse(file.exists(x), "not on path", "nonexistent"))
+    }, 
+    x
+  )  
 }
 
 #' @rdname is_xxx_for_decimal_point

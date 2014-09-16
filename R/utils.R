@@ -269,6 +269,7 @@ parenthesise <- function(x,
 #' @seealso \code{\link{cause}} , \code{\link[stats]{setNames}}
 set_cause <- function(x, value)
 {
+  if(all(x)) return(x)
   cause(x) <- ifelse(x, "", value)
   x
 }
