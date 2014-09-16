@@ -156,7 +156,15 @@ is_writable_file <- function(x)
 
 #' Warn about file.access under Windows
 #' 
-#' 
+#' If the OS is Windows, throw a warning about using 
+#' \code{\link[base]{file.access}}.
+#' @return Nothing. Invoked for the side effect of throwing a warning under 
+#' Windows.
+#' @seealso \code{\link[base]{file.access}}
+#' @examples
+#' \dontrun{
+#' warn_about_file.access_under_windows()
+#' }
 warn_about_file.access_under_windows <- function()
 { 
   if(is_windows())
