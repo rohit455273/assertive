@@ -52,11 +52,20 @@ is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE,
   assert_is_numeric(x)
   ok <- rep.int(TRUE, length(x))
   ok[is.na(x)] <- NA
-  ok[x < lower] <- FALSE                     
-  ok[x > upper] <- FALSE
-  if(lower_is_strict) ok[x == lower] <- FALSE
-  if(upper_is_strict) ok[x == upper] <- FALSE
+  too_low <- (if(lower_is_strict) `<` else `<=`)(x, lower)
+  too_high <- (if(upper_is_strict) `>` else `>=`)(x, upper)
+  ok[too_low] <- FALSE                     
+  ok[too_high] <- FALSE
   names(ok) <- x
+  cause(ok) <- ifelse(
+    too_low,
+    "too low",
+    ifelse(
+      too_high,
+      "too high",
+      ""
+    )
+  )
   ok
 }
 
