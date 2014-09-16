@@ -146,6 +146,35 @@ get_name_in_parent <- function(x)
   ))
 }
 
+#' Merge two lists
+#' 
+#' Merges two lists, taking duplicated elements from the first list.
+#' @param x A list.
+#' @param y A list.
+#' @return A list, combining elements from \code{x} and \code{y}.
+#' @seealso \code{\link{merge_dots_with_list}}, \code{\link[base]{merge}}
+#' @examples
+#' merge(
+#'   list(foo = 1, bar = 2, baz = 3), 
+#'   list(foo = 4, baz = 5, quux = 6)
+#' )
+#' @export
+merge.list <- function(x, y)
+{
+  y <- coerce_to(y, "list")
+  all_names <- c(names(x), names(y))
+  all_values <- c(x, y)
+  if(has_duplicates(all_names))
+  {
+    warning(
+      "Duplicated arguments: ", 
+      toString(all_names[duplicated(all_names)])
+    )
+    all_values <- all_values[!duplicated(all_names)]
+  }
+  all_values
+}
+
 #' Merge ellipsis args with a list.
 #'
 #' Merges variable length ellipsis arguments to a function with a list argument.
@@ -155,6 +184,7 @@ get_name_in_parent <- function(x)
 #' @note If any arguments are present in both the \code{...} and \code{l} 
 #' arguments, the \code{...} version takes preference, and a warning is thrown.
 #' @return A list containing the merged inputs.
+#' @seealso \code{\link{merge.list}}, \code{\link[base]{merge}}
 #' @examples
 #' merge_dots_with_list(
 #'   foo = 1, 
@@ -167,17 +197,7 @@ merge_dots_with_list <- function(..., l = list())
 {
   dots <- list(...)
   l <- coerce_to(l, "list")
-  all_names <- c(names(dots), names(l))
-  all_values <- c(dots, l)
-  if(has_duplicates(all_names))
-  {
-    warning(
-      "Duplicated arguments: ", 
-      toString(all_names[duplicated(all_names)])
-    )
-    all_values <- all_values[!duplicated(all_names)]
-  }
-  all_values
+  merge(dots, l)
 }
 
 #' Wrap a string in brackets
