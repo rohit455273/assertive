@@ -47,7 +47,14 @@ is_dir <- function(x)
 is_existing_file <- function(x)
 {
   x <- coerce_to(x, "character")
-  call_and_name(file.exists, x)
+  call_and_name(
+    function(x)
+    {
+      ok <- file.exists(x)
+      cause(x) <- ifelse(ok, "", "nonexistent")
+    }, 
+    x
+  )
 }
 
 #' Is the file accessible?
@@ -67,8 +74,20 @@ is_existing_file <- function(x)
 #' @export
 is_ex_file <- function(x)
 {
+  warn_about_file.access_under_windows()
   x <- coerce_to(x, "character")
-  call_and_name(function(x) file.access(x, mode = 1) == 0L, x)
+  call_and_name(
+    function(x)
+    {
+      ok <- file.access(x, mode = 1) == 0L
+      cause(ok) <- ifelse(
+        ok, 
+        "", 
+        ifelse(file.exists(x, "unexecutable", "nonexistent"))
+      )
+    }, 
+    x
+  )
 }
 
 #' Is the directory a known R library?
@@ -99,14 +118,51 @@ is_library <- function(x)
 #' @export
 is_readable_file <- function(x)
 {
+  warn_about_file.access_under_windows()
   x <- coerce_to(x, "character")  
-  call_and_name(function(x) file.access(x, mode = 4) == 0L, x)
+  call_and_name(
+    function(x)
+    {
+      ok <- file.access(x, mode = 4) == 0L
+      cause(ok) <- ifelse(
+        ok, 
+        "", 
+        ifelse(file.exists(x, "unreadable", "nonexistent"))
+      )
+    }, 
+    x
+  )
 }
 
 #' @rdname is_ex_file
 #' @export
 is_writable_file <- function(x)
 {
+  warn_about_file.access_under_windows()
   x <- coerce_to(x, "character")
-  call_and_name(function(x) file.access(x, mode = 2) == 0L, x)
+  call_and_name(
+    function(x)
+    {
+      ok <- file.access(x, mode = 2) == 0L
+      cause(ok) <- ifelse(
+        ok, 
+        "", 
+        ifelse(file.exists(x, "unwritable", "nonexistent"))
+      )
+    }, 
+    x
+  )
+}
+
+#' Warn about file.access under Windows
+#' 
+#' 
+warn_about_file.access_under_windows <- function()
+{ 
+  if(is_windows())
+  {
+    warning(
+      "This function depends on file.access, which can give unexpected results under Windows."
+    )
+  }
 }
