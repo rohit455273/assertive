@@ -35,8 +35,6 @@
 #' @export
 is_us_telephone_number <- function(x)
 { 
-  enbracket <- function(x) paste("(", x, ")", sep = "")
-  
   #Spaces and round brackets appear in arbitrary places; ignore them.
   x <- suppressWarnings(strip_invalid_chars(x, invalid_chars="[ -()]"))
   
@@ -51,7 +49,7 @@ is_us_telephone_number <- function(x)
   x[ok] <- sub(paste0("^", start), "", x[ok]) #remove country code prefix
     
   npa1 <- "[2-9]"
-  npa23 <- enbracket(     
+  npa23 <- parenthesise(     
     paste(
       c(
         "0[1-9]", "1[02-9]", "2[013-9]", "3[0-24-9]", "4[0-35-9]", 
@@ -61,7 +59,7 @@ is_us_telephone_number <- function(x)
     )    
   )
   nxx1 <- "[2-9]"
-  nxx23 <- enbracket(paste(c("1[02-9]", "[02-9][0-9]"), collapse = "|"))
+  nxx23 <- parenthesise(paste(c("1[02-9]", "[02-9][0-9]"), collapse = "|"))
   xxxx <- d(4)
   
   second_rx <- create_regex(
