@@ -3,7 +3,14 @@
 is_false <- function(x)
 {
   x <- coerce_to(x, "logical")
-  call_and_name(function(x) !x & !is.na(x), x)
+  call_and_name(
+    function(x) 
+    {
+      ok <- !x & !is.na(x)
+      set_cause(ok, ifelse(is.na(x), "missing", "true"))    
+    }, 
+    x
+  )
 }
 
 #' @rdname is_true
@@ -68,9 +75,9 @@ is_identical_to_true <- function(x, allow_attributes = FALSE,
 #' assert_any_are_true(x)
 #' assert_any_are_false(x)
 #' \dontrun{
-#' #These tests should fail:
-#' assert_is_true(c(truth = TRUE))
-#' assert_is_false(matrix(FALSE))
+#' # These tests should fail:
+#' assert_is_identical_to_true(c(truth = TRUE))
+#' assert_is_identical_to_false(matrix(FALSE))
 #' assert_all_are_true(x)
 #' assert_all_are_false(x)
 #' }
@@ -78,5 +85,12 @@ is_identical_to_true <- function(x, allow_attributes = FALSE,
 is_true <- function(x)
 {
   x <- coerce_to(x, "logical")
-  call_and_name(function(x) x & !is.na(x), x)
+  call_and_name(
+    function(x) 
+    {
+      ok <- x & !is.na(x)
+      set_cause(ok, ifelse(is.na(x), "missing", "false"))    
+    }, 
+    x
+  )
 }
