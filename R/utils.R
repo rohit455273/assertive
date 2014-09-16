@@ -278,7 +278,11 @@ parenthesise <- function(x,
 set_cause <- function(x, value)
 {
   if(all(!is.na(x) & x)) return(x)
-  cause(x) <- ifelse(!is.na(x) & x, "", value)
+  cause(x) <- ifelse(
+    is.na(x), 
+    "missing", 
+    ifelse(x, "", value)
+  )
   x
 }
 
