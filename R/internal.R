@@ -99,6 +99,7 @@ call_and_name <- function(fn, x, ...)
     )
     length(x) <- length(y)
   }
+  attributes(y) <- merge(attributes(y), attributes(x))
   names(y) <- x
   y
 }
