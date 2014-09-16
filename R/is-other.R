@@ -40,7 +40,14 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
 #' @export
 is_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
 {
-  call_and_name(function(x) abs(x %% n) <= tol, x) 
+  call_and_name(
+    function(x) 
+    {
+      ok <- abs(x %% n) <= tol
+      set_cause(ok, "indivisible")
+    }, 
+    x
+  ) 
 }
 
 #' Does the code run without throwing an error?
@@ -277,5 +284,12 @@ is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE,
 is_whole_number <- function(x, tol = 100 * .Machine$double.eps)
 {
   x <- coerce_to(x, "numeric")
-  call_and_name(function(x) abs(x - round(x)) <= tol, x)
+  call_and_name(
+    function(x) 
+    {
+      ok <- abs(x - round(x)) <= tol
+      set_cause(ok, "fractional")
+    }, 
+    x
+  )
 }
