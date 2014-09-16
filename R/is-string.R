@@ -50,14 +50,7 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
       expected_check_digit == actual_check_digit
     }
   )
-  set_cause(
-    ok, 
-    ifelse(
-      is.na(ok),
-      "missing",
-      ifelse(matches, "bad checkdigit", "bad format")
-    )
-  )
+  set_cause(ok, ifelse(matches, "bad checkdigit", "bad format"))
 }
 
 #' Does the character vector contain credit card numbers? 
