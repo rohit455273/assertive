@@ -81,11 +81,7 @@ is_ex_file <- function(x)
       ok <- file.access(x, mode = 1) == 0L
       set_cause(
         ok, 
-        ifelse(
-          ok, 
-          "", 
-          ifelse(file.exists(x, "unexecutable", "nonexistent"))
-        )
+        ifelse(file.exists(x, "unexecutable", "nonexistent"))
       )
     }, 
     x
@@ -110,9 +106,7 @@ is_library <- function(x)
     function(x) 
     {
       std_x <- normalizePath(path.expand(x), winslash = "/", mustWork = FALSE)
-      set_cause(
-        std_x %in% .libPaths(),
-        ifelse(ok, "not a lib")
+      set_cause(std_x %in% .libPaths(), "not a lib")
     }, 
     x
   )
@@ -130,11 +124,7 @@ is_readable_file <- function(x)
       ok <- file.access(x, mode = 4) == 0L
       set_cause(
         ok, 
-        ifelse(
-          ok, 
-          "", 
-          ifelse(file.exists(x, "unreadable", "nonexistent"))
-        )
+        ifelse(file.exists(x, "unreadable", "nonexistent"))
       )
     }, 
     x
@@ -153,11 +143,7 @@ is_writable_file <- function(x)
       ok <- file.access(x, mode = 2) == 0L
       set_cause(
         ok, 
-        ifelse(
-          ok, 
-          "", 
-          ifelse(file.exists(x, "unwritable", "nonexistent"))
-        )
+        ifelse(file.exists(x, "unwritable", "nonexistent"))
       )
     }, 
     x

@@ -57,16 +57,10 @@ is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE,
   ok[too_low] <- FALSE                     
   ok[too_high] <- FALSE
   names(ok) <- x
-  cause(ok) <- ifelse(
-    too_low,
-    "too low",
-    ifelse(
-      too_high,
-      "too high",
-      ""
-    )
+  set_cause(
+    ok,
+    ifelse(too_low, "too low", "too_high")
   )
-  ok
 }
 
 #' @rdname is_in_range

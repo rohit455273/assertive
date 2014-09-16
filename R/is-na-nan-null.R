@@ -30,13 +30,9 @@ is_finite <- function(x)
       set_cause(
         ok, 
         ifelse(
-          ok,
-          "",
-          ifelse(
-            is.infinite(x),
-            "infinite",
-            ifelse(is.nan(x), "not a number", "missing")
-          )
+          is.infinite(x),
+          "infinite",
+          ifelse(is.nan(x), "not a number", "missing")
         )
       )
     }, 
@@ -56,13 +52,9 @@ is_infinite <- function(x)
       set_cause(
         ok, 
         ifelse(
-          ok,
-          "",
-          ifelse(
-            is.finite(x),
-            "finite",
-            ifelse(is.nan(x), "not a number", "missing")
-          )
+          is.finite(x),
+          "finite",
+          ifelse(is.nan(x), "not a number", "missing")
         )
       )
     }, 
@@ -97,7 +89,7 @@ is_na <- function(x)
     function(x)
     {
       ok <- is.na(x)
-      set_cause(ok, ifelse(ok, "", "not missing"))
+      set_cause(ok, "not missing")
     }, 
     x
   )
@@ -131,7 +123,7 @@ is_nan <- function(x)
     function(x)
     {
       ok <- is.nan(x)
-      set_cause(ok, ifelse(ok, "", "a number"))
+      set_cause(ok, "a number")
     }, 
     x
   )
@@ -145,7 +137,7 @@ is_not_na <- function(x)
     function(x)
     {
       ok <- !is.na(x)
-      set_cause(ok, ifelse(ok, "", "missing"))
+      set_cause(ok, "missing")
     }, 
     x
   )
@@ -160,7 +152,7 @@ is_not_nan <- function(x)
     function(x)
     {
       ok <- !is.nan(x)
-      set_cause(ok, ifelse(ok, "", "not a number"))
+      set_cause(ok, "not a number")
     }, 
     x
   )
