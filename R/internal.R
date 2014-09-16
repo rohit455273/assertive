@@ -86,7 +86,7 @@ bapply <- function(x, predicate, ..., USE.NAMES = TRUE)
 #' same length as the input \code{x}.
 #' @examples
 #' \dontrun{
-#' call_and_name(is.finite, c(1, Inf, Na))
+#' call_and_name(is.finite, c(1, Inf, NA))
 #' }
 #' @seealso \code{\link{cause}} and \code{\link{na}}.
 call_and_name <- function(fn, x, ...)
