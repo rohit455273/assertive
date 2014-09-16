@@ -32,13 +32,15 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
   #Check format
   rx <- c(d(1, 7), d(2), d(1))
   rx <- create_regex(rx, sep = "\\-")
-  
-  ok <- matches_regex(x, rx)
+    
+  ok <- matches <- matches_regex(x, rx)
+
   
   #Check checkdigit
-  x[ok] <- suppressWarnings(strip_non_numeric(x[ok]))
-  ok[ok] <- bapply(
-    character_to_list_of_integer_vectors(x[ok]), 
+  not_missing_and_ok <- !is.na(ok) & ok
+  x[not_missing_and_ok] <- suppressWarnings(strip_non_numeric(x[not_missing_and_ok]))
+  ok[not_missing_and_ok] <- bapply(
+    character_to_list_of_integer_vectors(x[not_missing_and_ok]), 
     function(x)
     {
       lenx <- length(x)
@@ -48,7 +50,14 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
       expected_check_digit == actual_check_digit
     }
   )
-  ok
+  set_cause(
+    ok, 
+    ifelse(
+      is.na(ok),
+      "missing",
+      ifelse(matches, "bad checkdigit", "bad format")
+    )
+  )
 }
 
 #' Does the character vector contain credit card numbers? 
