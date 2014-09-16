@@ -113,7 +113,7 @@ is_class <- function(x, .xname = get_name_in_parent(x))
 {
   if(is_empty(x)) return(logical())
   x <- coerce_to(x, "character")
-  bapply(x, isClass)
+  bapply(x, methods::isClass)
 }
 
 #' Is the input complex?
@@ -317,11 +317,12 @@ is_leaf <- function(x, .xname = get_name_in_parent(x))
   {
     return(false("%s has no 'leaf' attribute.", .xname))
   }
-  if(!(ok <- is_identical_to_true(
+  ok <- is_identical_to_true(
     leaf, 
-    TRUE,
+    allow_attributes = TRUE,
     paste("The leaf attribute of", .xname)
-    )))
+  )
+  if(!ok)
   {
     return(ok)
   }
