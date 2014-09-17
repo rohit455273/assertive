@@ -139,11 +139,7 @@ is_credit_card_number <- function(x,
   )  
   set_cause(
     ok, 
-    ifelse(
-      is.na(ok),
-      "missing",
-      ifelse(matches, "bad checkdigit", "bad format")
-    )
+    ifelse(matches, "bad checkdigit", "bad format")
   )
 }
 
