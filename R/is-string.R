@@ -227,7 +227,14 @@ is_email_address <- function(x, method = c("simple", "rfc2822"),
 is_empty_character <- function(x)
 { 
   x <- coerce_to(x, "character")
-  !nzchar(x)
+  call_and_name(
+    function(x)
+    {
+      ok <- !nzchar(x)
+      set_cause(ok, "nonempty")
+    },
+    x
+  )
 }
 
 #' Does the character vector contain hex colours?
