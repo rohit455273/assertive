@@ -35,23 +35,25 @@
 #' @export
 is_us_telephone_number <- function(x)
 { 
-  enbracket <- function(x) paste("(", x, ")", sep = "")
-  
-  #Spaces and round brackets appear in arbitrary places; ignore them.
+  # Spaces and round brackets appear in arbitrary places; ignore them.
   x <- suppressWarnings(strip_invalid_chars(x, invalid_chars="[ -()]"))
   
-  #All numbers should begin with 1 or the country code, 001. Check and remove.
+  # All numbers should begin with 1 or the country code, 001. Check and remove.
   start <- "((00|\\+)?1)?"
   
   first_rx <- create_regex(
     c(start, d(10)), #country prefix + 10 digits
     sep = ""
   )
-  ok <- matches_regex(x, first_rx) 
-  x[ok] <- sub(paste0("^", start), "", x[ok]) #remove country code prefix
-    
+  ok <- matches1 <- matches_regex(x, first_rx)
+  not_missing_and_ok <- !is.na(ok) & ok 
+  
+  # Remove country code prefix  
+  x[not_missing_and_ok] <- sub(paste0("^", start), "", x[not_missing_and_ok]) 
+   
+  # npa = "numbering plan area" code   
   npa1 <- "[2-9]"
-  npa23 <- enbracket(     
+  npa23 <- parenthesise(     
     paste(
       c(
         "0[1-9]", "1[02-9]", "2[013-9]", "3[0-24-9]", "4[0-35-9]", 
@@ -60,16 +62,20 @@ is_us_telephone_number <- function(x)
       collapse = "|"
     )    
   )
+  
+  # nxx = "central office exchange" code
   nxx1 <- "[2-9]"
-  nxx23 <- enbracket(paste(c("1[02-9]", "[02-9][0-9]"), collapse = "|"))
+  nxx23 <- parenthesise(paste(c("1[02-9]", "[02-9][0-9]"), collapse = "|"))
+  
+  # xxxx = "subscriber" number
   xxxx <- d(4)
   
   second_rx <- create_regex(
     c(npa1, npa23, nxx1, nxx23, xxxx), sep = ""
   )
 
-  ok[ok] <- matches_regex(x[ok], second_rx)
-  ok  
+  ok[not_missing_and_ok] <- matches_regex(x[not_missing_and_ok], second_rx)
+  set_cause(ok, ifelse(matches1, "bad format", "bad country code or length"))  
 }
 
 #' Is the string a valid US zip code?
