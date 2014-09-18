@@ -83,13 +83,18 @@ is_call <- function(x, .xname = get_name_in_parent(x))
 #' corresponding \code{is_*} function returns \code{FALSE}.
 #' @seealso \code{\link[base]{is.character}} and \code{\link{is_scalar}}.
 #' @examples
+#' x <- c("a", "", NA)
+#' is_empty_character(x)
+#' is_missing_or_empty_character(x)
+#' is_not_missing_nor_empty_character(x)
+#' is_an_empty_string(x)
+#' is_numeric_string(c("1", "1.1", "-1.1e1", "one", NA))
 #' assert_is_character(letters)
 #' assert_is_a_string("foo bar baz")
-#' assert_is_an_empty_string("")
-#' assert_all_are_numeric_strings(c("1", "2.3", "-4.5", "6e7", "8E-9"))
-#' assert_any_are_numeric_strings(c("1", "Not a number"))
 #' assert_all_strings_are_missing_or_empty(c("", NA))
 #' assert_any_strings_are_missing_or_empty(c("a", NA, "b"))
+#' assert_all_are_numeric_strings(c("1", "2.3", "-4.5", "6e7", "8E-9"))
+#' assert_any_are_numeric_strings(c("1", "Not a number"))
 #' @export
 is_character <- function(x, .xname = get_name_in_parent(x))
 {
