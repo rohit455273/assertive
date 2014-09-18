@@ -265,7 +265,8 @@ is_empty_character <- function(x)
 is_hex_colour <- function(x)
 {
   rx <- create_regex("#[0-9a-f]{6}")
-  matches_regex(x, rx)
+  ok <- matches_regex(x, rx)
+  set_cause(ok, "bad format")
 }
 
 #' Is the string an honorific?
