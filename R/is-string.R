@@ -340,7 +340,8 @@ is_honorific <- function(x)
 #'   out_of_range  = "1.2.3.256",
 #'   five_blocks   = "1.2.3.4.5",
 #'   non_numeric   = "1.2.3.Z",
-#'   missing_block = "1.2.3.NA"
+#'   missing_block = "1.2.3.NA",
+#'   missing       = NA
 #' )
 #' is_ip_address(x)
 #' assert_any_are_ip_addresses(x)
@@ -353,15 +354,20 @@ is_ip_address <- function(x)
 {
   x <- coerce_to(x, "character")  
   rx <- create_regex(rep.int(d(1, 3), 4), sep = "\\.")
-  ok <- matches_regex(x, rx)
+  ok <- matches <- matches_regex(x, rx)
+  not_missing_and_ok <- !is.na(ok) & ok
   
-  blocks <- strsplit(x[ok], ".", fixed = TRUE)
-  ok[ok] <- bapply(
+  blocks <- strsplit(x[not_missing_and_ok], ".", fixed = TRUE)
+  ok[not_missing_and_ok] <- bapply(
     blocks,
-    function(b) all(suppressWarnings(as.integer(b) %in% 0:255))
+    function(b) 
+    {  
+      all(suppressWarnings(as.integer(b) %in% 0:255))
+    }
   )
   
-  ok | (x == "localhost")
+  ok <- ok | (x == "localhost")
+  set_cause(ok, ifelse(matches, "big numbers", "bad format"))
 }
 
 #' @rdname is_isbn_code
