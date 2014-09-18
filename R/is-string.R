@@ -249,7 +249,7 @@ is_empty_character <- function(x)
 #' colours.
 #' @examples
 #' x <- c(
-#'   "#0123456", "#789abc", "#defDEF", #ok
+#'   "#012345", "#789abc", "#defDEF",  #ok
 #'   "012345",                         #no hash
 #'   "#g12345",                        #bad letter
 #'   "#01 23 45",                      #contains spaces
