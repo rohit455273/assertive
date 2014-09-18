@@ -177,12 +177,29 @@ d <- function(lo, hi, optional = FALSE)
   assert_all_are_non_negative(lo)
   if(!missing(hi))
   {
-    hi <- as.integer(hi)
-    assert_all_are_true(hi > lo)
-    lo <- paste(lo, hi, sep = ",")
+    if(is_positive_infinity(hi))
+    {
+      rx <- if(lo == 0)
+      {
+        "[[:digit:]]*"
+      } else if(lo == 1) 
+      {
+        "[[:digit:]]+"
+      } else
+      {
+        paste0("[[:digit:]]{", lo, ",}")
+      }
+    } else
+    {
+      hi <- as.integer(hi)
+      assert_all_are_true(hi > lo)
+      lo <- paste(lo, hi, sep = ",")
+    }
+  } else
+  {    
+    rx <- paste0("[[:digit:]]{", lo, "}")
+    rx <- sub("{1}", "", rx, fixed = TRUE)
   }
-  rx <- paste0("[[:digit:]]{", lo, "}")
-  rx <- sub("{1}", "", rx, fixed = TRUE)
   if(optional)
   {
     rx <- paste0("(", rx, ")?")
