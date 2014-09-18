@@ -283,6 +283,9 @@ is_hex_colour <- function(x)
 #' so this should only be used as a guide, rather than giving a 
 #' definitive result.  Especially note that cultural conventions
 #' differ across the world and this function has a UK bias.
+#' @references Many possibilities borrowed from the Salutation dropdown on
+#' the MathWorks account creation page.
+#' \url{https://www.mathworks.com/accesslogin/createProfile.do}
 #' @examples
 #' x <- c("Mr", "MR", "mr.", "Mister", "masTer", "Mr!", "M.r", ".Mr")
 #' is_honorific(x)
@@ -292,18 +295,32 @@ is_honorific <- function(x)
   #Strip single dots after words
   x <- gsub("(?<=\\b)\\.(?=\\s|$)", "", x, perl = TRUE)  
   rx <- create_regex(
-    #standard
-    "m([ia]ste)?r", "mrs", "miss", "d(octo)?r", 
-    #academic
+    # standard
+    "m([ia]ste)?r", "mrs", "m(is)?s", "d(octo)?r", 
+    # academic
     "((assoc)?iate)prof(essor)?", "dean", 
-    #religious
+    # religious
     "rev(erend)?", "ft", "father", "bro(ther)?", "s(iste)?r", "(arch)?bishop", 
-    #politics and nobility
-    "r(igh)?t hon(ourable)", "sir", "lord", "lady", "dame", "prince(ss)?", "king", "queen"#,
-    #military 
-    #TODO "", "", "", "", "", "", ""
+    # politics and nobility
+    "r(igh)?t hon(ourable)", "sir", "lord", "lady", "dame", "prince(ss)?", "king", "queen",
+    # military 
+    "adm(iral)", "brig(adier )?gen(eral)?", "capt(ain)?", "cdr", "commander", 
+    "cpt", "eur ing", "gen(eral)?", "ltc?", "lieutenant( commander| general)?", 
+    "lt cdr", "ltjg", "maj(or)?( general)?", "mgen", "radm", "rag", "(staf )?sgt", 
+    "sergeant",  "[12]lt",
+    # french
+    "mlle", "mme", "m",
+    # german
+    "herr", "frau",
+    # dutch
+    "heer", "mevrouw",
+    # italian
+    "sig( ra)?",
+    # spanish
+    "sr(ta|a)?"
   )
-  matches_regex(x, rx)
+  ok <- matches_regex(x, rx)
+  set_cause(ok, "bad format")
 }
 
 #' Does the character vector contain IP addresses?
