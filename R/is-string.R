@@ -231,7 +231,7 @@ is_empty_character <- function(x)
     function(x)
     {
       ok <- !nzchar(x)
-      set_cause(ok, "nonempty")
+      set_cause(ok, ifelse(is.na(x), "missing", "nonempty"))
     },
     x
   )
@@ -509,7 +509,8 @@ is_isbn_code <- function(x, type = c("10", "13"),
 is_missing_or_empty_character <- function(x)
 { 
   x <- coerce_to(x, "character")
-  !nzchar(x) | is_na(x)
+  ok <- !nzchar(x) | is_na(x)
+  set_cause(ok, "nonempty")
 }
 
 #' @rdname is_character
@@ -517,7 +518,8 @@ is_missing_or_empty_character <- function(x)
 is_not_missing_nor_empty_character <- function(x)
 { 
   x <- coerce_to(x, "character")
-  nzchar(x) & !is_na(x)
+  ok <- nzchar(x) & !is_na(x)
+  set_cause(ok, ifelse(is.na(x), "missing", "empty"))
 }
 
 #' @rdname is_character
@@ -525,10 +527,15 @@ is_not_missing_nor_empty_character <- function(x)
 is_numeric_string <- function(x)
 {
   x <- coerce_to(x, "character")
-  numx <- suppressWarnings(as.numeric(x))
-  ans <- is_not_na(numx)
-  names(ans) <- x   #need to take names from x, not numx
-  ans
+  ok <- call_and_name(
+    function(x)
+    {
+      numx <- suppressWarnings(as.numeric(x))
+      is_not_na(numx)
+    },
+    x
+  )
+  set_cause(ok, ifelse(is.na(x), "missing", "bad format"))
 }
 
 #' Is the input valid R code?
