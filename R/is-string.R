@@ -462,7 +462,8 @@ is_isbn13_code <- function(x, .xname = get_name_in_parent(x))
 #'   too_long            = "00-387-98503-4",
 #'   too_short           = "0-387-9850-4",
 #'   non_numeric         = "Z-387-98503-4",
-#'   invalid_check_digit = "0-387-98503-5"
+#'   invalid_check_digit = "0-387-98503-5",
+#'   missing             = NA
 #' )
 #' x13 <- c(
 #'   hyphens             = "978-0-387-98503-9",
@@ -471,7 +472,8 @@ is_isbn13_code <- function(x, .xname = get_name_in_parent(x))
 #'   too_long            = "9978-0-387-98503-9",
 #'   too_short           = "978-0-387-9850-9",
 #'   non_numeric         = "Z78-0-387-9850-9",
-#'   invalid_check_digit = "978-0-387-98503-8"
+#'   invalid_check_digit = "978-0-387-98503-8",
+#'   missing             = NA
 #' )
 #' is_isbn_code(x10, type = "10")
 #' assert_any_are_isbn_codes(x10, type = "10")
