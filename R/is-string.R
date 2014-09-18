@@ -371,54 +371,78 @@ is_ip_address <- function(x)
 }
 
 #' @rdname is_isbn_code
+#' @export
 is_isbn10_code <- function(x, .xname = get_name_in_parent(x))
 {
   #Check basic format
-  digits <- "[[:digit:]]+"
-  sep <- "[- ]?"
-  rx <- create_regex(c(rep.int(digits, 3), "[[:digit:]X]"))
-  ok <- matches_regex(x, rx)
+  rx <- create_regex(c(rep.int(d(1, Inf), 3), "[[:digit:]X]"))
+  ok <- matches <- matches_regex(x, rx)
+  not_missing_and_ok <- !is.na(ok) & ok
   
   #Check correct amount of numbers
-  x[ok] <- suppressWarnings(strip_non_numeric(x[ok], allow_x = TRUE))
-  ok[ok] <- nchar(x[ok]) == 10L
+  x[not_missing_and_ok] <- suppressWarnings(
+    strip_non_numeric(x[not_missing_and_ok], allow_x = TRUE)
+  )
+  ok[not_missing_and_ok] <- len <- nchar(x[not_missing_and_ok]) == 10L
+  not_missing_and_still_ok <- !is.na(ok) & ok
   
   #Check checkdigit
-  ok[ok] <- bapply(
-    character_to_list_of_integer_vectors(x[ok]),
+  ok[not_missing_and_still_ok] <- bapply(
+    character_to_list_of_integer_vectors(x[not_missing_and_still_ok]),
     function(x)
     {
       actual_check_digit <- x[10L]
-      x <- x[1:9L]
+      x <- x[-10L]
       expected_check_digit <- (sum(x * 1:9L) %% 11L)
-      if(expected_check_digit == 10L) return(is.na(actual_check_digit))
+      if(expected_check_digit == 10L) 
+      {
+        return(is.na(actual_check_digit))
+      }
       expected_check_digit == actual_check_digit
     }
   )  
-  ok
+  set_cause(
+    ok, 
+    ifelse(
+      not_missing_and_still_ok,
+      "bad check digit",
+      ifelse(not_missing_and_ok, "bad length", "bad format")
+    )
+  )
 }
 
 #' @rdname is_isbn_code
+#' @export
 is_isbn13_code <- function(x, .xname = get_name_in_parent(x))
 {
   #Check basic format
-  digits <- "[[:digit:]]+"
-  rx <- create_regex(c(rep.int(digits, 4), "[[:digit:]X]"))
-  ok <- matches_regex(x, rx)
+  rx <- create_regex(c(rep.int(d(1, Inf), 4), "[[:digit:]X]"))
+  ok <- matches <- matches_regex(x, rx)
+  not_missing_and_ok <- !is.na(ok) & ok
   
   #Check correct amount of numbers
-  x[ok] <- suppressWarnings(strip_non_numeric(x[ok]))
-  ok[ok] <- nchar(x[ok]) == 13L
+  x[not_missing_and_ok] <- suppressWarnings(
+    strip_non_numeric(x[not_missing_and_ok], allow_x = TRUE)
+  )
+  ok[not_missing_and_ok] <- len <- nchar(x[not_missing_and_ok]) == 13L
+  not_missing_and_still_ok <- !is.na(ok) & ok
   
   #Check checkdigit
-  ok[ok] <- bapply(
-    character_to_list_of_integer_vectors(x[ok]),
+  ok[not_missing_and_still_ok] <- bapply(
+    character_to_list_of_integer_vectors(x[not_missing_and_still_ok]),
     function(x)
     {
       (sum(suppressWarnings(x * c(1, 3))) %% 10L) == 0L
     }
   )  
-  ok
+  set_cause(
+    ok, 
+    ifelse(
+      not_missing_and_still_ok,
+      "bad check digit",
+      ifelse(not_missing_and_ok, "bad length", "bad format")
+    )
+  )
 }
 
 #' Does the character vector contain ISBN book codes?

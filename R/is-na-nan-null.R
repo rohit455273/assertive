@@ -13,6 +13,8 @@
 #' x <- c(0, Inf, -Inf, NA, NaN)
 #' is_finite(x)
 #' is_infinite(x)
+#' is_positive_infinity(x)
+#' is_negative_infinity(x)
 #' assert_all_are_finite(1:10)
 #' assert_any_are_finite(c(1, Inf))
 #' assert_all_are_infinite(c(Inf, -Inf))
@@ -193,4 +195,56 @@ is_null <- function(x, .xname = get_name_in_parent(x))
     return(false("%s is not NULL.", .xname))
   }
   TRUE
+}
+
+#' @rdname is_finite
+#' @export
+is_negative_infinity <- function(x)
+{
+  x <- coerce_to(x, "numeric")
+  call_and_name(
+    function(x)
+    {
+      ok <- is.infinite(x) & x < 0
+      set_cause(
+        ok, 
+        ifelse(
+          is.finite(x),
+          "finite",
+          ifelse(
+            is.nan(x), 
+            "not a number",
+            ifelse(is.na(x), "missing", "positive inf")
+          )
+        )
+      )
+    }, 
+    x
+  )
+}
+
+#' @rdname is_finite
+#' @export
+is_positive_infinity <- function(x)
+{
+  x <- coerce_to(x, "numeric")
+  call_and_name(
+    function(x)
+    {
+      ok <- is.infinite(x) & x > 0
+      set_cause(
+        ok, 
+        ifelse(
+          is.finite(x),
+          "finite",
+          ifelse(
+            is.nan(x), 
+            "not a number",
+            ifelse(is.na(x), "missing", "negative inf")
+          )
+        )
+      )
+    }, 
+    x
+  )
 }
