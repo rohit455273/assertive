@@ -49,11 +49,11 @@ is_in_open_range <- function(x, lower = -Inf, upper = Inf)
 is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE, 
   upper_is_strict = FALSE)
 {
-  assert_is_numeric(x)
+  x <- coerce_to(x, "numeric")
   ok <- rep.int(TRUE, length(x))
   ok[is.na(x)] <- NA
-  too_low <- (if(lower_is_strict) `<` else `<=`)(x, lower)
-  too_high <- (if(upper_is_strict) `>` else `>=`)(x, upper)
+  too_low <- (if(lower_is_strict) `<=` else `<`)(x, lower)
+  too_high <- (if(upper_is_strict) `>=` else `>`)(x, upper)
   ok[too_low] <- FALSE                     
   ok[too_high] <- FALSE
   names(ok) <- x
