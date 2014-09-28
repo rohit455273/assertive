@@ -574,11 +574,9 @@ is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
 #' @param x Input to check.
 #' @param allow_reserved If \code{TRUE} then "..." and "..1", "..2", etc. 
 #' are considered valid.
-#' @param allow_duplicates If \code{TRUE} then duplicated names are allowed.
-#' @return \code{TRUE} if the input is a valid variable name.
-#' The \code{assert_*} functions return nothing but
-#' throw an error if the corresponding \code{is_*} function returns 
-#' \code{FALSE}.
+#' @param allow_duplicates Deprecated and ignored.
+#' The \code{assert_*} functions return nothing but throw an error if the 
+#' corresponding \code{is_*} function returns \code{FALSE}.
 #' @seealso \code{\link{make.names}}.
 #' @examples
 #' assert_all_are_valid_variable_names(c("x", "y_y0.y", ".", "...", "..1"))
@@ -591,27 +589,45 @@ is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
 #' \url{http://4dpiecharts.com/2011/07/04/testing-for-valid-variable-names/}
 #' @export
 is_valid_variable_name <- function(x, allow_reserved = TRUE, 
-  allow_duplicates = TRUE)
+  allow_duplicates)
 {
+  if(!missing(allow_duplicates))
+  {
+    .Deprecated(
+      msg = "The 'allow_duplicates' argument is deprecated and will be ignored."
+    )
+  }
   x <- coerce_to(x, "character")
-  ok <- rep.int(TRUE, length(x))
   
   #is name too long?
   max_name_length <- if(getRversion() < "2.13.0") 256L else 10000L
-  ok[ok] <- nchar(x[ok]) <= max_name_length
+  ok <- short_enough <- nchar(x) <= max_name_length
+  
+  not_missing_and_ok <- !is.na(ok) & ok
   
   #is it a reserved variable, i.e.
   #an ellipsis or two dots then a number?
+  not_reserved <- rep.int(TRUE, length(x))
   if(!allow_reserved)
   {
-    ok[ok] <- x[ok] != "..."
     rx <- create_regex("\\.{2}[[:digit:]]+")
-    ok[ok] <- !matches_regex(x[ok], rx)
-  }
+    ok[not_missing_and_ok] <- not_reserved[not_missing_and_ok] <- 
+      x[not_missing_and_ok] != "..." & !matches_regex(x[not_missing_and_ok], rx)
+  } 
   
   #are names valid (and maybe unique)
-  ok[ok] <- x[ok] == make.names(x[ok], unique = !allow_duplicates)
+  not_missing_and_ok <- !is.na(ok) & ok
+  
+  ok[not_missing_and_ok] <- x[not_missing_and_ok] == 
+    make.names(x[not_missing_and_ok])
   
   names(ok) <- x
-  ok
+  set_cause(
+    ok, 
+    ifelse(
+      short_enough, 
+      ifelse(not_reserved, "bad format", "reserved"),
+      "too long"  
+    )
+  )
 }
