@@ -182,30 +182,40 @@ assert_any_strings_are_not_missing_nor_empty <- function(x)
 #' @rdname is_valid_variable_name
 #' @export
 assert_all_are_valid_variable_names <- function(x, allow_reserved = TRUE, 
-  allow_duplicates = TRUE)
-{                                                       
+  allow_duplicates)
+{   
+  if(!missing(allow_duplicates))
+  {
+    .Deprecated(
+      msg = "The 'allow_duplicates' argument is deprecated and will be ignored."
+    )
+  }
   msg <- sprintf("%s are not all valid variable names.", get_name_in_parent(x))
   assert_engine(
     x, 
     is_valid_variable_name, 
     msg,
-    allow_reserved = allow_reserved,
-    allow_duplicates = allow_duplicates
+    allow_reserved = allow_reserved
   )
 }
 
 #' @rdname is_valid_variable_name
 #' @export
 assert_any_are_valid_variable_names <- function(x, allow_reserved = TRUE, 
-  allow_duplicates = TRUE)
-{                                                      
+  allow_duplicates)
+{          
+  if(!missing(allow_duplicates))
+  {
+    .Deprecated(
+      msg = "The 'allow_duplicates' argument is deprecated and will be ignored."
+    )
+  }
   msg <- sprintf("%s are all not valid variable names.", get_name_in_parent(x))
   assert_engine(
     x, 
     is_valid_variable_name, 
     msg,
     what = "any",
-    allow_reserved = allow_reserved,
-    allow_duplicates = allow_duplicates
+    allow_reserved = allow_reserved
   )
 }
