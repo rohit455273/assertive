@@ -45,7 +45,7 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
       fail_index <- head(fail_index)
       failures <- data.frame(
         Position = fail_index,
-        Value    = names(ok[fail_index]) ,
+        Value    = truncate(names(ok[fail_index])),
         Cause    = unclass(cause(ok)[fail_index]), # See bug 15997
         row.names = seq_along(fail_index)
       )
@@ -383,3 +383,22 @@ strip_non_numeric <- function(x, allow_x = FALSE, allow_plus = FALSE)
   )
   strip_invalid_chars(x, invalid_chars, "non-numeric")
 }
+
+#' Truncate a string
+#' 
+#' Truncates a character vector to have a maximum length.
+#' @param x A character vector, or something coercible to one.
+#' @param width A positive integer.
+#' @return A character vector
+#' @examples
+#' truncate(c("abcd", "efghi", "jklmno", "pqrstuv"), 5)
+truncate <- function(x, width = getOption("width"))
+{
+  x <- as.character(x)
+  ifelse(
+    nchar(x) > width,
+    paste0(substring(x, 1, width - 3), "..."),
+    x
+  )
+} 
+
