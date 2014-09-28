@@ -39,18 +39,23 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
     {
       # Append first few failure values and positions to the error message.
       fail_index <- which(!ok)
-      fail_values <- names(ok[fail_index])
-      if(is.character(x) || is.factor(x))
-      {
-        fail_values <- dQuote(fail_values)
-      }
-      failures <- paste0(fail_values, " [", fail_index, "]")
-      # 37 is nchar("\nFailure value [pos'n]: ") plus space for RStudio's
-      # "Show traceback" message.
+      n <- length(fail_index)
+      fail_index <- head(fail_index)
+      failures <- data.frame(
+        Position = fail_index,
+        Value    = names(ok[fail_index]) ,
+        Cause    = unclass(cause(ok)[fail_index]),
+        row.names = seq_along(fail_index)
+      )
       msg <- paste0(
         msg, 
-        "\nFailure value [pos'n]: ", 
-        toString(failures, width = getOption("width") - 37)
+        "\nThere were ", n, " failures",
+        if(nrow(failures) < n) 
+        {
+          paste0(" (showing the first ", nrow(failures), ")")
+        },
+        ":\n",
+        print_and_capture(failures)
       )
     }
     # Throw error/warning/message
