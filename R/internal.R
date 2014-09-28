@@ -14,10 +14,12 @@
 #' in the input.
 assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
 {
-  handler <- match.fun(match.arg(
-    getOption("assertive.severity"),
-    c("stop", "warning", "message")
-    ))
+  handler <- match.fun(
+    match.arg(
+      getOption("assertive.severity"),
+      c("stop", "warning", "message")
+    )
+  )
   what <- match.fun(match.arg(what))
   #Some functions, e.g., is.R take no args
   ok <- if(missing(x)) predicate() else predicate(x, ...)
