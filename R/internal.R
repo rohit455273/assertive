@@ -309,6 +309,22 @@ na <- function(...)
   x
 }
 
+#' Print a variable and capture the output
+#' 
+#' Prints a variable and captures the output, collapsing the value to a single 
+#' string.
+#' @param x A variable.
+#' @return A string.
+#' @seealso \code{\link[base]{print}}, \code{\link[utils]{capture.output}}
+#' @examples
+#' \dontrun{
+#' # This is useful for including data frames in warnings or errors
+#' message("This is the CO2 dataset:\n", print_and_capture(CO2))
+#' }
+print_and_capture <- function(x)
+{
+  paste(capture.output(print(x)), collapse = "\n")
+}
 
 #' Removes invalid characters from a string.
 #'
