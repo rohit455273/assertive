@@ -111,7 +111,8 @@ is_uk_national_insurance_number <- function(x)
     ),
     sep = " ?"
   )
-  matches_regex(x, rx)
+  ok <- matches_regex(x, rx)
+  set_cause(ok, "bad format")
 }
 
 #' Is the string a valid UK postcode?
@@ -150,7 +151,8 @@ is_uk_postcode <- function(x)
     c("GIR", "0AA"),
     sep = " ?"
   )
-  matches_regex(x, rx)
+  ok <- matches_regex(x, rx)
+  set_cause(ok, "bad format")
 }
 
 #' Is the string a valid UK telephone number?
