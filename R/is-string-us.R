@@ -95,11 +95,12 @@ is_us_telephone_number <- function(x)
 #' up-to-date zip code base.
 #' @examples
 #' zip_codes <- c(
-#'   "90210", 
-#'   "20500", 
-#'   "22313-1450",  #5+4 style ok
-#'   "223131450",   #fails, no hyphen
-#'   "09901"        #fails, invalid area prefix
+#'   "Beverley Hills"  = "90210", 
+#'   "The White House" = "20500", 
+#'   USPTO             = "22313-1450",  #5+4 style ok
+#'   "No hyphen"       = "223131450",
+#'   "Bad area prefix" = "09901",    
+#'   Missing           = NA
 #'  )
 #' is_us_zip_code(zip_codes)
 #' assert_any_are_us_zip_codes(zip_codes)
@@ -125,7 +126,7 @@ is_us_zip_code <- function(x)
     )
   )
   prefix <- paste0(
-    "(",
+    "(?:",
     paste(
       formatC(
         prefix,
@@ -136,7 +137,8 @@ is_us_zip_code <- function(x)
     ),
     ")" 
   )  
-  plus_four <- paste0("(-", d(4), ")?")
+  plus_four <- paste0("(?:-", d(4), ")?")
   rx <- create_regex(c(prefix, d(2), plus_four), sep = "")  
-  matches_regex(x, rx)
+  ok <- matches_regex(x, rx)
+  set_cause(ok, "bad format")
 }

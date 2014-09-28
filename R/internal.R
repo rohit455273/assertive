@@ -12,6 +12,8 @@
 #' @param ... Passed to the \code{predicate} function.
 #' @return \code{FALSE} with the attribute \code{message}, as provided
 #' in the input.
+#' @note Missing values are considered as \code{FALSE} for the purposes of
+#' whether or not an error is thrown.
 assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
 {
   handler <- match.fun(
@@ -23,7 +25,7 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
   what <- match.fun(match.arg(what))
   #Some functions, e.g., is.R take no args
   ok <- if(missing(x)) predicate() else predicate(x, ...)
-  if(!what(ok))
+  if(!what(ok & !is.na(ok)))
   {
     if(missing(msg)) 
     {
@@ -38,13 +40,13 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
     if(!is_scalar(ok))
     {
       # Append first few failure values and positions to the error message.
-      fail_index <- which(!ok)
+      fail_index <- which(!ok | is.na(ok))
       n <- length(fail_index)
       fail_index <- head(fail_index)
       failures <- data.frame(
         Position = fail_index,
         Value    = names(ok[fail_index]) ,
-        Cause    = unclass(cause(ok)[fail_index]),
+        Cause    = unclass(cause(ok)[fail_index]), # See bug 15997
         row.names = seq_along(fail_index)
       )
       msg <- paste0(
