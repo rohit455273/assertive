@@ -151,6 +151,7 @@ get_name_in_parent <- function(x)
 #' Merges two lists, taking duplicated elements from the first list.
 #' @param x A list.
 #' @param y A list.
+#' @param ... Ignored.
 #' @return A list, combining elements from \code{x} and \code{y}.
 #' @seealso \code{\link{merge_dots_with_list}}, \code{\link[base]{merge}}
 #' @examples
@@ -159,7 +160,7 @@ get_name_in_parent <- function(x)
 #'   list(foo = 4, baz = 5, quux = 6)
 #' )
 #' @export
-merge.list <- function(x, y)
+merge.list <- function(x, y, ...)
 {
   if(is.null(y)) return(x)
   y <- coerce_to(y, "list")
@@ -176,7 +177,7 @@ merge.list <- function(x, y)
   all_values
 }
 
-merge.NULL <- function(x, y)
+merge.NULL <- function(x, y, ...)
 {
   return(y)
 }
