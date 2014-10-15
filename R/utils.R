@@ -211,13 +211,13 @@ merge_dots_with_list <- function(..., l = list())
 #'
 #' Parenthesise a character vector by wrapping elements in brackets, 
 #' dashes or commas.
-#' @param x Character vector to wrap in parathenses.
+#' @param x Character vector to wrap in parenthenses.
 #' @param type String naming the type of parenthesis.
 #' @return A character vector of the input wrapped in parentheses.
 #' @note English grammar terminology is awfully confusing.  The verb 'to 
 #' parenthesise' means to wrap a phrase in brackets or dashes or commas,
 #' thus denoting it as supplementary material that could be left out.
-#' A 'parenthesis' as a noun is a synonym for a round bracket.
+#' A 'parenthesis' as a noun is often used as a synonym for a round bracket.
 #' @seealso \code{\link[base]{sQuote}}
 #' @examples
 #' paste("There were three", parenthesise(3), "mice in the experiment.")
