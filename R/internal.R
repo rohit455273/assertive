@@ -203,6 +203,7 @@ d <- function(lo, hi, optional = FALSE)
       hi <- as.integer(hi)
       assert_all_are_true(hi > lo)
       lo <- paste(lo, hi, sep = ",")
+      rx <- paste0("[[:digit:]]{", lo, ",", hi, "}")
     }
   } else
   {    
