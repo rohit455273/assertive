@@ -579,11 +579,17 @@ is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
 #' corresponding \code{is_*} function returns \code{FALSE}.
 #' @seealso \code{\link{make.names}}.
 #' @examples
-#' assert_all_are_valid_variable_names(c("x", "y_y0.y", ".", "...", "..1"))
+#' make_random_string <- function(n)
+#' {
+#'   paste0(sample(letters, n, replace = TRUE), collapse = "")
+#' }
+#' long <- c(make_random_string(10000), make_random_string(10001))
+#' x <- c("x", "y_y0.Y", ".", "x y", "...", "..1", long)
+#' is_valid_variable_name(x)
+#' is_valid_variable_name(x, allow_reserved = FALSE)
 #' \dontrun{
 #' #These examples should fail.
 #' assert_all_are_valid_variable_names(c("...", "..1"), allow_reserved = FALSE) 
-#' assert_all_are_valid_variable_names(c("x", "x"), allow_duplicates = FALSE)
 #' }
 #' @references
 #' \url{http://4dpiecharts.com/2011/07/04/testing-for-valid-variable-names/}
