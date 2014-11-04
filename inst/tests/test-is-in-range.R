@@ -37,48 +37,92 @@ test_that("test.is_in_right_open_range.0_to_4_in_1_to_3.returns_true_inside_boun
     expect_equal(is_in_right_open_range(x, 1, 3), expected)
   })
 
-test_that("test.is_negative.minus_2_to_2.returns_true_when_negative", {
-  x <- -2:2
-  expected <- c(TRUE, TRUE, FALSE, FALSE, FALSE)
-  names(expected) <- x
-  expect_equal(is_negative(x), expected)
+test_that("test.is_negative.minus_2_to_2.returns_true_when_negative", 
+{
+  x <- c(-2:2, NA)
+  expected <- rep.int(c(TRUE, FALSE, NA), c(2, 3, 1))
+  expect_equal(
+    strip_attributes(actual <- is_negative(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("", "too high", "missing"), c(2, 3, 1)))
+  )
 })
 
 test_that("test.is_non_negative.minus_2_to_2.returns_true_when_non_negative", 
-  {
-    x <- -2:2
-    expected <- c(FALSE, FALSE, TRUE, TRUE, TRUE)
-    names(expected) <- x
-    expect_equal(is_non_negative(x), expected)
-  })
+{
+  x <- c(2:-2, NA)
+  expected <- rep.int(c(TRUE, FALSE, NA), c(3, 2, 1))
+  expect_equal(
+    strip_attributes(actual <- is_non_negative(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("", "too low", "missing"), c(3, 2, 1)))
+  )
+})
 
 test_that("test.is_non_positive.minus_2_to_2.returns_true_when_non_positive", 
-  {
-    x <- -2:2
-    expected <- c(TRUE, TRUE, TRUE, FALSE, FALSE)
-    names(expected) <- x
-    expect_equal(is_non_positive(x), expected)
-  })
+{
+  x <- c(-2:2, NA)
+  expected <- rep.int(c(TRUE, FALSE, NA), c(3, 2, 1))
+  expect_equal(
+    strip_attributes(actual <- is_non_positive(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("", "too high", "missing"), c(3, 2, 1)))
+  )
+})
 
 test_that("test.is_percentage.minus_minus_1_to_101.returns_true_when_percentage", 
-  {
-    x <- -1:101
-    expected <- c(FALSE, rep.int(TRUE, 101), FALSE)
-    names(expected) <- x
-    expect_equal(is_percentage(x), expected)
-  })
+{
+  x <- c(-1:101, NA)
+  expected <- c(FALSE, rep.int(TRUE, 101), FALSE, NA)
+  expect_equal(
+    strip_attributes(actual <- is_percentage(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("too low", "", "too high", "missing"), c(1, 101, 1, 1)))
+  )
+})
 
-test_that("test.is_positive.minus_2_to_2.returns_true_when_positive", {
-  x <- -2:2
-  expected <- c(FALSE, FALSE, FALSE, TRUE, TRUE)
-  names(expected) <- x
-  expect_equal(is_positive(x), expected)
+test_that("test.is_positive.minus_2_to_2.returns_true_when_positive", 
+{
+  x <- c(2:-2, NA)
+  expected <- rep.int(c(TRUE, FALSE, NA), c(2, 3, 1))
+  expect_equal(
+    strip_attributes(actual <- is_positive(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("", "too low", "missing"), c(2, 3, 1)))
+  )
 })
 
 test_that("test.is_proportion.minus_minus_point_01_to_1_point_01.returns_true_when_percentage", 
-  {
-    x <- seq.int(-0.01, 1.01, 0.01)
-    expected <- c(FALSE, rep.int(TRUE, 101), FALSE)
-    names(expected) <- x
-    expect_equal(is_proportion(x), expected)
-  }) 
+{
+  x <- c(seq.int(-0.01, 1.01, 0.01), NA)
+  expected <- c(FALSE, rep.int(TRUE, 101), FALSE, NA)
+  expect_equal(
+    strip_attributes(actual <- is_proportion(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("too low", "", "too high", "missing"), c(1, 101, 1, 1)))
+  )
+}) 

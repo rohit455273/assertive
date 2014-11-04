@@ -5,14 +5,21 @@ test_that("test.is_uk_car_licence.a_character_vector.returns_true_when_string_co
       "1 III", "1 QQQ", "1 ZZZ", "01 AAA", "AAA 1A", "AAA 999A", "AAA 1I", 
       "AAA 1O", "AAA 1Q", "AAA 1U", "AAA 1Z", "AAA 01A", "A1 AAA", "A999 AAA", 
       "I1 AAA", "O1 AAA", "U1 AAA", "Z1 AAA", "A01 AAA", "AA00 AAA", 
-      "AA99 AAA", "II00 AAA", "QQ00 AAA", "ZZ00 AAA", "AA00 III", "AA00 QQQ")
+      "AA99 AAA", "II00 AAA", "QQ00 AAA", "ZZ00 AAA", "AA00 III", "AA00 QQQ", NA)
     expected <- c(TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
       FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, 
       TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, 
       FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, 
-      FALSE, FALSE)
-    names(expected) <- x
-    expect_equal(is_uk_car_licence(x), expected)
+      FALSE, FALSE, NA)
+    expect_equal(
+      strip_attributes(actual <- is_uk_car_licence(x)), 
+      expected
+    )
+    expect_equal(names(actual), unname(x))
+#     expect_equal(
+#       cause(actual),
+#       noquote(rep.int(c("", "bad format", "missing"), c(6, 12, 1)))
+#     )
   })
 
 test_that("test.is_uk_national_insurance_number.a_character_vector.returns_true_when_string_contains_a_uk_national_insurance_number", 
@@ -25,20 +32,34 @@ test_that("test.is_uk_national_insurance_number.a_character_vector.returns_true_
       "AA 00 00 00 J", "AA 00 00 00 K", "AA 00 00 00 L", "AA 00 00 00 N", 
       "AA 00 00 00 O", "AA 00 00 00 P", "AA 00 00 00 Q", "AA 00 00 00 R", 
       "AA 00 00 00 S", "AA 00 00 00 T", "AA 00 00 00 U", "AA 00 00 00 V", 
-      "AA 00 00 00 W", "AA 00 00 00 X", "AA 00 00 00 Y", "AA 00 00 00 Z")
-    expected <- rep(c(TRUE, FALSE), times = c(6, 33))
-    names(expected) <- x
-    expect_equal(is_uk_national_insurance_number(x), expected)
+      "AA 00 00 00 W", "AA 00 00 00 X", "AA 00 00 00 Y", "AA 00 00 00 Z", NA)
+    expected <- rep.int(c(TRUE, FALSE, NA), c(6, 33, 1))
+    expect_equal(
+      strip_attributes(actual <- is_uk_national_insurance_number(x)), 
+      expected
+    )
+    expect_equal(names(actual), unname(x))
+    expect_equal(
+      cause(actual),
+      noquote(rep.int(c("", "bad format", "missing"), c(6, 33, 1)))
+    )
   })
 
 test_that("test.is_uk_postcode.a_character_vector.returns_true_when_string_contains_a_uk_postcode", 
   {
     x <- c("SW1A 1AA", "SK11 9DW", "M34FP", "Le45ns", "TS25 2BZ", "gir 0aa", 
       "Q1 1AA", "V1 1AA", "X1 1AA", "A01 1AA", "A100 1AA", "A1 10AA", 
-      "A1 1CA", "A1 1IA", "A1 1KA", "A1 1MA", "A1 1OA", "A1 1VA")
-    expected <- rep(c(TRUE, FALSE), times = c(6, 12))
-    names(expected) <- x
-    expect_equal(is_uk_postcode(x), expected)
+      "A1 1CA", "A1 1IA", "A1 1KA", "A1 1MA", "A1 1OA", "A1 1VA", NA)
+    expected <- rep(c(TRUE, FALSE, NA), times = c(6, 12, 1))
+    expect_equal(
+      strip_attributes(actual <- is_uk_postcode(x)), 
+      expected
+    )
+    expect_equal(names(actual), unname(x))
+    expect_equal(
+      cause(actual),
+      noquote(rep.int(c("", "bad format", "missing"), c(6, 12, 1)))
+    )
   })
 
 test_that("test.is_uk_telephone_number.a_character_vector.returns_true_when_string_contains_a_uk_telephone_number", 
@@ -234,8 +255,15 @@ test_that("test.is_uk_telephone_number.a_character_vector.returns_true_when_stri
       "08401234567", "08411234567", "08461234567", "08471234567", "08481234567", 
       "08491234567", "08410234567", "08411234567", "08460234567", "08470234567", 
       "08480234567", "08490234567", "03112345678", "03212345678", "03812345678", 
-      "03912345678")
-    expected <- rep(c(TRUE, FALSE), times = c(885, 70))
-    names(expected) <- x
-    expect_equal(is_uk_telephone_number(x), expected)
+      "03912345678", NA)
+    expected <- rep.int(c(TRUE, FALSE, NA), c(885, 70, 1))
+    expect_equal(
+      strip_attributes(actual <- is_uk_telephone_number(x)), 
+      expected
+    )
+    expect_equal(names(actual), unname(x))
+    expect_equal(
+      cause(actual),
+      noquote(rep.int(c("", "bad format", "missing"), c(885, 70, 1)))
+    )
   }) 

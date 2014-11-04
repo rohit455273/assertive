@@ -283,8 +283,7 @@ test_that("test.is_S4.not_an_S4_instance.returns_true", {
 })
 
 test_that("test.is_stepfun.a_regular_function.returns_false", {
-  expect_false(is_stepfun(function() {
-  }))
+  expect_false(is_stepfun(function() {}))
 })
 
 test_that("test.is_stepfun.a_step_function.returns_true", {

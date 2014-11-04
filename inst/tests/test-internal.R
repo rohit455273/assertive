@@ -9,6 +9,38 @@ test_that("test.character_to_list_of_integer_vectors.strings.returns_list_of_int
   expect_warning(character_to_list_of_integer_vectors(x))
 })
 
+test_that(
+  "test.d.single_input.returns_valid_regex",
+  {
+    lo <- 1:5
+    expected <- paste0("[[:digit:]]{", lo, "}")
+    actual <- d(lo)
+    expect_identical(actual, expected)
+  }
+)
+
+test_that(
+  "test.d.both_inputs.returns_valid_regex",
+  {
+    lo <- 1:5
+    hi <- 6:8
+    expected <- paste0("[[:digit:]]{", lo, ",", hi, "}")
+    actual <- d(lo, hi)
+    expect_identical(actual, expected)
+  }
+)
+
+test_that(
+  "test.d.infinite_hi.returns_valid_regex",
+  {
+    lo <- 0:2
+    hi <- Inf
+    expected <- paste0("[[:digit:]]", c("*", "+", "{2,}"))
+    actual <- d(lo, hi)
+    expect_identical(actual, expected)
+  }
+)
+
 test_that("test.matches_regex.strings.returns_true_when_string_matches_regex", 
 {
   rx <- "foo"
