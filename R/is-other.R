@@ -287,8 +287,8 @@ is_whole_number <- function(x, tol = 100 * .Machine$double.eps)
   call_and_name(
     function(x) 
     {
-      ok <- abs(x - round(x)) <= tol
-      set_cause(ok, "fractional")
+      ok <- abs(x - round(x)) <= tol & !is.infinite(x)
+      set_cause(ok, ifelse(is.infinite(x), "infinite", "fractional"))
     }, 
     x
   )
