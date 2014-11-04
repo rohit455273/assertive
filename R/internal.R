@@ -412,12 +412,16 @@ strip_non_numeric <- function(x, allow_x = FALSE, allow_plus = FALSE)
 #' @param width A positive integer.
 #' @return A character vector
 #' @examples
+#' \dontrun{
 #' truncate(c("abcd", "efghi", "jklmno", "pqrstuv"), 5)
+#' }
 truncate <- function(x, width = getOption("width"))
 {
   x <- as.character(x)
   ifelse(
     nchar(x) > width,
+    # paste0(substring(x, 1, width - 1), "\u2026") would be better, but some
+    # setups don't display unicode properly.
     paste0(substring(x, 1, width - 3), "..."),
     x
   )
