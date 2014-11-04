@@ -334,6 +334,26 @@ print_and_capture <- function(x)
   paste(capture.output(print(x)), collapse = "\n")
 }
 
+#' Recycle arguments
+#' 
+#' Explicit recycling of arguments to make them all have the same length.
+#' @param ... Arguments, usually vectors.
+#' @return A \code{list} of vectors, all with the same length.
+#' @note The function is based on \code{rep_len}, which drops attributes (hence
+#' this being most appropriate for vector inputs).
+#' @seealso \code{\link[base]{rep_len}}.
+#' @examples
+#' \dontrun{
+#' # z is the longest argument, with 6 elements
+#' recycle(x = 1:4, y = list(a = month.abb, b = pi), z = matrix(1:6, nrow = 3))
+#' }
+recycle <- function(...)
+{
+  dots <- list(...)
+  n <- max(vapply(dots, length, integer(1)))
+  lapply(dots, rep_len, length.out = n)
+}
+
 #' Removes invalid characters from a string.
 #'
 #' Removes invalid characters from a string, leaving only digits.
