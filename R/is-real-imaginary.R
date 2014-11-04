@@ -42,7 +42,7 @@ is_real <- function(x)
     function(x)
     {
       ok <- Im(x) == 0
-      set_cause(ok, "imag")
+      set_cause(ok, "imaginary")
     },
     x
   )
