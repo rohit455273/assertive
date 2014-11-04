@@ -176,40 +176,50 @@ create_regex <- function (..., l = list(), sep = "[- ]?")
 #' @return A character vector of regexes.
 #' @examples
 #' \dontrun{
-#' d(3)
-#' d(3, 4)
-#' d(1:5, 6)
+#' d(1:5)
+#' d(1:5, 6:8)
+#' d(0:2, Inf)
 #' }
-d <- function(lo, hi, optional = FALSE)
+d <- function(lo, hi = NA_integer_, optional = FALSE)
 {
   lo <- as.integer(lo)
   assert_all_are_non_negative(lo)
-  if(!missing(hi))
-  {
-    if(is_positive_infinity(hi))
+  l <- recycle(lo = lo, hi = hi)
+  lo <- l$lo
+  hi <- l$hi
+  rx <- ifelse(
+    is.na(hi),
+    {    
+      sub("{1}", "", paste0("[[:digit:]]{", lo, "}"), fixed = TRUE)
+    },
     {
-      rx <- if(lo == 0)
-      {
-        "[[:digit:]]*"
-      } else if(lo == 1) 
-      {
-        "[[:digit:]]+"
-      } else
-      {
-        paste0("[[:digit:]]{", lo, ",}")
-      }
-    } else
-    {
-      hi <- as.integer(hi)
-      assert_all_are_true(hi > lo)
-      lo <- paste(lo, hi, sep = ",")
-      rx <- paste0("[[:digit:]]{", lo, ",", hi, "}")
-    }
-  } else
-  {    
-    rx <- paste0("[[:digit:]]{", lo, "}")
-    rx <- sub("{1}", "", rx, fixed = TRUE)
-  }
+      ifelse(
+        is_positive_infinity(hi),
+        {
+          ifelse(
+            lo == 0,
+            {
+              "[[:digit:]]*"
+            },
+            ifelse(
+              lo == 1,
+              {
+                "[[:digit:]]+"
+              },
+              {
+                paste0("[[:digit:]]{", lo, ",}")
+              }
+            )
+          )
+        },
+        {
+          hi <- as.integer(hi)
+          assert_all_are_true(hi > lo)
+          rx <- paste0("[[:digit:]]{", lo, ",", hi, "}")
+        }
+      )
+    } 
+  )
   if(optional)
   {
     rx <- paste0("(", rx, ")?")
