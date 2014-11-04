@@ -47,7 +47,7 @@ is_in_past <- function(x)
     function(x)
     {
       ok <- x < Sys.time()
-      set_cause(ok, "in past")
+      set_cause(ok, "in future")
     },
     x
   )
