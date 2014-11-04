@@ -61,9 +61,9 @@ is_existing_file <- function(x)
 #' Checks to see if the input files can be executed/read/written to.
 #'
 #' @param x Input to check.
-#' @return \code{is_ex_file} wraps \code{file.access}, showing
-#' the names of the inputs in the answer.   \code{assert_is_ex_file} 
-#' returns nothing but throws an error if \code{is_ex_file} returns
+#' @return \code{is_executable_file} wraps \code{file.access}, showing
+#' the names of the inputs in the answer.   \code{assert_is_executable_file} 
+#' returns nothing but throws an error if \code{is_executable_file} returns
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{file.access}}.
 #' @examples
@@ -71,7 +71,7 @@ is_existing_file <- function(x)
 #' assert_all_are_readable_files(dir())
 #' }
 #' @export
-is_ex_file <- function(x)
+is_executable_file <- function(x)
 {
   warn_about_file.access_under_windows()
   x <- coerce_to(x, "character")
@@ -86,6 +86,14 @@ is_ex_file <- function(x)
     }, 
     x
   )
+}
+
+#' @rdname is_executable_file
+#' @export
+is_ex_file <- function(x)
+{
+  .Deprecated("is_executable_file")
+  is_executable_file(x)
 }
 
 #' Is the directory a known R library?
@@ -112,7 +120,7 @@ is_library <- function(x)
   )
 }
 
-#' @rdname is_ex_file
+#' @rdname is_executable_file
 #' @export
 is_readable_file <- function(x)
 {
@@ -131,7 +139,7 @@ is_readable_file <- function(x)
   )
 }
 
-#' @rdname is_ex_file
+#' @rdname is_executable_file
 #' @export
 is_writable_file <- function(x)
 {
