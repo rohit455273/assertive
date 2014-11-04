@@ -59,7 +59,7 @@ is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE,
   names(ok) <- x
   set_cause(
     ok,
-    ifelse(too_low, "too low", "too_high")
+    ifelse(too_low, "too low", "too high")
   )
 }
 
