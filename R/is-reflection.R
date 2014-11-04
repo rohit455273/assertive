@@ -107,13 +107,29 @@ is_period_for_decimal_point <- function()
 
 #' Are you running R?
 #'
-#' Checks to see you are running R.
+#' Checks to see what type of R you are running.
 #'
 #' @return \code{is_r} wraps \code{is.R}, providing more 
-#' information on failure.  \code{assert_is_r} returns nothing but
-#' throws an error if \code{is_R} returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.R}}.
+#' information on failure.  \code{is_r_stable}, \code{is_r_patched} and
+#' \code{is_r_devel} tell you what type of R build you are 
+#' running.  \code{is_revo_r} tells you if you are running Revolution Analytics'
+#' Revolution R build.
+#' The \code{assert_*} functions return nothing but throw an error if 
+#' the corresponding \code{is_*} function returns \code{FALSE}.
+#' @seealso \code{\link[base]{is.R}}, \code{\link[base]{version}}.
+#' @references \url{http://www.revolutionanalytics.com/revolution-r-open}
 #' @examples
+#' is_r()
+#' is_r_stable()
+#' is_r_patched()
+#' is_r_devel()
+#' is_revo_r()
+#' switch(
+#'   version$status,
+#'   ""                             = assert_is_r_stable(),
+#'   "Patched"                      = assert_is_r_patched(),
+#'   "Under development (unstable)" = assert_is_r_devel()
+#' )
 #' \dontrun{
 #' assert_is_r()
 #' }
@@ -124,6 +140,51 @@ is_r <- function()
   {
     return(false("You are not running R."))
   } 
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_r_devel <- function()
+{
+  if(version$status != "Under development (unstable)")
+  {
+    return(false("You are not running a development build of R."))
+  }
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_r_patched <- function()
+{
+  if(version$status != "Patched")
+  {
+    return(false("You are not running a patched build of R."))
+  }
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_r_stable <- function()
+{
+  if(nzchar(version$status))
+  {
+    return(false("You are not running a stable build of R."))
+  }
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_revo_r <- function()
+{
+  if(!exists("Revo.version", "package:base", inherits = FALSE) || 
+    !is.list(Revo.version))
+  {
+    return(false("You are not running Revolution R."))
+  }
   TRUE
 }
 
