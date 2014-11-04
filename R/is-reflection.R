@@ -126,9 +126,9 @@ is_period_for_decimal_point <- function()
 #' is_revo_r()
 #' switch(
 #'   version$status,
-#'   ""                             = assert_is_r_stable(),
 #'   "Patched"                      = assert_is_r_patched(),
-#'   "Under development (unstable)" = assert_is_r_devel()
+#'   "Under development (unstable)" = assert_is_r_devel(),
+#'   assert_is_r_stable()
 #' )
 #' \dontrun{
 #' assert_is_r()
