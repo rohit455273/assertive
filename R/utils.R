@@ -140,10 +140,15 @@ coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
 #' @export
 get_name_in_parent <- function(x)
 {  
-  deparse(do.call(
-    substitute, 
-    list(substitute(x), parent.frame())
-  ))
+  paste0(
+    deparse(
+      do.call(
+        substitute, 
+        list(substitute(x), parent.frame())
+      )
+    ),
+    collapse = ""
+  )
 }
 
 #' Merge two lists
