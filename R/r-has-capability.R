@@ -184,3 +184,20 @@ r_has_cairo_capability <- function()
   }
   TRUE
 }
+
+#' @rdname r_has_jpeg_capability
+#' @export
+r_has_icu_capability <- function()
+{
+  if(as.package_version(version) < "3.1.2")
+  {
+    return(
+      false("ICU capability is not declared for versions of R before 3.1.2.")
+    )
+  }
+  if(!capabilities("ICU"))
+  {
+    return(false("R does not have ICU capability."))
+  }
+  TRUE
+}

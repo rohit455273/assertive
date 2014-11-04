@@ -102,3 +102,10 @@ assert_r_has_cairo_capability <- function()
 {
   assert_engine(predicate = r_has_cairo_capability)
 }
+
+#' @rdname r_has_jpeg_capability
+#' @export
+assert_r_has_icu_capability <- function()
+{
+  assert_engine(predicate = r_has_icu_capability)
+}
