@@ -18,7 +18,10 @@ is_false <- function(x)
 is_identical_to_false <- function(x, allow_attributes = FALSE, 
   .xname = get_name_in_parent(x))
 {
-  if(allow_attributes) attributes(x) <- NULL
+  if(allow_attributes) 
+  {
+    x <- strip_attributes(x)
+  }
   if(!identical(FALSE, x)) 
   {
     return(false("%s is not identical to FALSE.", .xname))
