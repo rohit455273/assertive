@@ -262,12 +262,16 @@ is_empty_character <- function(x)
 #' assert_all_are_hex_colours(x)
 #' }
 #' @export
-is_hex_colour <- function(x)
+is_hex_color <- function(x)
 {
   rx <- create_regex("#[0-9a-f]{6}")
   ok <- matches_regex(x, rx)
   set_cause(ok, "bad format")
 }
+
+#' @rdname is_hex_color
+#' @export
+is_hex_colour <- is_hex_color
 
 #' Is the string an honorific?
 #' 
@@ -536,6 +540,19 @@ is_numeric_string <- function(x)
     x
   )
   set_cause(ok, ifelse(is.na(x), "missing", "bad format"))
+}
+
+is_single_character <- function(x)
+{
+  x <- coerce_to(x, "character")
+  ok <- call_and_name(
+    function(x)
+    {
+      nchar(x) == 1
+    },
+    x
+  )
+  set_cause(ok, ifelse(is.na(x), "missing", "bad format"))  
 }
 
 #' Is the input valid R code?
