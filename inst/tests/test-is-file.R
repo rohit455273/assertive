@@ -1,8 +1,20 @@
-test_that("test.is_dir.some_paths.returns_true_when_path_is_dir", {
-  x <- c(R.home(), dir(R.home("bin"), full.names = TRUE))
-  expected <- file.info(x)[["isdir"]]
-  names(expected) <- x
-  expect_equal(is_dir(x), expected)
+test_that("test.is_dir.some_paths.returns_true_when_path_is_dir", 
+{
+  x <- c(
+    R.home(), 
+    dir(R.home("bin"), full.names = TRUE), 
+    "~not a real directory~"
+  )
+  expected <- rep.int(c(TRUE, FALSE), c(1, length(x) - 1))
+  expect_equal(
+    strip_attributes(actual <- is_dir(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("", "file", "nonexistent"), c(1, length(x) - 2, 1)))
+  )
 })
 
 test_that("test.is_executable_file.r_exes.returns_true", {
@@ -20,20 +32,36 @@ test_that("test.is_executable_file.r_exes.returns_true", {
 })
 
 test_that("test.is_existing_file.some_paths.returns_true_when_file_exists", 
-  {
-    tf <- tempfile()
-    file.create(tf)
-    x <- c("~", getwd(), tf, "~not an existing file~")
-    expected <- c(TRUE, TRUE, TRUE, FALSE)
-    names(expected) <- x
-    expect_equal(is_existing_file(x), expected)
-  })
+{
+  tf <- tempfile()
+  file.create(tf)
+  on.exit(unlink(tf))
+  x <- c("~", getwd(), tf, "~not an existing file~", NA)
+  expected <- c(TRUE, TRUE, TRUE, FALSE, FALSE)
+  expect_equal(
+    strip_attributes(actual <- is_existing_file(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("", "nonexistent"), c(3, 2)))
+  )
+})
 
 test_that("test.is_library.some_paths.returns_true_when_path_is_library", {
   x <- c(.libPaths(), "a made up directory")
-  expected <- c(rep.int(TRUE, length(x) - 1), FALSE)
-  names(expected) <- x
-  expect_equal(is_library(x), expected)
+  n_libs <- length(.libPaths())
+  expected <- rep.int(c(TRUE, FALSE), c(n_libs, 1))
+  expect_equal(
+    strip_attributes(actual <- is_library(x)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("", "not a lib"), c(n_libs, 1)))
+  )
 })
 
 test_that("test.is_readable_file.r_bin_files.returns_true", {
