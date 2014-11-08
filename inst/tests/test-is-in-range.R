@@ -1,40 +1,76 @@
 test_that("test.is_in_closed_range.0_to_4_in_1_to_3.returns_true_inside_bounds", 
-  {
-    x <- 0:4
-    expected <- c(FALSE, TRUE, TRUE, TRUE, FALSE)
-    names(expected) <- x
-    expect_equal(is_in_closed_range(x, 1, 3), expected)
-  })
+{
+  x <- c(0:4, NA)
+  expected <- c(FALSE, TRUE, TRUE, TRUE, FALSE, NA)
+  expect_equal(
+    strip_attributes(actual <- is_in_closed_range(x, 1, 3)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("too low", "", "too high", "missing"), c(1, 3, 1, 1)))
+  )
+})
 
 test_that("test.is_in_left_open_range.0_to_4_in_1_to_3.returns_true_inside_bounds", 
-  {
-    x <- 0:4
-    expected <- c(FALSE, FALSE, TRUE, TRUE, FALSE)
-    names(expected) <- x
-    expect_equal(is_in_left_open_range(x, 1, 3), expected)
-  })
+{
+  x <- c(0:4, NA)
+  expected <- c(FALSE, FALSE, TRUE, TRUE, FALSE, NA)
+  expect_equal(
+    strip_attributes(actual <- is_in_left_open_range(x, 1, 3)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("too low", "", "too high", "missing"), c(2, 2, 1, 1)))
+  )
+})
 
 test_that("test.is_in_open_range.0_to_4_in_1_to_3.returns_true_inside_bounds", 
-  {
-    x <- 0:4
-    expected <- c(FALSE, FALSE, TRUE, FALSE, FALSE)
-    names(expected) <- x
-    expect_equal(is_in_open_range(x, 1, 3), expected)
-  })
+{
+  x <- c(0:4, NA)
+  expected <- c(FALSE, FALSE, TRUE, FALSE, FALSE, NA)
+  expect_equal(
+    strip_attributes(actual <- is_in_open_range(x, 1, 3)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("too low", "", "too high", "missing"), c(2, 1, 2, 1)))
+  )
+})
 
-test_that("test.is_in_range.0_to_4_in_1_to_3.returns_true_inside_bounds", {
-  x <- 0:4
-  expected <- c(FALSE, TRUE, TRUE, TRUE, FALSE)
-  names(expected) <- x
-  expect_equal(is_in_range(x, 1, 3), expected)
+test_that("test.is_in_range.0_to_4_in_1_to_3.returns_true_inside_bounds", 
+{
+  x <- c(0:4, NA)
+  expected <- c(FALSE, TRUE, TRUE, TRUE, FALSE, NA)
+  expect_equal(
+    strip_attributes(actual <- is_in_range(x, 1, 3)), 
+    expected
+  )
+  expect_equal(names(actual), as.character(x))
+  expect_equal(
+    cause(actual),
+    noquote(rep.int(c("too low", "", "too high", "missing"), c(1, 3, 1, 1)))
+  )
 })
 
 test_that("test.is_in_right_open_range.0_to_4_in_1_to_3.returns_true_inside_bounds", 
   {
-    x <- 0:4
-    expected <- c(FALSE, TRUE, TRUE, FALSE, FALSE)
-    names(expected) <- x
-    expect_equal(is_in_right_open_range(x, 1, 3), expected)
+    x <- c(0:4, NA)
+    expected <- c(FALSE, TRUE, TRUE, FALSE, FALSE, NA)
+    expect_equal(
+      strip_attributes(actual <- is_in_right_open_range(x, 1, 3)), 
+      expected
+    )
+    expect_equal(names(actual), as.character(x))
+    expect_equal(
+      cause(actual),
+      noquote(rep.int(c("too low", "", "too high", "missing"), c(1, 2, 2, 1)))
+    )
   })
 
 test_that("test.is_negative.minus_2_to_2.returns_true_when_negative", 
