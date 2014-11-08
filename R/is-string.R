@@ -542,6 +542,19 @@ is_numeric_string <- function(x)
   set_cause(ok, ifelse(is.na(x), "missing", "bad format"))
 }
 
+#' Is the input a single character?
+#' 
+#' Checks to see if he unput is a single character.
+#' @param x A character vector.
+#' @return \code{is_single_character} returns \code{TRUE} when the input is a 
+#' single character (as determined by \code{nchar}; this excludes \code{NA}).
+#' The \code{assert_*} functions return nothing but throw an error if the 
+#' corresponding \code{is_*} function returns \code{FALSE}.
+#' @seealso \code{\link[base]{nchar}}
+#' @examples
+#' x <- c("", "a", "aa", NA)
+#' is_single_character(x)
+#' @export
 is_single_character <- function(x)
 {
   x <- coerce_to(x, "character")
