@@ -65,6 +65,9 @@ is_uk_car_licence <- function(x)
   ok <- matches_regex(x, rx)
   set_cause(ok, "bad format")
 }
+#' @rdname is_uk_car_licence
+#' @export
+is_uk_car_license <- is_uk_car_licence
 
 #' Is the string a valid UK national insurance number?
 #'
