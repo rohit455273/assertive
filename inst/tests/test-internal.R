@@ -13,7 +13,10 @@ test_that(
   "test.d.single_input.returns_valid_regex",
   {
     lo <- 1:5
-    expected <- paste0("[[:digit:]]{", lo, "}")
+    expected <- paste0(
+      "[[:digit:]]", 
+      c("", paste0("{", lo[-1], "}"))
+    )
     actual <- d(lo)
     expect_identical(actual, expected)
   }

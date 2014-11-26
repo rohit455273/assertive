@@ -113,7 +113,9 @@ is_period_for_decimal_point <- function()
 #' information on failure.  \code{is_r_stable}, \code{is_r_patched} and
 #' \code{is_r_devel} tell you what type of R build you are 
 #' running.  \code{is_revo_r} tells you if you are running Revolution Analytics'
-#' Revolution R build.
+#' Revolution R build.  \code{is_revo_r} tells you if you are running a slave
+#' instance of R (e.g. when building a package with \code{devtools} or using a
+#' cluster).
 #' The \code{assert_*} functions return nothing but throw an error if 
 #' the corresponding \code{is_*} function returns \code{FALSE}.
 #' @seealso \code{\link[base]{is.R}}, \code{\link[base]{version}}.
@@ -124,6 +126,7 @@ is_period_for_decimal_point <- function()
 #' is_r_patched()
 #' is_r_devel()
 #' is_revo_r()
+#' is_slave_r()
 #' switch(
 #'   version$status,
 #'   "Patched"                      = assert_is_r_patched(),
@@ -184,6 +187,17 @@ is_revo_r <- function()
     !is.list(Revo.version))
   {
     return(false("You are not running Revolution R."))
+  }
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_slave_r <- function()
+{
+  if(!("--slave" %in% commandArgs()))
+  {
+    return(false("You are not running a slave instance of R."))
   }
   TRUE
 }

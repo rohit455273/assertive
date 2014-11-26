@@ -62,8 +62,12 @@ is_uk_car_licence <- function(x)
     `2001 to 2051`         = c(paste0("[A-HJ-PR-Y]{2}", d(2)), "[A-HJ-PR-Z]{3}"),
     sep = " ?"
   )
-  matches_regex(x, rx)
+  ok <- matches_regex(x, rx)
+  set_cause(ok, "bad format")
 }
+#' @rdname is_uk_car_licence
+#' @export
+is_uk_car_license <- is_uk_car_licence
 
 #' Is the string a valid UK national insurance number?
 #'

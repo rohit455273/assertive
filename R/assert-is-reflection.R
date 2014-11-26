@@ -98,6 +98,13 @@ assert_is_revo_r <- function()
   assert_engine(predicate = is_revo_r)        
 }
 
+#' @rdname is_r
+#' @export
+assert_is_slave_r <- function()
+{                                                         
+  assert_engine(predicate = is_slave_r)        
+}
+
 #' @rdname is_windows
 #' @export
 assert_is_unix <- function()

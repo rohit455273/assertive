@@ -148,6 +148,22 @@ assert_any_are_numeric_strings <- function(x)
   assert_engine(x, is_numeric_string, msg, what = "any")        
 }
 
+#' @rdname is_single_character
+#' @export
+assert_all_are_single_characters <- function(x)
+{                                                     
+  msg <- sprintf("%s are not all single characters.", get_name_in_parent(x))
+  assert_engine(x, is_single_characters, msg, type = type)        
+}
+
+#' @rdname is_single_character
+#' @export
+assert_any_are_single_characters <- function(x)
+{                                                     
+  msg <- sprintf("%s are all not single characters.", get_name_in_parent(x))
+  assert_engine(x, is_single_characters, msg, what = "any", type = type)        
+}
+
 #' @rdname is_character
 #' @export
 assert_all_strings_are_missing_or_empty <- function(x)
