@@ -5,6 +5,13 @@ assert_is_64_bit_os <- function()
   assert_engine(predicate = is_64_bit_os)
 }
 
+#' @rdname is_r
+#' @export
+assert_is_architect <- function()
+{                                                         
+  assert_engine(predicate = is_architect)        
+}
+
 #' @rdname is_batch_mode
 #' @export
 assert_is_batch_mode <- function()
@@ -96,6 +103,13 @@ assert_is_r_stable <- function()
 assert_is_revo_r <- function()
 {                                                         
   assert_engine(predicate = is_revo_r)        
+}
+
+#' @rdname is_r
+#' @export
+assert_is_rstudio <- function()
+{                                                         
+  assert_engine(predicate = is_rstudio)        
 }
 
 #' @rdname is_r

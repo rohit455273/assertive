@@ -9,6 +9,19 @@ is_64_bit_os <- function()
   TRUE
 }
 
+#' @rdname is_r
+#' @export
+is_architect <- function()
+{
+  if(!"package:rj" %in% search() ||
+    is.null(device_name <- formals(getOption("device"))$name) ||
+    device_name != "rj.gd")
+  {
+    return(false("You are not running Architect/StatET."))
+  }
+  TRUE
+}
+
 #' How is R running?
 #' 
 #' Tests to see if R is running in batch mode/interactively.
@@ -112,8 +125,9 @@ is_period_for_decimal_point <- function()
 #' @return \code{is_r} wraps \code{is.R}, providing more 
 #' information on failure.  \code{is_r_stable}, \code{is_r_patched} and
 #' \code{is_r_devel} tell you what type of R build you are 
-#' running.  \code{is_revo_r} tells you if you are running Revolution Analytics'
-#' Revolution R build.  \code{is_revo_r} tells you if you are running a slave
+#' running.  \code{is_architect}, \code{is_rstudio} and \code{is_revo_r} tell
+#' you if you are running Architect/StatET, RStudio, or Revolution Analytics'
+#' Revolution R build.  \code{is_slave_r} tells you if you are running a slave
 #' instance of R (e.g. when building a package with \code{devtools} or using a
 #' cluster).
 #' The \code{assert_*} functions return nothing but throw an error if 
@@ -125,7 +139,9 @@ is_period_for_decimal_point <- function()
 #' is_r_stable()
 #' is_r_patched()
 #' is_r_devel()
+#' is_architect()
 #' is_revo_r()
+#' is_rstudio()
 #' is_slave_r()
 #' switch(
 #'   version$status,
@@ -187,6 +203,18 @@ is_revo_r <- function()
     !is.list(Revo.version))
   {
     return(false("You are not running Revolution R."))
+  }
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_rstudio <- function()
+{
+  env <- Sys.getenv("RSTUDIO")
+  if(is.null(env) || env != "1")
+  {
+    return(false("You are not running RStudio."))
   }
   TRUE
 }
