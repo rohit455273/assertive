@@ -1,3 +1,30 @@
+#' Can R find tools for compiling code?
+#' 
+#' Checks to see if R can see the \code{gcc} and \code{make} tools in order
+#' to compile code.
+#' @return \code{r_can_compile_code} returns \code{TRUE} if R can see \code{gcc} 
+#' and \code{make} tools, and \code{FALSE} (with a cause) otherwise.
+#' \code{assert_r_can_compile_code} returns nothing but throws an error if 
+#' \code{r_can_compile_code} function returns \code{FALSE}.
+#' @examples
+#' r_can_compile_code()
+#' \dontrun{
+#' assert_r_can_compile_code()
+#' }
+#' @export
+r_can_compile_code <- function()
+{
+  paths <- Sys.which(c("gcc", "make"))
+  for(i in seq_along(paths))
+  {
+    if(!nzchar(paths[i]))
+    {
+      return(assertive:::false("R cannot find the %s tool.", names(paths[i])))
+    }
+  }
+  TRUE
+}
+
 #' Does R have a capability?
 #' 
 #' Check to see if R has a specific capability.
