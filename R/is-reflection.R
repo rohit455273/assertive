@@ -211,8 +211,8 @@ is_revo_r <- function()
 #' @export
 is_rstudio <- function()
 {
-  env <- Sys.getenv("RSTUDIO")
-  if(is.null(env) || env != "1")
+  gui <- .Platform$GUI
+  if(is.null(gui) || gui != "RStudio")
   {
     return(false("You are not running RStudio."))
   }
