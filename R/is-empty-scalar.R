@@ -130,11 +130,12 @@ is_empty_model <- function(x, .xname = get_name_in_parent(x))
 
 #' @rdname is_empty
 #' @export
-is_non_empty <- function(x, .xname = get_name_in_parent(x))
+is_non_empty <- function(x, metric = c("length", "elements"), .xname = get_name_in_parent(x))
 {
-  if(length(x) == 0L) 
+  metric <- get_metric(metric)
+  if(metric(x, 0)) 
   {
-    return(false("%s has length zero.", .xname))
+    return(false("%s has length 0.", .xname))
   }
   TRUE
 }
@@ -157,11 +158,57 @@ is_non_empty_model <- function(x, .xname = get_name_in_parent(x))
 
 #' @rdname is_empty
 #' @export
-is_scalar <- function(x, .xname = get_name_in_parent(x))
+is_of_dimension <- function(x, n, .xname = get_name_in_parent(x))
 {
-  if(length(x) != 1L)
+  # There are two cases two test: n is NULL, or n is a vector of natural 
+  # numbers.
+  if(is.null(n))
   {
-    return(false("%s does not have length one.", .xname))
+    if(has_dims(x))
+    {
+      return(false("%s does not have NULL dimension.", .xname))
+    }
+    return(TRUE)
+  }
+  assert_all_are_non_negative(n)
+  assert_all_numbers_are_whole_numbers(n)
+  dim_x <- dim(x)
+  if(!is_of_length(dim_x, length(n)))
+  {
+    return(false("%s does not have %d dimensions.", .xname, length(n)))
+  }
+  differences <- dim_x != n
+  if(any(differences))
+  {
+    return(
+      false(
+        "Dimensions %s of %s are incorrect.", 
+        toString(which(differences)), 
+        .xname
+      )
+    )
   }
   TRUE
-}                
+}
+
+#' @rdname is_empty
+#' @export
+is_of_length <- function(x, n, .xname = get_name_in_parent(x))
+{
+  n <- use_first(n)
+  assert_all_are_non_negative(n)
+  assert_all_numbers_are_whole_numbers(n)
+  if(length(x) != n)
+  {
+    return(false("%s does not have length %d.", .xname, n))
+  }
+  TRUE
+}
+
+#' @rdname is_empty
+#' @export
+is_scalar <- function(x, metric = c("length", "elements"), .xname = get_name_in_parent(x))
+{
+  metric <- get_metric(metric)
+  metric(x, 1L, .xname)
+}     
