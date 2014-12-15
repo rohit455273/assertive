@@ -19,7 +19,8 @@
 #' @export
 is2 <- function(x, class, .xname = get_name_in_parent(x))
 {    
-  if(is_empty(class)) stop("You must provide a class.")
+  # Can't use is_empty in next line because that function calls this one.
+  if(length(class) == 0L) stop("You must provide a class.")
   if(length(class) > 1L) 
   {
     return(bapply(class, function(cl) is2(x, cl, "")))
@@ -626,7 +627,7 @@ is_table <- function(x, .xname = get_name_in_parent(x))
 is_ts <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is2(x, "ts", .xname))) return(ok)
-  if(!(ok <- is_non_empty(x, .xname))) return(ok)
+  if(!(ok <- is_non_empty(x, .xname = .xname))) return(ok)
   TRUE
 }
 
