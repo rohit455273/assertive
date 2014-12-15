@@ -131,6 +131,27 @@ coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
   )
 }
 
+#' Get the dimensions of an object
+#' 
+#' Get the dimensions of an object, retuning the length if that object has no
+#' \code{dim} attribute.
+#' @param x Any object.
+#' @return A integer vector of non-negative values.
+#' @seealso \code{\link[base]{NROW}}, \code{\link[base]{dim}}
+#' @examples
+#' # For data frames and matrices, DIM is the same as dim.
+#' DIM(sleep) 
+#' # For vectors (and other objects without a dim attribute), DIM is the 
+#' # same as length.
+#' DIM(1:10)
+#' DIM(list(x = 1:10))
+#' @export
+DIM <- function(x)
+{
+  dim_x <- dim(x)
+  if(is.null(dim_x)) length(x) else dim_x
+}
+
 #' Get the name of a variable in the parent frame.
 #'
 #' Gets the name of the input in the parent frame.
