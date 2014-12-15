@@ -165,12 +165,12 @@ has_dimnames <- function(x, .xname = get_name_in_parent(x))
 #' @return \code{has_dims} returns\code{TRUE} if \code{dim} is non-null.
 #' \code{assert_has_dims} returns nothing but throws an error if
 #' \code{has_dims} is not \code{TRUE}.
-#' @seealso \code{\link{dim}}.
+#' @seealso \code{\link[base]{dim}}, \code{\link{is_of_dimension}}.
 #' @export
 has_dims <- function(x, .xname = get_name_in_parent(x))
 {
-  dimx <- dim(x)
-  if(is.null(dimx)) 
+  dim_x <- dim(x)
+  if(is.null(dim_x)) 
   {
     return(false("The dimensions of %s are NULL.", .xname))
   }
