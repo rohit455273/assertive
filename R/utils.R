@@ -84,7 +84,8 @@ cause <- function(x)
 #' @export
 coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
 {
-  if(is_empty(target_class)) 
+  # Can't use is_empty in next line because that function calls this one.
+  if(length(target_class) == 0L) 
   {
     stop("You must provide a class.")
   }
@@ -439,8 +440,13 @@ sys_set_locale <- function(..., l = list())
 #' @export
 use_first <- function(x, indexer = c("[[", "["))
 {
-  assert_is_non_empty(x)
-  if(is_scalar(x))
+  # Can't use assert_is_non_empty, is_scalar in next lines because those 
+  # functions calls this one.
+  if(length(x) == 0L)
+  {
+    stop(get_name_in_parent(x), " is has length 0.")
+  }
+  if(length(x) == 1L)
   {
     return(x)
   }
