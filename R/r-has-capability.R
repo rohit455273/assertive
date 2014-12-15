@@ -14,13 +14,18 @@
 #' @export
 r_can_compile_code <- function()
 {
-  paths <- Sys.which(c("gcc", "make"))
-  for(i in seq_along(paths))
+  tools <- c("gcc", "make")
+  paths <- Sys.which(tools)
+  not_found <- !nzchar(paths)
+  if(any(not_found))
   {
-    if(!nzchar(paths[i]))
-    {
-      return(assertive:::false("R cannot find the %s tool.", names(paths[i])))
-    }
+    return(
+      false(
+        "R cannot find the %s %s.", 
+        toString(tools[not_found]),
+        ngettext(sum(not_found), "tool", "tools")
+      )
+    )
   }
   TRUE
 }
