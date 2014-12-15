@@ -34,9 +34,7 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
 #' is_divisible_by(-5:5, -2)
 #' is_divisible_by(1.5:10.5, c(1.5, 3.5))
 #' assert_any_are_even(1:10)
-#' \dontrun{
-#' assert_all_are_even(1:10)
-#' }
+#' dont_stop(assert_all_are_even(1:10))
 #' @export
 is_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
 {
@@ -99,10 +97,8 @@ is_even <- function(x, tol = 100 * .Machine$double.eps)
 #' e$x <- 1
 #' e$y <- 2
 #' assert_all_are_existing(c("x", "y"), envir = e)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_existing(c("x", "z"), envir = e)
-#' }
+#' dont_stop(assert_all_are_existing(c("x", "z"), envir = e))
 #' @export
 is_existing <- function(
   x, 
@@ -183,10 +179,8 @@ is_odd <- function(x, tol = 100 * .Machine$double.eps)
 #' @examples
 #' m <- diag(3); m[3, 1] <- 1e-100
 #' assert_is_symmetric_matrix(m)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_is_symmetric_matrix(m, tol = 0)
-#'}
+#' dont_stop(assert_is_symmetric_matrix(m, tol = 0))
 #' @export
 is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps, 
   .xname = get_name_in_parent(x), ...)
@@ -232,11 +226,9 @@ is_symmetric_matrix <- function(x, tol = 100 * .Machine$double.eps,
 #' @examples
 #' assert_is_unsorted(c(1, 3, 2))
 #' assert_is_unsorted(c(1, 1, 2), strictly = TRUE)
-#' \dontrun{
 #' #These tests should fail.
-#' assert_is_unsorted(c(1, 1, 2))
-#' assert_is_unsorted(c(2, 1, 0))
-#' }
+#' dont_stop(assert_is_unsorted(c(1, 1, 2)))
+#' dont_stop(assert_is_unsorted(c(2, 1, 0)))
 #' @export
 is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE, 
   .xname = get_name_in_parent(x))

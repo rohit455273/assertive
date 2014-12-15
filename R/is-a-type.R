@@ -88,9 +88,7 @@ is_an_integer <- function(x, .xname = get_name_in_parent(x))
 #' @examples
 #' x <- structure(1:5, class = c("foo", "bar"))
 #' assert_is_inherited_from(x, c("foo", "baz"))
-#' \dontrun{
-#' assert_is_inherited_from(x, c("Foo", "baz"))
-#' }
+#' dont_stop(assert_is_inherited_from(x, c("Foo", "baz")))
 #' @export
 is_inherited_from <- function(x, classes, .xname = get_name_in_parent(x))
 {

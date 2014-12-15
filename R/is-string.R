@@ -20,10 +20,8 @@
 #' )
 #' is_cas_number(x)
 #' assert_any_are_cas_numbers(x)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_cas_numbers(x)
-#' }
+#' dont_stop(assert_all_are_cas_numbers(x))
 #' @references Chemspider (\url{https://www.chemspider.com}) is a good service 
 #' for looking up CAS numbers.
 #' @export
@@ -94,9 +92,7 @@ is_cas_number <- function(x, .xname = get_name_in_parent(x))
 #' )
 #' is_credit_card_number(x)
 #' assert_any_are_credit_card_numbers(x)
-#' \dontrun{
-#' assert_all_are_credit_card_numbers(x)
-#' }
+#' dont_stop(assert_all_are_credit_card_numbers(x))
 #' @references \url{http://www.regular-expressions.info/creditcard.html} 
 #' contains the regexes used by this function.
 #' The example valid card numbers are from
@@ -257,10 +253,8 @@ is_empty_character <- function(x)
 #' )
 #' is_hex_colour(x)
 #' assert_any_are_hex_colours(x)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_hex_colours(x)
-#' }
+#' dont_stop(assert_all_are_hex_colours(x))
 #' @export
 is_hex_color <- function(x)
 {
@@ -349,10 +343,8 @@ is_honorific <- function(x)
 #' )
 #' is_ip_address(x)
 #' assert_any_are_ip_addresses(x)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_ip_addresses(x)
-#' }
+#' dont_stop(assert_all_are_ip_addresses(x))
 #' @export
 is_ip_address <- function(x)
 {
@@ -483,11 +475,9 @@ is_isbn13_code <- function(x, .xname = get_name_in_parent(x))
 #' assert_any_are_isbn_codes(x10, type = "10")
 #' is_isbn_code(x13, type = "13")
 #' assert_any_are_isbn_codes(x13, type = "13")
-#' \dontrun{
 #' #These tests should fail.
-#' assert_all_are_isbn_codes(x10, type = "10")
-#' assert_all_are_isbn_codes(x13, type = "13")
-#' }
+#' dont_stop(assert_all_are_isbn_codes(x10, type = "10"))
+#' dont_stop(assert_all_are_isbn_codes(x13, type = "13"))
 #' @export
 is_isbn_code <- function(x, type = c("10", "13"), 
   .xname = get_name_in_parent(x))
@@ -617,10 +607,8 @@ is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
 #' x <- c("x", "y_y0.Y", ".", "x y", "...", "..1", long)
 #' is_valid_variable_name(x)
 #' is_valid_variable_name(x, allow_reserved = FALSE)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_valid_variable_names(c("...", "..1"), allow_reserved = FALSE) 
-#' }
+#' dont_stop(assert_all_are_valid_variable_names(c("...", "..1"), allow_reserved = FALSE))
 #' @references
 #' \url{http://4dpiecharts.com/2011/07/04/testing-for-valid-variable-names/}
 #' @export

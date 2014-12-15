@@ -9,9 +9,7 @@
 #' x <- 1:5
 #' are_identical(cos(pi), -1, x, (2:6) - 1L)
 #' assert_any_are_identical(cos(pi), -1, x, (2:6) - 1L)
-#' \dontrun{
-#' assert_all_are_identical(cos(pi), -1, x, (2:6) - 1L)
-#' }
+#' dont_stop(assert_all_are_identical(cos(pi), -1, x, (2:6) - 1L))
 #' @export
 are_identical <- function(...)
 {

@@ -80,10 +80,8 @@ has_arg <- function(x, fn = sys.function(sys.parent()))
 #' x <- structure(c(a = 1), b = 2)
 #' assert_has_all_attributes(x, c("names", "b"))
 #' assert_has_any_attributes(x, c("names", "c"))
-#' \dontrun{
 #' #These examples should fail.
-#' assert_has_all_attributes(x, c("names", "c"))
-#' }
+#' dont_stop(assert_has_all_attributes(x, c("names", "c")))
 #' @export
 has_attributes <- function(x, attrs, .xname = get_name_in_parent(x))
 {

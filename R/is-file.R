@@ -81,7 +81,7 @@ is_empty_file <- function(x)
 #' assert_all_are_existing_files(dir())
 #' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_existing_files("not an existing file (probably)")
+#' dont_stop(assert_all_are_existing_files("not an existing file (probably)"))
 #' }
 #' @export
 is_existing_file <- function(x)
@@ -208,7 +208,7 @@ is_writable_file <- function(x)
 #' @seealso \code{\link[base]{file.access}}
 #' @examples
 #' \dontrun{
-#' warn_about_file.access_under_windows()
+#' dont_stop(warn_about_file.access_under_windows())
 #' }
 warn_about_file.access_under_windows <- function()
 { 

@@ -149,9 +149,7 @@ is_period_for_decimal_point <- function()
 #'   "Under development (unstable)" = assert_is_r_devel(),
 #'   assert_is_r_stable()
 #' )
-#' \dontrun{
-#' assert_is_r()
-#' }
+#' dont_stop(assert_is_r())
 #' @export
 is_r <- function()
 {

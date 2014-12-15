@@ -40,10 +40,8 @@
 #' )
 #' is_uk_car_licence(licences)
 #' assert_any_are_uk_car_licences(licences)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_uk_car_licences(licences)
-#' }
+#' dont_stop(assert_all_are_uk_car_licences(licences))
 #' @references Regex taken from 
 #' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
 #' @export
@@ -98,10 +96,8 @@ is_uk_car_license <- is_uk_car_licence
 #' )
 #' is_uk_national_insurance_number(ni_numbers)
 #' assert_any_are_uk_national_insurance_numbers(ni_numbers)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_uk_national_insurance_numbers(ni_numbers)
-#' }
+#' dont_stop(assert_all_are_uk_national_insurance_numbers(ni_numbers))
 #' @references Regex taken from 
 #' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
 #' @export

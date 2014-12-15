@@ -8,9 +8,7 @@
 #' \code{r_can_compile_code} function returns \code{FALSE}.
 #' @examples
 #' r_can_compile_code()
-#' \dontrun{
-#' assert_r_can_compile_code()
-#' }
+#' dont_stop(assert_r_can_compile_code())
 #' @export
 r_can_compile_code <- function()
 {

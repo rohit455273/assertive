@@ -18,9 +18,7 @@
 #' assert_all_are_finite(1:10)
 #' assert_any_are_finite(c(1, Inf))
 #' assert_all_are_infinite(c(Inf, -Inf))
-#' \dontrun{
-#' assert_all_are_finite(c(0, Inf, -Inf, NA, NaN))
-#' }
+#' dont_stop(assert_all_are_finite(c(0, Inf, -Inf, NA, NaN)))
 #' @export
 is_finite <- function(x)
 {
@@ -81,9 +79,7 @@ is_infinite <- function(x)
 #' is_not_na(x)
 #' assert_all_are_not_na(1:10)
 #' assert_any_are_not_na(x)
-#' \dontrun{
-#' assert_any_are_not_na(x)
-#' }
+#' dont_stop(assert_all_are_not_na(x))
 #' @export
 is_na <- function(x)
 {
@@ -114,9 +110,7 @@ is_na <- function(x)
 #' is_not_nan(x)
 #' assert_all_are_not_nan(1:10)
 #' assert_any_are_not_nan(x)
-#' \dontrun{
-#' assert_any_are_not_nan(x)
-#' }
+#' dont_stop(assert_all_are_not_nan(x))
 #' @export
 is_nan <- function(x)
 {

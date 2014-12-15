@@ -31,10 +31,8 @@ is_imaginary <- function(x)
 #' assert_any_are_real(c(1i, 0))
 #' assert_all_are_imaginary(1:10 * 1i)
 #' assert_any_are_imaginary(c(1i, 0))
-#' \dontrun{
-#' assert_all_are_real(x)
-#' assert_all_are_imaginary(x)
-#' }
+#' dont_stop(assert_all_are_real(x))
+#' dont_stop(assert_all_are_imaginary(x))
 #' @export
 is_real <- function(x)
 {
