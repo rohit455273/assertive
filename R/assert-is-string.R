@@ -153,7 +153,7 @@ assert_any_are_numeric_strings <- function(x)
 assert_all_are_single_characters <- function(x)
 {                                                     
   msg <- sprintf("%s are not all single characters.", get_name_in_parent(x))
-  assert_engine(x, is_single_characters, msg, type = type)        
+  assert_engine(x, is_single_character, msg)        
 }
 
 #' @rdname is_single_character
@@ -161,7 +161,7 @@ assert_all_are_single_characters <- function(x)
 assert_any_are_single_characters <- function(x)
 {                                                     
   msg <- sprintf("%s are all not single characters.", get_name_in_parent(x))
-  assert_engine(x, is_single_characters, msg, what = "any", type = type)        
+  assert_engine(x, is_single_character, msg, what = "any")        
 }
 
 #' @rdname is_character
