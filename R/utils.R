@@ -77,10 +77,7 @@ cause <- function(x)
 #' @seealso \code{\link[methods]{is}} and \code{\link[methods]{as}}.
 #' @examples
 #' # Numbers can be coerced to characters but not to calls.
-#' \dontrun{
-#' coerce_to(1:5, c("call", "character"))
-#' }
-#' 
+#' dont_stop(coerce_to(1:5, c("call", "character")))
 #' @export
 coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
 {
@@ -319,6 +316,43 @@ parenthesise <- function(x,
   )
   paste0(before, x, after)
 }
+
+#' Run code without stopping
+#' 
+#' Runs code without stopping, warnings and errors are only printed.
+#' @param ... Passed to \code{tryCatch}.
+#' @return The expression that was passed in is run.
+#' @note This function is dangerous, since it overrides warnings and errors.
+#' Its intended use is for documenting examples of errors.
+#' @examples
+#' dont_stop(warning("!!!"))
+#' dont_stop(stop("!!!"))
+#' f <- function() g()
+#' g <- function() stop("!!!")
+#' dont_stop(f())
+#' @export
+dont_stop <- function(...)
+{
+  # The expression, without dont_stop().
+  cl <- sys.call()[[2]]
+  p <- function(e) 
+  {
+    # If the error call claims to be to doTryCatch, then nothing interesting
+    # was captured, so use the parent call that we captured earlier.
+    if(identical(e$call[[1]], as.name("doTryCatch")))
+    {
+      e$call <- cl
+    }
+    print(e)
+  }
+  tryCatch(..., warning = p, error = p)
+}
+f <- function() g()
+g <- function() warning("!!!")
+dont_stop(f())
+
+dont_stop(warning("!!!"))
+dont_stop(stop("!!!"))
 
 #' Set a cause and return the input
 #' 
