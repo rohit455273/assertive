@@ -347,12 +347,6 @@ dont_stop <- function(...)
   }
   tryCatch(..., warning = p, error = p)
 }
-f <- function() g()
-g <- function() warning("!!!")
-dont_stop(f())
-
-dont_stop(warning("!!!"))
-dont_stop(stop("!!!"))
 
 #' Set a cause and return the input
 #' 
