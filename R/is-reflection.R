@@ -193,6 +193,11 @@ is_r_stable <- function()
   TRUE
 }
 
+# This is to avoid a NOTE by R CMD check.  See 
+# http://stackoverflow.com/q/9439256/134830 and
+# http://stackoverflow.com/q/8096313/134830
+if(getRversion() >= "2.15.1")  utils::globalVariables("Revo.version")
+
 #' @rdname is_r
 #' @export
 is_revo_r <- function()
