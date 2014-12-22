@@ -19,6 +19,13 @@ assert_is_batch_mode <- function()
   assert_engine(predicate = is_batch_mode)
 }
 
+#' @rdname is_windows
+#' @export
+assert_is_bsd <- function()
+{
+  assert_engine(predicate = is_bsd)
+}
+
 #' @rdname is_xxx_for_decimal_point
 #' @export
 assert_is_comma_for_decimal_point <- function()
@@ -117,6 +124,13 @@ assert_is_rstudio <- function()
 assert_is_slave_r <- function()
 {                                                         
   assert_engine(predicate = is_slave_r)        
+}
+
+#' @rdname is_windows
+#' @export
+assert_is_solaris <- function()
+{
+  assert_engine(predicate = is_solaris)
 }
 
 #' @rdname is_windows
