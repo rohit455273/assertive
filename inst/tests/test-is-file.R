@@ -1,11 +1,13 @@
 test_that("test.is_dir.some_paths.returns_true_when_path_is_dir", 
 {
+  file.create(tmp <- tempfile())
+  on.exit(unlink(tmp))
   x <- c(
     R.home(), 
-    dir(R.home("bin"), full.names = TRUE), 
+    tmp, 
     "~not a real directory~"
   )
-  expected <- rep.int(c(TRUE, FALSE), c(1, length(x) - 1))
+  expected <- c(TRUE, FALSE, FALSE)
   expect_equal(
     strip_attributes(actual <- is_dir(x)), 
     expected
@@ -13,7 +15,7 @@ test_that("test.is_dir.some_paths.returns_true_when_path_is_dir",
   expect_equal(names(actual), as.character(x))
   expect_equal(
     cause(actual),
-    noquote(rep.int(c("", "file", "nonexistent"), c(1, length(x) - 2, 1)))
+    noquote(c("", "file", "nonexistent"))
   )
 })
 
