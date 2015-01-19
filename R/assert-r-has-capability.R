@@ -116,3 +116,17 @@ assert_r_has_icu_capability <- function()
 {
   assert_engine(predicate = r_has_icu_capability)
 }
+
+#' @rdname r_has_jpeg_capability
+#' @export
+assert_r_has_long_double_capability <- function()
+{
+  assert_engine(predicate = r_has_long_double_capability)
+}
+
+#' @rdname r_has_jpeg_capability
+#' @export
+assert_r_has_libcurl_capability <- function()
+{
+  assert_engine(predicate = r_has_libcurl_capability)
+}

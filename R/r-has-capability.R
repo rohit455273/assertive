@@ -231,3 +231,37 @@ r_has_icu_capability <- function()
   }
   TRUE
 }
+
+#' @rdname r_has_jpeg_capability
+#' @export
+r_has_long_double_capability <- function()
+{
+  if(as.package_version(version) < "3.2.0")
+  {
+    return(
+      false("long.double capability is not declared for versions of R before 3.2.0.")
+    )
+  }
+  if(!capabilities("long.double"))
+  {
+    return(false("R does not have long.double capability."))
+  }
+  TRUE
+}
+
+#' @rdname r_has_jpeg_capability
+#' @export
+r_has_libcurl_capability <- function()
+{
+  if(as.package_version(version) < "3.2.0")
+  {
+    return(
+      false("libcurl capability is not declared for versions of R before 3.2.0.")
+    )
+  }
+  if(!capabilities("libcurl"))
+  {
+    return(false("R does not have libcurl capability."))
+  }
+  TRUE
+}

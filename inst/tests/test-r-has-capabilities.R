@@ -4,7 +4,7 @@ test_that(
     caps <- capabilities()
     fns <- paste(
       "r_has", 
-      sub("/", "_", tolower(names(caps))), 
+      sub("[/.]", "_", tolower(names(caps))), 
       "capability",
       sep = "_"
     )
