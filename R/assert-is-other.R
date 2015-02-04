@@ -165,7 +165,25 @@ assert_is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE)
 
 #' @rdname is_whole_number
 #' @export
-assert_all_numbers_are_whole_numbers <- function(x, 
+assert_all_numbers_are_whole_numbers <- function(x,
+  tol = 100 * .Machine$double.eps)
+{                                                       
+  .Deprecated("assert_all_are_whole_numbers")
+  assert_all_are_whole_numbers(x, tol)
+}
+
+#' @rdname is_whole_number
+#' @export
+assert_any_numbers_are_whole_numbers <- function(x, 
+  tol = 100 * .Machine$double.eps)
+{                                                      
+  .Deprecated("assert_any_are_whole_numbers")
+  assert_any_are_whole_numbers(x, tol)  
+}
+
+#' @rdname is_whole_number
+#' @export
+assert_all_are_whole_numbers <- function(x, 
   tol = 100 * .Machine$double.eps)
 {                                                       
   msg <- sprintf("%s are not all whole numbers.", get_name_in_parent(x))
@@ -174,7 +192,7 @@ assert_all_numbers_are_whole_numbers <- function(x,
 
 #' @rdname is_whole_number
 #' @export
-assert_any_numbers_are_whole_numbers <- function(x, 
+assert_any_are_whole_numbers <- function(x, 
   tol = 100 * .Machine$double.eps)
 {                                                      
   msg <- sprintf("%s are all not whole numbers.", get_name_in_parent(x))

@@ -190,13 +190,29 @@ assert_any_strings_are_missing_or_empty <- function(x)
 #' @export
 assert_all_strings_are_not_missing_nor_empty <- function(x)
 {                                                       
+  .Deprecated("assert_all_are_not_missing_nor_empty_characters")
+  assert_all_are_not_missing_nor_empty_characters(x)
+}
+
+#' @rdname is_character
+#' @export
+assert_any_strings_are_not_missing_nor_empty <- function(x)
+{                                                      
+  .Deprecated("assert_any_are_not_missing_nor_empty_characters")
+  assert_any_are_not_missing_nor_empty_characters(x)
+}
+
+#' @rdname is_character
+#' @export
+assert_all_are_not_missing_nor_empty_characters <- function(x)
+{                                                       
   msg <- sprintf("%s contains missing or empty strings.", get_name_in_parent(x))
   assert_engine(x, is_not_missing_nor_empty_character, msg)
 }
 
 #' @rdname is_character
 #' @export
-assert_any_strings_are_not_missing_nor_empty <- function(x)
+assert_any_are_not_missing_nor_empty_characters <- function(x)
 {                                                      
   msg <- sprintf("%s are all missing or empty strings.", get_name_in_parent(x))
   assert_engine(x, is_not_missing_nor_empty_character, msg, what = "any")

@@ -4,7 +4,7 @@ has_elements <- function(x, n, .xname = get_name_in_parent(x))
 {
   n <- use_first(n)
   assert_all_are_non_negative(n)
-  assert_all_numbers_are_whole_numbers(n)
+  assert_all_are_whole_numbers(n)
   if(n_elements(x) != n)
   {
     return(
@@ -171,7 +171,7 @@ is_of_dimension <- function(x, n, .xname = get_name_in_parent(x))
     return(TRUE)
   }
   assert_all_are_non_negative(n)
-  assert_all_numbers_are_whole_numbers(n)
+  assert_all_are_whole_numbers(n)
   dim_x <- dim(x)
   if(!is_of_length(dim_x, length(n)))
   {
@@ -197,7 +197,7 @@ is_of_length <- function(x, n, .xname = get_name_in_parent(x))
 {
   n <- use_first(n)
   assert_all_are_non_negative(n)
-  assert_all_numbers_are_whole_numbers(n)
+  assert_all_are_whole_numbers(n)
   if(length(x) != n)
   {
     return(false("%s does not have length %d.", .xname, n))
