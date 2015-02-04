@@ -171,9 +171,8 @@ is_uk_postcode <- function(x)
 #' phone_nos <- c("+44 207 219 3475", "08457 90 90 90")
 #' is_uk_telephone_number(phone_nos)
 #' assert_all_are_uk_telephone_numbers(phone_nos)
-#' @references The regex is adapted from the one at
-#' \url{http://www.aa-asterisk.org.uk/index.php/Regular_Expressions_for_Validating_and_Formatting_UK_Telephone_Numbers}
-#' with some additional consultation from
+#' @references The regex is adapted from one on the now defunct 
+#' aa-asterisk.org.uk site with some additional consultation from
 #' \url{https://en.wikipedia.org/wiki/List_of_United_Kingdom_dialling_codes}
 #' @export
 is_uk_telephone_number <- function(x)
