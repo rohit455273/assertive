@@ -20,7 +20,7 @@ install_bitbucket("richierocks/assertive")
 
 ### How to use the package
 
-assertive contains lots of "assert" functions that throw errors if conditions 
+assertive contains lots of *assert* functions that throw errors if conditions 
 aren't met.  They are very useful for checking user input to your functions.
 
 For example,
@@ -37,11 +37,11 @@ f(NULL)
 ## Error: x is NULL.
 ```
 
-(You can think of the "assert" functions as more specific versions of 
+(You can think of the *assert* functions as more specific versions of 
 `base::stopifnot` that make your code easier to read and give more informative 
 error messages.)
 
-Each assert function has a corresponding "is" function.  In this case, 
+Each *assert* function has a corresponding *is* function.  In this case, 
 `is_not_null` is a wrapper to base-R's `!is.null`, that gives a more informative 
 error message on failure (in an attribute named `cause`).
 
@@ -55,8 +55,8 @@ is_not_null(NULL)
 ## [1] NULL is NULL.
 ```
 
-Many of the "is" functions are wrappers to base functions.  They all return causes
-of failure, and they have consistent naming, beginning "is_" or "has_" (so 
-`interactive` becomes `is_interactive`, for example.)
+Many of the *is* functions are wrappers to base functions.  They all return causes
+of failure, and they have consistent naming, beginning `is_` or `has_` (so 
+`base::interactive` becomes `is_interactive`, for example.)
 
 
