@@ -11,7 +11,7 @@ To install, you first need the devtools package.
 install.packages("devtools")
 ```
 
-Then you can install the pathological package using
+Then you can install the assertive package using
 
 ```{r}
 library(devtools)
