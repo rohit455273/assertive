@@ -546,7 +546,7 @@ is_relistable <- function(x, .xname = get_name_in_parent(x))
 #' #These examples should fail.
 #' dont_stop(assert_is_S4(1:10))
 #' @export
-is_S4 <- function(x, .xname = get_name_in_parent(x))
+is_s4 <- function(x, .xname = get_name_in_parent(x))
 {
   if(!isS4(x))
   {
@@ -554,6 +554,14 @@ is_S4 <- function(x, .xname = get_name_in_parent(x))
   }
   TRUE
 } 
+
+#' @rdname is_s4
+#' @export
+is_S4 <- function(x, .xname = get_name_in_parent(x))
+{
+  .Deprecated("is_s4")
+  is_s4(x, .xname)
+}
 
 #' @rdname is_function
 #' @export

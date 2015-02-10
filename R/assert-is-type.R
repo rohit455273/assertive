@@ -204,9 +204,17 @@ assert_is_relistable <- function(x)
   assert_engine(x, is_relistable, .xname = get_name_in_parent(x))
 }
 
-#' @rdname is_S4
+#' @rdname is_s4
 #' @export
 assert_is_S4 <- function(x)
+{                                                         
+  .Deprecated("assert_is_s4")
+  assert_is_s4(x)
+}
+
+#' @rdname is_s4
+#' @export
+assert_is_s4 <- function(x)
 {                                                         
   assert_engine(x, is_S4, .xname = get_name_in_parent(x))
 }
