@@ -40,10 +40,8 @@
 #' )
 #' is_uk_car_licence(licences)
 #' assert_any_are_uk_car_licences(licences)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_uk_car_licences(licences)
-#' }
+#' dont_stop(assert_all_are_uk_car_licences(licences))
 #' @references Regex taken from 
 #' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
 #' @export
@@ -98,10 +96,8 @@ is_uk_car_license <- is_uk_car_licence
 #' )
 #' is_uk_national_insurance_number(ni_numbers)
 #' assert_any_are_uk_national_insurance_numbers(ni_numbers)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_uk_national_insurance_numbers(ni_numbers)
-#' }
+#' dont_stop(assert_all_are_uk_national_insurance_numbers(ni_numbers))
 #' @references Regex taken from 
 #' \url{http://www.regexlib.com/REDetails.aspx?regexp_id=527}.
 #' @export
@@ -175,9 +171,8 @@ is_uk_postcode <- function(x)
 #' phone_nos <- c("+44 207 219 3475", "08457 90 90 90")
 #' is_uk_telephone_number(phone_nos)
 #' assert_all_are_uk_telephone_numbers(phone_nos)
-#' @references The regex is adapted from the one at
-#' \url{http://www.aa-asterisk.org.uk/index.php/Regular_Expressions_for_Validating_and_Formatting_UK_Telephone_Numbers}
-#' with some additional consultation from
+#' @references The regex is adapted from one on the now defunct 
+#' aa-asterisk.org.uk site with some additional consultation from
 #' \url{https://en.wikipedia.org/wiki/List_of_United_Kingdom_dialling_codes}
 #' @export
 is_uk_telephone_number <- function(x)

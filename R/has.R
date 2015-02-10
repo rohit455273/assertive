@@ -80,10 +80,8 @@ has_arg <- function(x, fn = sys.function(sys.parent()))
 #' x <- structure(c(a = 1), b = 2)
 #' assert_has_all_attributes(x, c("names", "b"))
 #' assert_has_any_attributes(x, c("names", "c"))
-#' \dontrun{
 #' #These examples should fail.
-#' assert_has_all_attributes(x, c("names", "c"))
-#' }
+#' dont_stop(assert_has_all_attributes(x, c("names", "c")))
 #' @export
 has_attributes <- function(x, attrs, .xname = get_name_in_parent(x))
 {
@@ -165,12 +163,12 @@ has_dimnames <- function(x, .xname = get_name_in_parent(x))
 #' @return \code{has_dims} returns\code{TRUE} if \code{dim} is non-null.
 #' \code{assert_has_dims} returns nothing but throws an error if
 #' \code{has_dims} is not \code{TRUE}.
-#' @seealso \code{\link{dim}}.
+#' @seealso \code{\link[base]{dim}}, \code{\link{is_of_dimension}}.
 #' @export
 has_dims <- function(x, .xname = get_name_in_parent(x))
 {
-  dimx <- dim(x)
-  if(is.null(dimx)) 
+  dim_x <- dim(x)
+  if(is.null(dim_x)) 
   {
     return(false("The dimensions of %s are NULL.", .xname))
   }

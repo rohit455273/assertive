@@ -54,11 +54,11 @@ is_bzfile_connection <- function(x, .xname = get_name_in_parent(x))
 #' cat("this has no final newline character", file = tcon)
 #' assert_is_incomplete_connection(tcon)
 #' close(tcon)
-#' \dontrun{
 #' #These examples should fail.
-#' assert_is_connection("not a connection")
-#' assert_is_readable_connection(stdout())
-#' assert_is_writable_connection(stdin())
+#' dont_stop(assert_is_connection("not a connection"))
+#' dont_stop(assert_is_readable_connection(stdout()))
+#' dont_stop(assert_is_writable_connection(stdin()))
+#' \dontrun{
 #' fcon <- file()
 #' close(fcon)
 #' assert_is_open_connection(fcon)

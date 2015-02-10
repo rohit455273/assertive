@@ -20,6 +20,28 @@ assert_any_are_dirs <- function(x)
   assert_engine(x, is_dir, msg = msg, what = "any")
 }
 
+#' @rdname is_empty_file
+#' @export
+assert_all_are_empty_files <- function(x)
+{
+  msg <- sprintf(
+    "The files %s are not all empty", 
+    get_name_in_parent(x)
+  )
+  assert_engine(x, is_empty_file, msg = msg)
+}
+
+#' @rdname is_empty_file
+#' @export
+assert_any_are_empty_files <- function(x)
+{
+  msg <- sprintf(
+    "The files %s are all not empty.", 
+    get_name_in_parent(x)
+  )
+  assert_engine(x, is_empty_file, msg = msg, what = "any")
+}
+
 #' @rdname is_existing_file
 #' @export
 assert_all_are_existing_files <- function(x)

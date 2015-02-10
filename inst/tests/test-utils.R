@@ -6,6 +6,25 @@ test_that("test.coerce_to.numeric_vector_to_data_frame.returns_data_frame",
     expect_warning(coerce_to(x, "data.frame"))
   })
 
+test_that(
+  "test.parenthesise.character_input.returns_parenthesised_input",  
+  {
+    x <- "foo"
+    types <- eval(formals(parenthesise)$type)
+    actual <- vapply(
+      types,
+      function(type) parenthesise(x, type),
+      character(1),
+      USE.NAMES = FALSE
+    )
+    expected <- c(
+      "(foo)", "[foo]", "{foo}", "<foo>", "\u3008foo\u3009", 
+      "- foo -", "\u2013 foo \u2013", "\u2014foo\u2014", ", foo, "
+    )
+    expect_identical(actual, expected)
+  }
+)
+
 test_that("test.use_first.a_list_double_indexing.returns_contents_of_first_element", 
   {
     x <- as.list(letters)

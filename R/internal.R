@@ -243,6 +243,15 @@ false <- function(...)
   x
 }
 
+get_metric <- function(metric = c("length", "elements"))
+{
+  switch(
+    match.arg(force(metric)[1], eval(formals(sys.function())$metric)),
+    length   = is_of_length,
+    elements = has_elements
+  )
+}
+
 #' Allowed locale categories.
 #'
 #' The categories of locale that can be gotten/set.

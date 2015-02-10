@@ -77,13 +77,11 @@ is_identical_to_true <- function(x, allow_attributes = FALSE,
 #' is_false(x)
 #' assert_any_are_true(x)
 #' assert_any_are_false(x)
-#' \dontrun{
 #' # These tests should fail:
-#' assert_is_identical_to_true(c(truth = TRUE))
-#' assert_is_identical_to_false(matrix(FALSE))
-#' assert_all_are_true(x)
-#' assert_all_are_false(x)
-#' }
+#' dont_stop(assert_is_identical_to_true(c(truth = TRUE)))
+#' dont_stop(assert_is_identical_to_false(matrix(FALSE)))
+#' dont_stop(assert_all_are_true(x))
+#' dont_stop(assert_all_are_false(x))
 #' @export
 is_true <- function(x)
 {

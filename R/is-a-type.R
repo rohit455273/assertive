@@ -3,7 +3,7 @@
 is_a_bool <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_logical(x, .xname))) return(ok)
-  if(!(ok <- is_scalar(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname = .xname))) return(ok)
   TRUE
 }
 
@@ -12,7 +12,7 @@ is_a_bool <- function(x, .xname = get_name_in_parent(x))
 is_a_complex <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_complex(x, .xname))) return(ok)
-  if(!(ok <- is_scalar(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname = .xname))) return(ok)
   TRUE
 }
 
@@ -33,7 +33,7 @@ is_a_non_empty_string <- function(x, .xname = get_name_in_parent(x))
 is_a_number <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_numeric(x, .xname))) return(ok)
-  if(!(ok <- is_scalar(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname = .xname))) return(ok)
   TRUE
 } 
 
@@ -42,7 +42,7 @@ is_a_number <- function(x, .xname = get_name_in_parent(x))
 is_a_raw <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_raw(x, .xname))) return(ok)
-  if(!(ok <- is_scalar(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname = .xname))) return(ok)
   TRUE
 } 
 
@@ -51,7 +51,7 @@ is_a_raw <- function(x, .xname = get_name_in_parent(x))
 is_a_string <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_character(x, .xname))) return(ok)
-  if(!(ok <- is_scalar(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname = .xname))) return(ok)
   TRUE
 }
 
@@ -72,7 +72,7 @@ is_an_empty_string <- function(x, .xname = get_name_in_parent(x))
 is_an_integer <- function(x, .xname = get_name_in_parent(x))
 {
   if(!(ok <- is_integer(x, .xname))) return(ok)
-  if(!(ok <- is_scalar(x, .xname))) return(ok)
+  if(!(ok <- is_scalar(x, .xname = .xname))) return(ok)
   TRUE
 } 
 
@@ -88,9 +88,7 @@ is_an_integer <- function(x, .xname = get_name_in_parent(x))
 #' @examples
 #' x <- structure(1:5, class = c("foo", "bar"))
 #' assert_is_inherited_from(x, c("foo", "baz"))
-#' \dontrun{
-#' assert_is_inherited_from(x, c("Foo", "baz"))
-#' }
+#' dont_stop(assert_is_inherited_from(x, c("Foo", "baz")))
 #' @export
 is_inherited_from <- function(x, classes, .xname = get_name_in_parent(x))
 {

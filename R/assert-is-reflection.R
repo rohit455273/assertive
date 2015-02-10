@@ -5,11 +5,25 @@ assert_is_64_bit_os <- function()
   assert_engine(predicate = is_64_bit_os)
 }
 
+#' @rdname is_r
+#' @export
+assert_is_architect <- function()
+{                                                         
+  assert_engine(predicate = is_architect)        
+}
+
 #' @rdname is_batch_mode
 #' @export
 assert_is_batch_mode <- function()
 {
   assert_engine(predicate = is_batch_mode)
+}
+
+#' @rdname is_windows
+#' @export
+assert_is_bsd <- function()
+{
+  assert_engine(predicate = is_bsd)
 }
 
 #' @rdname is_xxx_for_decimal_point
@@ -100,9 +114,23 @@ assert_is_revo_r <- function()
 
 #' @rdname is_r
 #' @export
+assert_is_rstudio <- function()
+{                                                         
+  assert_engine(predicate = is_rstudio)        
+}
+
+#' @rdname is_r
+#' @export
 assert_is_slave_r <- function()
 {                                                         
   assert_engine(predicate = is_slave_r)        
+}
+
+#' @rdname is_windows
+#' @export
+assert_is_solaris <- function()
+{
+  assert_engine(predicate = is_solaris)
 }
 
 #' @rdname is_windows

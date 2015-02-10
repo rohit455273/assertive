@@ -13,7 +13,7 @@ is_dir <- function(x)
   call_and_name(
     function(x) 
     {
-      ok <- file.info(x)[["isdir"]]
+      ok <- file.info(x)$isdir
       causes <- ifelse(
         is.na(ok),
         "nonexistent",
@@ -26,21 +26,62 @@ is_dir <- function(x)
   )
 }
 
+#' Is a file empty?
+#' 
+#' Checks to see if a file is empty.
+#' 
+#' @param x Input to check.
+#' @return \code{is_empty_file} wraps \code{file.info}, retuning \code{TRUE} 
+#' when the input is a file that exists with size zero.  
+#'\code{assert_*_are_empty_files} return nothing but throws an error if 
+#'\code{is_empty_file} returns \code{FALSE}.
+#' @seealso \code{\link[base]{file.info}}.
+#' @examples
+#' \dontrun{
+#' tf <- tempfile()
+#' file.create(tf)
+#' is_empty_file(tf)
+#' unlink(tf)  
+#' }
+#' @export
+is_empty_file <- function(x)
+{
+  x <- coerce_to(x, "character")
+  call_and_name(
+    function(x) 
+    {
+      f_info <- file.info(x)
+      ok <- is_true(f_info$size == 0 & !f_info$isdir)
+      causes <- ifelse(
+        is.na(f_info$size),
+        "nonexistent",
+        ifelse(
+          f_info$size > 0,
+          "nonempty", 
+          ifelse(f_info$isdir, "dir", "")
+        )
+      )
+      set_cause(ok, causes)
+    }, 
+    x
+  )
+}
+
 #' Does the file exist?
 #'
 #' Checks to see if the input files exist.
 #'
 #' @param x Input to check.
 #' @return \code{is_existing_file} wraps \code{file.exists}, showing
-#' the names of the inputs in the answer.   \code{assert_is_existing_file} 
-#' returns nothing but throws an error if \code{is_existing_file} returns
+#' the names of the inputs in the answer.   \code{assert_*_are_existing_files} 
+#' return nothing but throws an error if \code{is_existing_file} returns
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{file.exists}}.
 #' @examples
 #' assert_all_are_existing_files(dir())
 #' \dontrun{
 #' #These examples should fail.
-#' assert_all_are_existing_files("not an existing file (probably)")
+#' dont_stop(assert_all_are_existing_files("not an existing file (probably)"))
 #' }
 #' @export
 is_existing_file <- function(x)
@@ -167,7 +208,7 @@ is_writable_file <- function(x)
 #' @seealso \code{\link[base]{file.access}}
 #' @examples
 #' \dontrun{
-#' warn_about_file.access_under_windows()
+#' dont_stop(warn_about_file.access_under_windows())
 #' }
 warn_about_file.access_under_windows <- function()
 { 

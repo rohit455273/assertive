@@ -1,3 +1,33 @@
+#' Can R find tools for compiling code?
+#' 
+#' Checks to see if R can see the \code{gcc} and \code{make} tools in order
+#' to compile code.
+#' @return \code{r_can_compile_code} returns \code{TRUE} if R can see \code{gcc} 
+#' and \code{make} tools, and \code{FALSE} (with a cause) otherwise.
+#' \code{assert_r_can_compile_code} returns nothing but throws an error if 
+#' \code{r_can_compile_code} function returns \code{FALSE}.
+#' @examples
+#' r_can_compile_code()
+#' dont_stop(assert_r_can_compile_code())
+#' @export
+r_can_compile_code <- function()
+{
+  tools <- c("gcc", "make")
+  paths <- Sys.which(tools)
+  not_found <- !nzchar(paths)
+  if(any(not_found))
+  {
+    return(
+      false(
+        "R cannot find the %s %s.", 
+        toString(tools[not_found]),
+        ngettext(sum(not_found), "tool", "tools")
+      )
+    )
+  }
+  TRUE
+}
+
 #' Does R have a capability?
 #' 
 #' Check to see if R has a specific capability.
@@ -198,6 +228,40 @@ r_has_icu_capability <- function()
   if(!capabilities("ICU"))
   {
     return(false("R does not have ICU capability."))
+  }
+  TRUE
+}
+
+#' @rdname r_has_jpeg_capability
+#' @export
+r_has_long_double_capability <- function()
+{
+  if(as.package_version(version) < "3.2.0")
+  {
+    return(
+      false("long.double capability is not declared for versions of R before 3.2.0.")
+    )
+  }
+  if(!capabilities("long.double"))
+  {
+    return(false("R does not have long.double capability."))
+  }
+  TRUE
+}
+
+#' @rdname r_has_jpeg_capability
+#' @export
+r_has_libcurl_capability <- function()
+{
+  if(as.package_version(version) < "3.2.0")
+  {
+    return(
+      false("libcurl capability is not declared for versions of R before 3.2.0.")
+    )
+  }
+  if(!capabilities("libcurl"))
+  {
+    return(false("R does not have libcurl capability."))
   }
   TRUE
 }
