@@ -113,7 +113,7 @@ You can test for NAs, NaNs, and NULLs using `is_na`, `is_nan` and `is_null`, or 
 
 ### Testing numbers
 
-`is_in_range` tests if a number is in a numeric range, along with the more specialised wrappers: `is_in_open_range`, `is_in_closed_range`, `is_in_left_open_range`, `is_in_right_open_range`, `is_positive`, `is_negative`, `is_non_positive`, is_non_negative, `is_proportion` and `is_percentage`.
+`is_in_range` tests if a number is in a numeric range, along with the more specialised wrappers: `is_in_open_range`, `is_in_closed_range`, `is_in_left_open_range`, `is_in_right_open_range`, `is_positive`, `is_negative`, `is_non_positive`, `is_non_negative`, `is_proportion` and `is_percentage`.
 
 Finiteness can be tested with `is_finite`, `is_infinite`, `is_positive_infinity` and `is_negative_infinity`.
 
@@ -165,15 +165,15 @@ Adding to this section is a priority for assertive development.  Request additio
 
 You can test the operating system with `is_windows`, `is_linux`, `is_mac`, `is_solaris` and the more general `is_unix`.
 
-You can test the type of R using `is_r`, `is_r_devel`, `is_r_patched` and `is_r_stable`.
+`is_r`, `is_r_devel`, `is_r_patched` and `is_r_stable` test if you are running R, and if so what type.
 
-You can test the IDE using `is_rstudio`, `is_architect` and `is_revo_r`.
+`is_rstudio`, `is_architect` and `is_revo_r` test for specific IDEs.
 
 You can test R's capabilities using `r_has_png_capability`, `r_has_tcltk_capability`, etc.
 
-You can test the locale's preference for decimal points using `is_comma_for_decimal_point` or `is_period_for_decimal_point`.
+You can test the currentlocale's preference for decimal points using `is_comma_for_decimal_point` or `is_period_for_decimal_point`.
 
-You can test how R is being run, using `is_slave_r`, `is_interactive`, `is_batch_mode`, `is_32_bit` and `is_64_bit`.
+`is_slave_r`, `is_interactive`, `is_batch_mode`, `is_32_bit` and `is_64_bit` test how R is being run.
 
 
 ### Testing code
