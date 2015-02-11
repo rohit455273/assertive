@@ -1,0 +1,86 @@
+---
+title: "Introduction"
+author: "Richard Cotton"
+date: '`r Sys.Date()`'
+output: html_document
+---
+
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Introduction}
+-->
+
+### *assert* functions
+
+There are times when it is a good idea to check the state of your variables, to
+ensure that they have the properties that you think they have.  For example,
+if you have a count variable, you might want to check that it is numeric, that
+all the values are non-negative, and that all the values are whole numbers.
+
+Base-R has a function called `stopifnot` that lets you perform such checks.
+
+```{r, error = TRUE}
+count <- c(1, 2, 3, 4.5)
+stopifnot(
+  is.numeric(count),
+  all(count >= 0),
+  isTRUE(all.equal(count, round(count)))
+)
+```
+
+This is OK, but not that easy to read.  Worse, the error messages that it 
+produces in the event of failure aren't very user-friendly.
+
+`assertive` provides lots of *assert* functions that provide checks
+for specific conditions.  They are designed to make your code easier to read, 
+and to return helpful error messages to users in the event of a check failing.
+
+Here's the same example again, written in an `assertive` style.
+
+```{r, error = TRUE}
+library(assertive)
+count <- c(1, 2, 3, 4.5)
+assert_is_numeric(count)
+assert_all_are_non_negative(count)
+assert_all_are_whole_numbers(count)
+```
+
+Here you see that the error message contains a human readable sentence, followed
+by information on the values that caused problems, along with their positions
+and reasons for failure.
+
+### *is* and *has* functions
+
+Each of the *assert* functions has an underlying *is* or *has* function.  For
+example, `assert_is_numeric` calls `is_numeric`, `assert_all_are_non_negative`
+calls `is_non_negative`, and so on.
+
+Some *is* and *has* functions, such as `is_numeric`, return a single logical 
+value.
+
+```{r}
+is_numeric(1:6)
+is_numeric(letters)
+```
+
+When the check passed, `is_numeric` returned `TRUE`, and when it failed, 
+`is_numeric` returned `FALSE` with a `cause` attribute explaining the problem.
+
+Where *is* functions return a single value, they have a single corresponding 
+*assert* function prefixed by `assert_`.
+
+Some *is* and *has* functions, such as `is_non_negative`, return a logical 
+vector.
+
+```{r}
+is_non_negative(rnorm(6))
+```
+
+`is_non_negative` returned a logical vector which was `TRUE` where the check
+passed, and `FALSE` where the check failed.  This time the `cause` attribute
+was also vectorised, returning an emtpy string for the passes and a brief
+explanation of the problem for the failures.
+
+Where *is* functions return a vector, there are two corresponding *assert* 
+functions, prefixed `assert_all_are_`, and `assert_any_are_`.
+
