@@ -216,7 +216,7 @@ assert_is_S4 <- function(x)
 #' @export
 assert_is_s4 <- function(x)
 {                                                         
-  assert_engine(x, is_S4, .xname = get_name_in_parent(x))
+  assert_engine(x, is_s4, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_function

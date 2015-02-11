@@ -54,7 +54,7 @@ assert_any_are_date_strings <- function(x, format = "%F %T")
 
 #' @rdname is_email_address
 #' @export
-assert_all_are_email_addresses <- function(x, method = c("simple", "rfc2822"))
+assert_all_are_email_addresses <- function(x, method = c("simple", "rfc5322"))
 {                    
   method <- match.arg(method)
   msg <- sprintf("%s are not all email addresses.", get_name_in_parent(x))
@@ -63,7 +63,7 @@ assert_all_are_email_addresses <- function(x, method = c("simple", "rfc2822"))
 
 #' @rdname is_email_address
 #' @export
-assert_any_are_email_addresses <- function(x, method = c("simple", "rfc2822"))
+assert_any_are_email_addresses <- function(x, method = c("simple", "rfc5322"))
 {                                 
   method <- match.arg(method)                    
   msg <- sprintf("%s are all not email addresses.", get_name_in_parent(x))

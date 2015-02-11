@@ -2,9 +2,22 @@
 #' @export
 assert_is_64_bit_os <- function()
 {
-  assert_engine(predicate = is_64_bit_os)
+  .Deprecated("assert_is_64_bit")
+  assert_engine(predicate = is_64_bit)
 }
 
+#' @rdname is_windows
+#' @export
+assert_is_32_bit <- function()
+{
+  assert_engine(predicate = is_32_bit)
+}
+#' @rdname is_windows
+#' @export
+assert_is_64_bit <- function()
+{
+  assert_engine(predicate = is_64_bit)
+}
 #' @rdname is_r
 #' @export
 assert_is_architect <- function()

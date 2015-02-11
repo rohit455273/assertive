@@ -542,9 +542,9 @@ is_relistable <- function(x, .xname = get_name_in_parent(x))
 #' \code{is_S4} returns \code{FALSE}.
 #' @seealso \code{\link[base]{isS4}}.
 #' @examples
-#' assert_is_S4(getClass("MethodDefinition"))
+#' assert_is_s4(getClass("MethodDefinition"))
 #' #These examples should fail.
-#' dont_stop(assert_is_S4(1:10))
+#' dont_stop(assert_is_s4(1:10))
 #' @export
 is_s4 <- function(x, .xname = get_name_in_parent(x))
 {
