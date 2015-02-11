@@ -10,14 +10,16 @@ Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
 Description: Lots of is_* functions to check the state of your variables,
     and assert_* functions to throw errors if they aren't in the right form.    
 Depends:
-    R (>= 2.15.0)
+    R (>= 3.0.0)
 Imports:
     methods
 Suggests:
+    knitr,
     testthat
 License: Unlimited
 LazyLoad: yes
 LazyData: yes
+VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
 Acknowledgments: Development of this package was partially funded by the
     Proteomics Core at Weill Cornell Medical College in Qatar
