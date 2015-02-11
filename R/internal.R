@@ -51,7 +51,12 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
       )
       msg <- paste0(
         msg, 
-        "\nThere were ", n, " failures",
+        "\nThere ", 
+        ngettext(n, "was", "were"), 
+        " ", 
+        n, 
+        " ", 
+        ngettext(n, "failure", "failures"),
         if(nrow(failures) < n) 
         {
           paste0(" (showing the first ", nrow(failures), ")")
@@ -71,7 +76,7 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
 #' scalar) value.
 #' 
 #' @param x A vector (atomic or list).
-#' @param predicate A predicate (function that returns a bool) to apply 
+#' @param predicate A predicate (function that returns a bool) to apply.
 #' elementwise to \code{x}.
 #' @param USE.NAMES Passed to \code{vapply}.
 #' @param ... Passed to \code{vapply}.
