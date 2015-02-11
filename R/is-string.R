@@ -605,8 +605,8 @@ is_valid_r_code <- function(x, .xname = get_name_in_parent(x))
 #' }
 #' long <- c(make_random_string(10000), make_random_string(10001))
 #' x <- c("x", "y_y0.Y", ".", "x y", "...", "..1", long)
-#' is_valid_variable_name(x)
-#' is_valid_variable_name(x, allow_reserved = FALSE)
+#' unname(is_valid_variable_name(x))
+#' unname(is_valid_variable_name(x, allow_reserved = FALSE))
 #' #These examples should fail.
 #' dont_stop(assert_all_are_valid_variable_names(c("...", "..1"), allow_reserved = FALSE))
 #' @references
