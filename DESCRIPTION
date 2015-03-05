@@ -1,8 +1,8 @@
 Package: assertive
 Type: Package
 Title: Readable Check Functions to Ensure Code Integrity
-Version: 0.2-2
-Date: 2015-02-09
+Version: 0.2-3
+Date: 2015-03-05
 Author: Richard Cotton [aut, cre]
 Maintainer: Richard Cotton <richierocks@gmail.com>
 Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
@@ -12,9 +12,9 @@ Description: Lots of is_* functions to check the state of your variables,
 Depends:
     R (>= 3.0.0)
 Imports:
-    methods
+    methods,
+    knitr
 Suggests:
-    knitr,
     testthat
 License: Unlimited
 LazyLoad: yes
