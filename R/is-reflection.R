@@ -177,6 +177,7 @@ is_period_for_decimal_point <- function(type = c("numbers", "money"))
 #'   version$status,
 #'   "Patched"                      = assert_is_r_patched(),
 #'   "Under development (unstable)" = assert_is_r_devel(),
+#'   "RC"                           = assert_is_r_release_candidate(),
 #'   assert_is_r_stable()
 #' )
 #' dont_stop(assert_is_r())
@@ -208,6 +209,17 @@ is_r_patched <- function()
   if(version$status != "Patched")
   {
     return(false("You are not running a patched build of R."))
+  }
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_r_release_candidate <- function()
+{
+  if(version$status != "RC")
+  {
+    return(false("You are not running a release candidate build of R."))
   }
   TRUE
 }

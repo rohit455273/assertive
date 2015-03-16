@@ -113,6 +113,13 @@ assert_is_r_patched <- function()
 
 #' @rdname is_r
 #' @export
+assert_is_r_release_candidate <- function()
+{                                                         
+  assert_engine(predicate = is_r_release_candidate)        
+}
+
+#' @rdname is_r
+#' @export
 assert_is_r_stable <- function()
 {                                                         
   assert_engine(predicate = is_r_stable)        
