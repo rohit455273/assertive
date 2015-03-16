@@ -74,7 +74,7 @@ img {
 -->
 <div id="case-study-calculating-geometric-means" class="section level3">
 <h3>Case study: calculating geometric means</h3>
-<p>By far the most common use of assertions is for checking input to functions. Consider this function for calculating the geometric mean:</p>
+<p>By far the most common use of assertions is for checking input to functions. Consider this function for calculating the <a href="https://en.wikipedia.org/wiki/Geometric_mean">geometric mean</a>:</p>
 <pre class="r"><code>geomean &lt;- function(x, na.rm = FALSE)
 {
   exp(mean(log(x), na.rm = na.rm))
@@ -152,7 +152,7 @@ geomean(x, c(1.5, 0))</code></pre>
 <div id="exercises" class="section level3">
 <h3>Exercises</h3>
 <ol style="list-style-type: decimal">
-<li>The <code>mad</code> function in the <code>stats</code> package calculates the median absolute deviation. Type <code>mad</code> to see its contents, and run <code>example(mad)</code> to get a feel for how it works. Update the function (either copy and paste, or use <code>fixInNamespace</code> if you are feeling fancy) to include some assertions checking the inputs. Hint: Some of the inputs should be numeric; others should be logical. Some should be only allow a single value. [15 mins].</li>
+<li>The <code>mad</code> function in the <code>stats</code> package calculates the <a href="https://en.wikipedia.org/wiki/Median_absolute_deviation">median absolute deviation</a>. Type <code>mad</code> to see its contents, and run <code>example(mad)</code> to get a feel for how it works.<br />Update the function (either copy and paste, or use <code>fixInNamespace</code> if you are feeling fancy) to include some assertions checking the inputs. Hint: Some of the inputs should be numeric; others should be logical. Some should be only allow a single value. [15 mins].</li>
 </ol>
 </div>
 

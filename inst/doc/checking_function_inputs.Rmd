@@ -19,7 +19,8 @@ knitr::opts_chunk$set(error = FALSE)
 ### Case study: calculating geometric means
 
 By far the most common use of assertions is for checking input to functions.
-Consider this function for calculating the geometric mean:
+Consider this function for calculating the 
+[geometric mean](https://en.wikipedia.org/wiki/Geometric_mean):
 
 ```{r}
 geomean <- function(x, na.rm = FALSE)
@@ -150,10 +151,11 @@ lower-level functions, you can often afford to be stricter.
 
 ### Exercises
 
-1. The `mad` function in the `stats` package calculates the median absolute 
-deviation.  Type `mad` to see its contents, and run `example(mad)` to get a feel
-for how it works.  Update the function (either copy and paste, or use 
-`fixInNamespace` if you are feeling fancy) to include some assertions checking 
-the inputs.  Hint: Some of the inputs should be numeric; others should be 
-logical.  Some should be only allow a single value. [15 mins].
+1. The `mad` function in the `stats` package calculates the [median absolute 
+deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation).  Type `mad` 
+to see its contents, and run `example(mad)` to get a feel for how it works.  
+Update the function (either copy and paste, or use `fixInNamespace` if you are 
+feeling fancy) to include some assertions checking the inputs.  Hint: Some of 
+the inputs should be numeric; others should be logical.  Some should be only 
+allow a single value. [15 mins].
 
