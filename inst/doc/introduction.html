@@ -110,12 +110,12 @@ assert_all_are_whole_numbers(counts)</code></pre>
 <p>Where <em>is</em> functions return a single value, they have a single corresponding <em>assert</em> function prefixed by <code>assert_</code>. For example, <code>is_numeric</code> is paired with <code>assert_is_numeric</code>.</p>
 <p>Some <em>is</em> and <em>has</em> functions, such as <code>is_non_negative</code>, return a logical vector.</p>
 <pre class="r"><code>is_non_negative(rnorm(6))</code></pre>
-<pre><code>##  -0.20886541597658  -1.07068472844581   1.68885755144482 
-##              FALSE              FALSE               TRUE 
-##  -1.68145106244132 -0.263808890711296   1.46794076064131 
+<pre><code>##   1.85027386134187 -0.578688500050631  -1.47971295307092 
+##               TRUE              FALSE              FALSE 
+##    -0.133276736157 -0.232058794760384 0.0147176397242853 
 ##              FALSE              FALSE               TRUE 
 ## attr(,&quot;cause&quot;)
-## [1] too low too low         too low too low</code></pre>
+## [1]         too low too low too low too low</code></pre>
 <p><code>is_non_negative</code> returned a logical vector which was <code>TRUE</code> where the check passed, and <code>FALSE</code> where the check failed. This time the <code>cause</code> attribute was also vectorised, returning an empty string for the passes and a brief explanation of the problem for the failures.</p>
 <p>Where <em>is</em> functions return a vector, there are two corresponding <em>assert</em> functions, prefixed <code>assert_all_are_</code>, and <code>assert_any_are_</code>. For example, <code>is_non_negative</code> is paired with <code>assert_all_are_non_negative</code> and <code>assert_any_are_non_negative</code>.</p>
 </div>
