@@ -65,6 +65,7 @@ is_subset <- function(x, y, .xname = get_name_in_parent(x), .yname = get_name_in
   TRUE
 }
 
+#' @rdname is_set_equal
 #' @export
 is_superset <- function(x, y, .xname = get_name_in_parent(x), .yname = get_name_in_parent(y))
 {
