@@ -109,7 +109,8 @@ respectively.
 `is_scalar` tests for objects of length one, or with one element (this can be 
 different for lists; you choose the metric).
 
-Similarly `is_empty` tests for objects of zero length/containing zero elements.
+Similarly `is_empty` and `is_non_empty` test for objects of zero 
+length/containing zero elements.
 
 More generally `is_of_length` and `has_elements` test for a particular length/
 number of elements.
