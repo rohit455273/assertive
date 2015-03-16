@@ -236,10 +236,10 @@ r_has_icu_capability <- function()
 #' @export
 r_has_long_double_capability <- function()
 {
-  if(as.package_version(version) < "3.2.0")
+  if(as.package_version(version) < "3.1.3")
   {
     return(
-      false("long.double capability is not declared for versions of R before 3.2.0.")
+      false("long.double capability is not declared for versions of R before 3.1.3.")
     )
   }
   if(!capabilities("long.double"))
