@@ -196,8 +196,8 @@ page.
 You can test the operating system with `is_windows`, `is_linux`, `is_mac`, 
 `is_solaris` and the more general `is_unix`.
 
-`is_r`, `is_r_devel`, `is_r_patched` and `is_r_stable` test if you are running 
-R, and if so what type.
+`is_r`, `is_r_devel`, `is_r_patched`, `is_r_release_candidate` and `is_r_stable`
+test if you are running R, and if so what type.
 
 `is_rstudio`, `is_architect` and `is_revo_r` test for specific IDEs.
 
