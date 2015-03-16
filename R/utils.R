@@ -285,7 +285,7 @@ n_elements <- function(x)
 #'   "is quite good for data analysis."
 #' )
 #' @export
-parenthesise <- function(x, 
+parenthesize <- function(x, 
   type = c("round_brackets", "square_brackets", "curly_brackets", "angle_brackets", "chevrons", "hyphens", "en_dashes", "em_dashes", "commas")) 
 {
   type <- match.arg(type)
@@ -316,6 +316,10 @@ parenthesise <- function(x,
   )
   paste0(before, x, after)
 }
+
+#' @rdname parenthesize
+#' @export
+parenthesise <- parenthesize
 
 #' Run code without stopping
 #' 
