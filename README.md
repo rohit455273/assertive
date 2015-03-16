@@ -186,7 +186,7 @@ these more complex data types.
 `is_us_telephone_number`, `is_us_zip_code` test the United States-specific data 
 types.
 
-Adding to this section is a priority for assertive development.  Request 
+Adding to this section is a priority for *assertive* development.  Request 
 additional data types on the 
 [issues](https://bitbucket.org/richierocks/assertive/issues?status=new&status=open) 
 page.
