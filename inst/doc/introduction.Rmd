@@ -7,7 +7,7 @@ output: html_document
 
 <!--
 %\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Introduction}
+%\VignetteIndexEntry{1. Introduction}
 -->
 
 ```{r, Setup, echo = FALSE, results = "hide"}
@@ -92,3 +92,30 @@ Where *is* functions return a vector, there are two corresponding *assert*
 functions, prefixed `assert_all_are_`, and `assert_any_are_`.  For example,
 `is_non_negative` is paired with `assert_all_are_non_negative` and 
 `assert_any_are_non_negative`.
+
+### Summary
+
+1. *assertive* contains `is*` functions that return logical values or vectors,
+with a `cause` attribute the describes what went wrong when the return value
+is not \code{TRUE}.
+2. *assertive* also contains `assert*` functions that throw an error if a 
+conditon is not met (and do nothing if the condition is met).
+3. If a function `is_something` returns a single value, then the corresponding 
+`assert*` function is named `assert_is_something`.
+4. If a function `is_something` returns a vector, then the corresponding 
+`assert*` functions are named `assert_all_are_something` and 
+`assert_any_are_something`.
+
+### Exercises.
+
+1. List the contents of the *assertive* package using `ls("package:assertive")`.
+[1 min].
+2. Find a function that will throw an error if its input is not a vector.  Run 
+the examples for that function Hint: The `pattern` argument to `ls` may be 
+useful for narrowing your search. [2 mins].
+3. Find a function that will throw an error if its input contains values that
+aren't whole numbers.  Run the example.  [2 mins].
+4. Find a function that returns a logical vector if its input contains US zip 
+codes. Run the example.  [2 mins].
+
+

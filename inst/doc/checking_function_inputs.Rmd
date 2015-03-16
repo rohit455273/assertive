@@ -7,7 +7,7 @@ output: html_document
   
 <!--
 %\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Introduction}
+%\VignetteIndexEntry{2. Checking function inputs}
 -->
   
 ```{r, Setup, echo = FALSE, results = "hide"}
@@ -135,6 +135,11 @@ exists, or `as` if it doesn't.
 geomean4(x, c(1.5, 0))
 ```
 
+Whether to throw an error on bad input or fix it is personal preference and 
+depends upon context.  For end-user functions should should usually try to be
+flexible and fix things unless they've done something very silly.  For 
+lower-level functions, you can often afford to be stricter.
+
 ### Summary
 
 1. Check function inputs at the start of the function to "fail early".
@@ -142,4 +147,13 @@ geomean4(x, c(1.5, 0))
 3. Use `assert_` functions to throw errors for inputs that you can't salvage.
 4. Use `is_` functions in an `if` condition to provide custom behaviour.
 5. Fix inputs with `use_first` and `coerce_to` where possible.
+
+### Exercises
+
+1. The `mad` function in the `stats` package calculates the median absolute 
+deviation.  Type `mad` to see its contents, and run `example(mad)` to get a feel
+for how it works.  Update the function (either copy and paste, or use 
+`fixInNamespace` if you are feeling fancy) to include some assertions checking 
+the inputs.  Hint: Some of the inputs should be numeric; others should be 
+logical.  Some should be only allow a single value. [15 mins].
 
