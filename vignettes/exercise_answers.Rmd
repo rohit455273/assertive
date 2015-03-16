@@ -1,0 +1,26 @@
+---
+title: "Exercise answers"
+author: "Richard Cotton"
+date: '`r Sys.Date()`'
+output: html_document
+---
+  
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{A1. Exercise answers}
+-->
+  
+```{r, Setup, echo = FALSE, results = "hide"}
+set.seed(19790801)
+library(assertive)
+knitr::opts_chunk$set(error = FALSE)
+```
+
+### 1. Introduction
+
+1. Just type the code in the question!
+2. `example(assert_is_vector)`.
+3. `example(assert_all_are_whole_numbers)`
+4. `example(is_us_zip_code)`
+
+### 2. Checking function inputs
