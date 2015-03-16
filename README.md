@@ -170,7 +170,7 @@ slightly unreliable on Windows).
 
 `is_connection` tests whether an object is a connection, and there are many 
 specialized types including `is_file_connection`, `is_fifo_connection`, 
-`is_pipe_connection`, `is_readable_connection`, ``, `is_open_connection`, 
+`is_pipe_connection`, `is_readable_connection`, `is_open_connection`, 
 `is_writable_connection`, `is_stdin`, `is_stdout` and `is_stderr`.
 
 
