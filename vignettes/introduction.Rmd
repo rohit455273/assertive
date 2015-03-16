@@ -105,3 +105,17 @@ conditon is not met (and do nothing if the condition is met).
 4. If a function `is_something` returns a vector, then the corresponding 
 `assert*` functions are named `assert_all_are_something` and 
 `assert_any_are_something`.
+
+### Exercises.
+
+1. List the contents of the *assertive* package using `ls("package:assertive")`.
+[1 min].
+2. Find a function that will throw an error if its input is not a vector.  Run 
+the examples for that function Hint: The `pattern` argument to `ls` may be 
+useful for narrowing your search. [2 mins].
+3. Find a function that will throw an error if its input contains values that
+aren't whole numbers.  Run the example.  [2 mins].
+4. Find a function that returns a logical vector if its input contains US zip 
+codes. Run the example.  [2 mins].
+
+
