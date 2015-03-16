@@ -7,7 +7,7 @@ output: html_document
   
 <!--
 %\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Introduction}
+%\VignetteIndexEntry{2. Checking function inputs}
 -->
   
 ```{r, Setup, echo = FALSE, results = "hide"}
