@@ -268,7 +268,8 @@ is_rstudio <- function()
 #' @export
 is_slave_r <- function()
 {
-  if(!("--slave" %in% commandArgs()))
+  cargs <- commandArgs()
+  if(!"--slave" %in% cargs && !all(c("--quiet", "--no-save") %in% cargs))
   {
     return(false("You are not running a slave instance of R."))
   }
