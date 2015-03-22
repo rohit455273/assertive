@@ -45,11 +45,11 @@ cause <- function(x)
   if(!is_scalar(value) && length(value) != length(x))
   {
     stop(
-      "The length of value should be 1 or the length of x (", 
-      length(x),
-      ") but is ", 
-      length(value),
-      "."
+      gettextf(
+        "The length of value should be 1 or the length of x (%d) but is %d.", 
+        length(x),
+        length(value)
+      )
     )
   }
   attr(x, "cause") <- noquote(as.character(value))
@@ -91,7 +91,11 @@ coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
     if(!is2(x, this_class))
     {
       warning(
-        "Coercing ", .xname, " to class ", sQuote(this_class), ".",
+        gettextf(
+          "Coercing %s to class %s.", 
+          .xname,
+          sQuote(this_class)
+        ),
         call. = FALSE
       )
     }
@@ -114,18 +118,20 @@ coerce_to <- function(x, target_class, .xname = get_name_in_parent(x))
       return(attr(can_be_coerced, "result"))
     }
     warning(
-      .xname, 
-      " cannot be coerced to type ", 
-      sQuote(this_class), 
-      ".", 
+      gettextf(
+        "%s cannot be coerced to type %s.", 
+        .xname,
+        sQuote(this_class)
+      ), 
       call. = FALSE
     )
   }
   stop(
-    .xname, 
-    " cannot be coerced to type ",
-    ".",
-    toString(sQuote(target_class))
+    gettextf(
+      "%s cannot be coerced to type %s.", 
+      .xname,
+      toString(sQuote(target_class))
+    )
   )
 }
 
@@ -476,7 +482,7 @@ use_first <- function(x, indexer = c("[[", "["))
   # functions calls this one.
   if(length(x) == 0L)
   {
-    stop(get_name_in_parent(x), " is has length 0.")
+    stop(gettextf("%s has length 0.", get_name_in_parent(x)))
   }
   if(length(x) == 1L)
   {
@@ -484,7 +490,10 @@ use_first <- function(x, indexer = c("[[", "["))
   }
   indexer <- match.fun(match.arg(indexer))
   warning(
-    "Only the first value of ", sQuote(get_name_in_parent(x)), " will be used.",
+    gettextf(
+      "Only the first value of %s will be used.",
+      sQuote(get_name_in_parent(x))
+    ),
     call. = FALSE
   )
   indexer(x, 1L)
