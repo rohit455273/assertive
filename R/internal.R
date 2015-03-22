@@ -34,7 +34,7 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
         msg <- cause(ok)
       } else
       {
-        stop("Bug in assertive; error message is missing")
+        stop("Bug in assertive; error message is missing.")
       }
     }
     if(!is_scalar(ok))
@@ -399,12 +399,12 @@ recycle <- function(...)
 #' #Inputs such as factors as coerced to character.
 #' strip_non_alphanumeric(factor(c(" A1\t1AA.", "*(B2^2BB)%")))
 #' }
-strip_invalid_chars <- function(x, invalid_chars, char_desc = "invalid")
+strip_invalid_chars <- function(x, invalid_chars, char_desc = gettext("invalid"))
 {
   x <- coerce_to(x, "character")
   if(any(grepl(invalid_chars, x)))
   {
-    warning("Removing ", char_desc, " characters from input.")
+    warning(gettextf("Removing %s characters from input.", char_desc))
     x <- gsub(invalid_chars, "", x)
   }
   x

@@ -5,7 +5,13 @@ Readable check functions to ensure code integrity.
 
 ### Installation
 
-To install, you first need the devtools package.
+To install the stable version, type:
+
+```{r}
+install.packages("assertive")
+```
+
+To install the development version, you first need the devtools package.
 
 ```{r}
 install.packages("devtools")
