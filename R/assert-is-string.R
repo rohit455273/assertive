@@ -74,7 +74,7 @@ assert_any_are_email_addresses <- function(x, method = c("simple", "rfc5322"))
 #' @export
 assert_all_are_hex_colors <- function(x)
 {                    
-  msg <- sprintf("%s are not all hex colours.", get_name_in_parent(x))
+  msg <- gettextf("%s are not all hex colors.", get_name_in_parent(x))
   assert_engine(x, is_hex_color, msg)        
 }
 
@@ -82,7 +82,7 @@ assert_all_are_hex_colors <- function(x)
 #' @export
 assert_any_are_hex_colors <- function(x)
 {                                                
-  msg <- sprintf("%s are all not hex colours.", get_name_in_parent(x))
+  msg <- gettextf("%s are all not hex colors.", get_name_in_parent(x))
   assert_engine(x, is_hex_color, msg, what = "any")        
 }
 
