@@ -169,15 +169,20 @@ is_period_for_decimal_point <- function(type = c("numbers", "money"))
 #' is_r_stable()
 #' is_r_patched()
 #' is_r_devel()
+#' is_r_alpha()
+#' is_r_beta()
+#' is_r_release_candidate()
 #' is_architect()
 #' is_revo_r()
 #' is_rstudio()
 #' is_slave_r()
 #' switch(
 #'   version$status,
-#'   "Patched"                      = assert_is_r_patched(),
+#'   Patched                        = assert_is_r_patched(),
 #'   "Under development (unstable)" = assert_is_r_devel(),
-#'   "RC"                           = assert_is_r_release_candidate(),
+#'   Alpha                          = assert_is_r_alpha(),
+#'   Beta                           = assert_is_r_beta(),
+#'   RC                             = assert_is_r_release_candidate(),
 #'   assert_is_r_stable()
 #' )
 #' dont_stop(assert_is_r())
@@ -188,6 +193,28 @@ is_r <- function()
   {
     return(false("You are not running R."))
   } 
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_r_alpha <- function()
+{
+  if(version$status != "Alpha")
+  {
+    return(false("You are not running an alpha build of R."))
+  }
+  TRUE
+}
+
+#' @rdname is_r
+#' @export
+is_r_beta <- function()
+{
+  if(version$status != "Beta")
+  {
+    return(false("You are not running a beta build of R."))
+  }
   TRUE
 }
 

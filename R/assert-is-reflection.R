@@ -99,6 +99,20 @@ assert_is_r <- function()
 
 #' @rdname is_r
 #' @export
+assert_is_r_alpha <- function()
+{                                                         
+  assert_engine(predicate = is_r_alpha)        
+}
+
+#' @rdname is_r
+#' @export
+assert_is_r_beta <- function()
+{                                                         
+  assert_engine(predicate = is_r_beta)        
+}
+
+#' @rdname is_r
+#' @export
 assert_is_r_devel <- function()
 {                                                         
   assert_engine(predicate = is_r_devel)        
