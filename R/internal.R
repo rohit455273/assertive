@@ -236,13 +236,13 @@ d <- function(lo, hi = NA_integer_, optional = FALSE)
 #'
 #' Always returns the value \code{FALSE}, with a cause attribute.
 #'
-#' @param ... Passed to sprintf to create a cause of failure message.
+#' @param ... Passed to \code{gettextf} to create a cause of failure message.
 #' @return \code{FALSE} with the attribute \code{cause}, as provided
 #' in the input.
 #' @seealso \code{\link{cause}} and \code{\link{na}}.
 false <- function(...)
 {
-  msg <- if(length(list(...)) > 0L) sprintf(...) else ""
+  msg <- if(length(list(...)) > 0L) gettextf(...) else ""
   x <- FALSE
   cause(x) <- msg
   x
@@ -329,13 +329,13 @@ modal_value <- function(x)
 #'
 #' Always returns the value (logical) \code{NA}, with a cause attribute.
 #'
-#' @param ... Passed to sprintf to create a cause of failure message.
+#' @param ... Passed to \code{gettextf} to create a cause of failure message.
 #' @return \code{NA} with the attribute \code{cause}, as provided
 #' in the input.
 #' @seealso \code{\link{cause}} and \code{\link{false}}.
 na <- function(...)
 {
-  msg <- if(length(list(...)) > 0L) sprintf(...) else ""
+  msg <- if(length(list(...)) > 0L) gettextf(...) else ""
   x <- NA
   cause(x) <- msg
   x

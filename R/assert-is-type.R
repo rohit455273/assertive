@@ -2,7 +2,7 @@
 #' @export
 assert_is_all_of <- function(x, classes, .xname = get_name_in_parent(x))
 {  
-  msg <- sprintf(
+  msg <- gettextf(
     "%s is not in all of the classes %s.", 
     .xname, 
     toString(sQuote(classes))
@@ -14,7 +14,7 @@ assert_is_all_of <- function(x, classes, .xname = get_name_in_parent(x))
 #' @export
 assert_is_any_of <- function(x, classes, .xname = get_name_in_parent(x))
 {  
-  msg <- sprintf(
+  msg <- gettextf(
     "%s is not in any of the classes %s.", 
     .xname, 
     toString(sQuote(classes))

@@ -71,7 +71,7 @@ assert_is_mac <- function()
 #' @export
 assert_all_are_on_os_path <- function(x)
 {                                                     
-  msg <- sprintf("%s are not all on the operating system path.", get_name_in_parent(x))
+  msg <- gettextf("%s are not all on the operating system path.", get_name_in_parent(x))
   assert_engine(x, is_on_os_path, msg)        
 }
 
@@ -79,7 +79,7 @@ assert_all_are_on_os_path <- function(x)
 #' @export
 assert_any_are_on_os_path <- function(x)
 {                                                     
-  msg <- sprintf("%s are all not on the operating system path.", get_name_in_parent(x))
+  msg <- gettextf("%s are all not on the operating system path.", get_name_in_parent(x))
   assert_engine(x, is_on_os_path, msg, what = "any")        
 }
 

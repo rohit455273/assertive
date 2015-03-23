@@ -26,7 +26,7 @@ as.character.file <- function(x, ...)
 #' Gets or sets the \code{"cause"} (of failure) attribute of a variable.
 #'
 #' @param x Any variable.
-#' @param value Passed to \code{sprintf} and stored in the \code{"cause"}
+#' @param value Passed to \code{gettextf} and stored in the \code{"cause"}
 #' attribute.
 #' @return The get method returns the \code{"cause"} attribute.
 #' @examples
