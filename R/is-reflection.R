@@ -180,8 +180,8 @@ is_period_for_decimal_point <- function(type = c("numbers", "money"))
 #'   version$status,
 #'   Patched                        = assert_is_r_patched(),
 #'   "Under development (unstable)" = assert_is_r_devel(),
-#'   Alpha                          = assert_is_r_alpha(),
-#'   Beta                           = assert_is_r_beta(),
+#'   alpha                          = assert_is_r_alpha(),
+#'   beta                           = assert_is_r_beta(),
 #'   RC                             = assert_is_r_release_candidate(),
 #'   assert_is_r_stable()
 #' )
