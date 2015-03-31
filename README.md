@@ -264,3 +264,6 @@ allow users to pass arguments to your function in either form.
 demonstrating errors in examples.
 
 `parenthesise` wraps a string in parentheses.
+
+`sys_get_locale` and `sys_set_locale` are convenience wrappers for getting and 
+setting locale components.
