@@ -65,7 +65,7 @@ is_bsd <- function()
 {
   if(!grepl("BSD", Sys.info()[["sysname"]]))
   {
-    return(false("The operating system is not BSD-based."))
+    return(not_this_os("BSD-based"))
   }
   TRUE
 }
@@ -94,7 +94,7 @@ is_linux <- function()
 {
   if(Sys.info()["sysname"] != "Linux")
   {
-    return(false("The operating system is not Linux."))
+    return(not_this_os("Linux"))
   }
   TRUE
 }
@@ -105,9 +105,7 @@ is_mac <- function()
 {
   if(Sys.info()["sysname"] != "Darwin")
   {
-    return(false(
-      "The operating system is not OS X."
-    ))
+    return(not_this_os("OS X"))
   }
   TRUE
 }
@@ -309,9 +307,7 @@ is_solaris <- function()
 {
   if(Sys.info()["sysname"] != "SunOS")
   {
-    return(false(
-      "The operating system is not Solaris."
-    ))
+    return(not_this_os("Solaris"))
   }
   TRUE
 }
@@ -322,7 +318,7 @@ is_unix <- function()
 {
   if(.Platform$OS.type != "unix")
   {
-    return(false("The operating system is not Unix-based."))
+    return(not_this_os("Unix-based"))
   }
   TRUE
 }
@@ -366,7 +362,7 @@ is_windows <- function()
 {
   if(.Platform$OS.type != "windows")
   {
-    return(false("The operating system is not Windows."))
+    return(not_this_os("Windows"))
   }
   TRUE
 }
@@ -458,4 +454,29 @@ is_xxx_for_decimal_point <- function(dp, type = c("numbers", "money"))
     )
   }
   TRUE
+}
+
+#' Failure for bad OS
+#' 
+#' Wrapper to \code{false} for failure messages when the OS is not as 
+#' expected.
+#' @param os A string giving the name of the OS that was desired.
+#' @return A string showing the results of \code{.Platform$OS} and 
+#' \code{Sys.info()['sysname']}.
+#' @seealso \code{\link[base]{.Platform}} and \code{\link[base]{Sys.info}}
+#' @examples
+#' \donttest{
+#' assertive:::not_this_os("Windows")
+#' assertive:::not_this_os("BSD-based")
+#' }
+not_this_os <- function(os)
+{
+  false(
+    gettextf(
+      "The operating system is not %s. R reports it as: Sys.info()['sysname'] = %s, .Platform$OS = %s.", 
+      os, 
+      Sys.info()["sysname"],
+      .Platform$OS
+    )
+  )
 }
