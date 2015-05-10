@@ -124,12 +124,13 @@ is_mac <- function()
 #' @export
 is_on_os_path <- function(x)
 {
+  sep <- if(is_windows()) ";" else ":"
   call_and_name(
     function(x) 
     {
       x <- normalizePath(path.expand(coerce_to(x, "character")), mustWork = FALSE)
       paths <- normalizePath(
-        strsplit(Sys.getenv("path"), ";")[[1]], 
+        strsplit(Sys.getenv("PATH"), sep)[[1]], 
         mustWork = FALSE
       )
       ok <- x %in% paths
