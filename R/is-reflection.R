@@ -116,7 +116,7 @@ is_mac <- function()
 #' 
 #' @param x An path to check.
 #' @note The OS search path is determined with \code{Sys.getenv("path")}.
-#' @return \code{TRUE} if the sepcified paths are on the OS search path.
+#' @return \code{TRUE} if the specified paths are on the OS search path.
 #' @examples
 #' is_on_os_path(
 #'   c(R.home("bin"), R.home("etc"), "a nonexistent path")
