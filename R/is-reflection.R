@@ -115,7 +115,9 @@ is_mac <- function()
 #' Is the specified path on the operating system search path?
 #' 
 #' @param x An path to check.
-#' @note The OS search path is determined with \code{Sys.getenv("path")}.
+#' @note The OS search path is determined with \code{Sys.getenv("path")}.  For
+#' files, the path of the containing folder is checked rather than the path of 
+#' the file itself.
 #' @return \code{TRUE} if the specified paths are on the OS search path.
 #' @examples
 #' is_on_os_path(
@@ -125,6 +127,8 @@ is_mac <- function()
 is_on_os_path <- function(x)
 {
   sep <- if(is_windows()) ";" else ":"
+  # For files, check the containing directory
+  x <- ifelse(is_dir(x), x, dirname(x))
   call_and_name(
     function(x) 
     {
