@@ -16,13 +16,21 @@
 #' whether or not an error is thrown.
 assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
 {
+  handlerType <- match.arg(
+    getOption("assertive.severity"),
+    c("stop", "warning", "message")
+  )
   handler <- match.fun(
-    match.arg(
-      getOption("assertive.severity"),
-      c("stop", "warning", "message")
-    )
+    handlerType
+  )
+  simple <- switch(
+    handlerType,
+    stop = simpleError,
+    warning = simpleWarning,
+    message = simpleMessage
   )
   what <- match.fun(match.arg(what))
+  
   #Some functions, e.g., is.R take no args
   ok <- if(missing(x)) predicate() else predicate(x, ...)
   if(!what(ok & !is.na(ok)))
@@ -66,7 +74,8 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
       )
     }
     # Throw error/warning/message
-    handler(msg, call. = FALSE)
+    caller <- sys.call(-2)
+    handler(simple(msg, caller))
   }
 }
 
