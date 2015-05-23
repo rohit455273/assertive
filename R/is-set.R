@@ -58,9 +58,19 @@ is_set_equal <- function(x, y, .xname = get_name_in_parent(x), .yname = get_name
 #' @export
 is_subset <- function(x, y, .xname = get_name_in_parent(x), .yname = get_name_in_parent(y))
 {
-  if(is_non_empty(setdiff(x, y)))
+  diffxy <- setdiff(x, y)
+  if(is_non_empty(diffxy))
   {
-    return(false("There are elements in %s that are not in %s.", .xname, .yname))
+    return(
+      false(
+        "The %s %s in %s %s not in %s.", 
+        toString(sQuote(diffxy), 100),
+        ngettext(length(diffxy), "element", "elements"),
+        .xname, 
+        ngettext(length(diffxy), "is", "are"),
+        .yname
+      )
+    )
   }   
   TRUE
 }
@@ -69,9 +79,5 @@ is_subset <- function(x, y, .xname = get_name_in_parent(x), .yname = get_name_in
 #' @export
 is_superset <- function(x, y, .xname = get_name_in_parent(x), .yname = get_name_in_parent(y))
 {
-  if(is_non_empty(setdiff(y, x)))
-  {
-    return(false("There are elements in %s that are not in %s.", .yname, .xname))
-  }   
-  TRUE
+  is_subset(y, x, .yname, .xname)
 }
