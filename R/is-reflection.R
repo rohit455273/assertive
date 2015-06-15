@@ -205,7 +205,7 @@ is_r_alpha <- function()
 {
   if(version$status != "alpha")
   {
-    return(false("You are not running an alpha build of R."))
+    return(not_this_build("alpha"))
   }
   TRUE
 }
@@ -216,7 +216,7 @@ is_r_beta <- function()
 {
   if(version$status != "beta")
   {
-    return(false("You are not running a beta build of R."))
+    return(not_this_build("beta"))
   }
   TRUE
 }
@@ -227,7 +227,7 @@ is_r_devel <- function()
 {
   if(version$status != "Under development (unstable)")
   {
-    return(false("You are not running a development build of R."))
+    return(not_this_build("development"))
   }
   TRUE
 }
@@ -238,7 +238,7 @@ is_r_patched <- function()
 {
   if(version$status != "Patched")
   {
-    return(false("You are not running a patched build of R."))
+    return(not_this_build("patched"))
   }
   TRUE
 }
@@ -249,7 +249,7 @@ is_r_release_candidate <- function()
 {
   if(version$status != "RC")
   {
-    return(false("You are not running a release candidate build of R."))
+    return(not_this_build("release candidate"))
   }
   TRUE
 }
@@ -260,7 +260,7 @@ is_r_stable <- function()
 {
   if(nzchar(version$status))
   {
-    return(false("You are not running a stable build of R."))
+    return(not_this_build("stable"))
   }
   TRUE
 }
@@ -485,3 +485,36 @@ not_this_os <- function(os)
     )
   )
 }
+
+#' Failure for bad build
+#' 
+#' Wrapper to \code{false} for failure messages when the OS is not as 
+#' expected.
+#' @param status A string giving the name of the build status that was desired.
+#' @return A string showing the actual build status.
+#' @seealso \code{\link[base]{.Platform}} and \code{\link[base]{Sys.info}}
+#' @examples
+#' \donttest{
+#' assertive:::not_this_build("stable")
+#' assertive:::not_this_build("development")
+#' }
+not_this_build <- function(status)
+{
+ reported_status <- switch(
+   version$status,
+   Patched                        = "patched",
+   "Under development (unstable)" = "development",
+   alpha                          = "alpha",
+   beta                           = "beta",
+   RC                             = "release candidate",
+   "stable"
+ )
+  false(
+    gettextf(
+      "You are running a %s build of R, not a %s build.", 
+      reported_status, 
+      status
+    )
+  ) 
+}
+
