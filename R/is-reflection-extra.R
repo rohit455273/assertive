@@ -13,6 +13,10 @@
 
 get_current_r <- function(cran = getOption("repos", c(CRAN = "http://cran.r-project.org"))["CRAN"])
 {
+  if(cran == "@CRAN@")
+  {
+    cran <- "http://cran.r-project.org"
+  }
   lines <- readLines(paste(cran, "sources.html", sep = "/"))
   rx <- "R-(\\d\\.\\d\\.\\d)"
   version_string <- regmatches(lines, regexpr(rx, lines))
