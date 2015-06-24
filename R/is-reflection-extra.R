@@ -29,6 +29,7 @@ get_current_r <- function(cran = getOption("repos", c(CRAN = "http://cran.r-proj
 #' release version of R.  For convenience, these will return \code{TRUE}.
 #' @examples
 #' is_current_r()
+#' @export
 is_current_r <- function(cran = getOption("repos", c(CRAN = "http://cran.r-project.org"))["CRAN"])
 {
   this_version <- getRversion()
