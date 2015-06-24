@@ -502,11 +502,14 @@ not_this_os <- function(os)
 #' }
 not_this_build <- function(status)
 {
- reported_status <- clean_status_string()
+  reported_status <- clean_status_string()
+  get_article <- function(x) if(x != "alpha") "a" else "an"
   false(
     gettextf(
-      "You are running a %s build of R, not a %s build.", 
+      "You are running %s %s build of R, not %s %s build.", 
+      get_article(reported_status),
       reported_status, 
+      get_article(status),
       status
     )
   ) 
