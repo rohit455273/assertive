@@ -181,6 +181,42 @@ test_that("test.is_r.r_or_s.returns_true_if_is_r", {
   }
 })
 
+test_that("test.is_r_alpha.any_r.returns_true_if_is_r_alpha", 
+{
+  expected <- version$status == "alpha"
+  actual <- is_r_alpha()
+  expect_equal(strip_attributes(actual), expected)
+  if (!actual) {
+    expect_equal(
+      cause(actual), 
+      noquote(
+        sprintf(
+          "You are running a %s build of R, not an alpha build.",
+          clean_status_string()
+        )
+      )
+    )
+  }
+})
+
+test_that("test.is_r_beta.any_r.returns_true_if_is_r_beta", 
+{
+  expected <- version$status == "beta"
+  actual <- is_r_beta()
+  expect_equal(strip_attributes(actual), expected)
+  if (!actual) {
+    expect_equal(
+      cause(actual), 
+      noquote(
+        sprintf(
+          "You are running a %s build of R, not a beta build.",
+          clean_status_string()
+        )
+      )
+    )
+  }
+})
+
 test_that("test.is_r_devel.any_r.returns_true_if_is_r_devel", {
   expected <- version$status == "Under development (unstable)"
   actual <- is_r_devel()
@@ -188,7 +224,12 @@ test_that("test.is_r_devel.any_r.returns_true_if_is_r_devel", {
   if (!actual) {
     expect_equal(
       cause(actual), 
-      noquote("You are not running a development build of R.")
+      noquote(
+        sprintf(
+          "You are running a %s build of R, not a development build.",
+          clean_status_string()
+        )
+      )
     )
   }
 })
@@ -200,7 +241,12 @@ test_that("test.is_r_patched.any_r.returns_true_if_is_r_patched", {
   if (!actual) {
     expect_equal(
       cause(actual), 
-      noquote("You are not running a patched build of R.")
+      noquote(
+        sprintf(
+          "You are running a %s build of R, not a patched build.",
+          clean_status_string()
+        )
+      )
     )
   }
 })
@@ -213,7 +259,12 @@ test_that("test.is_r_stable.any_r.returns_true_if_is_r_stable",
   if (!actual) {
     expect_equal(
       cause(actual), 
-      noquote("You are not running a stable build of R.")
+      noquote(
+        sprintf(
+          "You are running a %s build of R, not a stable build.",
+          clean_status_string()
+        )
+      )
     )
   }
 })
