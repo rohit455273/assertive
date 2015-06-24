@@ -128,7 +128,9 @@ is_on_os_path <- function(x)
 {
   sep <- if(is_windows()) ";" else ":"
   # For files, check the containing directory
-  x <- ifelse(is_dir(x), x, dirname(x))
+  # is_dir treats missing directories as FALSE, which we don't want here
+  # so just as easy to use underlying file.info
+  x <- ifelse(is_false(file.info(x)$isdir), dirname(x), x)
   call_and_name(
     function(x) 
     {
@@ -521,3 +523,4 @@ clean_status_string <- function(status = version$status)
     RC                             = "release candidate",
     "stable"
   )
+}
