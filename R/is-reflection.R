@@ -500,15 +500,7 @@ not_this_os <- function(os)
 #' }
 not_this_build <- function(status)
 {
- reported_status <- switch(
-   version$status,
-   Patched                        = "patched",
-   "Under development (unstable)" = "development",
-   alpha                          = "alpha",
-   beta                           = "beta",
-   RC                             = "release candidate",
-   "stable"
- )
+ reported_status <- clean_status_string()
   false(
     gettextf(
       "You are running a %s build of R, not a %s build.", 
@@ -518,3 +510,14 @@ not_this_build <- function(status)
   ) 
 }
 
+clean_status_string <- function(status = version$status)
+{
+  switch(
+    status,
+    Patched                        = "patched",
+    "Under development (unstable)" = "development",
+    alpha                          = "alpha",
+    beta                           = "beta",
+    RC                             = "release candidate",
+    "stable"
+  )
