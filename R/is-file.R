@@ -122,7 +122,7 @@ is_executable_file <- function(x)
       ok <- file.access(x, mode = 1) == 0L
       set_cause(
         ok, 
-        ifelse(file.exists(x, "unexecutable", "nonexistent"))
+        ifelse(file.exists(x), "unexecutable", "nonexistent")
       )
     }, 
     x
