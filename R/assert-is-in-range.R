@@ -2,7 +2,11 @@
 #' @export
 assert_all_are_in_closed_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
-  msg <- gettextf("%s are not all in range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all in the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, FALSE, FALSE)
+  )
   assert_engine(x, is_in_closed_range, msg, lower = lower, upper = upper)  
 }
 
@@ -10,7 +14,11 @@ assert_all_are_in_closed_range <- function(x, lower = -Inf, upper = Inf)
 #' @export
 assert_any_are_in_closed_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
-  msg <- gettextf("%s are all out of range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are all out of the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, FALSE, FALSE)
+  )
   assert_engine(
     x, 
     is_in_closed_range, 
@@ -25,7 +33,11 @@ assert_any_are_in_closed_range <- function(x, lower = -Inf, upper = Inf)
 #' @export
 assert_all_are_in_left_open_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
-  msg <- gettextf("%s are not all in range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all in the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, TRUE, FALSE)
+  )
   assert_engine(x, is_in_left_open_range, msg, lower = lower, upper = upper)  
 }
 
@@ -33,7 +45,11 @@ assert_all_are_in_left_open_range <- function(x, lower = -Inf, upper = Inf)
 #' @export
 assert_any_are_in_left_open_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
-  msg <- gettextf("%s are all out of range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are all out of the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, TRUE, FALSE)
+  )
   assert_engine(
     x, 
     is_in_left_open_range, 
@@ -48,7 +64,11 @@ assert_any_are_in_left_open_range <- function(x, lower = -Inf, upper = Inf)
 #' @export
 assert_all_are_in_open_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
-  msg <- gettextf("%s are not all in range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all in the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, TRUE, TRUE)
+  )
   assert_engine(x, is_in_open_range, msg, lower = lower, upper = upper)  
 }
 
@@ -56,7 +76,11 @@ assert_all_are_in_open_range <- function(x, lower = -Inf, upper = Inf)
 #' @export
 assert_any_are_in_open_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
-  msg <- gettextf("%s are all out of range.", get_name_in_parent(x))
+  msg <-   msg <- gettextf(
+    "%s are all out of the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, TRUE, TRUE)
+  )
   assert_engine(
     x, 
     is_in_open_range, 
@@ -72,7 +96,11 @@ assert_any_are_in_open_range <- function(x, lower = -Inf, upper = Inf)
 assert_all_are_in_range <- function(x, lower = -Inf, upper = Inf, 
   lower_is_strict = FALSE, upper_is_strict = FALSE)
 {                                                     
-  msg <- gettextf("%s are not all in range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all in the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, lower_is_strict, upper_is_strict)
+  )
   assert_engine(
     x, 
     is_in_range, 
@@ -81,7 +109,7 @@ assert_all_are_in_range <- function(x, lower = -Inf, upper = Inf,
     upper = upper, 
     lower_is_strict = lower_is_strict, 
     upper_is_strict = upper_is_strict
-    ) 
+  ) 
 }
 
 #' @rdname is_in_range
@@ -89,7 +117,11 @@ assert_all_are_in_range <- function(x, lower = -Inf, upper = Inf,
 assert_any_are_in_range <- function(x, lower = -Inf, upper = Inf, 
   lower_is_strict = FALSE, upper_is_strict = FALSE)
 {                                                     
-  msg <- gettextf("%s are all out of range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are all out of the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, lower_is_strict, upper_is_strict)
+  )
   assert_engine(
     x, 
     is_in_range, 
@@ -99,14 +131,18 @@ assert_any_are_in_range <- function(x, lower = -Inf, upper = Inf,
     upper = upper, 
     lower_is_strict = lower_is_strict, 
     upper_is_strict = upper_is_strict
-    )
+  )
 }
 
 #' @rdname is_in_range
 #' @export
 assert_all_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
-  msg <- gettextf("%s are not all in range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all in the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, FALSE, TRUE)
+  )
   assert_engine(x, is_in_right_open_range, msg, lower = lower, upper = upper)  
 }
 
@@ -114,7 +150,11 @@ assert_all_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 #' @export
 assert_any_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 {                                                     
-  msg <- gettextf("%s are all out of range.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are all out of the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(lower, upper, FALSE, TRUE)
+  )
   assert_engine(
     x, 
     is_in_right_open_range, 
@@ -178,14 +218,18 @@ assert_any_are_non_positive <- function(x)
 assert_all_are_percentages <- function(x, lower_is_strict = FALSE, 
   upper_is_strict = FALSE)
 {                                                       
-  msg <- gettextf("%s are not all percentages.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all in the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(0, 100, lower_is_strict, upper_is_strict)
+  )
   assert_engine(
     x, 
     is_percentage, 
     msg, 
     lower_is_strict = lower_is_strict, 
     upper_is_strict = upper_is_strict
-    )
+  )
 }
 
 #' @rdname is_in_range
@@ -193,7 +237,11 @@ assert_all_are_percentages <- function(x, lower_is_strict = FALSE,
 assert_any_are_percentages <- function(x, lower_is_strict = FALSE, 
   upper_is_strict = FALSE)
 {                                                       
-  msg <- gettextf("%s are all not percentages.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are all out of the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(0, 100, lower_is_strict, upper_is_strict)
+  )
   assert_engine(
     x, 
     is_percentage, 
@@ -225,7 +273,11 @@ assert_any_are_positive <- function(x)
 assert_all_are_proportions <- function(x, lower_is_strict = FALSE, 
   upper_is_strict = FALSE)
 {                                                       
-  msg <- gettextf("%s are not all proportions.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all in the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(0, 1, lower_is_strict, upper_is_strict)
+  )
   assert_engine(
     x, 
     is_proportion, 
@@ -240,7 +292,11 @@ assert_all_are_proportions <- function(x, lower_is_strict = FALSE,
 assert_any_are_proportions <- function(x, lower_is_strict = FALSE, 
   upper_is_strict = FALSE)
 {                                                       
-  msg <- gettextf("%s are all not proportions.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are all out of the range %s.", 
+    get_name_in_parent(x),
+    make_range_string(0, 1, lower_is_strict, upper_is_strict)
+  )
   assert_engine(
     x, 
     is_proportion, 
@@ -248,5 +304,24 @@ assert_any_are_proportions <- function(x, lower_is_strict = FALSE,
     what = "any",
     lower_is_strict = lower_is_strict, 
     upper_is_strict = upper_is_strict
-    )
+  )
 }  
+
+#' Make a range string
+#' 
+#' Makes a range string using mathematical notation.
+#' @param lower A number for the lower bound.
+#' @param upper A number for the upper bound.
+#' @param lower_is_strict Should the lower bound be included?
+#' @param upper_is_strict Should the upper bound be included?
+#' @return A string denoting the range.
+#' @note Not vectorized across the \code{lower_is_strict} and 
+#' \code{upper_is_strict} args for speed.
+#' @examples 
+#' make_range_string(-1.2345, 6.7890, TRUE, FALSE)
+make_range_string <- function(lower, upper, lower_is_strict, upper_is_strict)
+{
+  left <- if(lower_is_strict) "(" else "["
+  right <- if(upper_is_strict) ")" else "]"
+  paste0(left, lower, ",", upper, right)  
+}
