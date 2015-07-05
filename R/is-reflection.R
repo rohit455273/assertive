@@ -294,6 +294,89 @@ is_rstudio <- function()
   TRUE
 }
 
+#' Is RStudio the current version?
+#' 
+#' Checks to see if the running version of RStudio is the current version.
+#' @return \code{is_rstudio_current} returns \code{TRUE} or \code{FALSE}, and
+#' \code{assert_is_rstudio_current} throws an error in the event of an out of
+#' date RStudio.  Non-RStudio IDEs throw an error.
+#' @references This function is engineered from the \code{downloadUpdateInfo} 
+#' function from 
+#' \url{https://github.com/rstudio/rstudio/blob/master/src/cpp/session/modules/SessionUpdates.R}
+#' where the string for the OS is described in \code{beginUpdateCheck} from
+#' \url{https://github.com/rstudio/rstudio/blob/master/src/cpp/session/modules/SessionUpdates.cpp}
+#' @export
+is_rstudio_current <- function()
+{
+  assert_is_rstudio()
+  os <- if(is_windows()) "windows" else if(is_mac()) "mac" else "linux"
+  current_version <- rstudio_version_info()$version
+  if(is.na(current_version))
+  {
+    return(
+      false(
+        "RStudio is out of date; it is old enough that the version check API has changed."
+      )
+    ) 
+  }
+  update_url <- sprintf(
+    "http://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=kvp",
+    current_version,
+    os
+  )
+  lines <- readLines(update_url, warn = FALSE)
+  update_version <- substring(
+    grep("update-version=([0-9.]*)", strsplit(lines, "&")[[1]], value = TRUE),
+    16
+  )
+  if(nzchar(update_version))
+  {
+    return(
+      false(
+        "RStudio is out of date; you are running %s but version %s is available.",
+        current_version,
+        update_version
+      )
+    )
+  }
+  TRUE
+}
+
+#' Is RStudio running in desktop or server mode?
+#' 
+#' @references The values that RStudio uses for its mode are defined in
+#' \url{https://github.com/rstudio/rstudio/blob/master/src/cpp/session/include/session/SessionConstants.hpp}
+#' via the constants \code{kSessionProgramModeDesktop} and 
+#' \code{kSessionProgramModeServer}.
+#' @examples 
+#' is_rstudio_desktop()
+#' is_rstudio_server()
+#' @export
+is_rstudio_desktop <- function()
+{
+  rstudio_version_info()$mode == "desktop"
+}
+
+is_rstudio_server <- function()
+{
+  rstudio_version_info()$mode == "server"
+}
+
+#' Get RStudio's version information
+#' 
+#' Wrapper to .rs.api.versionInfo.
+rstudio_version_info <- function()
+{
+  assert_is_rstudio()
+  e <- as.environment("tools:rstudio")
+  if(!".rs.api.versionInfo" %in% ls(e, all.names = TRUE))
+  {
+    warning("You are using an old version of RStudio, which does not tell you version information.")
+    return(NA_character_)
+  }
+  e$.rs.api.versionInfo()
+}
+
 #' @rdname is_r
 #' @export
 is_slave_r <- function()
