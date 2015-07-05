@@ -375,6 +375,7 @@ is_rstudio_current <- function()
 
 #' Is RStudio running in desktop or server mode?
 #' 
+#' Checks for RStudio desktop or server version.
 #' @references The values that RStudio uses for its mode are defined in
 #' \url{https://github.com/rstudio/rstudio/blob/master/src/cpp/session/include/session/SessionConstants.hpp}
 #' via the constants \code{kSessionProgramModeDesktop} and 
@@ -386,7 +387,7 @@ is_rstudio_current <- function()
 #' @export
 is_rstudio_desktop <- function()
 {
-  if(ok <- is_rstudio())
+  if(!(ok <- is_rstudio()))
   {
     return(false(cause(ok)))
   }
@@ -400,7 +401,7 @@ is_rstudio_desktop <- function()
 #' @export
 is_rstudio_server <- function()
 {
-  if(ok <- is_rstudio())
+  if(!(ok <- is_rstudio()))
   {
     return(false(cause(ok)))
   }
