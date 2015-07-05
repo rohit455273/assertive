@@ -42,7 +42,8 @@ cause <- function(x)
 #' @export
 `cause<-` <- function(x, value)
 {
-  if(!is_scalar(value) && length(value) != length(x))
+  # Can't use is_scalar here due to dependency on this
+  if(length(value) != 1 && length(value) != length(x))
   {
     stop(
       gettextf(
