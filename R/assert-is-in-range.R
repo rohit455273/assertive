@@ -318,7 +318,9 @@ assert_any_are_proportions <- function(x, lower_is_strict = FALSE,
 #' @note Not vectorized across the \code{lower_is_strict} and 
 #' \code{upper_is_strict} args for speed.
 #' @examples 
+#' \donttest{
 #' make_range_string(-1.2345, 6.7890, TRUE, FALSE)
+#' }
 make_range_string <- function(lower, upper, lower_is_strict, upper_is_strict)
 {
   left <- if(lower_is_strict) "(" else "["
