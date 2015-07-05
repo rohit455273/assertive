@@ -53,8 +53,10 @@ is_in_range <- function(x, lower = -Inf, upper = Inf, lower_is_strict = FALSE,
   upper_is_strict = FALSE)
 {
   x <- coerce_to(x, "numeric")
-  assert_is_a_bool(lower_is_strict)
-  assert_is_a_bool(upper_is_strict)
+  lower <- coerce_to(lower, "numeric")
+  upper <- coerce_to(upper, "numeric")
+  lower_is_strict <- coerce_to(use_first(lower_is_strict), "logical")
+  upper_is_strict <- coerce_to(use_first(upper_is_strict), "logical")
   ok <- rep.int(TRUE, length(x))
   ok[is.na(x)] <- NA
   too_low <- (if(lower_is_strict) `<=` else `<`)(x, lower)
