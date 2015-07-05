@@ -94,6 +94,22 @@ assert_all_are_hex_colours <- assert_all_are_hex_colors
 #' @export
 assert_any_are_hex_colours <- assert_any_are_hex_colors
 
+#' @rdname is_honorific
+#' @export
+assert_all_are_honorifics <- function(x)
+{                                                     
+  msg <- gettextf("%s are not all honorifics.", get_name_in_parent(x))
+  assert_engine(x, is_honorific, msg)        
+}
+
+#' @rdname is_honorific
+#' @export
+assert_any_are_honorifics <- function(x)
+{                                                     
+  msg <- gettextf("%s are all not honorifics.", get_name_in_parent(x))
+  assert_engine(x, is_honorific, msg, what = "any")        
+}
+
 #' @rdname is_ip_address
 #' @export
 assert_all_are_ip_addresses <- function(x)
