@@ -74,8 +74,12 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
 {
   handlerType <- match.arg(
     getOption("assertive.severity"),
-    c("stop", "warning", "message")
+    c("stop", "warning", "message", "none")
   )
+  if(handlerType == "none") 
+  {
+    return(invisible(x))
+  }
   handler <- match.fun(
     handlerType
   )
