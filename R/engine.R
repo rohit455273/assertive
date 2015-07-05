@@ -137,6 +137,7 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
     caller <- sys.call(-2)
     handler(simple(msg, caller))
   }
+  if(missing(x)) invisible(NULL) else invisible(x)
 }
 
 #' FALSE, with a cause of failure.
