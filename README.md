@@ -221,7 +221,7 @@ You can test the operating system with `is_windows`, `is_linux`, `is_mac`,
 You can test R's capabilities using `r_has_png_capability`, 
 `r_has_tcltk_capability`, etc.
 
-You can test the currentlocale's preference for decimal points using 
+You can test the current locale's preference for decimal points using 
 `is_comma_for_decimal_point` or `is_period_for_decimal_point`.
 
 `is_slave_r`, `is_interactive`, `is_batch_mode`, `is_32_bit` and `is_64_bit` 
