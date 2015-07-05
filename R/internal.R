@@ -6,11 +6,11 @@
 #' @param x A vector (atomic or list).
 #' @param predicate A predicate (function that returns a bool) to apply.
 #' elementwise to \code{x}.
-#' @param USE.NAMES Passed to \code{vapply}.
 #' @param ... Passed to \code{vapply}.
 #' @return A logical vector.
+#' @note \code{USE.NAMES} is set to \code{TRUE}
 #' @seealso \code{\link{vapply}}.
-bapply <- function(x, predicate, ..., USE.NAMES = TRUE)
+bapply <- function(x, predicate, ...)
 {
   vapply(x, predicate, logical(1L), ..., USE.NAMES = TRUE)
 }

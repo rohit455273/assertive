@@ -15,7 +15,7 @@
 #' r_can_find_tools(c("latex", "pdflatex"))
 #' r_can_compile_code()
 #' r_can_build_translations()
-#' dont_stop(assert_r_can_find_tools(c("latex", "pdflatex"))
+#' dont_stop(assert_r_can_find_tools(c("latex", "pdflatex")))
 #' dont_stop(assert_r_can_compile_code())
 #' dont_stop(r_can_build_translations())
 #' @export

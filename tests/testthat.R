@@ -4,5 +4,5 @@ library(assertive)
 
 with_envvar(
   c(LANG = "en_US"),
-  test_package("assertive")
+  test_check("assertive")
 )
