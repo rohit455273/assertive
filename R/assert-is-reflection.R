@@ -162,6 +162,27 @@ assert_is_rstudio <- function()
 
 #' @rdname is_r
 #' @export
+assert_is_rstudio_current <- function()
+{                                                         
+  assert_engine(predicate = is_rstudio_current)        
+}
+
+#' @rdname is_r
+#' @export
+assert_is_rstudio_desktop <- function()
+{                                                         
+  assert_engine(predicate = is_rstudio_desktop)        
+}
+
+#' @rdname is_r
+#' @export
+assert_is_rstudio_server <- function()
+{                                                         
+  assert_engine(predicate = is_rstudio_server)        
+}
+
+#' @rdname is_r
+#' @export
 assert_is_slave_r <- function()
 {                                                         
   assert_engine(predicate = is_slave_r)        

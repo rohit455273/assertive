@@ -335,6 +335,7 @@ is_rstudio <- function()
 #' \url{https://github.com/rstudio/rstudio/blob/master/src/cpp/session/modules/SessionUpdates.R}
 #' where the string for the OS is described in \code{beginUpdateCheck} from
 #' \url{https://github.com/rstudio/rstudio/blob/master/src/cpp/session/modules/SessionUpdates.cpp}
+#' @seealso \code{\link{is_rstudio}}, \code{\link{is_rstudio_desktop}}
 #' @export
 is_rstudio_current <- function()
 {
@@ -378,18 +379,35 @@ is_rstudio_current <- function()
 #' \url{https://github.com/rstudio/rstudio/blob/master/src/cpp/session/include/session/SessionConstants.hpp}
 #' via the constants \code{kSessionProgramModeDesktop} and 
 #' \code{kSessionProgramModeServer}.
+#' @seealso \code{\link{is_rstudio}}, \code{\link{is_rstudio_current}}
 #' @examples 
 #' is_rstudio_desktop()
 #' is_rstudio_server()
 #' @export
 is_rstudio_desktop <- function()
 {
-  rstudio_version_info()$mode == "desktop"
+  if(ok <- is_rstudio())
+  {
+    return(false(cause(ok)))
+  }
+  if(rstudio_version_info()$mode != "desktop")
+  {
+    return(false("You are running the server version of RStudio."))
+  }
 }
 
+#' @rdname is_rstudio_desktop
+#' @export
 is_rstudio_server <- function()
 {
-  rstudio_version_info()$mode == "server"
+  if(ok <- is_rstudio())
+  {
+    return(false(cause(ok)))
+  }
+  if(rstudio_version_info()$mode != "server")
+  {
+    return(false("You are running the desktop version of RStudio."))
+  }
 }
 
 #' Get RStudio's version information
