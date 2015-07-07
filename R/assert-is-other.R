@@ -3,7 +3,12 @@
 assert_all_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps, 
   na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are not all divisible by %s.", get_name_in_parent(x), toString(n, width = 20))
+  msg <- gettextf(
+    "%s are not all divisible by %s (tol = %g).", 
+    get_name_in_parent(x), 
+    toString(n, width = 20),
+    tol
+  )
   assert_engine(
     is_divisible_by, 
     x, 
@@ -19,7 +24,12 @@ assert_all_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps,
 assert_any_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps, 
   na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are all not divisible by %s.", get_name_in_parent(x), toString(n, width = 20))
+  msg <- gettextf(
+    "%s are all not divisible by %s (tol = %g).", 
+    get_name_in_parent(x), 
+    toString(n, width = 20),
+    tol
+  )
   assert_engine(
     is_divisible_by, 
     x, 
@@ -36,7 +46,11 @@ assert_any_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps,
 assert_all_are_even <- function(x, tol = 100 * .Machine$double.eps, 
   na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are not all even.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all even (tol = %g).", 
+    get_name_in_parent(x),
+    tol
+  )
   assert_engine(
     is_even, 
     x, 
@@ -51,7 +65,11 @@ assert_all_are_even <- function(x, tol = 100 * .Machine$double.eps,
 assert_any_are_even <- function(x, tol = 100 * .Machine$double.eps, 
   na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are all not even.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are all not even (tol = %g).", 
+    get_name_in_parent(x),
+    tol
+  )
   assert_engine(
     is_even, 
     x, 
@@ -126,7 +144,11 @@ assert_is_loaded <- function(x)
 assert_all_are_odd <- function(x, tol = 100 * .Machine$double.eps, 
   na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are not all odd.", get_name_in_parent(x))
+  msg <- gettextf(
+    "%s are not all odd (tol = %g).",
+    get_name_in_parent(x),
+    tol
+  )
   assert_engine(
     is_odd, 
     x, 
@@ -141,7 +163,12 @@ assert_all_are_odd <- function(x, tol = 100 * .Machine$double.eps,
 assert_any_are_odd <- function(x, tol = 100 * .Machine$double.eps, 
   na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are all not odd.", get_name_in_parent(x))  assert_engine(
+  msg <- gettextf(
+    "%s are all not odd (tol = %g).", 
+    get_name_in_parent(x),
+    tol
+  )  
+  assert_engine(
     is_odd, 
     x, 
     tol = tol,
