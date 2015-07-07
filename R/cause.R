@@ -48,9 +48,15 @@ cause <- function(x)
 set_cause <- function(x, value)
 {
   if(all(!is.na(x) & x)) return(x)
+  # TRUEs
   cause_value <- character(length(x))
+  # NAs
   cause_value[is.na(x)] <- "missing"
-  cause_value[!x & !is.na(x)] <- value
+  # FALSEs
+  value <- rep_len(value, length(x))
+  index <- !x & !is.na(x)
+  cause_value[index] <- value[index]
+  
   cause(x) <- cause_value
   class(x) <- c("vector_with_cause", "logical")
   x
