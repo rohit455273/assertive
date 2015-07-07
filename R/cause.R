@@ -92,6 +92,10 @@ print.vector_with_cause <- function(x, na_ignore = FALSE, n_to_show = 6, ...)
 {
   cause_x <- cause(x)
   names_x <- names(x)
+  if(is.null(names_x))
+  {
+    names_x <- character(length(x))
+  }
   x <- strip_attributes(x)
   ok <- if(na_ignore)
   {
