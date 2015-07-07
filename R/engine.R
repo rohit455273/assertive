@@ -4,13 +4,12 @@
 #' is thrown.  This function is exported for use by package developers so
 #' that they can create their own assert functions.  
 #'
-#' @param x Input to check.  If missing, pass no args to \code{predicate}.
 #' @param predicate Function that returns a logical value (possibly 
 #' a vector).
+#' @param ... Passed to the \code{predicate} function.
 #' @param msg The error message, in the event of failure.
 #' @param what Either 'all' or 'any', to reduce vectorised tests to a 
 #' single value.
-#' @param ... Passed to the \code{predicate} function.
 #' @return \code{FALSE} with the attribute \code{message}, as provided
 #' in the input.
 #' @note Missing values are considered as \code{FALSE} for the purposes of
@@ -28,8 +27,8 @@
 #' assert_is_identical_to_pi <- function(x, .xname = get_name_in_parent())
 #' {
 #'   assert_engine(
-#'     x, 
 #'     is_identical_to_pi, 
+#'     x, 
 #'     .xname = get_name_in_parent(x)
 #'   )
 #' }
@@ -49,18 +48,18 @@
 #' {
 #'   msg <- gettextf("%s are not all less than pi.", get_name_in_parent(x))
 #'   assert_engine(
-#'     x, 
 #'     is_less_than_pi, 
-#'     msg
+#'     x, 
+#'     msg = msg
 #'   )
 #' }
 #' assert_any_are_less_than_pi <- function(x)
 #' {
 #'   msg <- gettextf("%s are all greater than or equal to pi.", get_name_in_parent(x))
 #'   assert_engine(
-#'     x, 
 #'     is_less_than_pi, 
-#'     msg,
+#'     x, 
+#'     msg = msg,
 #'     what = "any"
 #'   )
 #' }
@@ -70,15 +69,17 @@
 #' assert_any_are_less_than_pi(x)
 #' dont_stop(assert_all_are_less_than_pi(x))
 #' @export
-assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
+assert_engine <- function(predicate, ..., msg, what = c("all", "any"))
 {
   handlerType <- match.arg(
     getOption("assertive.severity"),
     c("stop", "warning", "message", "none")
   )
+  dots <- list(...)
+  return_value <- if(length(dots) > 0) dots[[1]] else NULL
   if(handlerType == "none") 
   {
-    return(invisible(x))
+    return(invisible(return_value))
   }
   handler <- match.fun(
     handlerType
@@ -91,8 +92,7 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
   )
   what <- match.fun(match.arg(what))
   
-  #Some functions, e.g., is.R take no args
-  ok <- if(missing(x)) predicate() else predicate(x, ...)
+  ok <- predicate(...)
   if(!what(ok & !is.na(ok)))
   {
     if(missing(msg)) 
@@ -137,7 +137,7 @@ assert_engine <- function(x, predicate, msg, what = c("all", "any"), ...)
     caller <- sys.call(-2)
     handler(simple(msg, caller))
   }
-  if(missing(x)) invisible(NULL) else invisible(x)
+  invisible(return_value)
 }
 
 #' FALSE, with a cause of failure.

@@ -3,7 +3,7 @@
 assert_all_are_us_telephone_numbers <- function(x)
 {                                                     
   msg <- gettextf("%s are not all US telephone numbers.", get_name_in_parent(x))
-  assert_engine(x, is_us_telephone_number, msg)        
+  assert_engine(is_us_telephone_number, x, msg = msg)        
 }
 
 #' @rdname is_us_telephone_number
@@ -11,7 +11,7 @@ assert_all_are_us_telephone_numbers <- function(x)
 assert_any_are_us_telephone_numbers <- function(x)
 {                                                     
   msg <- gettextf("%s are all not US telephone numbers.", get_name_in_parent(x))
-  assert_engine(x, is_us_telephone_number, msg, what = "any")        
+  assert_engine(is_us_telephone_number, x, msg = msg, what = "any")        
 }
 
 
@@ -20,7 +20,7 @@ assert_any_are_us_telephone_numbers <- function(x)
 assert_all_are_us_zip_codes <- function(x)
 {                                                     
   msg <- gettextf("%s are not all US zip codes.", get_name_in_parent(x))
-  assert_engine(x, is_us_zip_code, msg)        
+  assert_engine(is_us_zip_code, x, msg = msg)        
 }
 
 #' @rdname is_us_zip_code
@@ -28,5 +28,5 @@ assert_all_are_us_zip_codes <- function(x)
 assert_any_are_us_zip_codes <- function(x)
 {                                                     
   msg <- gettextf("%s are all not US zip codes.", get_name_in_parent(x))
-  assert_engine(x, is_us_zip_code, msg, what = "any")        
+  assert_engine(is_us_zip_code, x, msg = msg, what = "any")        
 }

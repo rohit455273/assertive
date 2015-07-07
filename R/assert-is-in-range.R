@@ -7,7 +7,7 @@ assert_all_are_in_closed_range <- function(x, lower = -Inf, upper = Inf)
     get_name_in_parent(x),
     make_range_string(lower, upper, FALSE, FALSE)
   )
-  assert_engine(x, is_in_closed_range, msg, lower = lower, upper = upper)  
+assert_engine(is_in_closed_range, x, msg = msg, lower = lower, upper = upper)  
 }
 
 #' @rdname is_in_range
@@ -20,12 +20,12 @@ assert_any_are_in_closed_range <- function(x, lower = -Inf, upper = Inf)
     make_range_string(lower, upper, FALSE, FALSE)
   )
   assert_engine(
-    x, 
     is_in_closed_range, 
-    msg, 
-    what = "any", 
+    x, 
     lower = lower, 
-    upper = upper
+    upper = upper, 
+    msg = msg, 
+    what = "any"
   )  
 }
 
@@ -38,7 +38,13 @@ assert_all_are_in_left_open_range <- function(x, lower = -Inf, upper = Inf)
     get_name_in_parent(x),
     make_range_string(lower, upper, TRUE, FALSE)
   )
-  assert_engine(x, is_in_left_open_range, msg, lower = lower, upper = upper)  
+  assert_engine(
+    is_in_left_open_range, 
+    x, 
+    lower = lower, 
+    upper = upper, 
+    msg = msg
+  )  
 }
 
 #' @rdname is_in_range
@@ -51,12 +57,12 @@ assert_any_are_in_left_open_range <- function(x, lower = -Inf, upper = Inf)
     make_range_string(lower, upper, TRUE, FALSE)
   )
   assert_engine(
-    x, 
     is_in_left_open_range, 
-    msg, 
-    what = "any", 
+    x, 
     lower = lower, 
-    upper = upper
+    upper = upper,
+    msg   = msg, 
+    what  = "any"
   )  
 }
 
@@ -69,7 +75,7 @@ assert_all_are_in_open_range <- function(x, lower = -Inf, upper = Inf)
     get_name_in_parent(x),
     make_range_string(lower, upper, TRUE, TRUE)
   )
-  assert_engine(x, is_in_open_range, msg, lower = lower, upper = upper)  
+  assert_engine(is_in_open_range, x, lower = lower, upper = upper, msg = msg)  
 }
 
 #' @rdname is_in_range
@@ -82,12 +88,12 @@ assert_any_are_in_open_range <- function(x, lower = -Inf, upper = Inf)
     make_range_string(lower, upper, TRUE, TRUE)
   )
   assert_engine(
-    x, 
     is_in_open_range, 
-    msg, 
-    what = "any", 
+    x,
     lower = lower, 
-    upper = upper
+    upper = upper, 
+    msg   = msg, 
+    what  = "any"
   )  
 }
 
@@ -102,13 +108,13 @@ assert_all_are_in_range <- function(x, lower = -Inf, upper = Inf,
     make_range_string(lower, upper, lower_is_strict, upper_is_strict)
   )
   assert_engine(
-    x, 
     is_in_range, 
-    msg, 
+    x, 
     lower = lower, 
     upper = upper, 
     lower_is_strict = lower_is_strict, 
-    upper_is_strict = upper_is_strict
+    upper_is_strict = upper_is_strict, 
+    msg = msg
   ) 
 }
 
@@ -123,14 +129,14 @@ assert_any_are_in_range <- function(x, lower = -Inf, upper = Inf,
     make_range_string(lower, upper, lower_is_strict, upper_is_strict)
   )
   assert_engine(
-    x, 
     is_in_range, 
-    msg, 
-    what = "any",
+    x, 
     lower = lower, 
     upper = upper, 
     lower_is_strict = lower_is_strict, 
-    upper_is_strict = upper_is_strict
+    upper_is_strict = upper_is_strict, 
+    msg = msg, 
+    what = "any"
   )
 }
 
@@ -143,7 +149,13 @@ assert_all_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
     get_name_in_parent(x),
     make_range_string(lower, upper, FALSE, TRUE)
   )
-  assert_engine(x, is_in_right_open_range, msg, lower = lower, upper = upper)  
+  assert_engine(
+    is_in_right_open_range, 
+    x, 
+    msg = msg,
+    lower = lower, 
+    upper = upper
+  )  
 }
 
 #' @rdname is_in_range
@@ -156,12 +168,12 @@ assert_any_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
     make_range_string(lower, upper, FALSE, TRUE)
   )
   assert_engine(
-    x, 
     is_in_right_open_range, 
-    msg, 
-    what = "any", 
+    x, 
+    msg = msg,
     lower = lower, 
-    upper = upper
+    upper = upper, 
+    what = "any"
   )  
 }
 
@@ -170,7 +182,7 @@ assert_any_are_in_right_open_range <- function(x, lower = -Inf, upper = Inf)
 assert_all_are_negative <- function(x)
 {                                                                
   msg <- gettextf("%s are not all negative.", get_name_in_parent(x))
-  assert_engine(x, is_negative, msg)
+  assert_engine(is_negative, x, msg = msg)
 }
 
 #' @rdname is_in_range
@@ -178,7 +190,7 @@ assert_all_are_negative <- function(x)
 assert_any_are_negative <- function(x)
 {                                                        
   msg <- gettextf("%s are all not negative.", get_name_in_parent(x))
-  assert_engine(x, is_negative, msg, what = "any")
+  assert_engine(is_negative, x, msg = msg, what = "any")
 }
 
 #' @rdname is_in_range
@@ -186,7 +198,7 @@ assert_any_are_negative <- function(x)
 assert_all_are_non_negative <- function(x)
 {                                                       
   msg <- gettextf("%s are not all non-negative.", get_name_in_parent(x))
-  assert_engine(x, is_non_negative, msg)
+  assert_engine(is_non_negative, x, msg = msg)
 }
 
 #' @rdname is_in_range
@@ -194,7 +206,7 @@ assert_all_are_non_negative <- function(x)
 assert_any_are_non_negative <- function(x)
 {                                                      
   msg <- gettextf("%s are all not non-negative.", get_name_in_parent(x))
-  assert_engine(x, is_non_negative, msg, what = "any")
+  assert_engine(is_non_negative, x, msg = msg, what = "any")
 }
 
 #' @rdname is_in_range
@@ -202,7 +214,7 @@ assert_any_are_non_negative <- function(x)
 assert_all_are_non_positive <- function(x)
 {                                                       
   msg <- gettextf("%s contains positive values.", get_name_in_parent(x))
-  assert_engine(x, is_non_positive, msg)
+  assert_engine(is_non_positive, x, msg = msg)
 }
 
 #' @rdname is_in_range
@@ -210,7 +222,7 @@ assert_all_are_non_positive <- function(x)
 assert_any_are_non_positive <- function(x)
 {                                                      
   msg <- gettextf("%s are all positive.", get_name_in_parent(x))
-  assert_engine(x, is_non_positive, msg, what = "any")
+  assert_engine(is_non_positive, x, msg = msg, what = "any")
 }
 
 #' @rdname is_in_range
@@ -224,11 +236,11 @@ assert_all_are_percentages <- function(x, lower_is_strict = FALSE,
     make_range_string(0, 100, lower_is_strict, upper_is_strict)
   )
   assert_engine(
-    x, 
     is_percentage, 
-    msg, 
+    x, 
     lower_is_strict = lower_is_strict, 
-    upper_is_strict = upper_is_strict
+    upper_is_strict = upper_is_strict, 
+    msg = msg
   )
 }
 
@@ -243,13 +255,13 @@ assert_any_are_percentages <- function(x, lower_is_strict = FALSE,
     make_range_string(0, 100, lower_is_strict, upper_is_strict)
   )
   assert_engine(
-    x, 
     is_percentage, 
-    msg, 
-    what = "any",
+    x, 
     lower_is_strict = lower_is_strict, 
-    upper_is_strict = upper_is_strict
-    )
+    upper_is_strict = upper_is_strict, 
+    msg = msg, 
+    what = "any"
+  )
 }  
 
 #' @rdname is_in_range
@@ -257,7 +269,7 @@ assert_any_are_percentages <- function(x, lower_is_strict = FALSE,
 assert_all_are_positive <- function(x)
 {                                                       
   msg <- gettextf("%s contains non-positive values.", get_name_in_parent(x))
-  assert_engine(x, is_positive, msg)
+  assert_engine(is_positive, x, msg = msg)
 }
 
 #' @rdname is_in_range
@@ -265,7 +277,7 @@ assert_all_are_positive <- function(x)
 assert_any_are_positive <- function(x)
 {                                                      
   msg <- gettextf("%s are all non-positive.", get_name_in_parent(x))
-  assert_engine(x, is_positive, msg, what = "any")
+  assert_engine(is_positive, x, msg = msg, what = "any")
 }
 
 #' @rdname is_in_range
@@ -279,12 +291,12 @@ assert_all_are_proportions <- function(x, lower_is_strict = FALSE,
     make_range_string(0, 1, lower_is_strict, upper_is_strict)
   )
   assert_engine(
-    x, 
     is_proportion, 
-    msg, 
+    x, 
     lower_is_strict = lower_is_strict, 
-    upper_is_strict = upper_is_strict
-    )
+    upper_is_strict = upper_is_strict, 
+    msg = msg
+  )
 }
 
 #' @rdname is_in_range
@@ -298,12 +310,12 @@ assert_any_are_proportions <- function(x, lower_is_strict = FALSE,
     make_range_string(0, 1, lower_is_strict, upper_is_strict)
   )
   assert_engine(
-    x, 
     is_proportion, 
-    msg, 
-    what = "any",
+    x, 
     lower_is_strict = lower_is_strict, 
-    upper_is_strict = upper_is_strict
+    upper_is_strict = upper_is_strict, 
+    msg = msg, 
+    what = "any"
   )
 }  
 

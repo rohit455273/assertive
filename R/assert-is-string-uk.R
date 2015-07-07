@@ -3,7 +3,7 @@
 assert_all_are_uk_car_licences <- function(x)
 {                                                     
   msg <- gettextf("%s are not all UK car licence plates.", get_name_in_parent(x))
-  assert_engine(x, is_uk_car_licence, msg)        
+  assert_engine(is_uk_car_licence, x, msg = msg)        
 }
 
 #' @rdname is_uk_car_licence
@@ -11,7 +11,7 @@ assert_all_are_uk_car_licences <- function(x)
 assert_any_are_uk_car_licences <- function(x)
 {                                                     
   msg <- gettextf("%s are all not UK car licence plates.", get_name_in_parent(x))
-  assert_engine(x, is_uk_car_licence, msg, what = "any")        
+  assert_engine(is_uk_car_licence, x, msg = msg, what = "any")        
 }
 
 #' @rdname is_uk_car_licence
@@ -30,7 +30,7 @@ assert_all_are_uk_national_insurance_numbers <- function(x)
     "%s are not all UK national insurance numbers.", 
     get_name_in_parent(x)
   )
-  assert_engine(x, is_uk_national_insurance_number, msg)        
+  assert_engine(is_uk_national_insurance_number, x, msg = msg)        
 }
 
 #' @rdname is_uk_national_insurance_number
@@ -41,7 +41,7 @@ assert_any_are_uk_national_insurance_numbers <- function(x)
     "%s are all not UK national insurance numbers.", 
     get_name_in_parent(x)
   )
-  assert_engine(x, is_uk_national_insurance_number, msg, what = "any")        
+  assert_engine(is_uk_national_insurance_number, x, msg = msg, what = "any")        
 }
 
 #' @rdname is_uk_postcode
@@ -49,7 +49,7 @@ assert_any_are_uk_national_insurance_numbers <- function(x)
 assert_all_are_uk_postcodes <- function(x)
 {                                                     
   msg <- gettextf("%s are not all UK postcodes.", get_name_in_parent(x))
-  assert_engine(x, is_uk_postcode, msg)        
+  assert_engine(is_uk_postcode, x, msg = msg)        
 }
 
 #' @rdname is_uk_postcode
@@ -57,7 +57,7 @@ assert_all_are_uk_postcodes <- function(x)
 assert_any_are_uk_postcodes <- function(x)
 {                                                     
   msg <- gettextf("%s are all not UK postcodes.", get_name_in_parent(x))
-  assert_engine(x, is_uk_postcode, msg, what = "any")        
+  assert_engine(is_uk_postcode, x, msg = msg, what = "any")        
 }
 
 #' @rdname is_uk_telephone_number
@@ -65,7 +65,7 @@ assert_any_are_uk_postcodes <- function(x)
 assert_all_are_uk_telephone_numbers <- function(x)
 {                                                     
   msg <- gettextf("%s are not all UK telephone numbers.", get_name_in_parent(x))
-  assert_engine(x, is_uk_telephone_number, msg)        
+  assert_engine(is_uk_telephone_number, x, msg = msg)        
 }
 
 #' @rdname is_uk_telephone_number
@@ -73,5 +73,5 @@ assert_all_are_uk_telephone_numbers <- function(x)
 assert_any_are_uk_telephone_numbers <- function(x)
 {                                                     
   msg <- gettextf("%s are all not UK telephone numbers.", get_name_in_parent(x))
-  assert_engine(x, is_uk_telephone_number, msg, what = "any")        
+  assert_engine(is_uk_telephone_number, x, msg = msg, what = "any")        
 }
