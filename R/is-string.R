@@ -609,10 +609,6 @@ is_single_character <- function(x)
 #'
 #' @param x Input to check.
 #' @param .xname Not intended to be used directly.
-#' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
-#' cause an error; otherwise they do not.  Like \code{na.rm} in many
-#' stats package functions, except that the position of the failing
-#' values does not change.
 #' @return \code{TRUE} if the input string is valid R code.
 #' @examples
 #' is_valid_r_code("x <- 1 + sqrt(pi)")

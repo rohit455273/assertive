@@ -366,6 +366,13 @@ assert_any_are_not_missing_nor_empty_characters <- function(x, na_ignore = FALSE
   )
 }
 
+#' @rdname is_valid_r_code
+#' @export
+assert_is_valid_r_code <- function(x)
+{                      
+  msg <- gettextf("%s is not valid R code.", get_name_in_parent(x))
+  assert_engine(is_valid_r_code, x, msg = msg)
+}
 
 #' @rdname is_valid_variable_name
 #' @export
