@@ -19,6 +19,10 @@ is_imaginary <- function(x, tol = 100 * .Machine$double.eps)
 #' @param x Input to check.
 #' @param tol Imaginary/real components smaller than \code{tol} are not 
 #' considered.
+#' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
+#' cause an error; otherwise they do not.  Like \code{na.rm} in many
+#' stats package functions, except that the position of the failing
+#' values does not change.
 #' @return \code{TRUE} if the input has imaginary component equal to zero.
 #' The \code{assert_*} functions return nothing but
 #' throw an error if the corresponding \code{is_*} function returns 
