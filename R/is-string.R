@@ -177,7 +177,7 @@ is_date_string <- function(x, format = "%F %T", .xname = get_name_in_parent(x))
     function(x) 
     {
       ok <- !is.na(strptime(x, format))
-      set_cause(ok, ifelse(is.na(x), "missing", "bad format"))
+      set_cause(ok, "bad format")
     }, 
     x
   )  

@@ -63,6 +63,7 @@ assert_all_are_date_strings <- function(x, format = "%F %T", na_ignore = FALSE)
   assert_engine(
     is_date_string, 
     x, 
+    format = format,
     msg = msg, 
     na_ignore = na_ignore
   )
@@ -79,6 +80,7 @@ assert_any_are_date_strings <- function(x, format = "%F %T", na_ignore = FALSE)
   assert_engine(
     is_date_string, 
     x, 
+    format = format,
     msg = msg, 
     what = "any", 
     na_ignore = na_ignore
