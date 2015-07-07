@@ -75,84 +75,64 @@
 #' @export
 assert_engine <- function(predicate, ..., msg, what = c("all", "any"), na_ignore = FALSE)
 {
-  handlerType <- match.arg(
+  handler_type <- match.arg(
     getOption("assertive.severity"),
     c("stop", "warning", "message", "none")
   )
   dots <- list(...)
   return_value <- if(length(dots) > 0) dots[[1]] else NULL
-  if(handlerType == "none") 
+  if(handler_type == "none") 
   {
     return(invisible(return_value))
   }
+  what <- match.fun(match.arg(what))
+  
+  ok <- predicate(...)
+  if(inherits(ok, "scalar_with_cause"))
+  {
+    if(!isTRUE(ok))
+    {
+      if(missing(msg))
+      {
+        msg <- cause(ok)
+      }
+      give_feedback(handler_type, msg)
+    }
+  } else # inherits(ok, "vector_with_cause")
+  {
+    really_ok <- if(na_ignore)
+    {
+      # ok can be TRUE or NA; FALSE is bad
+      ok | is.na(ok)
+    } else
+    {
+      # ok can be TRUE; FALSE or NA is bad
+      ok & !is.na(ok)
+    }
+    if(!what(really_ok))
+    {
+      # Append first few failure values and positions to the error message.
+      msg <- paste(msg, print_and_capture(ok), sep = "\n")
+      give_feedback(handler_type, msg)
+    }
+  }
+  invisible(return_value)
+}
+
+give_feedback <- function(handler_type, msg)
+{
   handler <- match.fun(
-    handlerType
+    handler_type
   )
   simple <- switch(
-    handlerType,
+    handler_type,
     stop = simpleError,
     warning = simpleWarning,
     message = simpleMessage
   )
-  what <- match.fun(match.arg(what))
-  
-  ok <- predicate(...)
-  
-  really_ok <- if(na_ignore)
-  {
-    # ok can be TRUE or NA; FALSE is bad
-    ok | is.na(ok)
-  } else
-  {
-    # ok can be TRUE; FALSE or NA is bad
-    ok & !is.na(ok)
-  }
-  
-  if(!what(really_ok))
-  {
-    if(missing(msg)) 
-    {
-      if(length(ok) == 1L)
-      {
-        msg <- cause(ok)
-      } else
-      {
-        stop("Bug in assertive; error message is missing.")
-      }
-    }
-    if(length(ok) != 1L)
-    {
-      # Append first few failure values and positions to the error message.
-      fail_index <- which(!really_ok)
-      n <- length(fail_index)
-      fail_index <- head(fail_index)
-      failures <- data.frame(
-        Position = fail_index,
-        Value    = truncate(names(ok[fail_index])),
-        Cause    = unclass(cause(ok)[fail_index]), # See bug 15997
-        row.names = seq_along(fail_index)
-      )
-      msg <- paste0(
-        msg, 
-        "\nThere ", 
-        ngettext(n, "was", "were"), 
-        " ", 
-        n, 
-        " ", 
-        ngettext(n, "failure", "failures"),
-        if(nrow(failures) < n) 
-        {
-          paste0(" (showing the first ", nrow(failures), ")")
-        },
-        ":\n",
-        print_and_capture(failures)
-      )
-    }
-    # Throw error/warning/message
-    caller <- sys.call(-2)
-    handler(simple(msg, caller))
-  }
-  invisible(return_value)
+  # Throw error/warning/message
+  caller <- sys.call(-3)
+  handler(simple(msg, caller))
 }
 
 #' FALSE, with a cause of failure.

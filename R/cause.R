@@ -64,7 +64,7 @@ print.scalar_with_cause <- function(x, ...)
   {
     stop("Bug in assertive; x should have length 1.") 
   }
-  print(x)
+  print(x[1])
   cat("Cause of failure: ", cause(x), "\n")
 }    
 
