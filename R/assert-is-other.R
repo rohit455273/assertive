@@ -15,7 +15,7 @@ assert_all_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps,
     n = n, 
     tol = tol, 
     msg = msg, 
-    na_ignore = FALSE
+    na_ignore = na_ignore
   )  
 }
 
@@ -37,7 +37,7 @@ assert_any_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps,
     tol = tol, 
     msg = msg,
     what = "any",
-    na_ignore = FALSE
+    na_ignore = na_ignore
   )   
 }
 
@@ -56,7 +56,7 @@ assert_all_are_even <- function(x, tol = 100 * .Machine$double.eps,
     x, 
     tol = tol,
     msg = msg, 
-    na_ignore = FALSE
+    na_ignore = na_ignore
   )  
 }
 
@@ -76,7 +76,7 @@ assert_any_are_even <- function(x, tol = 100 * .Machine$double.eps,
     tol = tol,
     msg = msg, 
     what = "any",
-    na_ignore = FALSE
+    na_ignore = na_ignore
   ) 
 }
 
@@ -220,4 +220,43 @@ assert_any_numbers_are_whole_numbers <- function(x,
 {                                                      
   .Deprecated("assert_any_are_whole_numbers")
   assert_any_are_whole_numbers(x, tol, na_ignore = na_ignore)  
+}
+
+#' @rdname is_whole_number
+#' @export
+assert_all_are_whole_numbers <- function(x,
+  tol = 100 * .Machine$double.eps, na_ignore = FALSE)
+{                                                
+  msg <- gettextf(
+    "%s are not all whole numbers (tol = %g).", 
+    get_name_in_parent(x),
+    tol
+  )
+  assert_engine(
+    is_whole_number, 
+    x, 
+    tol = tol,
+    msg = msg, 
+    na_ignore = na_ignore
+  ) 
+}
+
+#' @rdname is_whole_number
+#' @export
+assert_any_are_whole_numbers <- function(x, 
+  tol = 100 * .Machine$double.eps, na_ignore = FALSE)
+{                                             
+  msg <- gettextf(
+    "%s are not all whole numbers (tol = %g).", 
+    get_name_in_parent(x),
+    tol
+  )
+  assert_engine(
+    is_whole_number, 
+    x, 
+    tol = tol,
+    msg = msg,
+    what = "any",
+    na_ignore = na_ignore
+  )
 }
