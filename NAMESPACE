@@ -2,6 +2,7 @@
 
 S3method(as.character,file)
 S3method(merge,list)
+S3method(print,with_cause)
 export("cause<-")
 export(DIM)
 export(are_identical)

@@ -48,10 +48,70 @@ cause <- function(x)
 set_cause <- function(x, value)
 {
   if(all(!is.na(x) & x)) return(x)
-  cause(x) <- ifelse(
-    is.na(x), 
-    "missing", 
-    ifelse(x, "", value)
-  )
+  cause_value <- character(length(x))
+  cause_value[is.na(x)] <- "missing"
+  cause_value[!x & !is.na(x)] <- value
+  cause(x) <- cause_value
+  class(x) <- c("with_cause", "logical")
   x
+}
+
+#' Print method for objects with a cause attribute
+#' 
+#' Prints objects of class \code{with_cause}.
+#' @param x an object of class \code{with_cause}.
+#' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
+#' cause an error; otherwise they do not.  Like \code{na.rm} in many
+#' stats package functions, except that the position of the failing
+#' values does not change.
+#' @param n_to_show A natural number.  The maximum number of failures 
+#' to show. 
+#' @export
+print.with_cause <- function(x, na_ignore = FALSE, n_to_show = 6)
+{
+  cause_x <- cause(x)
+  names_x <- names(x)
+  x <- strip_attributes(x)
+  ok <- if(na_ignore)
+  {
+    # ok can be TRUE or NA; FALSE is bad
+    x | is.na(x)
+  } else
+  {
+    # ok can be TRUE; FALSE or NA is bad
+    x & !is.na(x)
+  }
+  
+  if(length(ok) == 1L)
+  {
+    print(x)
+    cat("Cause of failure: ", cause_x, "\n")
+  } else
+  {
+    # Append first few failure values and positions to the error message.
+    fail_index <- which(!ok)
+    n <- length(fail_index)
+    fail_index <- head(fail_index, n_to_show)
+    failures <- data.frame(
+      Position = fail_index,
+      Value    = truncate(names_x[fail_index]),
+      Cause    = unclass(cause_x[fail_index]), # See bug 15997
+      row.names = seq_along(fail_index)
+    )
+    cat(
+      "There ", 
+      ngettext(n, "was", "were"), 
+      " ", 
+      n, 
+      " ", 
+      ngettext(n, "failure", "failures"),
+      if(nrow(failures) < n) 
+      {
+        paste0(" (showing the first ", nrow(failures), ")")
+      },
+      ":\n",
+      sep = ""
+    )
+    print(failures)
+  }
 }
