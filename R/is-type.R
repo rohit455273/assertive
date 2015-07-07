@@ -99,6 +99,10 @@ is_call <- function(x, .xname = get_name_in_parent(x))
 #'
 #' @param x Input to check.
 #' @param .xname Not intended to be used directly.
+#' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
+#' cause an error; otherwise they do not.  Like \code{na.rm} in many
+#' stats package functions, except that the position of the failing
+#' values does not change.
 #' @return \code{is_character} wraps \code{is.character}, providing more 
 #' information on failure. \code{is_a_string} returns \code{TRUE} if the 
 #' input is character and scalar. \code{is_an_empty_string} returns \code{TRUE}
