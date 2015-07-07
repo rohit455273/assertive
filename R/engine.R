@@ -10,6 +10,10 @@
 #' @param msg The error message, in the event of failure.
 #' @param what Either 'all' or 'any', to reduce vectorised tests to a 
 #' single value.
+#' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
+#' cause an error; otherwise they do not.  Like \code{na.rm} in many
+#' stats package functions, except that the position of the failing
+#' values does not change.
 #' @return \code{FALSE} with the attribute \code{message}, as provided
 #' in the input.
 #' @note Missing values are considered as \code{FALSE} for the purposes of
@@ -69,7 +73,7 @@
 #' assert_any_are_less_than_pi(x)
 #' dont_stop(assert_all_are_less_than_pi(x))
 #' @export
-assert_engine <- function(predicate, ..., msg, what = c("all", "any"))
+assert_engine <- function(predicate, ..., msg, what = c("all", "any"), na_ignore = FALSE)
 {
   handlerType <- match.arg(
     getOption("assertive.severity"),
@@ -93,11 +97,22 @@ assert_engine <- function(predicate, ..., msg, what = c("all", "any"))
   what <- match.fun(match.arg(what))
   
   ok <- predicate(...)
-  if(!what(ok & !is.na(ok)))
+  
+  really_ok <- if(na_ignore)
+  {
+    # ok can be TRUE or NA; FALSE is bad
+    ok | is.na(ok)
+  } else
+  {
+    # ok can be TRUE; FALSE or NA is bad
+    ok & !is.na(ok)
+  }
+  
+  if(!what(really_ok))
   {
     if(missing(msg)) 
     {
-      if(is_scalar(ok))
+      if(length(ok) == 1L)
       {
         msg <- cause(ok)
       } else
@@ -105,10 +120,10 @@ assert_engine <- function(predicate, ..., msg, what = c("all", "any"))
         stop("Bug in assertive; error message is missing.")
       }
     }
-    if(!is_scalar(ok))
+    if(length(ok) != 1L)
     {
       # Append first few failure values and positions to the error message.
-      fail_index <- which(!ok | is.na(ok))
+      fail_index <- which(!really_ok)
       n <- length(fail_index)
       fail_index <- head(fail_index)
       failures <- data.frame(

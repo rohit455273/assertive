@@ -30,6 +30,10 @@ is_in_open_range <- function(x, lower = -Inf, upper = Inf)
 #' otherwise it is closed.
 #' @param upper_is_strict If \code{TRUE}, the upper bound is open (strict)
 #' otherwise it is closed.
+#' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
+#' cause an error; otherwise they do not.  Like \code{na.rm} in many
+#' stats package functions, except that the position of the failing
+#' values does not change.
 #' @note \code{is_in_range} provides the most flexibility in determining
 #' if values are within a numeric interval.  The other functions restrict
 #' the input arguments for convience in common cases.  For example,
