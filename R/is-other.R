@@ -29,6 +29,10 @@ is_debugged <- function(x, .xname = get_name_in_parent(x))
 #' @param x A numeric vector to divide.
 #' @param n A numeric vector to divide by.
 #' @param tol Differences from zero smaller than \code{tol} are not considered.
+#' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
+#' cause an error; otherwise they do not.  Like \code{na.rm} in many
+#' stats package functions, except that the position of the failing
+#' values does not change.
 #' @return \code{TRUE} if the input \code{x} is divisible by \code{n}, within 
 #' the specified tolerance.
 #' @note \code{is_even} and \code{is_odd} are shortcuts for divisibility by two.
@@ -255,6 +259,10 @@ is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE,
 #' 
 #' @param x Input to check.
 #' @param tol Differences smaller than \code{tol} are not considered.
+#' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
+#' cause an error; otherwise they do not.  Like \code{na.rm} in many
+#' stats package functions, except that the position of the failing
+#' values does not change.
 #' @note The term whole number is used to distinguish from integer in
 #' that the input \code{x} need not have type \code{integer}.  In fact
 #' it is expected that \code{x} will be \code{numeric}.

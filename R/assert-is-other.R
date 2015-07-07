@@ -1,35 +1,65 @@
 #' @rdname is_divisible_by
 #' @export
-assert_all_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
+assert_all_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps, 
+  na_ignore = FALSE)
 {  
   msg <- gettextf("%s are not all divisible by %s.", get_name_in_parent(x), toString(n, width = 20))
-  assert_engine(is_divisible_by, x, msg = msg, n = n, tol = tol)  
-}
-
-#' @rdname is_divisible_by
-#' @export
-assert_any_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps)
-{  
-  msg <- gettextf("%s are all not divisible by %s.", get_name_in_parent(x), toString(n, width = 20))
   assert_engine(
-    x, is_divisible_by, x, msg = msg, what = "any", n = n, tol = tol
+    is_divisible_by, 
+    x, 
+    n = n, 
+    tol = tol, 
+    msg = msg, 
+    na_ignore = FALSE
   )  
 }
 
 #' @rdname is_divisible_by
 #' @export
-assert_all_are_even <- function(x, tol = 100 * .Machine$double.eps)
+assert_any_are_divisible_by <- function(x, n, tol = 100 * .Machine$double.eps, 
+  na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are not all even.", get_name_in_parent(x))
-  assert_engine(is_even, x, msg = msg, tol = tol)  
+  msg <- gettextf("%s are all not divisible by %s.", get_name_in_parent(x), toString(n, width = 20))
+  assert_engine(
+    is_divisible_by, 
+    x, 
+    n = n, 
+    tol = tol, 
+    msg = msg,
+    what = "any",
+    na_ignore = FALSE
+  )   
 }
 
 #' @rdname is_divisible_by
 #' @export
-assert_any_are_even <- function(x, tol = 100 * .Machine$double.eps)
+assert_all_are_even <- function(x, tol = 100 * .Machine$double.eps, 
+  na_ignore = FALSE)
+{  
+  msg <- gettextf("%s are not all even.", get_name_in_parent(x))
+  assert_engine(
+    is_even, 
+    x, 
+    tol = tol,
+    msg = msg, 
+    na_ignore = FALSE
+  )  
+}
+
+#' @rdname is_divisible_by
+#' @export
+assert_any_are_even <- function(x, tol = 100 * .Machine$double.eps, 
+  na_ignore = FALSE)
 {  
   msg <- gettextf("%s are all not even.", get_name_in_parent(x))
-  assert_engine(is_even, x, msg = msg, what = "any", tol = tol)  
+  assert_engine(
+    is_even, 
+    x, 
+    tol = tol,
+    msg = msg, 
+    what = "any",
+    na_ignore = FALSE
+  ) 
 }
 
 #' @rdname is_existing
@@ -69,22 +99,6 @@ assert_any_are_existing <- function(
   )       
 }
 
-#' @rdname is_divisible_by
-#' @export
-assert_all_are_odd <- function(x, tol = 100 * .Machine$double.eps)
-{  
-  msg <- gettextf("%s are not all odd.", get_name_in_parent(x))
-  assert_engine(is_odd, x, msg = msg, tol = tol)  
-}
-
-#' @rdname is_divisible_by
-#' @export
-assert_any_are_odd <- function(x, tol = 100 * .Machine$double.eps)
-{  
-  msg <- gettextf("%s are all not odd.", get_name_in_parent(x))
-  assert_engine(is_odd, x, msg = msg, what = "any", tol = tol)  
-}
-
 #' @rdname is_debugged
 #' @export
 assert_is_debugged <- function(x)
@@ -109,20 +123,32 @@ assert_is_loaded <- function(x)
 
 #' @rdname is_divisible_by
 #' @export
-assert_all_are_odd <- function(x, n, tol = 100 * .Machine$double.eps)
+assert_all_are_odd <- function(x, tol = 100 * .Machine$double.eps, 
+  na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are not all odd.", get_name_in_parent(x), toString(n, width = 20))
-  assert_engine(is_odd, x, msg = msg, tol = tol)  
+  msg <- gettextf("%s are not all odd.", get_name_in_parent(x))
+  assert_engine(
+    is_odd, 
+    x, 
+    tol = tol,
+    msg = msg, 
+    na_ignore = na_ignore
+  )  
 }
 
 #' @rdname is_divisible_by
 #' @export
-assert_any_are_odd <- function(x, n, tol = 100 * .Machine$double.eps)
+assert_any_are_odd <- function(x, tol = 100 * .Machine$double.eps, 
+  na_ignore = FALSE)
 {  
-  msg <- gettextf("%s are all not odd.", get_name_in_parent(x), toString(n, width = 20))
-  assert_engine(
-    x, is_odd, x, msg = msg, what = "any", tol = tol
-  )  
+  msg <- gettextf("%s are all not odd.", get_name_in_parent(x))  assert_engine(
+    is_odd, 
+    x, 
+    tol = tol,
+    msg = msg, 
+    what = "any",
+    na_ignore = na_ignore
+  )
 }
 
 #' @rdname is_symmetric_matrix
@@ -154,35 +180,17 @@ assert_is_unsorted <- function(x, na.rm = FALSE, strictly = FALSE)
 #' @rdname is_whole_number
 #' @export
 assert_all_numbers_are_whole_numbers <- function(x,
-  tol = 100 * .Machine$double.eps)
+  tol = 100 * .Machine$double.eps, na_ignore = FALSE)
 {                                                       
   .Deprecated("assert_all_are_whole_numbers")
-  assert_all_are_whole_numbers(x, tol)
+  assert_all_are_whole_numbers(x, tol, na_ignore = na_ignore)
 }
 
 #' @rdname is_whole_number
 #' @export
 assert_any_numbers_are_whole_numbers <- function(x, 
-  tol = 100 * .Machine$double.eps)
+  tol = 100 * .Machine$double.eps, na_ignore = FALSE)
 {                                                      
   .Deprecated("assert_any_are_whole_numbers")
-  assert_any_are_whole_numbers(x, tol)  
-}
-
-#' @rdname is_whole_number
-#' @export
-assert_all_are_whole_numbers <- function(x, 
-  tol = 100 * .Machine$double.eps)
-{                                                       
-  msg <- gettextf("%s are not all whole numbers.", get_name_in_parent(x))
-  assert_engine(is_whole_number, x, msg = msg, tol = tol)
-}
-
-#' @rdname is_whole_number
-#' @export
-assert_any_are_whole_numbers <- function(x, 
-  tol = 100 * .Machine$double.eps)
-{                                                      
-  msg <- gettextf("%s are all not whole numbers.", get_name_in_parent(x))
-  assert_engine(is_whole_number, x, msg = msg, what = "any", tol = tol)
+  assert_any_are_whole_numbers(x, tol, na_ignore = na_ignore)  
 }
