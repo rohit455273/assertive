@@ -159,7 +159,7 @@ is_loaded <- function(x, PACKAGE = "", type = "",
 #' @export
 is_odd <- function(x, tol = 100 * .Machine$double.eps)
 {
-  is_divisible_by(x - 1, 2L, tol = tol)  
+  setNames(is_divisible_by(x - 1, 2L, tol = tol), x)
 }
 
 #' Is the input a symmetric matrix?
