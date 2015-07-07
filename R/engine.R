@@ -169,7 +169,7 @@ false <- function(...)
   msg <- if(length(list(...)) > 0L) gettextf(...) else ""
   x <- FALSE
   cause(x) <- msg
-  class(x) <- c("with_cause", "logical")
+  class(x) <- c("scalar_with_cause", "logical")
   x
 }
 
@@ -187,6 +187,6 @@ na <- function(...)
   msg <- if(length(list(...)) > 0L) gettextf(...) else ""
   x <- NA
   cause(x) <- msg
-  class(x) <- c("with_cause", "logical")
+  class(x) <- c("scalar_with_cause", "logical")
   x
 }

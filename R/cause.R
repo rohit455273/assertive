@@ -52,22 +52,37 @@ set_cause <- function(x, value)
   cause_value[is.na(x)] <- "missing"
   cause_value[!x & !is.na(x)] <- value
   cause(x) <- cause_value
-  class(x) <- c("with_cause", "logical")
+  class(x) <- c("vector_with_cause", "logical")
   x
 }
 
-#' Print method for objects with a cause attribute
+#' @rdname print.vector_with_cause
+#' @export
+print.scalar_with_cause <- function(x, ...)
+{
+  if(length(x) != 1L)
+  {
+    stop("Bug in assertive; x should have length 1.") 
+  }
+  print(x)
+  cat("Cause of failure: ", cause(x), "\n")
+}    
+
+#' Print methods for objects with a cause attribute
 #' 
-#' Prints objects of class \code{with_cause}.
-#' @param x an object of class \code{with_cause}.
+#' Prints objects of class \code{scalar_with_cause} and 
+#' \code{vector_with_cause}.
+#' @param x an object of class \code{scalar_with_cause} or
+#' \code{vector_with_cause}.
 #' @param na_ignore A logical value.  If \code{FALSE}, \code{NA} values
-#' cause an error; otherwise they do not.  Like \code{na.rm} in many
+#' are printed; otherwise they do not.  Like \code{na.rm} in many
 #' stats package functions, except that the position of the failing
 #' values does not change.
 #' @param n_to_show A natural number.  The maximum number of failures 
 #' to show. 
+#' @param ... Currently unused.
 #' @export
-print.with_cause <- function(x, na_ignore = FALSE, n_to_show = 6)
+print.vector_with_cause <- function(x, na_ignore = FALSE, n_to_show = 6, ...)
 {
   cause_x <- cause(x)
   names_x <- names(x)
@@ -82,36 +97,29 @@ print.with_cause <- function(x, na_ignore = FALSE, n_to_show = 6)
     x & !is.na(x)
   }
   
-  if(length(ok) == 1L)
-  {
-    print(x)
-    cat("Cause of failure: ", cause_x, "\n")
-  } else
-  {
-    # Append first few failure values and positions to the error message.
-    fail_index <- which(!ok)
-    n <- length(fail_index)
-    fail_index <- head(fail_index, n_to_show)
-    failures <- data.frame(
-      Position = fail_index,
-      Value    = truncate(names_x[fail_index]),
-      Cause    = unclass(cause_x[fail_index]), # See bug 15997
-      row.names = seq_along(fail_index)
-    )
-    cat(
-      "There ", 
-      ngettext(n, "was", "were"), 
-      " ", 
-      n, 
-      " ", 
-      ngettext(n, "failure", "failures"),
-      if(nrow(failures) < n) 
-      {
-        paste0(" (showing the first ", nrow(failures), ")")
-      },
-      ":\n",
-      sep = ""
-    )
-    print(failures)
-  }
+  # Append first few failure values and positions to the error message.
+  fail_index <- which(!ok)
+  n <- length(fail_index)
+  fail_index <- head(fail_index, n_to_show)
+  failures <- data.frame(
+    Position = fail_index,
+    Value    = truncate(names_x[fail_index]),
+    Cause    = unclass(cause_x[fail_index]), # See bug 15997
+    row.names = seq_along(fail_index)
+  )
+  cat(
+    "There ", 
+    ngettext(n, "was", "were"), 
+    " ", 
+    n, 
+    " ", 
+    ngettext(n, "failure", "failures"),
+    if(nrow(failures) < n) 
+    {
+      paste0(" (showing the first ", nrow(failures), ")")
+    },
+    ":\n",
+    sep = ""
+  )
+  print(failures)
 }
