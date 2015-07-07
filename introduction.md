@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 author: "Richard Cotton"
-date: '`r Sys.Date()`'
+date: '2015-07-07'
 output: html_document
 ---
 
@@ -10,11 +10,7 @@ output: html_document
 %\VignetteIndexEntry{1. Introduction}
 -->
 
-```{r, Setup, echo = FALSE, results = "hide"}
-set.seed(19790801)
-library(assertive)
-knitr::opts_chunk$set(error = FALSE)
-```
+
 
 ### *assert* functions
 
@@ -25,13 +21,18 @@ all the values are non-negative, and that all the values are whole numbers.
 
 Base-R has a function called `stopifnot` that lets you perform such checks.
 
-```{r, CountsStopIfNot, error = TRUE, purl = FALSE}
+
+```r
 counts <- c(1, 2, 3, 4.5)
 stopifnot(
   is.numeric(counts),
   all(counts >= 0),
   isTRUE(all.equal(counts, round(counts)))
 )
+```
+
+```
+## Error: isTRUE(all.equal(counts, round(counts))) is not TRUE
 ```
 
 This is OK, but not that easy to read.  Worse, the error messages that it 
@@ -44,11 +45,19 @@ helpful error messages to users in the event of a check failing.
 
 Here's the same example again, written in an `assertive` style.
 
-```{r, CountsAssertive, error = TRUE, purl = FALSE}
+
+```r
 counts <- c(1, 2, 3, 4.5)
 assert_is_numeric(counts)
 assert_all_are_non_negative(counts)
 assert_all_are_whole_numbers(counts)
+```
+
+```
+## Error in eval(expr, envir, enclos): counts are not all whole numbers (tol = 2.22045e-14).
+## There was 1 failure:
+##   Position Value      Cause
+## 1        4   4.5 fractional
 ```
 
 Here you see that the error message contains a human readable sentence, followed
@@ -57,12 +66,20 @@ and reasons for failure.
 
 You can also use pipes, but this means that the variable name is changed to `.`.
 
-```{r, CountsWithPipes, error = TRUE, purl = FALSE}
+
+```r
 library(magrittr)
 counts %>% 
   assert_is_numeric %>% 
   assert_all_are_non_negative %>% 
   assert_all_are_whole_numbers
+```
+
+```
+## Error in function_list[[k]](value): . are not all whole numbers (tol = 2.22045e-14).
+## There was 1 failure:
+##   Position Value      Cause
+## 1        4   4.5 fractional
 ```
 
 ### *is* and *has* functions
@@ -74,9 +91,22 @@ calls `is_non_negative`, and so on.
 Some *is* and *has* functions, such as `is_numeric`, return a single logical 
 value.
 
-```{r, IsNumeric}
+
+```r
 is_numeric(1:6)
+```
+
+```
+## [1] TRUE
+```
+
+```r
 is_numeric(letters)
+```
+
+```
+## [1] FALSE
+## Cause of failure:  letters is not of type 'numeric'; it has class 'character'.
 ```
 
 When the check passed, `is_numeric` returned `TRUE`, and when it failed, 
@@ -89,9 +119,19 @@ with `assert_is_numeric`.
 Some *is* and *has* functions, such as `is_non_negative`, return a logical 
 vector.
 
-```{r, IsNonNegative}
+
+```r
 is_nn <- is_non_negative(rnorm(6))
 unclass(is_nn)
+```
+
+```
+##   1.85027386134187 -0.578688500050631  -1.47971295307092 
+##               TRUE              FALSE              FALSE 
+##    -0.133276736157 -0.232058794760384 0.0147176397242853 
+##              FALSE              FALSE               TRUE 
+## attr(,"cause")
+## [1]         too low too low too low too low
 ```
 
 For convenience, this has a pretty print method that shows you where the 

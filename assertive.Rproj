@@ -17,4 +17,4 @@ PackageInstallArgs: --no-multiarch --with-keep.source --no-site-file --no-init-f
 PackageBuildArgs: --no-site-file --no-init-file --slave
 PackageBuildBinaryArgs: --no-site-file --no-init-file --slave
 PackageCheckArgs: --no-site-file --no-init-file --slave
-PackageRoxygenize: rd,collate,namespace
+PackageRoxygenize: rd,collate,namespace,vignette
