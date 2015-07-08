@@ -56,6 +56,9 @@ is_identical_to_true <- function(x, allow_attributes = FALSE,
 #' @param .xname Not intended to be used directly.
 #' @return \code{is_if_condition} returns \code{TRUE} if the input is 
 #' scalar \code{TRUE} or \code{FALSE}.
+#' @note \code{if} will try to do the right thing if you pass it a number
+#' or a string, but this function assumes you want to do the right thing
+#' and pass either \code{TRUE} or \code{FALSE}, maybe with some attributes.
 #' @examples
 #' is_if_condition(TRUE)
 #' is_if_condition(FALSE)
