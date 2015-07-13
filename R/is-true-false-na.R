@@ -7,7 +7,7 @@ is_false <- function(x)
     function(x) 
     {
       ok <- !x & !is.na(x)
-      set_cause(ok, ifelse(is.na(x), "missing", "true"))    
+      set_cause(ok, ifelse(is.na(x), "missing", "true"))
     }, 
     x
   )
@@ -15,34 +15,62 @@ is_false <- function(x)
 
 #' @rdname is_true
 #' @export
-is_identical_to_false <- function(x, allow_attributes = FALSE, 
-  .xname = get_name_in_parent(x))
+is_na <- function(x)
 {
-  if(allow_attributes) 
-  {
-    x <- strip_attributes(x)
-  }
-  if(!identical(FALSE, x)) 
-  {
-    return(false("%s is not identical to FALSE.", .xname))
-  }
-  TRUE
-}                  
+  # Do not coerce_to(x, "logical"); this breaks, e.g., character vectors
+  call_and_name(
+    function(x)
+    {
+      ok <- is.na(x)
+      set_cause(ok, ifelse(x, "true", "false"))
+    }, 
+    x
+  )
+}
 
 #' @rdname is_true
 #' @export
-is_identical_to_true <- function(x, allow_attributes = FALSE, 
-  .xname = get_name_in_parent(x))
+is_not_na <- function(x)
 {
-  if(allow_attributes) 
-  {
-    x <- strip_attributes(x)
-  }
-  if(!identical(TRUE, x))
-  {
-    return(false("%s is not identical to TRUE.", .xname))
-  }
-  TRUE
+  # Do not coerce_to(x, "logical"); this breaks, e.g., character vectors
+  call_and_name(
+    function(x)
+    {
+      ok <- !is.na(x)
+      set_cause(ok, "missing")
+    }, 
+    x
+  )
+}
+
+#' @rdname is_true
+#' @export
+is_not_false <- function(x)
+{
+  x <- coerce_to(x, "logical")
+  call_and_name(
+    function(x)
+    {
+      ok <- x | is.na(x)
+      set_cause(ok, "true")
+    }, 
+    x
+  )
+}
+
+#' @rdname is_true
+#' @export
+is_not_true <- function(x)
+{
+  x <- coerce_to(x, "logical")
+  call_and_name(
+    function(x)
+    {
+      ok <- !x | is.na(x)
+      set_cause(ok, "false")
+    }, 
+    x
+  )
 }
 
 #' Is the input TRUE?
@@ -68,20 +96,45 @@ is_identical_to_true <- function(x, allow_attributes = FALSE,
 #' \code{FALSE}.
 #' @seealso \code{\link[base]{isTRUE}}.
 #' @examples
+#' # Checks against logical values using base::identical
 #' assert_is_identical_to_true(TRUE)
 #' assert_is_identical_to_false(FALSE)
+#' assert_is_identical_to_na(NA)
+#' 
+#' # Other NA types match
+#' assert_is_identical_to_na(NA_complex_)
+#' 
+#' # NaN is not NA
+#' dont_stop(assert_is_identical_to_na(NaN))
+#' 
+#' # For a slightly less strict test, you can ignore attributes
 #' assert_is_identical_to_true(c(truth = TRUE), allow_attributes = TRUE)
 #' assert_is_identical_to_false(matrix(FALSE), allow_attributes = TRUE)
+#' assert_is_identical_to_na(structure(NA, class = "nanana"), allow_attributes = TRUE)
+#' 
+#' # Vectorized predicates
 #' x <- c(TRUE, FALSE, NA)
 #' is_true(x)
 #' is_false(x)
+#' is_na(x)
+#' 
+#' # ...and their opposites
+#' is_not_true(x)
+#' is_not_false(x)
+#' is_not_na(x)
+#' 
+#' # Check that at least one element fits the condition
 #' assert_any_are_true(x)
 #' assert_any_are_false(x)
+#' assert_any_are_na(x)
+#' 
 #' # These tests should fail:
 #' dont_stop(assert_is_identical_to_true(c(truth = TRUE)))
 #' dont_stop(assert_is_identical_to_false(matrix(FALSE)))
+#' dont_stop(assert_is_identical_to_na(structure(NA, class = "nanana")))
 #' dont_stop(assert_all_are_true(x))
 #' dont_stop(assert_all_are_false(x))
+#' dont_stop(assert_all_are_na(x))
 #' @export
 is_true <- function(x)
 {
@@ -90,42 +143,8 @@ is_true <- function(x)
     function(x) 
     {
       ok <- x & !is.na(x)
-      set_cause(ok, ifelse(is.na(x), "missing", "false"))    
+      set_cause(ok, ifelse(is.na(x), "missing", "false"))   
     }, 
     x
   )
-}
-
-#' Is suitable to be used as an if condition
-#' 
-#' @param x Input to check.
-#' @param .xname Not intended to be used directly.
-#' @return \code{is_if_condition} returns \code{TRUE} if the input is 
-#' scalar \code{TRUE} or \code{FALSE}.
-#' @examples
-#' is_if_condition(TRUE)
-#' is_if_condition(FALSE)
-#' is_if_condition(NA)
-#' is_if_condition(c(TRUE, FALSE))
-#' is_if_condition("the truth")
-#' # You can pass a number as a logical condition, but you shouldn't,
-#' # so the next line returns FALSE.
-#' is_if_condition(1)
-#' dont_stop(assert_is_if_condition(raw(1)))
-#' @export
-is_if_condition <- function(x, .xname = get_name_in_parent(x))
-{
-  if(!(ok <- is_logical(x, .xname)))
-  {
-    return(ok)
-  }
-  if(!(ok <- is_scalar(x, "length", .xname)))
-  {
-    return(ok)
-  }
-  if(!is_not_na(x))
-  {
-    return(false("%s is NA.", .xname))
-  }
-  TRUE
 }

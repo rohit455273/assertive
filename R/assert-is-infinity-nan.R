@@ -62,22 +62,6 @@ assert_any_are_negative_infinity <- function(x)
   assert_engine(is_negative_infinity, x, msg = msg, what = "any")        
 }
 
-#' @rdname is_na
-#' @export
-assert_all_are_not_na <- function(x)
-{                                                      
-  msg <- gettextf("%s contains NAs.", get_name_in_parent(x))
-  assert_engine(is_not_na, x, msg = msg)
-}
-
-#' @rdname is_na
-#' @export
-assert_any_are_not_na <- function(x)
-{                                                      
-  msg <- gettextf("%s are all NA.", get_name_in_parent(x))
-  assert_engine(is_not_na, x, msg = msg, what = "any")
-}
-
 #' @rdname is_nan
 #' @export
 assert_all_are_not_nan <- function(x)
@@ -92,20 +76,6 @@ assert_any_are_not_nan <- function(x)
 {                                                      
   msg <- gettextf("%s are all NaN.", get_name_in_parent(x))
   assert_engine(is_not_nan, x, msg = msg, what = "any")
-}
-
-#' @rdname is_null
-#' @export
-assert_is_not_null <- function(x)
-{                                                      
-  assert_engine(is_not_null, x, .xname = get_name_in_parent(x))   
-}
-
-#' @rdname is_null
-#' @export
-assert_is_null <- function(x)
-{                                                         
-  assert_engine(is_null, x, .xname = get_name_in_parent(x))       
 }
 
 #' @rdname is_finite

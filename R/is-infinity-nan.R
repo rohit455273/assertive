@@ -62,37 +62,6 @@ is_infinite <- function(x)
   )
 }
 
-
-#' Is the input present/missing?
-#'
-#' Checks to see if the input is (not) NA.
-#'
-#' @param x Input to check.
-#' @return \code{is_na} wraps \code{is.na}, showing the names of 
-#' the inputs in the answer.  \code{is_not_na} is the negation. 
-#' The \code{assert_*} functions return nothing but throw an error
-#' if the corresponding \code{is_*} function returns \code{FALSE}.
-#' @seealso \code{\link[base]{is.na}}
-#' @examples
-#' x <- c(0, NaN, NA)
-#' is_na(x)
-#' is_not_na(x)
-#' assert_all_are_not_na(1:10)
-#' assert_any_are_not_na(x)
-#' dont_stop(assert_all_are_not_na(x))
-#' @export
-is_na <- function(x)
-{
-  call_and_name(
-    function(x)
-    {
-      ok <- is.na(x)
-      set_cause(ok, "not missing")
-    }, 
-    x
-  )
-}
-
 #' Is the input (not) NaN?
 #'
 #' Checks to see if the input is a number that is(n't) NaN.
@@ -125,20 +94,6 @@ is_nan <- function(x)
   )
 }
 
-#' @rdname is_na
-#' @export
-is_not_na <- function(x)
-{
-  call_and_name(
-    function(x)
-    {
-      ok <- !is.na(x)
-      set_cause(ok, "missing")
-    }, 
-    x
-  )
-}
-
 #' @rdname is_nan
 #' @export
 is_not_nan <- function(x)
@@ -152,43 +107,6 @@ is_not_nan <- function(x)
     }, 
     x
   )
-}
-
-#' @rdname is_null
-#' @export
-is_not_null <- function(x, .xname = get_name_in_parent(x))
-{
-  if(is.null(x))
-  {
-    return(false("%s is NULL.", .xname))
-  }
-  TRUE
-}
-
-#' Is the input (not) null?
-#'
-#' Checks to see if the input is (not) null.
-#'
-#' @param x Input to check.
-#' @param .xname Not intended to be used directly.
-#' @return \code{is_null} wraps \code{is.null}, providing more 
-#' information on failure. \code{is_not_null} returns \code{TRUE} in
-#' the opposite case.  The \code{assert_*} functions return nothing but
-#' throw an error if the corresponding \code{is_*} function returns 
-#' \code{FALSE}.
-#' @seealso \code{\link[base]{is.null}}.
-#' @examples
-#' assert_is_null(NULL)
-#' assert_is_null(c())
-#' assert_is_not_null(NA)
-#' @export
-is_null <- function(x, .xname = get_name_in_parent(x))
-{
-  if(!is.null(x))
-  {
-    return(false("%s is not NULL.", .xname))
-  }
-  TRUE
 }
 
 #' @rdname is_finite
