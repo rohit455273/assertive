@@ -3,7 +3,7 @@
 #' Checks to see if x belongs to any of the classes in classes.
 #' @param x Input to check.
 #' @param classes As for \code{class}. 
-#' @returnThe functions return nothing but throw an error if
+#' @return The functions return nothing but throw an error if
 #' \code{x} does not have any/all of the class \code{classes}.
 #' @seealso \code{\link[assertive.base]{is2}}
 #' @examples 
