@@ -134,6 +134,43 @@ is_existing <- function(
   TRUE
 }
 
+#' Is suitable to be used as an if condition
+#' 
+#' @param x Input to check.
+#' @param .xname Not intended to be used directly.
+#' @return \code{is_if_condition} returns \code{TRUE} if the input is 
+#' scalar \code{TRUE} or \code{FALSE}.
+#' @note \code{if} will try to do the right thing if you pass it a number
+#' or a string, but this function assumes you want to do the right thing
+#' and pass either \code{TRUE} or \code{FALSE}, maybe with some attributes.
+#' @examples
+#' is_if_condition(TRUE)
+#' is_if_condition(FALSE)
+#' is_if_condition(NA)
+#' is_if_condition(c(TRUE, FALSE))
+#' is_if_condition("the truth")
+#' # You can pass a number as a logical condition, but you shouldn't,
+#' # so the next line returns FALSE.
+#' is_if_condition(1)
+#' dont_stop(assert_is_if_condition(raw(1)))
+#' @export
+is_if_condition <- function(x, .xname = get_name_in_parent(x))
+{
+  if(!(ok <- is_logical(x, .xname)))
+  {
+    return(ok)
+  }
+  if(!(ok <- is_scalar(x, "length", .xname)))
+  {
+    return(ok)
+  }
+  if(!is_not_na(x))
+  {
+    return(false("%s is NA.", .xname))
+  }
+  TRUE
+}
+
 #' Is the input DLL loaded?
 #'
 #' Checks to see if the input DLL (a.k.a. shared object) is loaded.

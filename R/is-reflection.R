@@ -177,6 +177,47 @@ is_on_os_path <- function(x)
     x
   )  
 }
+#' Is the installed version of a package current?
+#' 
+#' Checks to see if the installed version of a package is current.
+#' @param x A string giving a package name.
+#' @param lib.loc A character vector of paths to local package libraries.
+#' @param repos A character vector of URLs to repositories to check for new
+#' package versions.
+#' @param type Check the repository for source or binary packages?
+#' @return The \code{is_*} functions return \code{TRUE} or \code{FALSE}.
+#' The \code{assert_*} functions throw an error in the event of failure.
+#' @seealso \code{\link[utils]{old.packages}}, on which this is based, which
+#' has advanced usage features.
+#' @examples 
+#' \donttest{
+#' # This test is marked "dont-test" since it involves a connection to 
+#' # repositories which is potentially long running.
+#' is_package_current("assertive")
+#' }
+#' @export
+is_package_current <- function(x, lib.loc = .libPaths(), 
+                               repos = getOption("repos"), type = getOption("pkgType"))
+{
+  # TODO: what is the behaviour when the package is installed with 
+  # different versions in multiple local libraries?
+  x <- coerce_to(use_first(x), "character")
+  ip <- installed.packages()[x, , drop = FALSE]
+  op <- old.packages(instPkgs = ip)
+  if(!is.null(op))
+  {
+    return(
+      false(
+        "%s is out of date; the installed version is %s but the latest %s version is %s.",
+        x,
+        as.character(op[, "Installed"]),
+        type,
+        as.character(op[, "ReposVer"])
+      )
+    )
+  }
+  TRUE
+}
 
 #' @rdname is_xxx_for_decimal_point
 #' @export

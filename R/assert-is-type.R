@@ -1,4 +1,15 @@
-#' @rdname is2  
+#' Does x belong to these classes?
+#' 
+#' Checks to see if x belongs to any of the classes in classes.
+#' @param x Input to check.
+#' @param classes As for \code{class}. 
+#' @return The functions return nothing but throw an error if
+#' \code{x} does not have any/all of the class \code{classes}.
+#' @seealso \code{\link[assertive.base]{is2}}
+#' @examples 
+#' assert_is_all_of(1:10, c("integer", "numeric"))
+#' #These examples should fail.
+#' dont_stop(assert_is_any_of(1:10, c("list", "data.frame")))
 #' @export
 assert_is_all_of <- function(x, classes)
 {  
@@ -10,7 +21,7 @@ assert_is_all_of <- function(x, classes)
   assert_engine(is2, x, class = classes, msg = msg)
 }
 
-#' @rdname is2  
+#' @rdname assert_is_all_of  
 #' @export
 assert_is_any_of <- function(x, classes)
 {  

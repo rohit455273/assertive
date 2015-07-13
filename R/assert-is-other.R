@@ -132,6 +132,13 @@ assert_is_debugged <- function(x)
 #   assert_engine(is_generic, x, msg = msg)        
 # }
 
+#' @rdname is_if_condition
+#' @export
+assert_is_if_condition <- function(x)
+{
+  assert_engine(is_if_condition, x, .xname = get_name_in_parent(x))
+}
+
 #' @rdname is_loaded
 #' @export
 assert_is_loaded <- function(x)
