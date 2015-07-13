@@ -234,3 +234,12 @@ is_scalar <- function(x, metric = c("length", "elements"),
   metric <- get_metric(metric)
   metric(x, 1L, .xname)
 }     
+
+get_metric <- function(metric = c("length", "elements"))
+{
+  switch(
+    match.arg(force(metric)[1], eval(formals(sys.function())$metric)),
+    length   = is_of_length,
+    elements = has_elements
+  )
+}
