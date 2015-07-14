@@ -42,6 +42,7 @@ NULL
 #' 
 #' See \code{\link[assertive.base]{cause}}.
 #' @name cause
+#' @aliases cause<-
 #' @export cause
 #' @export cause<-
 NULL
@@ -51,8 +52,7 @@ NULL
 #' See \code{\link[assertive.base]{set_cause}}.
 #' @name set_cause
 #' @export set_cause
-#' @export print.scalar_with_cause
-#' @export print.vector_with_cause
+#' @export
 NULL
 
 # From assertive.base coercion.R
@@ -128,13 +128,6 @@ NULL
 #' 
 #' See \code{\link[assertive.base]{get_name_in_parent}}.
 #' @name get_name_in_parent
-#' @export
-NULL
-
-#' Merge two lists
-#' 
-#' See \code{\link[assertive.base]{merge.list}}.
-#' @name merge.list
 #' @export
 NULL
 
