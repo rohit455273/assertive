@@ -80,6 +80,7 @@ is_character <- function(x, .xname = get_name_in_parent(x))
 #' @seealso \code{\link[methods]{isClass}}.
 #' @examples
 #' assert_all_are_classes(c("lm", "numeric"))
+#' @importFrom methods isClass
 #' @export
 is_class <- function(x, .xname = get_name_in_parent(x))
 {

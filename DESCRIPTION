@@ -8,12 +8,13 @@ Maintainer: Richard Cotton <richierocks@gmail.com>
 Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
     "richierocks@gmail.com")
 Description: Lots of is_* functions to check the state of your variables,
-    and assert_* functions to throw errors if they aren't in the right form.    
+    and assert_* functions to throw errors if they aren't in the right form.
 Depends:
     R (>= 3.0.0)
 Imports:
     assertive.base,
-    knitr
+    knitr,
+    methods
 Suggests:
     testthat,
     devtools
