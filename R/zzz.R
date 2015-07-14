@@ -1,4 +1,4 @@
-.onLoad <- function(libname, pkgname)
+.onAttach <- function(libname, pkgname)
 {
-  options(assertive.severity = "stop")
+  packageStartupMessage("assertive has some important changes.  Read ?changes for details.")
 }
