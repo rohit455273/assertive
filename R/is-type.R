@@ -535,6 +535,7 @@ is_S4 <- function(x, .xname = get_name_in_parent(x))
 }
 
 #' @rdname is_function
+#' @importFrom stats is.stepfun
 #' @export
 is_stepfun <- function(x, .xname = get_name_in_parent(x))
 {

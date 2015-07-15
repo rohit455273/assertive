@@ -24,6 +24,7 @@
 #' is_binding_locked(x)
 #' unlockBinding("x", parent.frame())
 #' is_binding_locked(x)
+#' @importFrom utils find
 #' @export
 is_binding_locked <- function(x, env = if(is_scalar(e <- find(.xname))) as.environment(e) else parent.frame(), .xname = get_name_in_parent(x))
 {

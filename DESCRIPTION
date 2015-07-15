@@ -14,7 +14,9 @@ Depends:
 Imports:
     assertive.base,
     knitr,
-    methods
+    methods,
+    stats,
+    utils
 Suggests:
     testthat,
     devtools

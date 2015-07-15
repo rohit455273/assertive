@@ -195,6 +195,8 @@ is_on_os_path <- function(x)
 #' # repositories which is potentially long running.
 #' is_package_current("assertive")
 #' }
+#' @importFrom utils installed.packages
+#' @importFrom utils old.packages
 #' @export
 is_package_current <- function(x, lib.loc = .libPaths(), 
                                repos = getOption("repos"), type = getOption("pkgType"))
