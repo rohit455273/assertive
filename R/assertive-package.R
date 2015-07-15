@@ -25,6 +25,18 @@ NULL
 #' The assertive package has a few changes since v0.2-6 that you should be 
 #' aware of.
 #' 
+#' @section License change:
+#' The package has moved from 'Unlimited' licensing to GNU GPL 3.  There are 
+#' a couple of reasons for the change.  Originally assertive was a hobby 
+#' project, and the licence was designed so that I didn't have to worry about
+#' it.  Now that assertive has users other than myself, a proper license was
+#' needed.
+#' 
+#' Secondly, a recent feature request was for a function to check whether RStudio
+#' was up to date.  Rather than reverse engineering this feature, I adapted some 
+#' code from the RStudio source (AGPL code), which meant that assertive now needed 
+#' to be AGPL compatible.
+#' 
 #' @section Pretty printing:
 #' The most obvious thing is that the return values from \code{is_} functions
 #' now have a pretty printing method so that they now look similar to the error
