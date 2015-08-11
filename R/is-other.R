@@ -193,6 +193,7 @@ is_loaded <- function(x, PACKAGE = "", type = "",
 }
 
 #' @rdname is_divisible_by
+#' @importFrom stats setNames
 #' @export
 is_odd <- function(x, tol = 100 * .Machine$double.eps)
 {

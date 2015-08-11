@@ -1,3 +1,4 @@
+0.3-0 Core functionality outsourced to assertive.base.
 0.2-7 License changed to GPL3.
       Support for pipes.
       Added fns for testing RStudio desktop/server, current ver.
