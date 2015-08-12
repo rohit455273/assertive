@@ -112,7 +112,7 @@ NULL
 
 #' Get the dimensions of an object
 #' 
-#' See \code{\link[assertive.base]{DIM}}.
+#' See \code{\link[assertive.properties]{DIM}}.
 #' @name DIM
 #' @export
 NULL
@@ -140,7 +140,7 @@ NULL
 
 #' Get the number of elements
 #' 
-#' See \code{\link[assertive.base]{n_elements}}.
+#' See \code{\link[assertive.properties]{n_elements}}.
 #' @name n_elements
 #' @export
 NULL

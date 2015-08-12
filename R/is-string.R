@@ -234,21 +234,6 @@ is_email_address <- function(x, method = c("simple", "rfc5322"),
   set_cause(ok, "bad format")
 }
 
-#' @rdname is_character
-#' @export
-is_empty_character <- function(x)
-{ 
-  x <- coerce_to(x, "character")
-  call_and_name(
-    function(x)
-    {
-      ok <- !nzchar(x)
-      set_cause(ok, ifelse(is.na(x), "missing", "nonempty"))
-    },
-    x
-  )
-}
-
 #' Does the character vector contain hex colors?
 #'
 #' Checks that the input contains hexadecimal colors.
@@ -531,24 +516,10 @@ is_isbn_code <- function(x, type = c("10", "13"),
 }
 
 #' @rdname is_character
-#' @export
-is_missing_or_empty_character <- function(x)
-{ 
-  x <- coerce_to(x, "character")
-  ok <- !nzchar(x) | is_na(x)
-  set_cause(ok, "nonempty")
-}
-
-#' @rdname is_character
-#' @export
-is_not_missing_nor_empty_character <- function(x)
-{ 
-  x <- coerce_to(x, "character")
-  ok <- nzchar(x) & !is_na(x)
-  set_cause(ok, ifelse(is.na(x), "missing", "empty"))
-}
-
-#' @rdname is_character
+#' @examples
+#' is_numeric_string(c("1", "1.1", "-1.1e1", "one", NA))
+#' assert_all_are_numeric_strings(c("1", "2.3", "-4.5", "6e7", "8E-9"))
+#' assert_any_are_numeric_strings(c("1", "Not a number"))
 #' @export
 is_numeric_string <- function(x)
 {

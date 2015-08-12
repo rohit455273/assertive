@@ -16,5 +16,5 @@ BuildType: Package
 PackageInstallArgs: --no-multiarch --with-keep.source --no-site-file --no-init-file --slave
 PackageBuildArgs: --no-site-file --no-init-file --slave
 PackageBuildBinaryArgs: --no-site-file --no-init-file --slave
-PackageCheckArgs: --no-site-file --no-init-file --slave
+PackageCheckArgs: --no-site-file --no-init-file --slave --as-cran
 PackageRoxygenize: rd,collate,namespace
