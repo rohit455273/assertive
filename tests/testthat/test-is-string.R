@@ -41,19 +41,6 @@ test_that("test.is_credit_card_number.valid_card_numbers.returns_true_for_all",
     expect_equal(is_credit_card_number(x), expected)
   })
 
-test_that("test.is_date_string.a_character_vector.returns_true_when_string_contains_a_date", 
-{
-  x <- c("1999-12-31 23:59:59", "1979-08-01 01:00:00", "31 Dec 1999 11:59:59PM", 
-    "not a date", "NA")
-  expected <- c(TRUE, TRUE, FALSE, FALSE, FALSE)
-  expect_equal(strip_attributes(actual <- is_date_string(x)), expected)
-  expect_equal(names(actual), unname(x))
-  expect_equal(
-    cause(actual),
-    noquote(rep.int(c("", "bad format"), c(2, 3)))
-  )
-})
-
 test_that("test.is_email_address.a_character_vector_rfc5322_match.returns_true_when_string_contains_an_email_address", 
 {
   x <- c("foo@bar.com", "foo@@bar.com", "@bar.com", "foo@bar", "foo@bar.comma", 

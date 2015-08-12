@@ -52,41 +52,6 @@ assert_any_are_credit_card_numbers <- function(x, na_ignore = FALSE)
   )        
 }
 
-#' @rdname is_date_string
-#' @export
-assert_all_are_date_strings <- function(x, format = "%F %T", na_ignore = FALSE)
-{                                                     
-  msg <- gettextf(
-    "%s is not a character vector of dates.", 
-    get_name_in_parent(x)
-  )
-  assert_engine(
-    is_date_string, 
-    x, 
-    format = format,
-    msg = msg, 
-    na_ignore = na_ignore
-  )
-}
-
-#' @rdname is_date_string
-#' @export
-assert_any_are_date_strings <- function(x, format = "%F %T", na_ignore = FALSE)
-{                                                     
-  msg <- gettextf(
-    "%s is not a character vector of dates.", 
-    get_name_in_parent(x)
-  )
-  assert_engine(
-    is_date_string, 
-    x, 
-    format = format,
-    msg = msg, 
-    what = "any", 
-    na_ignore = na_ignore
-  )      
-}
-
 #' @rdname is_email_address
 #' @export
 assert_all_are_email_addresses <- function(x, method = c("simple", "rfc5322"), na_ignore = FALSE)
