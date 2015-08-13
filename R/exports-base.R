@@ -1,5 +1,6 @@
 # From assertive.base assert-is-identical-to-true-false-na.R, 
-# assert-is-true-false-na.R, is-identical-to-true-false-na.R, is-true-false-na.R
+# assert-is-true-false-na.R, is-identical-to-true-false-na.R,
+# is-true-false-na.R
 
 #' Is the input TRUE/FALSE/NA?
 #' 
