@@ -24,10 +24,26 @@ library(devtools)
 install_bitbucket("richierocks/assertive")
 ```
 
-### The core
+### The virtual package system.
 
-Package developers may prefer to use only the lightweight core, provided in
-*[assertive.base](https://bitbucket.org/richierocks/assertive.base)*.
+*assertive* is a virtual package &ndash; it does not contain any functions, but merely 
+reexports them from lower-level packages.
+
+*[assertive.base](https://bitbucket.org/richierocks/assertive.base)* contains the core functionality.
+*[assertive.properties](https://bitbucket.org/richierocks/assertive.properties)* contains checks on properties of variables.
+*[assertive.types](https://bitbucket.org/richierocks/assertive.types)* contains checks on types of variables.
+*[assertive.numbers](https://bitbucket.org/richierocks/assertive.numbers)* contains checks for numbers.
+*[assertive.strings](https://bitbucket.org/richierocks/assertive.strings)* contains checks for strings. 
+*[assertive.datetimes](https://bitbucket.org/richierocks/assertive.datetimes)* contains checks for dates and times.
+*[assertive.files](https://bitbucket.org/richierocks/assertive.files)* contains checks for files and connections.
+*[assertive.sets](https://bitbucket.org/richierocks/assertive.sets)* contains checks for sets.
+*[assertive.matrices](https://bitbucket.org/richierocks/assertive.matrices)* contains checks for matrices.
+*[assertive.models](https://bitbucket.org/richierocks/assertive.models)* contains checks for models.
+*[assertive.data](https://bitbucket.org/richierocks/assertive.data)* contains checks for complex data types.
+*[assertive.data.uk](https://bitbucket.org/richierocks/assertive.data.uk)* contains checks for UK-specific complex data types.
+*[assertive.data.us](https://bitbucket.org/richierocks/assertive.data.us)* contains checks for US-specific complex data types. 
+*[assertive.reflection](https://bitbucket.org/richierocks/assertive.reflection)* contains checks on the state of R. 
+*[assertive.code](https://bitbucket.org/richierocks/assertive.code)* contains checks for code.
 
 
 ### How to use the package
