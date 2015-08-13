@@ -1,4 +1,4 @@
-# From assertive.matrices has-dims.R, assert-has-dims.R
+# From assertive.matrices is-matrix.R, assert-is-matrix.R
 
 #' Is the input a symmetric matrix?
 #' 
