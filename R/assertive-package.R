@@ -24,7 +24,7 @@ NULL
 #' 
 #' Changes since 0.3-0:
 #' 
-#' @section Virtuality
+#' @section Virtuality:
 #' The assertive package is now a virtual package: that is, it no longer 
 #' contains its own functions, but instead rexports them from lower-level 
 #' packages.
