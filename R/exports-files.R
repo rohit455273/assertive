@@ -80,16 +80,16 @@ NULL
 #' 
 #' See \code{\link[assertive.files]{is_executable_file}}.
 #' @name is_executable_file
-#' @aliases is_readable_file is_writeable_file assert_all_are_executable_files assert_any_are_executable_files assert_all_are_readable_files assert_any_are_readable_files assert_all_are_writeable_files assert_any_are_writeable_files
+#' @aliases is_readable_file is_writable_file assert_all_are_executable_files assert_any_are_executable_files assert_all_are_readable_files assert_any_are_readable_files assert_all_are_writable_files assert_any_are_writeable_files
 #' @export is_executable_file
 #' @export is_readable_file
-#' @export is_writeable_file
+#' @export is_writable_file
 #' @export assert_all_are_executable_files
 #' @export assert_any_are_executable_files
 #' @export assert_all_are_readable_files
 #' @export assert_any_are_readable_files
-#' @export assert_all_are_writeable_files
-#' @export assert_any_are_writeable_files
+#' @export assert_all_are_writable_files
+#' @export assert_any_are_writable_files
 NULL
 
 #' Is the directory a known R library?

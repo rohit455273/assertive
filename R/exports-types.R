@@ -29,7 +29,7 @@ NULL
 #' @aliases is_complex is_a_complex
 #' @export is_complex
 #' @export is_a_complex
-#' @export assert_is_complex_
+#' @export assert_is_complex
 #' @export assert_is_a_complex
 NULL
 
