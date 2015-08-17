@@ -75,6 +75,15 @@ NULL
 #' @export assert_is_stepfun
 NULL
 
+#' Does the object inherit from some class?
+#' 
+#' See \code{\link[assertive.types]{is_inherited_from}}.
+#' @name is_inherited_from
+#' @aliases assert_is_inherited_from
+#' @export is_inherited_from
+#' @export assert_is_inherited_from
+NULL
+
 #' Is the input an integer?
 #' 
 #' See \code{\link[assertive.types]{is_integer}}.
