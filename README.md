@@ -27,9 +27,9 @@ library(devtools)
 install_bitbucket("richierocks/assertive")
 ```
 
-### The virtual package system.
+### The virtual package system
 
-*assertive* is a virtual package &ndash; it does not contain any functions, but merely 
+*assertive* is a virtual package; it does not contain any functions, but merely 
 reexports them from lower-level packages.
 
 *[assertive.base](https://bitbucket.org/richierocks/assertive.base)* contains the core functionality.  
@@ -147,8 +147,8 @@ respectively.
 
 ### Testing sizes
 
-`is_scalar` tests for objects of length one, or with one element (this can be 
-different for lists; you choose the metric).
+`is_scalar` and `is_non_scalar` test for objects of length one (or not), or with
+one element (this can be different for lists; you choose the metric).
 
 Similarly `is_empty` and `is_non_empty` test for objects of zero 
 length/containing zero elements.
