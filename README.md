@@ -1,3 +1,6 @@
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active)
+[![assertive version 0.3-0 is on CRAN](http://www.r-pkg.org/badges/0.3-0/assertive)](http://www.r-pkg.org/pkg/assertive)
+
 # assertive
 
 Readable check functions to ensure code integrity.
