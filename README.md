@@ -233,4 +233,6 @@ If you speak a language other than English, and have an hour or two spare, your
 translation skills would be appreciated.
 
 *assertive* is also currently lacking assertions for time series, spatial data,
-personal data for countries other than the UK and US
+personal data for countries other than the UK and US, and industry-sector-specific
+data.  If you want to contribute a package for these data types, let me know and 
+I can talk you through how to do it.
