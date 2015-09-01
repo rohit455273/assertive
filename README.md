@@ -121,9 +121,9 @@ assert_all_are_positive(c(1, 0, -1, NA))
 ```
 
 
-### Can't I just use *testhat*?
+### Can't I just use *testthat*?
 
-[*testhat*](https://github.com/hadley/testthat) is an excellent package for 
+[*testthat*](https://github.com/hadley/testthat) is an excellent package for 
 writing unit tests, and I recommend that you use it.  Unit tests are a form of
 development-time testing.  That is, you write the tests while you develop your
 code in order to check that you haven't made any mistakes.
