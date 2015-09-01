@@ -13,7 +13,7 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Package
-PackageInstallArgs: --no-multiarch --with-keep.source --no-site-file --no-init-file --slave
+PackageInstallArgs: --no-multiarch --with-keep.source  --slave
 PackageBuildArgs: --no-site-file --no-init-file --slave
 PackageBuildBinaryArgs: --no-site-file --no-init-file --slave
 PackageCheckArgs: --no-site-file --no-init-file --slave --as-cran

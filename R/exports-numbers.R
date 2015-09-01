@@ -16,6 +16,33 @@
 #' @export assert_any_are_odd
 NULL
 
+# From assertive.numbers is-equal-to.R, assert-is-equal-to.R
+
+#' How does the input relate to a value?
+#' 
+#' See \code{\link[assertive.numbers]{is_equal_to}}.
+#' @name is_equal_to
+#' @aliases is_not_equal_to is_greater_than is_greater_than_or_equal_to is_less_than is_less_than_or_equal_to assert_all_are_equal_to assert_any_are_not_equal_to assert_all_are_greater_than assert_any_are_greater_than assert_all_are_greater_than_or_equal_to assert_any_are_greater_than_or_equal_to assert_all_are_less_than assert_any_are_less_than assert_all_are_less_than_or_equal_to assert_any_are_less_than_or_equal_to
+#' @export is_equal_to
+#' @export is_not_equal_to
+#' @export is_greater_than
+#' @export is_greater_than_or_equal_to
+#' @export is_less_than
+#' @export is_less_than_or_equal_to
+#' @export assert_all_are_equal_to
+#' @export assert_any_are_equal_to
+#' @export assert_all_are_not_equal_to
+#' @export assert_any_are_not_equal_to
+#' @export assert_all_are_greater_than
+#' @export assert_any_are_greater_than
+#' @export assert_all_are_greater_than_or_equal_to
+#' @export assert_any_are_greater_than_or_equal_to
+#' @export assert_all_are_less_than
+#' @export assert_any_are_less_than
+#' @export assert_all_are_less_than_or_equal_to
+#' @export assert_any_are_less_than_or_equal_to
+NULL
+
 # From assertive.numbers is-in-range.R, assert-is-in-range.R
 
 #' Is the input in range?

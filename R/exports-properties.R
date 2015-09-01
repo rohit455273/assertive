@@ -1,3 +1,16 @@
+# From assertive.base are-same-size.R assert-are-same-size.R
+
+#' Are the inputs the same length/dimension?
+#' 
+#' See \code{\link[assertive.base]{are_same_length}}.
+#' @name are_same_length
+#' @aliases have_same_dims assert_are_same_length assert_have_same_dims
+#' @export are_same_length
+#' @export have_same_dims
+#' @export assert_are_same_length
+#' @export assert_have_same_dims
+NULL 
+
 # From assertive.properties has-attributes.R, assert-has-attributes.R
 
 #' Does the input have any attributes?

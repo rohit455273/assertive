@@ -1,3 +1,14 @@
+# From assertive.base are-identical.R assert-are-identical.R
+
+#' Are the inputs identical?
+#' 
+#' See \code{\link[assertive.base]{are_identical}}.
+#' @name are_identical
+#' @aliases assert_are_identical
+#' @export are_identical
+#' @export assert_are_identical
+NULL 
+
 # From assertive.base assert-is-identical-to-true-false-na.R, 
 # assert-is-true-false-na.R, is-identical-to-true-false-na.R,
 # is-true-false-na.R
@@ -76,14 +87,14 @@ NULL
 #' @export
 NULL
 
-#' FALSE, with a cause of failure.
+#' FALSE, with a cause of failure
 #' 
 #' See \code{\link[assertive.base]{false}}.
 #' @name false
 #' @export
 NULL
 
-#' NA, with a cause of failure.
+#' NA, with a cause of failure
 #' 
 #' See \code{\link[assertive.base]{na}}.
 #' @name na
