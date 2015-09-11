@@ -17,6 +17,7 @@ NULL
 #' 
 #' See \code{\link[assertive.properties]{has_any_attributes}}.
 #' @name has_any_attributes
+#' @aliases has_no_attributes
 #' @export 
 NULL
 
