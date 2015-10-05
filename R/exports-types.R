@@ -1,5 +1,14 @@
 # From assertive.types is-type-base.R, assert-is-type-base.R, is-type.R, assert-is-a-type.R
 
+#' Does x belong to these classes?
+#' 
+#' See \code{\link[assertive.types]{assert_is_all_of}}.
+#' @name assert_is_all_of
+#' @aliases assert_is_any_of
+#' @export assert_is_all_of
+#' @export assert_is_any_of
+NULL
+
 #' Is the input an array or matrix?
 #' 
 #' See \code{\link[assertive.types]{is_array}}.
@@ -26,7 +35,7 @@ NULL
 #' 
 #' See \code{\link[assertive.types]{is_complex}}.
 #' @name is_complex
-#' @aliases is_complex is_a_complex
+#' @aliases is_complex is_a_complex assert_is_complex assert_is_a_complex
 #' @export is_complex
 #' @export is_a_complex
 #' @export assert_is_complex
@@ -167,9 +176,11 @@ NULL
 #' 
 #' See \code{\link[assertive.types]{is_s4}}.
 #' @name is_s4
-#' @aliases is_s4 assert_is_s4
+#' @aliases is_s4 is_S4 assert_is_s4 assert_is_S4
 #' @export is_s4
+#' @export is_S4
 #' @export assert_is_s4
+#' @export assert_is_S4
 NULL
 
 #' Is the input a table?
@@ -181,13 +192,81 @@ NULL
 #' @export assert_is_table
 NULL
 
+# From assertive.types is-condition.R assert-is-condition.R
+
+#' Is the input a condition?
+#' 
+#' See \code{\link[assertive.types]{is_try_error}}.
+#' @name is_try_error
+#' @aliases is_simple_error is_error is_simple_warning is_warning is_simple_message is_message is_condition assert_is_try_error assert_is_simple_error assert_is_error assert_is_simple_warning assert_is_warning assert_is_simple_message assert_is_message assert_is_condition
+#' @export is_try_error
+#' @export is_simple_error
+#' @export is_error
+#' @export is_simple_warning
+#' @export is_warning
+#' @export is_simple_message
+#' @export is_message
+#' @export is_condition
+#' @export assert_is_try_error
+#' @export assert_is_simple_error
+#' @export assert_is_error
+#' @export assert_is_simple_warning
+#' @export assert_is_warning
+#' @export assert_is_simple_message
+#' @export assert_is_message
+#' @export assert_is_condition
+NULL
+
+# From assertive.types is-date.R  assert-is-date.R
+
+#' Is the input a date?
+#' 
+#' See \code{\link[assertive.types]{is_date}}.
+#' @name is_date
+#' @aliases is_posixct is_posixlt assert_is_date assert_is_posixct assert_is_posixlt
+#' @export is_date
+#' @export is_posixct
+#' @export is_posixlt
+#' @export assert_is_date
+#' @export assert_is_posixct
+#' @export assert_is_posixlt
+NULL
+
+# From assertive.types is-type-data.table.R, assert-is-type-data.table.R
+
+#' Is the input a data.table?
+#' 
+#' See \code{\link[assertive.types]{is_data.table}}.
+#' @name is_data.table
+#' @aliases assert_is_data.table
+#' @export is_data.table
+#' @export assert_is_data.table
+NULL
+
+# From assertive.types is-type-dplyr.R, assert-is-type-dplyr.R
+
+#' Is the input a tbl?
+#' 
+#' See \code{\link[assertive.types]{is_tbl}}.
+#' @name is_tbl
+#' @aliases is_tbl_cube is_tbl_df is_tbl_dt assert_is_tbl assert_is_tbl_cube assert_is_tbl_df assert_is_tbl_dt
+#' @export is_tbl
+#' @export is_tbl_cube
+#' @export is_tbl_df
+#' @export is_tbl_dt
+#' @export assert_is_tbl
+#' @export assert_is_tbl_cube
+#' @export assert_is_tbl_df
+#' @export assert_is_tbl_dt
+NULL
+
 # From assertive.types is-type-grDevices.R, assert-is-type-grDevices.R
 
 #' Is the input a raster?
 #' 
 #' See \code{\link[assertive.types]{is_raster}}.
 #' @name is_raster
-#' @aliases is_raster assert_is_raster
+#' @aliases assert_is_raster
 #' @export is_raster
 #' @export assert_is_raster
 NULL

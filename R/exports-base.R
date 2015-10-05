@@ -4,9 +4,12 @@
 #' 
 #' See \code{\link[assertive.base]{are_identical}}.
 #' @name are_identical
-#' @aliases assert_are_identical
+#' @aliases assert_are_identical are_identical_legacy assert_all_are_identical_legacy assert_any_are_identical_legacy
 #' @export are_identical
 #' @export assert_are_identical
+#' @export are_identical_legacy
+#' @export assert_all_are_identical_legacy
+#' @export assert_any_are_identical_legacy
 NULL 
 
 # From assertive.base assert-is-identical-to-true-false-na.R, 
@@ -76,6 +79,18 @@ NULL
 #' See \code{\link[assertive.base]{coerce_to}}.
 #' @name coerce_to
 #' @export
+NULL
+
+# From assertive.base conditions.R
+
+#' Condition classes
+#' 
+#' See \code{\link[assertive.base]{assertionError}}.
+#' @name assertionError
+#' @aliases assertionWarning assertionMessage
+#' @export assertionError
+#' @export assertionWarning
+#' @export assertionMessage
 NULL
 
 # From assertive.base engine.R

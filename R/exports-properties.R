@@ -2,12 +2,15 @@
 
 #' Are the inputs the same length/dimension?
 #' 
-#' See \code{\link[assertive.base]{are_same_length}}.
+#' See \code{\link[assertive.properties]{are_same_length}}.
 #' @name are_same_length
-#' @aliases have_same_dims assert_are_same_length assert_have_same_dims
+#' @aliases have_same_dims are_same_length_legacy assert_are_same_length assert_have_same_dims assert_all_are_same_length_legacy assert_any_are_same_length_legacy
 #' @export are_same_length
+#' @export are_same_length_legacy
 #' @export have_same_dims
 #' @export assert_are_same_length
+#' @export assert_all_are_same_length_legacy
+#' @export assert_any_are_same_length_legacy
 #' @export assert_have_same_dims
 NULL 
 
@@ -40,8 +43,8 @@ NULL
 #' @aliases has_rows assert_has_cols assert_has_rows
 #' @export has_cols
 #' @export has_rows
-#' @export assert_has_all_attributes
-#' @export assert_has_any_attributes
+#' @export assert_has_cols
+#' @export assert_has_rows
 NULL
 
 #' Does the input have dimensions?
@@ -138,7 +141,7 @@ NULL
 
 #' Is the input unsorted?
 #' 
-#' See \code{\link[assertive.properties]{unsorted}}.
+#' See \code{\link[assertive.properties]{is_unsorted}}.
 #' @name is_unsorted
 #' @aliases assert_is_unsorted
 #' @export is_unsorted

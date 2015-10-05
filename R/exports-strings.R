@@ -6,7 +6,7 @@
 #' 
 #' See \code{\link[assertive.strings]{is_empty_character}}.
 #' @name is_empty_character
-#' @aliases is_non_empty_character is_missing_or_empty_character is_non_missing_nor_empty_character is_not_missing_nor_empty_character is_an_empty_string is_a_non_empty_string assert_all_are_empty_character assert_any_are_empty_character assert_all_are_non_empty_character assert_any_are_non_empty_character assert_all_are_missing_or_empty_character assert_any_are_non_empty_character assert_all_are_missing_or_empty_character assert_any_are_missing_or_empty_character assert_all_are_non_missing_nor_empty_character assert_any_are_non_missing_nor_empty_character assert_is_an_empty_string assert_is_a_non_empty_string
+#' @aliases is_non_empty_character is_missing_or_empty_character is_non_missing_nor_empty_character is_not_missing_nor_empty_character is_an_empty_string is_a_non_empty_string is_a_missing_or_empty_string is_a_non_missing_nor_empty_string assert_all_are_empty_character assert_any_are_empty_character assert_all_are_non_empty_character assert_any_are_non_empty_character assert_all_are_missing_or_empty_character assert_any_are_non_empty_character assert_all_are_missing_or_empty_character assert_any_are_missing_or_empty_character assert_all_are_non_missing_nor_empty_character assert_any_are_non_missing_nor_empty_character assert_is_an_empty_string assert_is_a_non_empty_string assert_is_a_missing_or_empty_string assert_is_a_non_missing_nor_empty_string
 #' @export is_empty_character
 #' @export is_non_empty_character 
 #' @export is_missing_or_empty_character
@@ -14,6 +14,8 @@
 #' @export is_not_missing_nor_empty_character
 #' @export is_an_empty_string
 #' @export is_a_non_empty_string
+#' @export is_a_missing_or_empty_string
+#' @export is_a_non_missing_nor_empty_string
 #' @export assert_all_are_empty_character
 #' @export assert_any_are_empty_character
 #' @export assert_all_are_non_empty_character
@@ -24,6 +26,8 @@
 #' @export assert_any_are_non_missing_nor_empty_character
 #' @export assert_is_an_empty_string
 #' @export assert_is_a_non_empty_string
+#' @export assert_is_a_missing_or_empty_string
+#' @export assert_is_a_non_missing_nor_empty_string
 NULL
 
 # From assertive.strings is-special-string.R, assert-is-special-string.R
@@ -46,4 +50,13 @@ NULL
 #' @export is_single_character
 #' @export assert_all_are_single_characters
 #' @export assert_any_are_single_characters
+NULL
+
+# From assertive.strings utils.R
+
+#' Convert a character vector to a list of integer vectors
+#'  
+#' See \code{\link[assertive.strings]{character_to_list_of_integer_vectors}}.
+#' @name character_to_list_of_integer_vectors
+#' @export character_to_list_of_integer_vectors
 NULL

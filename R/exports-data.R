@@ -57,6 +57,7 @@ NULL
 #' 
 #' See \code{\link[assertive.data]{is_ip_address}}.
 #' @name is_ip_address
+#' @aliases assert_all_are_ip_addresses assert_any_are_ip_addresses
 #' @export is_ip_address
 #' @export assert_all_are_ip_addresses
 #' @export assert_any_are_ip_addresses
@@ -66,8 +67,10 @@ NULL
 #' 
 #' See \code{\link[assertive.data]{is_isbn_code}}.
 #' @name is_isbn_code
-#' @aliases assert_all_are_isbn_codes assert_any_are_isbn_codes
+#' @aliases is_isbn10_code is_isbn13_code assert_all_are_isbn_codes assert_any_are_isbn_codes
 #' @export is_isbn_code
+#' @export is_isbn10_code
+#' @export is_isbn13_code
 #' @export assert_all_are_isbn_codes
 #' @export assert_any_are_isbn_codes
 NULL

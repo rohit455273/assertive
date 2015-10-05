@@ -22,7 +22,7 @@ NULL
 #' 
 #' See \code{\link[assertive.numbers]{is_equal_to}}.
 #' @name is_equal_to
-#' @aliases is_not_equal_to is_greater_than is_greater_than_or_equal_to is_less_than is_less_than_or_equal_to assert_all_are_equal_to assert_any_are_not_equal_to assert_all_are_greater_than assert_any_are_greater_than assert_all_are_greater_than_or_equal_to assert_any_are_greater_than_or_equal_to assert_all_are_less_than assert_any_are_less_than assert_all_are_less_than_or_equal_to assert_any_are_less_than_or_equal_to
+#' @aliases is_not_equal_to is_greater_than is_greater_than_or_equal_to is_less_than is_less_than_or_equal_to assert_all_are_equal_to assert_any_are_equal_to assert_all_are_not_equal_to assert_any_are_not_equal_to assert_all_are_greater_than assert_any_are_greater_than assert_all_are_greater_than_or_equal_to assert_any_are_greater_than_or_equal_to assert_all_are_less_than assert_any_are_less_than assert_all_are_less_than_or_equal_to assert_any_are_less_than_or_equal_to
 #' @export is_equal_to
 #' @export is_not_equal_to
 #' @export is_greater_than
@@ -49,7 +49,7 @@ NULL
 #' 
 #' See \code{\link[assertive.numbers]{is_in_range}}.
 #' @name is_in_range
-#' @aliases is_in_closed_range is_in_left_open_range is_in_open_range is_in_right_open_range is_negative is_non_negative is_non_positive is_percentage is_positive is_proportion assert_all_are_in_range assert_any_are_in_range assert_all_are_in_closed_range assert_all_are_in_left_open_range assert_any_are_in_left_open_range assert_all_are_in_open_range assert_any_are_in_open_range assert_all_are_in_right_open_range assert_any_are_in_right_open_range assert_all_are_negative assert_any_are_negative assert_all_are_non_negative assert_any_are_non_negative assert_all_are_non_positive assert_any_are_non_positive assert_all_are_percentages assert_any_are_percentages assert_all_are_positive assert_any_are_positive assert_all_are_proportions assert_any_are_proportions 
+#' @aliases is_in_closed_range is_in_left_open_range is_in_open_range is_in_right_open_range is_negative is_non_negative is_non_positive is_percentage is_positive is_proportion assert_all_are_in_range assert_any_are_in_range assert_all_are_in_closed_range assert_any_are_in_closed_range assert_all_are_in_left_open_range assert_any_are_in_left_open_range assert_all_are_in_open_range assert_any_are_in_open_range assert_all_are_in_right_open_range assert_any_are_in_right_open_range assert_all_are_negative assert_any_are_negative assert_all_are_non_negative assert_any_are_non_negative assert_all_are_non_positive assert_any_are_non_positive assert_all_are_percentages assert_any_are_percentages assert_all_are_positive assert_any_are_positive assert_all_are_proportions assert_any_are_proportions 
 #' @export is_in_range
 #' @export is_in_closed_range
 #' @export is_in_left_open_range
@@ -110,7 +110,7 @@ NULL
 #' 
 #' See \code{\link[assertive.numbers]{is_nan}}.
 #' @name is_nan
-#' @aliases is_not_nan
+#' @aliases is_not_nan assert_all_are_nan assert_any_are_nan assert_all_are_not_nan assert_any_are_not_nan
 #' @export is_nan
 #' @export is_not_nan
 #' @export assert_all_are_nan
@@ -140,8 +140,10 @@ NULL
 #' 
 #' See \code{\link[assertive.numbers]{is_whole_number}}.
 #' @name is_whole_number
-#' @aliases assert_all_are_whole_numbers assert_any_are_whole_numbers
+#' @aliases assert_all_are_whole_numbers assert_any_are_whole_numbers assert_all_numbers_are_whole_numbers assert_any_numbers_are_whole_numbers
 #' @export is_whole_number
 #' @export assert_all_are_whole_numbers
 #' @export assert_any_are_whole_numbers
+#' @export assert_all_numbers_are_whole_numbers
+#' @export assert_any_numbers_are_whole_numbers
 NULL

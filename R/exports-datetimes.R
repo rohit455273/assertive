@@ -14,11 +14,17 @@ NULL
 #' 
 #' See \code{\link[assertive.datetimes]{is_in_past}}.
 #' @name is_in_past
-#' @aliases is_in_future assert_all_are_in_past assert_any_are_in_past assert_all_are_in_future assert_any_are_in_future
+#' @aliases is_in_future is_after is_before assert_all_are_in_past assert_any_are_in_past assert_all_are_in_future assert_any_are_in_future assert_all_are_after assert_any_are_after assert_all_are_before assert_any_are_before
 #' @export is_in_past
 #' @export is_in_future
+#' @export is_after
+#' @export is_before
 #' @export assert_all_are_in_past
 #' @export assert_any_are_in_past
 #' @export assert_all_are_in_future
 #' @export assert_any_are_in_future
+#' @export assert_all_are_after
+#' @export assert_any_are_after
+#' @export assert_all_are_before
+#' @export assert_any_are_before
 NULL

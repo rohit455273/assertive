@@ -4,7 +4,10 @@
 #'  
 #' See \code{\link[assertive.code]{has_arg}}.
 #' @name has_arg
+#' @aliases has_arg_ assert_has_arg
 #' @export has_arg
+#' @export has_arg_
+#' @export assert_has_arg
 NULL
 
 #' Is the binding of a variable locked?

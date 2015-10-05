@@ -4,7 +4,7 @@
 #' 
 #' See \code{\link[assertive.files]{is_connection}}.
 #' @name is_connection
-#' @aliases is_bzfile_connection is_fifo_connection is_file_connection is_gzfile_connection is_incomplete_connection is_open_connection is_pipe_connection is_readable_connection is_socket_connection is_stderr is_stdin is_stdout is_terminal_connection is_text_connection is_unz_connection is_url_connection is_writable_connection is_xzfile_connection assert_is_connection assert_is_fifo_connection assert_is_file_connection assert_is_gzfile_connection assert_is_incomplete_connection assert_is_open_connection assert_is_pipe_connection assert_is_socket_connection assert_is_stderr assert_is_stdin assert_is_stdout assert_is_terminal_connection assert_is_text_connection assert_is_unz_connection assert_is_url_connection assert_is_writable_connection
+#' @aliases is_bzfile_connection is_fifo_connection is_file_connection is_gzfile_connection is_incomplete_connection is_open_connection is_pipe_connection is_readable_connection is_socket_connection is_stderr is_stdin is_stdout is_terminal_connection is_text_connection is_unz_connection is_url_connection is_writable_connection is_xzfile_connection assert_is_connection assert_is_bzfile_connection assert_is_fifo_connection assert_is_file_connection assert_is_gzfile_connection assert_is_incomplete_connection assert_is_open_connection assert_is_pipe_connection assert_is_readable_connection assert_is_socket_connection assert_is_stderr assert_is_stdin assert_is_stdout assert_is_terminal_connection assert_is_text_connection assert_is_unz_connection assert_is_url_connection assert_is_writable_connection assert_is_xzfile_connection
 #' @export is_connection
 #' @export is_bzfile_connection
 #' @export is_fifo_connection
@@ -25,6 +25,7 @@
 #' @export is_writable_connection
 #' @export is_xzfile_connection
 #' @export assert_is_connection
+#' @export assert_is_bzfile_connection
 #' @export assert_is_fifo_connection
 #' @export assert_is_file_connection
 #' @export assert_is_gzfile_connection
@@ -80,8 +81,9 @@ NULL
 #' 
 #' See \code{\link[assertive.files]{is_executable_file}}.
 #' @name is_executable_file
-#' @aliases is_readable_file is_writable_file assert_all_are_executable_files assert_any_are_executable_files assert_all_are_readable_files assert_any_are_readable_files assert_all_are_writable_files assert_any_are_writeable_files
+#' @aliases is_ex_file is_readable_file is_writable_file assert_all_are_executable_files assert_any_are_executable_files assert_all_are_ex_files assert_any_are_ex_files assert_all_are_readable_files assert_any_are_readable_files assert_all_are_writable_files assert_any_are_writable_files 
 #' @export is_executable_file
+#' @export is_ex_file
 #' @export is_readable_file
 #' @export is_writable_file
 #' @export assert_all_are_executable_files
