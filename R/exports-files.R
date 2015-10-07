@@ -61,10 +61,14 @@ NULL
 #' 
 #' See \code{\link[assertive.files]{is_empty_file}}.
 #' @name is_empty_file
-#' @aliases assert_all_are_empty_files assert_any_are_empty_files
+#' @aliases is_non_empty_file is_file_size_in_range assert_all_are_empty_files assert_any_are_empty_files assert_all_are_non_empty_files assert_any_are_non_empty_files
 #' @export is_empty_file
+#' @export is_non_empty_file
+#' @export is_file_size_in_range
 #' @export assert_all_are_empty_files
 #' @export assert_any_are_empty_files
+#' @export assert_all_are_non_empty_files
+#' @export assert_any_are_non_empty_files
 NULL
 
 #' Does the file exist?

@@ -20,3 +20,13 @@ NULL
 #' @export assert_any_are_us_zip_codes
 NULL
 
+#' Is the string a valid US SSN?
+#' 
+#' See \code{\link[assertive.data.us]{is_us_social_security_number}}.
+#' @name is_us_social_security_number
+#' @aliases assert_all_are_us_social_security_numbers assert_any_are_us_social_security_numbers
+#' @export is_us_social_security_number
+#' @export assert_all_are_us_social_security_numbers
+#' @export assert_any_are_us_social_security_numbers
+NULL
+

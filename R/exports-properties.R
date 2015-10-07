@@ -21,7 +21,8 @@ NULL
 #' See \code{\link[assertive.properties]{has_any_attributes}}.
 #' @name has_any_attributes
 #' @aliases has_no_attributes
-#' @export 
+#' @export has_any_attributes
+#' @export has_no_attributes
 NULL
 
 #' Does the input have the specified attributes?
