@@ -1,7 +1,7 @@
 Package: assertive
 Type: Package
 Title: Readable Check Functions to Ensure Code Integrity
-Version: 0.3-1
+Version: 0.3-2
 Date: 2015-10-07
 Author: Richard Cotton [aut, cre]
 Maintainer: Richard Cotton <richierocks@gmail.com>
