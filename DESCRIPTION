@@ -2,19 +2,19 @@ Package: assertive
 Type: Package
 Title: Readable Check Functions to Ensure Code Integrity
 Version: 0.3-2
-Date: 2015-10-07
+Date: 2016-01-31
 Author: Richard Cotton [aut, cre]
 Maintainer: Richard Cotton <richierocks@gmail.com>
 Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
     "richierocks@gmail.com")
-Description: Lots of predicates (is_* functions) to check the state of your 
-    variables, and assertions (assert_* functions) to throw errors if they 
+Description: Lots of predicates (is_* functions) to check the state of your
+    variables, and assertions (assert_* functions) to throw errors if they
     aren't in the right form.
 Depends:
     R (>= 3.0.0)
 Imports:
     assertive.base (>= 0.0-3),
-    assertive.properties,
+    assertive.properties (>= 0.0-2),
     assertive.types,
     assertive.numbers,
     assertive.strings,
@@ -26,7 +26,7 @@ Imports:
     assertive.data,
     assertive.data.uk,
     assertive.data.us,
-    assertive.reflection,
+    assertive.reflection (>= 0.0-2),
     assertive.code,
     knitr
 Suggests:
@@ -38,7 +38,7 @@ LazyData: yes
 VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
 Acknowledgments: Development of this package was partially funded by the
-    Proteomics Core at Weill Cornell Medical College in Qatar
+    Proteomics Core at Weill Cornell Medicine - Qatar
     <http://qatar-weill.cornell.edu>.  The Core is supported by 'Biomedical
     Research Program' funds, a program funded by Qatar Foundation.
-    
+RoxygenNote: 5.0.1
