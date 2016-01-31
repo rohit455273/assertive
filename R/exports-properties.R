@@ -87,6 +87,17 @@ NULL
 #' @export assert_has_dimnames
 NULL
 
+# From assertive.properties has-slot.R, assert-has-slot.R
+
+#' Does the S4 input have a slot?
+#' 
+#' See \code{\link[assertive.properties]{has_slot}}.
+#' @name has_slot
+#' @aliases assert_has_slot
+#' @export has_slot
+#' @export assert_has_slot
+NULL
+
 # From assertive.properties is-atomic-recursive-vector.R, assert-is-atomic-recursive-vector.R
 
 #' Is the input atomic/recursive/vector?
