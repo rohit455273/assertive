@@ -4,13 +4,15 @@
 #' 
 #' See \code{\link[assertive.properties]{are_same_length}}.
 #' @name are_same_length
-#' @aliases have_same_dims are_same_length_legacy assert_are_same_length assert_have_same_dims assert_all_are_same_length_legacy assert_any_are_same_length_legacy
+#' @aliases have_same_dims are_same_length_legacy assert_are_same_length assert_have_same_dims assert_all_are_same_length_legacy assert_any_are_same_length_legacy assert_all_are_same_length assert_any_are_same_length
 #' @export are_same_length
 #' @export are_same_length_legacy
 #' @export have_same_dims
 #' @export assert_are_same_length
 #' @export assert_all_are_same_length_legacy
 #' @export assert_any_are_same_length_legacy
+#' @export assert_all_are_same_length
+#' @export assert_any_are_same_length
 #' @export assert_have_same_dims
 NULL 
 
