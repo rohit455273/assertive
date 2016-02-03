@@ -11,6 +11,8 @@
 #' @export assert_are_same_length
 #' @export assert_all_are_same_length_legacy
 #' @export assert_any_are_same_length_legacy
+#' @export assert_all_are_same_length
+#' @export assert_any_are_same_length
 #' @export assert_have_same_dims
 NULL 
 
