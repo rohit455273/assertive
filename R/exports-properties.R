@@ -106,13 +106,17 @@ NULL
 #' 
 #' See \code{\link[assertive.properties]{is_atomic}}.
 #' @name is_atomic
-#' @aliases is_recursive is_vector assert_is_atomic assert_is_recursive assert_is_vector
+#' @aliases is_recursive is_vector is_nested is_non_nested assert_is_atomic assert_is_recursive assert_is_vector assert_is_nested assert_is_non_nested
 #' @export is_atomic
 #' @export is_recursive
 #' @export is_vector
+#' @export is_nested
+#' @export is_non_nested
 #' @export assert_is_atomic
 #' @export assert_is_recursive
 #' @export assert_is_vector
+#' @export assert_is_nested
+#' @export assert_is_non_nested
 NULL
 
 # From assertive.properties is-empty-scalar.R, assert-is-empty-scalar.R
