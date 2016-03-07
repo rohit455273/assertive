@@ -13,14 +13,14 @@ Description: Lots of predicates (is_* functions) to check the state of your
 Depends:
     R (>= 3.0.0)
 Imports:
-    assertive.base (>= 0.0-3),
+    assertive.base (>= 0.0-4),
     assertive.properties (>= 0.0-2),
-    assertive.types,
+    assertive.types (>= 0.0-2),
     assertive.numbers,
     assertive.strings,
     assertive.datetimes,
     assertive.files,
-    assertive.sets,
+    assertive.sets (>= 0.0-2),
     assertive.matrices,
     assertive.models,
     assertive.data,
