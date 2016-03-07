@@ -38,10 +38,13 @@ NULL
 #'  
 #' See \code{\link[assertive.strings]{is_numeric_string}}.
 #' @name is_numeric_string
-#' @aliases assert_all_are_numeric_strings assert_any_are_numeric_strings
+#' @aliases is_logical_string assert_all_are_numeric_strings assert_any_are_numeric_strings assert_all_are_logical_strings assert_any_are_logical_strings
 #' @export is_numeric_string
+#' @export is_logical_string
 #' @export assert_all_are_numeric_strings
 #' @export assert_any_are_numeric_strings
+#' @export assert_all_are_logical_strings
+#' @export assert_any_are_logical_strings
 NULL
 
 #' Is the input a single character?
