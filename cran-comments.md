@@ -1,6 +1,6 @@
 ## Release Summary
 
-Incorporates changes in assertive.properties and assertive.reflection.
+Incorporates changes in assertive.reflection for R 3.2.4.
 
 ## Test Environments
 
@@ -14,6 +14,4 @@ There were no ERRORs or WARNINGs.
 
 ## Downstream dependencies
 
-This release fixes a backwards compatibility issue with a non-CRAN package.
-No changes affect tested CRAN dependencies, though I couldn't successfully 
-install gpuR to test it.
+No breaking changes.
