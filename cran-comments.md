@@ -15,4 +15,5 @@ There were no ERRORs or WARNINGs.
 ## Downstream dependencies
 
 This release fixes a backwards compatibility issue with a non-CRAN package.
-No changes affect CRAN dependencies.
+No changes affect tested CRAN dependencies, though I couldn't successfully 
+install gpuR to test it.
