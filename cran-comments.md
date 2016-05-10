@@ -1,6 +1,6 @@
 ## Release Summary
 
-Incorporates changes in assertive.reflection for R 3.2.4.
+Incorporates changes in assertive.strings, assertive.properties, assertive.files.
 
 ## Test Environments
 
