@@ -1,10 +1,10 @@
 ## Release Summary
 
-Incorporates changes in assertive.strings, assertive.properties, assertive.files.
+Incorporates latest exports from assertive.base, assertive.properties, assertive.types, assertive.reflection, assertive.sets.
 
 ## Test Environments
 
-* Local Windows 7 & 10, R-devel 
+* Local macOS Sierra, R-devel 
 * Semaphore CI + Ubuntu 14.04, R-devel and R-release
 * AppVeyor + Windows Server 2012, R-devel
 
