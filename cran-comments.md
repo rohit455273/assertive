@@ -1,12 +1,12 @@
 ## Release Summary
 
-Incorporates latest exports from assertive.base, assertive.properties, assertive.types, assertive.reflection, assertive.sets.
+Incorporates latest exports from assertive.reflection.
 
 ## Test Environments
 
-* Local macOS Sierra, R-devel 
-* Semaphore CI + Ubuntu 14.04, R-devel and R-release
-* AppVeyor + Windows Server 2012, R-devel
+* Local macOS Mojave, R-release
+* Local Windows 10, R-devel 
+* R-hub
 
 ## R CMD check results
 
