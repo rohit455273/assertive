@@ -32,7 +32,8 @@ Imports:
     assertive.code,
     knitr
 Suggests:
-    testthat
+    testthat,
+    markdown
 License: GPL (>= 3)
 LazyLoad: yes
 LazyData: yes
