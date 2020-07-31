@@ -2,7 +2,7 @@ Package: assertive
 Type: Package
 Title: Readable Check Functions to Ensure Code Integrity
 Version: 0.3-6
-Date: 2020-07-30
+Date: 2020-07-31
 Author: Richard Cotton [aut, cre]
 Maintainer: Richard Cotton <richierocks@gmail.com>
 Authors@R: person("Richard", "Cotton", role = c("aut", "cre"), email =
@@ -41,4 +41,5 @@ Acknowledgments: Development of this package was partially funded by the
     Proteomics Core at Weill Cornell Medicine - Qatar
     <http://qatar-weill.cornell.edu>.  The Core is supported by 'Biomedical
     Research Program' funds, a program funded by Qatar Foundation.
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
